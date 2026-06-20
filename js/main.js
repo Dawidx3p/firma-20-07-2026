@@ -1,20 +1,29 @@
 const modal = document.getElementById("contactModal");
-
 const openButtons = document.querySelectorAll(".open-form");
-
 const closeButton = document.querySelector(".close-modal");
-
 const overlay = document.querySelector(".modal-overlay");
-
 const email = document.getElementById("email");
-
 const phone = document.getElementById("phone");
-
 const privacy = document.getElementById("privacy");
-
 const submitButton = document.getElementById("submitButton");
-
 const form = document.getElementById("contactForm");
+const menuToggle = document.querySelector(".menu-toggle");
+const navList = document.querySelector(".nav-list");
+
+menuToggle.addEventListener("click", () => {
+  const isOpen = navList.classList.toggle("active");
+
+  menuToggle.classList.toggle("active");
+  menuToggle.setAttribute("aria-expanded", isOpen);
+});
+
+navList.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navList.classList.remove("active");
+    menuToggle.classList.remove("active");
+    menuToggle.setAttribute("aria-expanded", "false");
+  });
+});
 
 openButtons.forEach(button => {
   button.addEventListener("click", () => {
