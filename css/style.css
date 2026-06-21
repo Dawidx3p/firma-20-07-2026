@@ -141,15 +141,17 @@ section {
   background: var(--text);
   color: var(--bg);
   border: 1px solid transparent;
-  box-shadow: 0 12px 35px rgba(124, 92, 255, 0.18);
+  box-shadow: 0 12px 35px rgba(124, 92, 255, 0.14);
 }
 
 .nav-cta:hover,
 .primary-button:hover {
   transform: translateY(-2px);
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #fff;
-  box-shadow: 0 18px 45px rgba(0, 224, 255, 0.22);
+  background: #ffffff;
+  color: var(--bg);
+  box-shadow:
+    0 18px 45px rgba(124, 92, 255, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.18);
 }
 
 .secondary-button {
@@ -159,9 +161,11 @@ section {
 }
 
 .secondary-button:hover {
-  background: rgba(255, 255, 255, 0.075);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.07);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.22);
   transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.22);
 }
 
 .primary-button:disabled {
@@ -261,7 +265,9 @@ h3 {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background:
-    linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    radial-gradient(circle at top right, rgba(0, 224, 255, 0.16), transparent 34%),
+    radial-gradient(circle at bottom left, rgba(124, 92, 255, 0.14), transparent 34%),
+    linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
     var(--bg-soft);
   box-shadow: 0 30px 100px rgba(0, 0, 0, 0.35);
   display: flex;
@@ -277,25 +283,68 @@ h3 {
   inset: 24px;
   border: 1px solid var(--line);
   border-radius: 18px;
+  background:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(to bottom, transparent, black 28%, black 72%, transparent);
 }
 
 .hero-panel::after {
-  content: "communication system";
+  content: "system komunikacji marki";
   position: absolute;
   top: 34px;
   left: 34px;
-  color: rgba(255, 255, 255, 0.18);
-  font-size: 0.85rem;
+  padding: 8px 12px;
+  border: 1px solid rgba(0, 224, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(0, 224, 255, 0.06);
+  color: var(--accent-2);
+  font-size: 0.72rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
 }
 
 .hero-panel p {
   position: relative;
   z-index: 1;
+  max-width: 420px;
   font-size: 2rem;
   line-height: 1.12;
   letter-spacing: -0.05em;
+}
+
+@media (max-width: 640px) {
+  .hero-panel {
+    min-height: 260px;
+    padding: 24px;
+    border-radius: 22px;
+  }
+
+  .hero-panel::before {
+    inset: 18px;
+    background-size: 28px 28px;
+  }
+
+  .hero-panel::after {
+    top: 24px;
+    left: 24px;
+    font-size: 0.62rem;
+    padding: 7px 10px;
+    max-width: calc(100% - 48px);
+  }
+
+  .hero-panel p {
+    font-size: 1.35rem;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-hero .hero-panel p {
+    font-size: 1.35rem;
+  }
 }
 
 /* LAYOUT */
@@ -307,6 +356,7 @@ h3 {
 .services-grid,
 .education-list,
 .cases-grid,
+.paths-grid,
 .pricing-grid,
 .partnership-content,
 .cta-content,
@@ -365,18 +415,23 @@ article p,
   border-bottom: 1px solid var(--line);
 }
 
-.message h2,
-.message p {
+.message h2 {
   max-width: var(--max-width);
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
 .message p {
   max-width: 780px;
-  text-align: left;
-  margin-left: 0;
   margin-top: 28px;
+  margin-left: max(0px, calc((100% - var(--max-width)) / 2));
+  color: var(--muted);
+  font-size: 1.15rem;
+}
+
+@media (max-width: 1180px) {
+  .message p {
+    margin-left: 0;
+  }
 }
 
 /* PROCESS */
@@ -444,6 +499,70 @@ article p,
 .pricing-card li,
 .partnership-benefits li {
   margin-top: 10px;
+}
+
+/* SITE PATHS */
+
+.paths-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+.path-card {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.path-card span {
+  display: block;
+  margin-bottom: 44px;
+  color: var(--accent-2);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.path-card p {
+  margin-bottom: 28px;
+}
+
+.path-card a {
+  margin-top: auto;
+  color: var(--text);
+  font-weight: 800;
+  transition: color 0.2s ease;
+}
+
+.path-card a:hover {
+  color: var(--accent-2);
+}
+
+@media (max-width: 1180px) {
+  .paths-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .path-card {
+    min-height: 260px;
+  }
+}
+
+@media (max-width: 640px) {
+  .paths-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .path-card {
+    min-height: auto;
+  }
+
+  .path-card span {
+    margin-bottom: 28px;
+  }
 }
 
 /* PARTNERSHIP */
@@ -610,8 +729,7 @@ article p,
 }
 
 .close-modal:hover {
-  background: rgba(255, 255, 255, 0.12);
-  transform: rotate(90deg);
+  background: rgba(240, 0, 0, 0.331);
 }
 
 .form-group {
@@ -759,6 +877,7 @@ article p,
   .education-list,
   .cases-grid,
   .pricing-grid,
+  .paths-grid,
   .approach-content,
   .process-list,
   .partnership-benefits {
@@ -871,4 +990,16 @@ article p,
   .form-group textarea {
     min-height: 84px;
   }
+}
+
+.page-hero {
+  min-height: 72vh;
+}
+
+.page-hero .hero-panel p {
+  font-size: 1.7rem;
+}
+
+.nav-list a.active {
+  color: var(--text);
 }
