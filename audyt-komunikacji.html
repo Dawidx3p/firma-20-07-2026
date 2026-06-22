@@ -204,37 +204,34 @@
     </nav>
   </footer>
   <div class="modal" id="contactModal" aria-hidden="true">
-
     <div class="modal-overlay"></div>
-  
+
     <div class="modal-content">
-  
-        <button
+      <button
         class="close-modal"
         type="button"
         aria-label="Zamknij formularz"
       >
-        &times;
+        ×
       </button>
-  
+
       <h2>Porozmawiajmy o Twojej marce</h2>
-  
+
       <p>
         Wypełnij formularz, a skontaktujemy się z Tobą.
       </p>
-  
+
       <form id="contactForm">
-  
         <div class="form-group">
           <label for="name">Jak mamy się do Ciebie zwracać?</label>
           <input type="text" id="name">
         </div>
-  
+
         <div class="form-group">
           <label for="email">Adres e-mail</label>
           <input type="email" id="email">
         </div>
-  
+
         <div class="form-group">
           <label for="phone">Numer telefonu</label>
           <input
@@ -242,14 +239,14 @@
             id="phone"
             inputmode="tel"
             autocomplete="tel"
-            >
+          >
         </div>
-  
+
         <div class="form-group">
           <label for="contactMethod">
             Preferowana forma kontaktu
           </label>
-  
+
           <select id="contactMethod">
             <option>E-mail</option>
             <option>Telefon</option>
@@ -257,37 +254,46 @@
             <option>Google Meet</option>
           </select>
         </div>
-  
+
+        <div class="form-group">
+          <label for="challenge">
+            Co obecnie jest największym problemem Twojej strony?
+          </label>
+
+          <textarea id="challenge" rows="4"></textarea>
+        </div>
+
         <div class="form-group checkbox">
-  
           <input
             type="checkbox"
             id="privacy"
             required
           >
-  
+
           <label for="privacy">
             Wyrażam zgodę na przetwarzanie danych osobowych
             w celu kontaktu zwrotnego.*
           </label>
-  
         </div>
-  
+
         <button
-        type="submit"
-        class="primary-button"
-        id="submitButton"
-        disabled
+          type="submit"
+          class="primary-button"
+          id="submitButton"
+          disabled
         >
-        Wyślij zgłoszenie
+          Wyślij zgłoszenie
         </button>
+
         <p class="form-hint">
           Aby wysłać formularz podaj adres e-mail lub numer telefonu oraz zaakceptuj zgodę.
-        </p>  
+        </p>
       </form>
-  
     </div>
-  
+  </div>
+  <div class="success-toast" id="successToast">
+    <span class="success-icon">✓</span>
+    <span>Dziękujemy! Skontaktujemy się z Tobą wkrótce.</span>
   </div>
   <script src="js/main.js"></script>
 </body>
