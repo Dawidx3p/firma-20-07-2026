@@ -1,4 +1,3 @@
-const modal = document.getElementById("contactModal");
 const openButtons = document.querySelectorAll(".open-form");
 const closeButton = document.querySelector(".close-modal");
 const overlay = document.querySelector(".modal-overlay");
@@ -9,6 +8,13 @@ const submitButton = document.getElementById("submitButton");
 const form = document.getElementById("contactForm");
 const menuToggle = document.querySelector(".menu-toggle");
 const navList = document.querySelector(".nav-list");
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mojoqowy";
+document.addEventListener("componentsLoaded", () => {
+
+  const modal = document.getElementById("contactModal");
+  const successToast = document.getElementById("successToast");
+
+  // cała reszta kodu
 
 menuToggle.addEventListener("click", () => {
   const isOpen = navList.classList.toggle("active");
@@ -43,6 +49,18 @@ function closeModal() {
   privacy.parentElement.classList.remove("checkbox-error");
 
   validateForm();
+}
+
+function showSuccessToast() {
+  successToast.classList.add("show");
+
+  setTimeout(() => {
+    successToast.classList.remove("show");
+  }, 4000);
+}
+
+function isValidEmail(emailAddress) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailAddress);
 }
 
 function isValidPhone(phoneNumber) {
@@ -84,87 +102,73 @@ phone.addEventListener("input", validateForm);
 privacy.addEventListener("change", validateForm);
 
 form.addEventListener("submit", async (e) => {
-
   e.preventDefault();
-  const hasEmail = email.value.trim() !== "";
-  const hasPhone = phone.value.trim() !== "";
+
+  const emailValue = email.value.trim();
   const phoneValue = phone.value.trim();
 
-if (phoneValue !== "" && !isValidPhone(phoneValue)) {
+  const validEmail = emailValue === "" || isValidEmail(emailValue);
+  const validPhone = phoneValue === "" || isValidPhone(phoneValue);
+  const hasContact = emailValue !== "" || phoneValue !== "";
 
-  phone.classList.add("field-error");
-
-  return;
-}
-  if (!hasEmail && !hasPhone) {
-
+  if (!hasContact) {
     email.classList.add("field-error");
     phone.classList.add("field-error");
+    return;
+  }
 
+  if (!validEmail) {
+    email.classList.add("field-error");
+    return;
+  }
+
+  if (!validPhone) {
+    phone.classList.add("field-error");
     return;
   }
 
   if (!privacy.checked) {
-
     privacy.parentElement.classList.add("checkbox-error");
-
     return;
   }
 
+  submitButton.disabled = true;
+  submitButton.textContent = "Wysyłanie...";
+
   try {
-
-    submitButton.disabled = true;
-    submitButton.textContent = "Wysyłanie...";
-
-    const response = await fetch("/api/contact", {
-
+    const response = await fetch(FORMSPREE_ENDPOINT, {
       method: "POST",
-
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Accept: "application/json"
       },
-
       body: JSON.stringify({
-
-        name: document.getElementById("name")?.value || "",
-
-        email: email.value,
-
-        phone: phone.value,
-
-        contactMethod:
-          document.getElementById("contactMethod")?.value || "",
-
-        challenge:
-          document.getElementById("challenge")?.value || ""
-
+        name: document.getElementById("name")?.value.trim() || "",
+        email: emailValue,
+        _replyto: emailValue,
+        phone: phoneValue,
+        contactMethod: document.getElementById("contactMethod")?.value || "",
+        challenge: document.getElementById("challenge")?.value.trim() || "",
+        sourcePage: window.location.pathname,
+        consent: privacy.checked
       })
-
     });
 
     if (!response.ok) {
-      throw new Error("Błąd wysyłki");
+      const errorData = await response.json();
+      console.log(errorData);
+      throw new Error("Formspree error");
     }
 
-    alert("Dziękujemy! Skontaktujemy się z Tobą.");
-
     closeModal();
+    showSuccessToast();
 
   } catch (error) {
-
-    alert(
-      "Nie udało się wysłać formularza. Spróbuj ponownie."
-    );
-
+    alert("Nie udało się wysłać formularza. Spróbuj ponownie.");
   } finally {
-
-    submitButton.textContent =
-      "Wyślij zgłoszenie";
-
+    submitButton.textContent = "Wyślij zgłoszenie";
     validateForm();
-
   }
-
 });
 
 validateForm();
@@ -172,3 +176,4 @@ validateForm();
 closeButton.addEventListener("click", closeModal);
 
 overlay.addEventListener("click", closeModal);
+});
