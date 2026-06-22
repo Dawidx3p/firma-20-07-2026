@@ -10,6 +10,8 @@
   --danger: #ff5a5a;
   --radius: 24px;
   --max-width: 1180px;
+  --radius-lg: 28px;
+  --section-space: 110px;
 }
 
 /* RESET */
@@ -336,13 +338,6 @@ h3 {
   }
 
   .hero-panel p {
-    font-size: 1.35rem;
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 640px) {
-  .page-hero .hero-panel p {
     font-size: 1.35rem;
   }
 }
@@ -964,10 +959,6 @@ article p,
     width: 100%;
   }
 
-  .hero-panel p {
-    font-size: 1.55rem;
-  }
-
   article,
   .process-list li,
   .case-card,
@@ -1015,6 +1006,10 @@ article p,
 
   .form-group textarea {
     min-height: 84px;
+  }
+  .lab-case,
+  .timeline-step {
+    padding: 24px;
   }
 }
 
@@ -1106,4 +1101,86 @@ article p,
   line-height: 1.7;
   padding-left: 20px;
   border-left: 2px solid rgba(0, 224, 255, 0.35);
+}
+
+.process-timeline {
+  padding: var(--section-space) 24px;
+}
+
+.timeline {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.timeline-step {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.03);
+}
+
+.timeline-step span {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--accent-2);
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.timeline-step h3 {
+  margin-bottom: 12px;
+}
+
+.timeline-step p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 980px) {
+  .timeline {
+    grid-template-columns: 1fr;
+  }
+}
+
+.article-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.article-note {
+  max-width: var(--max-width);
+  margin: 28px auto 0;
+  padding: 22px 24px;
+  border-left: 2px solid rgba(0, 224, 255, 0.35);
+  border-radius: 0 18px 18px 0;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--muted);
+}
+
+.article-note a {
+  color: var(--text);
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 224, 255, 0.5);
+  text-underline-offset: 4px;
+}
+
+.article-meta {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 980px) {
+  .article-grid {
+    grid-template-columns: 1fr;
+  }
 }
