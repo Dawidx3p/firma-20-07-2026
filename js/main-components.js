@@ -1,4 +1,6 @@
-const modal = document.getElementById("contactModal");
+//coś tu nie działa
+
+
 const openButtons = document.querySelectorAll(".open-form");
 const closeButton = document.querySelector(".close-modal");
 const overlay = document.querySelector(".modal-overlay");
@@ -10,7 +12,12 @@ const form = document.getElementById("contactForm");
 const menuToggle = document.querySelector(".menu-toggle");
 const navList = document.querySelector(".nav-list");
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mojoqowy";
-const successToast = document.getElementById("successToast");
+document.addEventListener("componentsLoaded", () => {
+
+  const modal = document.getElementById("contactModal");
+  const successToast = document.getElementById("successToast");
+
+  // cała reszta kodu
 
 menuToggle.addEventListener("click", () => {
   const isOpen = navList.classList.toggle("active");
@@ -172,3 +179,4 @@ validateForm();
 closeButton.addEventListener("click", closeModal);
 
 overlay.addEventListener("click", closeModal);
+});
