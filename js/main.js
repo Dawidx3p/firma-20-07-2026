@@ -11,6 +11,34 @@ const menuToggle = document.querySelector(".menu-toggle");
 const navList = document.querySelector(".nav-list");
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mojoqowy";
 const successToast = document.getElementById("successToast");
+const sections = document.querySelectorAll("section[id]");
+const links = document.querySelectorAll(".toc a");
+
+window.addEventListener("scroll", () => {
+
+  let current = "";
+
+  sections.forEach(section => {
+
+    const top = section.offsetTop - 150;
+
+    if (scrollY >= top) {
+      current = section.id;
+    }
+
+  });
+
+  links.forEach(link => {
+
+    link.classList.remove("active");
+
+    if (link.getAttribute("href") === `#${current}`) {
+      link.classList.add("active");
+    }
+
+  });
+
+});
 
 menuToggle.addEventListener("click", () => {
   const isOpen = navList.classList.toggle("active");
