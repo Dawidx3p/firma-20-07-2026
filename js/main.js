@@ -13,6 +13,33 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mojoqowy";
 const successToast = document.getElementById("successToast");
 const sections = document.querySelectorAll("section[id]");
 const links = document.querySelectorAll(".toc a");
+const animatedElements = document.querySelectorAll(
+  ".section-header, .message, .case-card, .path-card, .process-card, .pricing-card, .cta-content"
+);
+
+animatedElements.forEach((element, index) => {
+  element.classList.add("reveal");
+  element.style.setProperty("--delay", `${Math.min(index * 0.04, 0.24)}s`);
+});
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.14,
+    rootMargin: "0px 0px -80px 0px"
+  }
+);
+
+animatedElements.forEach((element) => {
+  revealObserver.observe(element);
+});
 
 window.addEventListener("scroll", () => {
 

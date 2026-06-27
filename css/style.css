@@ -1719,3 +1719,70 @@ article a:hover{
   width:40px;
   height:40px;
 }
+
+/* ANIMACJE */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.process-card,
+.case-card,
+.path-card,
+.pricing-card {
+  will-change: transform;
+}
+
+.process-card.is-visible,
+.case-card.is-visible,
+.path-card.is-visible,
+.pricing-card.is-visible {
+  transition-delay: var(--delay, 0s);
+}
+
+.hero-panel {
+  animation: heroFloat 7s ease-in-out infinite;
+}
+
+@keyframes heroFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.process-icon {
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+.process-card:hover .process-icon {
+  transform: scale(1.08) rotate(-3deg);
+  filter: drop-shadow(0 0 14px rgba(0, 224, 255, 0.45));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .hero-panel,
+  .process-icon {
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+}
+
+
+/* ANIMACJE  KONIEC*/
