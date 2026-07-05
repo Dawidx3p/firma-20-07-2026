@@ -13,6 +13,9 @@ const FORMSPREE_ENDPOINT = "https://formspree.io/f/mojoqowy";
 const successToast = document.getElementById("successToast");
 const sections = document.querySelectorAll("section[id]");
 const links = document.querySelectorAll(".toc a");
+
+//ANIMACJE ZACZYNAJĄ SIĘ TU
+
 const animatedElements = document.querySelectorAll(
   ".section-header, .message, .case-card, .path-card, .process-card, .pricing-card, .cta-content"
 );
@@ -40,6 +43,8 @@ const revealObserver = new IntersectionObserver(
 animatedElements.forEach((element) => {
   revealObserver.observe(element);
 });
+
+//ANIMACJE KOŃCZĄ SIĘ TU
 
 window.addEventListener("scroll", () => {
 
