@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dawidx3p.github.io/firma-20-07-2026/sitemap.xml
+Sitemap: https://kairox.pl/sitemap.xml
