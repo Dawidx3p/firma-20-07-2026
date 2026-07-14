@@ -402,6 +402,14 @@
                 Polityka cookies
             </a>
 
+            <button
+            class="footer-privacy-button"
+            id="privacySettings"
+            type="button"
+          >
+            Ustawienia prywatności
+          </button>
+
         </nav>
 
     </div>
@@ -519,6 +527,52 @@
     <span class="success-icon">✓</span>
     <span>Dziękujemy! Skontaktujemy się z Tobą wkrótce.</span>
   </div>
+  <div class="consent-banner"
+  id="consentBanner"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="consentTitle"
+  aria-describedby="consentDescription"
+  hidden
+>
+  <div class="consent-card">
+    <div class="consent-content">
+      <p class="consent-label">Prywatność</p>
+
+      <h2 id="consentTitle">Pomóż nam rozwijać KAIROX</h2>
+
+      <p id="consentDescription">
+        Korzystamy z Google Analytics i Microsoft Clarity, aby anonimowo
+        analizować ruch, przewijanie i sposób korzystania ze strony.
+        Dzięki temu możemy sprawdzać, co działa, a co warto poprawić.
+      </p>
+
+      <p class="consent-note">
+        Nie wykorzystujemy tych danych do personalizacji reklam.
+        Możesz zmienić decyzję w dowolnym momencie.
+      </p>
+    </div>
+
+    <div class="consent-actions">
+      <button
+        class="secondary-button"
+        id="rejectAnalytics"
+        type="button"
+      >
+        Tylko niezbędne
+      </button>
+
+      <button
+        class="primary-button"
+        id="acceptAnalytics"
+        type="button"
+      >
+        Akceptuję analitykę
+      </button>
+    </div>
+  </div>
+  </div>
+  <script src="js/consent.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
