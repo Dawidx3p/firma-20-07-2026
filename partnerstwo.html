@@ -54,9 +54,9 @@
         <li><a href="artykuly.html">Artykuły</a></li>
       </ul>
 
-      <button class="nav-cta open-form" type="button">
-        Porozmawiajmy
-      </button>
+      <a class="nav-cta" href="formularz-kontaktowy.html">
+          Porozmawiajmy
+        </a>
     </nav>
   </header>
 
@@ -74,9 +74,9 @@
         </p>
 
         <div class="hero-actions">
-          <button class="primary-button open-form" type="button">
-            Porozmawiajmy o współpracy
-          </button>
+          <a class="primary-button" href="formularz-kontaktowy.html">
+          Porozmawiajmy o współpracy
+        </a>
 
           <a href="#partnership-scope" class="secondary-button">
             Co obejmuje?
@@ -253,9 +253,9 @@
           określić, czy stała współpraca będzie lepsza niż pojedynczy projekt.
         </p>
 
-        <button class="primary-button open-form" type="button">
+        <a class="primary-button" href="formularz-kontaktowy.html">
           Zapytaj o partnerstwo
-        </button>
+        </a>
       </div>
     </section>
 
@@ -274,6 +274,21 @@
             <p>
                 Strony internetowe jako narzędzie komunikacji marki.
             </p>
+
+            <div class="footer-email">
+
+
+              <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
+
+
+              <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
+
+
+              <span class="copy-email-status" role="status" aria-live="polite"></span>
+
+
+            </div>
+
 
             <div class="footer-social">
 
@@ -375,105 +390,6 @@
     </div>
 
 </footer>
-  <div class="modal" id="contactModal" aria-hidden="true">
-    <div class="modal-overlay"></div>
-
-    <div class="modal-content">
-      <button
-        class="close-modal"
-        type="button"
-        aria-label="Zamknij formularz"
-      >
-        ×
-      </button>
-
-      <h2>Porozmawiajmy o Twojej marce</h2>
-
-      <p>
-        Wypełnij formularz, a skontaktujemy się z Tobą.
-      </p>
-
-      <form id="contactForm">
-        <div class="form-group">
-          <label for="name">Jak mamy się do Ciebie zwracać?</label>
-          <input type="text" id="name">
-        </div>
-
-        <div class="form-group">
-          <label for="email">Adres e-mail</label>
-          <input type="email" id="email">
-        </div>
-
-        <div class="form-group">
-          <label for="phone">Numer telefonu</label>
-          <input
-            type="tel"
-            id="phone"
-            inputmode="tel"
-            autocomplete="tel"
-          >
-        </div>
-
-        <div class="form-group">
-          <label for="contactMethod">
-            Preferowana forma kontaktu
-          </label>
-
-          <select id="contactMethod">
-            <option>E-mail</option>
-            <option>Telefon</option>
-            <option>WhatsApp</option>
-            <option>Google Meet</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="challenge">
-            Co obecnie jest największym problemem Twojej strony?
-          </label>
-
-          <textarea id="challenge" rows="4"></textarea>
-        </div>
-
-        <div class="form-group checkbox">
-          <input
-            type="checkbox"
-            id="privacy"
-            required
-          >
-
-          <label for="privacy">
-            Zapoznałem(-am) się z
-            <a
-              href="polityka-prywatnosci.html"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Polityką prywatności
-            </a>
-            i przyjmuję do wiadomości zasady przetwarzania danych.*
-          </label>
-        </div>
-
-        <button
-          type="submit"
-          class="primary-button"
-          id="submitButton"
-          disabled
-        >
-          Wyślij zgłoszenie
-        </button>
-
-        <p class="form-hint">
-          Aby wysłać formularz podaj adres e-mail lub numer telefonu oraz zaakceptuj zgodę.
-        </p>
-      </form>
-    </div>
-  </div>
-  <div class="success-toast" id="successToast">
-    <span class="success-icon">✓</span>
-    <span>Dziękujemy! Skontaktujemy się z Tobą wkrótce.</span>
-  </div>
   <div class="consent-banner"
   id="consentBanner"
   role="dialog"

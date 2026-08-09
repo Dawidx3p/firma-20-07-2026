@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Opowiedz nam o swojej stronie i umów bezpłatną konsultację z KAIROX.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Porozmawiajmy o Twojej stronie — KAIROX">
+  <meta property="og:description" content="Krótki formularz, od którego zaczyna się rozmowa o komunikacji Twojej marki.">
+  <meta property="og:url" content="https://kairox.pl/formularz-kontaktowy.html">
+  <meta property="og:image" content="https://kairox.pl/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="img/180na180.png">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Porozmawiajmy o Twojej stronie — KAIROX</title>
+</head>
+<body>
+  <main>
+    <section class="contact-landing">
+      <div class="contact-landing-intro">
+        <p class="contact-brand" aria-label="KAIROX">KAIROX</p>
+        <p class="eyebrow">Bezpłatna konsultacja</p>
+        <h1>Porozmawiajmy o Twojej stronie</h1>
+        <p class="contact-landing-lead">
+          Opowiedz krótko, co dziś nie działa tak, jak powinno. Wrócimy do Ciebie,
+          żeby poznać kontekst i sprawdzić, czy możemy realnie pomóc.
+        </p>
+
+        <div class="contact-expectations" aria-label="Jak wygląda pierwszy kontakt">
+          <div><span>01</span><p>Wypełniasz krótki formularz.</p></div>
+          <div><span>02</span><p>Kontaktujemy się w wybrany przez Ciebie sposób.</p></div>
+          <div><span>03</span><p>Rozmawiamy o sytuacji, potrzebach i możliwym kolejnym kroku.</p></div>
+        </div>
+
+        <p class="contact-assurance">Bez zobowiązań i bez gotowej oferty wysyłanej w ciemno.</p>
+      </div>
+
+      <div class="contact-form-card" id="formularz">
+        <p class="eyebrow">Zacznijmy rozmowę</p>
+        <h2>Napisz, z czym się mierzysz</h2>
+        <p>Wystarczy adres e-mail lub numer telefonu.</p>
+
+        <form id="contactForm" novalidate>
+          <div class="contact-fields-row">
+            <div class="form-group">
+              <label for="website">Adres Twojej strony</label>
+              <input type="url" id="website" name="website" inputmode="url" autocomplete="url" placeholder="https://twojafirma.pl">
+            </div>
+            <div class="form-group">
+              <label for="name">Jak mamy się do Ciebie zwracać?</label>
+              <input type="text" id="name" name="name" autocomplete="name">
+            </div>
+          </div>
+          <div class="contact-fields-row">
+            <div class="form-group">
+              <label for="email">Adres e-mail</label>
+              <input type="email" id="email" name="email" autocomplete="email">
+            </div>
+            <div class="form-group">
+              <label for="phone">Numer telefonu</label>
+              <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="contactMethod">Preferowana forma kontaktu</label>
+            <select id="contactMethod" name="contactMethod">
+              <option>E-mail</option>
+              <option>Telefon</option>
+              <option>WhatsApp</option>
+              <option>Google Meet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="challenge">Co obecnie jest największym problemem Twojej strony?</label>
+            <textarea id="challenge" name="challenge" rows="5" placeholder="Napisz kilka zdań — nie musisz przygotowywać pełnego briefu."></textarea>
+          </div>
+          <div class="form-group checkbox">
+            <input type="checkbox" id="privacy" required>
+            <label for="privacy">
+              Zapoznałem(-am) się z <a href="polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityką prywatności</a>
+              i przyjmuję do wiadomości zasady przetwarzania danych.*
+            </label>
+          </div>
+          <button type="submit" class="primary-button" id="submitButton" disabled>Wyślij zgłoszenie</button>
+          <p class="form-hint">Podaj e-mail lub telefon i zaakceptuj informację o przetwarzaniu danych.</p>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="contact-footer">
+    <p>© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
+    <div class="footer-email footer-email-compact">
+      <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
+      <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
+      <span class="copy-email-status" role="status" aria-live="polite"></span>
+    </div>
+    <nav aria-label="Informacje prawne">
+      <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+      <a href="polityka-cookies.html">Polityka cookies</a>
+      <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+    </nav>
+  </footer>
+
+  <div class="consent-banner" id="consentBanner" role="dialog" aria-modal="true" aria-labelledby="consentTitle" aria-describedby="consentDescription" hidden>
+    <div class="consent-card">
+      <div class="consent-content">
+        <p class="consent-label">Prywatność</p>
+        <h2 id="consentTitle">Pomóż nam rozwijać KAIROX</h2>
+        <p id="consentDescription">Korzystamy z Google Analytics i Microsoft Clarity, aby anonimowo analizować sposób korzystania ze strony.</p>
+        <p class="consent-note">Nie wykorzystujemy tych danych do personalizacji reklam. Możesz zmienić decyzję w dowolnym momencie.</p>
+      </div>
+      <div class="consent-actions">
+        <button class="secondary-button" id="rejectAnalytics" type="button">Tylko niezbędne</button>
+        <button class="primary-button" id="acceptAnalytics" type="button">Akceptuję analitykę</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/consent.js"></script>
+  <script src="js/contact-page.js"></script>
+</body>
+</html>
