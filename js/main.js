@@ -6,7 +6,7 @@ const sections = document.querySelectorAll("section[id]");
 const links = document.querySelectorAll(".toc a");
 
 const animatedElements = document.querySelectorAll(
-  ".section-header, .message, .case-card, .path-card, .process-card, .pricing-card, .cta-content"
+  ".section-header, .message, .case-card, .path-card, .process-card, .pricing-card, .project-showcase, .cta-content"
 );
 
 animatedElements.forEach((element, index) => {
