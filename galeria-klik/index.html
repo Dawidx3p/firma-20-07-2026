@@ -4,21 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex">
-  <meta http-equiv="refresh" content="0; url=https://dawidx3p.github.io/galeria-klik/">
+  <meta http-equiv="refresh" content="6; url=https://dawidx3p.github.io/galeria-klik/">
   <link rel="canonical" href="https://dawidx3p.github.io/galeria-klik/">
-  <title>Galeria Klik — przekierowanie</title>
+  <link rel="icon" href="../img/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../css/style.css">
+  <title>Przechodzisz do Galerii Klik — KAIROX</title>
+</head>
+<body class="external-redirect-page">
+  <main class="external-redirect-main">
+    <section class="external-redirect-card" aria-labelledby="redirect-title">
+      <a class="external-redirect-logo" href="../" aria-label="KAIROX — strona główna">KAIROX</a>
+
+      <div class="external-redirect-icon" aria-hidden="true">↗</div>
+      <p class="eyebrow">Zewnętrzna realizacja</p>
+      <h1 id="redirect-title">Przechodzisz do Galerii Klik</h1>
+      <p class="external-redirect-description">
+        Za chwilę opuścisz kairox.pl i przejdziesz do projektu opublikowanego
+        w serwisie GitHub Pages.
+      </p>
+
+      <div class="external-redirect-domain">
+        <span>Adres docelowy</span>
+        <strong>dawidx3p.github.io/galeria-klik</strong>
+      </div>
+
+      <p class="external-redirect-countdown" role="status" aria-live="polite">
+        Automatyczne przekierowanie za <strong id="redirectCountdown">3</strong> s.
+      </p>
+
+      <div class="external-redirect-actions">
+        <a class="primary-button" id="redirectNow" href="https://dawidx3p.github.io/galeria-klik/">
+          Przejdź teraz
+        </a>
+        <a class="secondary-button" href="../#realizacje">Wróć do KAIROX</a>
+      </div>
+    </section>
+  </main>
+
   <script>
-    window.location.replace(
+    const targetUrl =
       "https://dawidx3p.github.io/galeria-klik/" +
       window.location.search +
-      window.location.hash
-    );
+      window.location.hash;
+    const countdown = document.getElementById("redirectCountdown");
+    const redirectNow = document.getElementById("redirectNow");
+    let secondsLeft = 3;
+
+    redirectNow.href = targetUrl;
+
+    const countdownTimer = window.setInterval(() => {
+      secondsLeft -= 1;
+      countdown.textContent = String(Math.max(secondsLeft, 0));
+
+      if (secondsLeft <= 0) {
+        window.clearInterval(countdownTimer);
+        window.location.replace(targetUrl);
+      }
+    }, 1000);
   </script>
-</head>
-<body>
-  <p>
-    Otwieramy projekt Galeria Klik.
-    <a href="https://dawidx3p.github.io/galeria-klik/">Przejdź do realizacji</a>.
-  </p>
 </body>
 </html>
