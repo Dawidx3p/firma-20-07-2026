@@ -51,6 +51,7 @@ if (menuToggle && navList) {
     const isOpen = navList.classList.toggle("active");
     menuToggle.classList.toggle("active", isOpen);
     menuToggle.setAttribute("aria-expanded", String(isOpen));
+    document.body.classList.toggle("menu-open", isOpen);
   });
 
   navList.querySelectorAll("a").forEach((link) => {
@@ -58,6 +59,7 @@ if (menuToggle && navList) {
       navList.classList.remove("active");
       menuToggle.classList.remove("active");
       menuToggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("menu-open");
     });
   });
 }
