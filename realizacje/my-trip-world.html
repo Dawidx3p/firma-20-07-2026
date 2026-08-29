@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
   <meta name="description" content="My Trip World — case study osobistego archiwum podróży z interaktywnym globusem, relacjami oraz galerią zdjęć i filmów.">
   <meta property="og:type" content="article">
   <meta property="og:title" content="My Trip World — case study KAIROX">
@@ -53,10 +54,6 @@
         </dl>
       </div>
     </section>
-
-    <div class="case-cover case-cover-dark">
-      <img src="../img/projects/my-trip-world.jpg" alt="Interaktywny globus My Trip World z zaznaczonymi miejscami podróży">
-    </div>
 
     <section class="case-intro" aria-labelledby="trip-summary-title">
       <p class="eyebrow">W skrócie</p>
@@ -136,6 +133,17 @@
         <article><span>05</span><h3>Album i viewer</h3><p>Wspólny szablon danych obsługuje zdjęcia, filmy, relacje, podpisy, klawiaturę, gesty mobilne i udostępnianie linku.</p></article>
       </div>
     </section>
+
+    <figure class="case-proof">
+      <div class="case-proof-copy">
+        <p class="eyebrow">Działający interfejs</p>
+        <h2>Od koncepcji do prawdziwego globusa</h2>
+        <p>Stylizowana okładka tłumaczy zasadę produktu, a poniższy ekran pokazuje rzeczywistą wersję opublikowanego MVP.</p>
+      </div>
+      <div class="case-proof-image">
+        <img src="../img/projects/my-trip-world.jpg" alt="Rzeczywisty interfejs My Trip World z globusem i wyszukiwarką podróży" loading="lazy">
+      </div>
+    </figure>
 
     <section class="case-tech" aria-labelledby="trip-architecture-title">
       <div><p class="eyebrow">Architektura</p><h2 id="trip-architecture-title">Dane oddzielone od interfejsu</h2><p>Projekt wykorzystuje HTML, CSS, JavaScript, Three.js i TopoJSON. Działa bez frameworka, backendu i procesu budowania, dlatego GitHub Pages publikuje go bezpośrednio. Każda podróż zawiera identyfikator i slug, miasto, kraj, współrzędne, daty, URL, media oraz kolekcje relacji.</p></div>
