@@ -1,0 +1,12 @@
+{
+  "name": "kairox-chat",
+  "main": "bielik-worker.mjs",
+  "compatibility_date": "2026-10-08",
+  "preview_urls": false,
+  "vars": { "PUBLIC_CHAT_ENABLED": "true" },
+  "ratelimits": [
+    { "name": "CHAT_IP_LIMITER", "namespace_id": "734101", "simple": { "limit": 5, "period": 60 } },
+    { "name": "CHAT_SITE_LIMITER", "namespace_id": "734102", "simple": { "limit": 30, "period": 60 } }
+  ],
+  "observability": { "enabled": false }
+}
