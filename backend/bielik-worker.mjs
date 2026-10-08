@@ -79,6 +79,29 @@ async function askModel(body, env) {
   const reply = data?.choices?.[0]?.message?.content;
   return typeof reply === "string" && reply.trim() ? { reply } : { error: "Model nie zwrócił odpowiedzi tekstowej." };
 }
+const SESSION_MS = 10 * 60 * 1000;
+function base64url(bytes) { return btoa(String.fromCharCode(...bytes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+function fromBase64url(value) { return Uint8Array.from(atob(value.replace(/-/g, "+").replace(/_/g, "/")), char => char.charCodeAt(0)); }
+async function sessionKey(env) {
+  return crypto.subtle.importKey("raw", new TextEncoder().encode(env.CHAT_TEST_KEY), { name: "HMAC", hash: "SHA-256" }, false, ["sign", "verify"]);
+}
+function sessionBytes(payload, origin, ip) { return new TextEncoder().encode(`kairox-chat-session-v1|${payload}|${origin}|${ip}`); }
+async function createSession(env, origin, ip) {
+  const expiresAt = Date.now() + SESSION_MS;
+  const payload = base64url(new TextEncoder().encode(JSON.stringify({ expiresAt, nonce: crypto.randomUUID() })));
+  const signature = await crypto.subtle.sign("HMAC", await sessionKey(env), sessionBytes(payload, origin, ip));
+  return { chatSession: `${payload}.${base64url(new Uint8Array(signature))}`, sessionExpiresAt: expiresAt };
+}
+async function verifySession(token, env, origin, ip) {
+  if (typeof token !== "string" || token.length > 1000) return null;
+  try {
+    const parts = token.split("."); if (parts.length !== 2) return null;
+    if (!await crypto.subtle.verify("HMAC", await sessionKey(env), fromBase64url(parts[1]), sessionBytes(parts[0], origin, ip))) return null;
+    const { expiresAt } = JSON.parse(new TextDecoder().decode(fromBase64url(parts[0])));
+    if (!Number.isSafeInteger(expiresAt) || expiresAt <= Date.now() || expiresAt > Date.now() + SESSION_MS) return null;
+    return { chatSession: token, sessionExpiresAt: expiresAt };
+  } catch { return null; }
+}
 async function handleChat(request, env, isPublic) {
   const origin = request.headers.get("Origin");
   const cors = isPublic && ALLOWED_ORIGINS.has(origin) ? {
@@ -94,7 +117,7 @@ async function handleChat(request, env, isPublic) {
   if (!env.HF_TOKEN) return respond({ error: "Czat nie jest jeszcze dostępny." }, 503);
   if (isPublic) {
     // Brak któregokolwiek zabezpieczenia zamyka dostęp do modelu.
-    if (env.PUBLIC_CHAT_ENABLED !== "true" || !env.TURNSTILE_SECRET_KEY ||
+    if (env.PUBLIC_CHAT_ENABLED !== "true" || !env.TURNSTILE_SECRET_KEY || !env.CHAT_TEST_KEY || env.CHAT_TEST_KEY.length < 32 ||
       typeof env.CHAT_IP_LIMITER?.limit !== "function" || typeof env.CHAT_SITE_LIMITER?.limit !== "function") {
       return respond({ error: "Czat nie jest jeszcze dostępny. Możesz skorzystać z formularza kontaktowego." }, 503);
     }
@@ -108,27 +131,34 @@ async function handleChat(request, env, isPublic) {
   catch (error) { return respond({ error: "Niepoprawny lub zbyt duży JSON." }, error.message === "large" ? 413 : 400); }
   if (!validInput(body)) return respond({ error: "Wpisz pytanie do 2000 znaków. Historia rozmowy jest niepoprawna lub za długa." }, 400);
   try {
+    let session;
     if (isPublic) {
-      if (typeof body.turnstileToken !== "string" || !body.turnstileToken || body.turnstileToken.length > 2048) return respond({ error: "Potwierdź weryfikację bezpieczeństwa." }, 403);
       const ip = request.headers.get("CF-Connecting-IP");
       if (!ip) return respond({ error: "Nie udało się zweryfikować połączenia." }, 403);
       const ipLimit = await env.CHAT_IP_LIMITER.limit({ key: `chat:${ip}` });
       if (!ipLimit.success) return respond({ error: "Za dużo pytań w krótkim czasie. Poczekaj minutę." }, 429);
-      const verification = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-        method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ secret: env.TURNSTILE_SECRET_KEY, response: body.turnstileToken, remoteip: ip }),
-        signal: AbortSignal.timeout(10000),
-      });
-      if (!verification.ok) return respond({ error: "Weryfikacja jest chwilowo niedostępna." }, 503);
-      const check = await verification.json();
-      if (check.success !== true || check.hostname !== new URL(origin).hostname || check.action !== "kairox_chat") {
-        return respond({ error: "Weryfikacja wygasła lub się nie powiodła. Spróbuj ponownie." }, 403);
+      session = await verifySession(body.chatSession, env, origin, ip);
+      if (!session) {
+        if (typeof body.turnstileToken !== "string" || !body.turnstileToken || body.turnstileToken.length > 2048) {
+          return respond({ error: "Potwierdź weryfikację bezpieczeństwa.", verificationRequired: true }, 403);
+        }
+        const verification = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ secret: env.TURNSTILE_SECRET_KEY, response: body.turnstileToken, remoteip: ip }),
+          signal: AbortSignal.timeout(10000),
+        });
+        if (!verification.ok) return respond({ error: "Weryfikacja jest chwilowo niedostępna." }, 503);
+        const check = await verification.json();
+        if (check.success !== true || check.hostname !== new URL(origin).hostname || check.action !== "kairox_chat") {
+          return respond({ error: "Weryfikacja wygasła lub się nie powiodła. Spróbuj ponownie." }, 403);
+        }
+        session = await createSession(env, origin, ip);
       }
       const siteLimit = await env.CHAT_SITE_LIMITER.limit({ key: "kairox-public-chat" });
       if (!siteLimit.success) return respond({ error: "Czat ma teraz dużo zapytań. Spróbuj za minutę." }, 429);
     }
     const data = await askModel(body, env);
-    return respond(data, data.reply ? 200 : 502);
+    return respond(isPublic && session ? { ...data, ...session } : data, data.reply ? 200 : 502);
   } catch (error) {
     return respond({ error: error.name === "TimeoutError" ? "Odpowiedź trwa zbyt długo. Spróbuj ponownie za chwilę." : "Nie udało się połączyć z czatem. Spróbuj później." }, 502);
   }

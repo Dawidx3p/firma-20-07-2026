@@ -39,11 +39,15 @@ nie zostały zmienione. `js/chat-config.js` zawiera tylko publiczny adres i Site
 - Prywatny formularz pod adresem Workera i POST `/chat` nadal wymagają
   `CHAT_TEST_KEY`. Publiczny widget używa osobnej trasy `/public-chat`.
 - Publiczne zapytania wymagają poprawnego Origin, kompletu konfiguracji,
-  aktualnego tokenu Turnstile, właściwego hostname i action `kairox_chat`.
+  tokenu Turnstile przy rozpoczęciu sesji, właściwego hostname i action `kairox_chat`.
   Sam Origin/CORS nie zabezpiecza API przed skryptami — robi to również
   weryfikacja Turnstile po stronie serwera.
-- Każde publiczne pytanie ma jednorazowy token. Widget odnawia weryfikację
-  po wysłaniu pytania oraz usuwa token po jego wygaśnięciu.
+- Po poprawnej weryfikacji Worker wystawia podpisaną sesję na 10 minut.
+  Podpis HMAC jest związany z Origin i IP; kluczem jest sekret `CHAT_TEST_KEY`
+  (minimum 32 znaki). Sesja pozostaje w pamięci karty i nie trafia do modelu.
+  Kolejne pytania nie odnawiają jej ważności. Po wygaśnięciu, zmianie IP
+  lub odświeżeniu strony potrzebna jest ponowna weryfikacja Turnstile.
+  Limity są sprawdzane również przy korzystaniu z sesji.
 - Limity: 5 żądań/minutę na IP (wspólne IP mogą współdzielić limit),
   30 wywołań modelu/minutę dla strony; **liczniki są lokalne dla punktu
   Cloudflare i przybliżone**, nie stanowią globalnego limitu kosztów.

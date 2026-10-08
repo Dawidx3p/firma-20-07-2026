@@ -52,3 +52,20 @@
 .kx-chat-lead-status{font-size:12px;color:#c5b5ff;margin:10px 0}
 .kx-chat-lead-cancel{background:transparent;border:0;padding:8px 0;font-size:11px!important;min-height:44px}
 .kx-chat-lead-send{background:#7250ea;border:1px solid #9c86ff;border-radius:10px;padding:10px 12px;min-height:44px;font-size:12px!important}
+/* Jeden aktywny obszar przewijania, z polem wiadomości stale na dole. */
+.kx-chat-panel{display:flex;flex-direction:column;height:min(650px,calc(100dvh - 116px));overflow:hidden}
+.kx-chat-header{flex-shrink:0;padding:16px;gap:10px}
+.kx-chat-header-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.kx-chat-header .kx-chat-reset{font-size:10px!important;max-width:55px;line-height:1.25;padding:4px}
+.kx-chat-intro{overflow-y:auto;min-height:0}
+.kx-chat-conversation{display:flex;flex-direction:column;flex:1;min-height:0}
+.kx-chat-content{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.kx-chat-thread{max-height:none;overflow:visible;padding-top:14px}
+.kx-chat-is-collecting .kx-chat-thread{display:none}
+.kx-chat-form{flex-shrink:0;border-top:1px solid #ffffff14;padding:12px 18px 0}
+.kx-chat textarea{height:68px;min-height:68px;max-height:68px;resize:none}
+.kx-chat-send{display:block;width:100%;margin-top:8px;min-height:42px;padding:8px 14px}
+.kx-chat-verification{margin-top:6px}
+.kx-chat-status:empty{display:none}
+.kx-chat-footnote{flex-shrink:0;margin:10px 18px 14px}
+@media(max-width:480px){.kx-chat-panel{height:min(650px,calc(100dvh - 100px))}.kx-chat-header h2{font-size:15px}.kx-chat-header-actions{gap:4px}.kx-chat-thread{max-height:none}.kx-chat-form{padding-top:10px}}

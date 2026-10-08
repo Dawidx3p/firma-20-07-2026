@@ -19,7 +19,7 @@
     <div id="kx-chat-panel" class="kx-chat-panel" role="dialog" aria-labelledby="kx-chat-title" hidden>
       <header class="kx-chat-header">
         <div><span class="kx-chat-eyebrow">KAIROX · BIELIK</span><h2 id="kx-chat-title">Porozmawiajmy o Twojej stronie</h2></div>
-        <button class="kx-chat-close" type="button" aria-label="Zamknij czat">×</button>
+        <div class="kx-chat-header-actions"><button class="kx-chat-reset" type="button" hidden>Nowa rozmowa</button><button class="kx-chat-close" type="button" aria-label="Zamknij czat">×</button></div>
       </header>
       <div class="kx-chat-intro">
         <p>Nie wiesz, od czego zacząć? Pomogę Ci poznać ofertę i wybrać kierunek.</p>
@@ -29,7 +29,8 @@
         <p class="kx-chat-direct"><a href="/formularz-kontaktowy.html">Wolisz porozmawiać z zespołem?</a></p>
       </div>
       <div class="kx-chat-conversation" hidden>
-        <div class="kx-chat-thread" role="region" aria-label="Rozmowa z asystentem" tabindex="0"></div>
+        <div class="kx-chat-content" role="region" aria-label="Rozmowa z asystentem" tabindex="0">
+        <div class="kx-chat-thread"></div>
         <div class="kx-chat-suggestions">
           <button type="button">Ile kosztuje strona?</button>
           <button type="button">Od czego zacząć?</button>
@@ -48,12 +49,13 @@
           <p class="kx-chat-lead-status" role="status" aria-live="polite"></p>
           <div class="kx-chat-actions"><button class="kx-chat-lead-cancel" type="button">Wróć do rozmowy</button><button class="kx-chat-lead-send" type="submit" disabled>Wyślij zgłoszenie</button></div>
         </form>
+        </div>
         <form class="kx-chat-form">
           <label for="kx-chat-message">Twoje pytanie</label>
           <textarea id="kx-chat-message" rows="2" maxlength="2000" placeholder="Np. mam stronę, ale nie dostaję zapytań…" required data-private="true"></textarea>
+          <button class="kx-chat-send" type="submit" disabled>Wyślij wiadomość ↗</button>
           <div class="kx-chat-verification"></div>
           <p class="kx-chat-status" role="status" aria-live="polite"></p>
-          <div class="kx-chat-actions"><button class="kx-chat-reset" type="button">Nowa rozmowa</button><button class="kx-chat-send" type="submit" disabled>Wyślij ↗</button></div>
         </form>
         <p class="kx-chat-footnote">AI może się mylić. Bez danych osobowych. <a href="/formularz-kontaktowy.html">Kontakt z zespołem</a></p>
       </div>
@@ -68,17 +70,20 @@
   const send = $(".kx-chat-send");
   const status = $(".kx-chat-status");
   const thread = $(".kx-chat-thread");
+  const content = $(".kx-chat-content");
   const leadForm = $(".kx-chat-lead");
   const leadStatus = $(".kx-chat-lead-status");
   const leadSend = $(".kx-chat-lead-send");
   let inferService, sendContact, validateContact, activeService, pendingOffer, leadBusy = false, leadSent = false;
   const interests = new Map(), offeredServices = new Set();
+  let chatSession = "", sessionExpiresAt = 0, sessionTimer;
   let history = [], token = "", widgetId, loading = false, scriptPromise, controller, generation = 0;
-  function updateSend() { send.disabled = loading || !token || !input.value.trim(); }
+  function hasSession() { return Boolean(chatSession && Date.now() < sessionExpiresAt); }
+  function updateSend() { send.disabled = loading || (!token && !hasSession()) || !input.value.trim(); }
   function openChat() {
     panel.hidden = false;
     launcher.setAttribute("aria-expanded", "true");
-    ($(".kx-chat-intro").hidden ? input : start).focus();
+    (!leadForm.hidden ? $("#kx-lead-email") : $(".kx-chat-intro").hidden ? input : start).focus();
   }
   function closeChat() { panel.hidden = true; launcher.setAttribute("aria-expanded", "false"); launcher.focus(); }
   launcher.addEventListener("click", () => panel.hidden ? openChat() : closeChat());
@@ -90,11 +95,11 @@
     const name = document.createElement("span");
     name.className = "kx-chat-speaker";
     name.textContent = role === "user" ? "Ty" : "Bielik · AI";
-    const content = document.createElement("span");
-    content.textContent = text;
-    message.append(name, content);
+    const messageText = document.createElement("span");
+    messageText.textContent = text;
+    message.append(name, messageText);
     thread.appendChild(message);
-    thread.scrollTop = thread.scrollHeight;
+    content.scrollTop = content.scrollHeight;
   }
   function loadTurnstile() {
     if (window.turnstile) return Promise.resolve();
@@ -126,13 +131,14 @@
       ({ sendContact, validateContact } = contactModule);
       $(".kx-chat-intro").hidden = true;
       $(".kx-chat-conversation").hidden = false;
+      $(".kx-chat-reset").hidden = false;
       addMessage("assistant", "Cześć! Pomogę Ci poznać ofertę KAIROX. Co chcesz poprawić na swojej stronie?");
       status.textContent = "Trwa weryfikacja bezpieczeństwa…";
       widgetId = window.turnstile.render($(".kx-chat-verification"), {
-        sitekey: config.turnstileSiteKey, action: "kairox_chat", theme: "dark", size: "flexible",
+        sitekey: config.turnstileSiteKey, action: "kairox_chat", theme: "dark", size: "flexible", appearance: "interaction-only",
         callback: (value) => { token = value; if (!loading && /^(Trwa weryfikacja|Weryfikacja wygasła)/.test(status.textContent)) status.textContent = ""; updateSend(); },
-        "expired-callback": () => { token = ""; updateSend(); status.textContent = "Weryfikacja wygasła. Potwierdź ją ponownie."; },
-        "error-callback": () => { token = ""; updateSend(); status.textContent = "Weryfikacja się nie powiodła. Odśwież stronę lub użyj formularza kontaktowego."; },
+        "expired-callback": () => { token = ""; updateSend(); if (!hasSession()) resetVerification(); },
+        "error-callback": () => { token = ""; updateSend(); if (!hasSession()) status.textContent = "Weryfikacja się nie powiodła. Odśwież stronę lub użyj formularza kontaktowego."; },
       });
       input.focus();
     } catch (error) {
@@ -158,9 +164,11 @@
     interests.clear(); offeredServices.clear(); activeService = undefined; pendingOffer = undefined; leadSent = false;
     leadForm.reset(); leadStatus.textContent = ""; setCollecting(false);
     thread.replaceChildren(); addMessage("assistant", "Zaczynamy od nowa. W czym mogę pomóc?");
-    status.textContent = ""; resetVerification(); input.focus();
+    status.textContent = ""; if (!hasSession()) resetVerification(); else updateSend(); input.focus();
   });
   function setCollecting(value) {
+    root.classList.toggle("kx-chat-is-collecting", value);
+    content.scrollTop = value ? 0 : content.scrollHeight;
     leadForm.hidden = !value;
     form.hidden = value;
     $(".kx-chat-suggestions").hidden = value;
@@ -183,7 +191,7 @@
     decline.type = "button"; decline.textContent = "Nie teraz";
     const options = document.createElement("div"); options.className = "kx-chat-offer-actions";
     options.append(accept, decline); offer.append(question, options); thread.appendChild(offer);
-    thread.scrollTop = thread.scrollHeight;
+    content.scrollTop = content.scrollHeight;
     pendingOffer = { accept, decline };
     accept.addEventListener("click", () => {
       if (leadBusy || leadSent) return;
@@ -250,7 +258,8 @@
         addMessage("user", message); input.value = ""; pendingOffer[action].click(); updateSend(); return;
       }
     }
-    if (loading || !token || !message) return;
+    if (loading || !message) return;
+    if (!token && !hasSession()) { status.textContent = "Trwa weryfikacja bezpieczeństwa…"; resetVerification(); return; }
     const turnstileToken = token;
     const currentGeneration = generation;
     loading = true; token = ""; updateSend();
@@ -262,10 +271,16 @@
     try {
       const response = await fetch(config.endpoint, {
         method: "POST", credentials: "omit", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message, history, turnstileToken }), signal: requestController.signal,
+        body: JSON.stringify({ message, history, turnstileToken, chatSession: hasSession() ? chatSession : undefined }), signal: requestController.signal,
       });
       const data = await response.json();
       if (currentGeneration !== generation) return;
+      if (typeof data.chatSession === "string" && Number.isSafeInteger(data.sessionExpiresAt)) {
+        chatSession = data.chatSession; sessionExpiresAt = data.sessionExpiresAt;
+        clearTimeout(sessionTimer);
+        sessionTimer = setTimeout(() => { chatSession = ""; sessionExpiresAt = 0; resetVerification(); }, Math.max(0, sessionExpiresAt - Date.now()));
+      }
+      if (data.verificationRequired) { chatSession = ""; sessionExpiresAt = 0; }
       if (!response.ok || typeof data.reply !== "string") throw new Error(data.error || "Czat jest chwilowo niedostępny.");
       addMessage("assistant", data.reply);
       offerContact(message);
@@ -277,7 +292,7 @@
       input.value = message;
     } finally {
       clearTimeout(timer);
-      if (currentGeneration === generation) { loading = false; resetVerification(); }
+      if (currentGeneration === generation) { loading = false; if (!hasSession()) resetVerification(); else updateSend(); }
     }
   });
 })();

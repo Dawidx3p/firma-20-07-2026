@@ -49,7 +49,7 @@ test('Bielik: ochrona endpointów i połączenie z dostawcami', async (t) => {
     assert(!response.headers.get('Access-Control-Allow-Headers').includes('Authorization')); assert.equal(calls.length, 0);
   });
   await t.test('każdy brak konfiguracji zamyka publiczny model', async () => {
-    for (const key of ['HF_TOKEN', 'TURNSTILE_SECRET_KEY', 'CHAT_IP_LIMITER', 'CHAT_SITE_LIMITER', 'PUBLIC_CHAT_ENABLED']) {
+    for (const key of ['HF_TOKEN', 'CHAT_TEST_KEY', 'TURNSTILE_SECRET_KEY', 'CHAT_IP_LIMITER', 'CHAT_SITE_LIMITER', 'PUBLIC_CHAT_ENABLED']) {
       mock(); const settings = env(); delete settings[key]; await rejected(request(), settings, 503); assert.equal(calls.length, 0);
     }
     mock(); await rejected(request(), { ...env(), PUBLIC_CHAT_ENABLED: 'false' }, 503);
@@ -96,7 +96,7 @@ test('Bielik: ochrona endpointów i połączenie z dostawcami', async (t) => {
     mock(); const settings = env();
     const response = await worker.fetch(request({ message: ' Cena? ', history: [{ role: 'user', content: 'Potrzebuję strony' }, { role: 'assistant', content: 'Jakiej?' }], turnstileToken: 'verified-token', model: 'other', system: 'other', max_tokens: 90000 }), settings);
     assert.equal(response.status, 200); assert.equal(response.headers.get('Access-Control-Allow-Origin'), origin); assert.equal(response.headers.get('Cache-Control'), 'no-store');
-    const text = await response.text(); assert.deepEqual(JSON.parse(text), { reply: 'Cześć!' });
+    const text = await response.text(); const answer = JSON.parse(text); assert.equal(answer.reply, 'Cześć!'); assert.equal(typeof answer.chatSession, 'string'); assert(answer.sessionExpiresAt > Date.now());
     assert.equal(calls.length, 2);
     const verify = JSON.parse(calls[0].options.body); assert.equal(verify.secret, settings.TURNSTILE_SECRET_KEY); assert.equal(verify.response, 'verified-token'); assert(!calls[0].options.body.includes(settings.HF_TOKEN));
     const model = calls[1]; const payload = JSON.parse(model.options.body); assert.equal(model.options.headers.Authorization, `Bearer ${settings.HF_TOKEN}`);
@@ -104,6 +104,39 @@ test('Bielik: ochrona endpointów i połączenie z dostawcami', async (t) => {
     assert.equal(payload.messages[0].role, 'system'); assert.equal(payload.messages.length, 4); assert.equal(payload.messages.at(-1).content, 'Cena?');
     assert(!model.options.body.includes(settings.TURNSTILE_SECRET_KEY)); assert(!model.options.body.includes(settings.CHAT_TEST_KEY));
     for (const secret of [settings.HF_TOKEN, settings.TURNSTILE_SECRET_KEY, settings.CHAT_TEST_KEY]) assert(!text.includes(secret));
+  });
+  await t.test('sesja pozwala na kolejne pytanie bez ponownego Turnstile, zachowując limity', async () => {
+    mock(); const settings = env();
+    let ipChecks = 0, siteChecks = 0;
+    settings.CHAT_IP_LIMITER.limit = async () => { ipChecks++; return { success: true }; };
+    settings.CHAT_SITE_LIMITER.limit = async () => { siteChecks++; return { success: true }; };
+    const first = await (await worker.fetch(request(), settings)).json();
+    mock(); const response = await worker.fetch(request({ message: 'A co obejmuje cena?', chatSession: first.chatSession }), settings);
+    assert.equal(response.status, 200); assert.equal(calls.length, 1); assert(calls[0].url.includes('huggingface'));
+    assert.equal(ipChecks, 2); assert.equal(siteChecks, 2);
+    assert(!calls[0].options.body.includes(first.chatSession));
+    assert.equal((await response.json()).sessionExpiresAt, first.sessionExpiresAt); // Nie przedłużamy sesji bez nowej weryfikacji.
+  });
+  await t.test('sfałszowana sesja, inne IP i inna domena wymagają Turnstile', async () => {
+    mock(); const settings = env(); const first = await (await worker.fetch(request(), settings)).json();
+    for (const [token, headers] of [
+      [first.chatSession.slice(0, -2) + 'xx', {}], [first.chatSession, { 'CF-Connecting-IP': '192.0.2.2' }],
+      [first.chatSession, { Origin: 'https://www.kairox.pl' }],
+    ]) {
+      mock(); const response = await rejected(request({ message: 'Hej', chatSession: token }, headers), settings, 403);
+      assert.equal((await response.json()).verificationRequired, true); assert.equal(calls.length, 0);
+    }
+  });
+  await t.test('sesja wygasa po 10 minutach i nie omija limitów', async () => {
+    mock(); const settings = env(); const first = await (await worker.fetch(request(), settings)).json();
+    settings.CHAT_SITE_LIMITER.limit = async () => ({ success: false });
+    mock(); await rejected(request({ message: 'Hej', chatSession: first.chatSession }), settings, 429); assert.equal(calls.length, 0);
+    const originalNow = Date.now;
+    try {
+      Date.now = () => first.sessionExpiresAt + 1;
+      mock(); const response = await rejected(request({ message: 'Hej', chatSession: first.chatSession }), env(), 403);
+      assert.equal((await response.json()).verificationRequired, true); assert.equal(calls.length, 0);
+    } finally { Date.now = originalNow; }
   });
   await t.test('błędy dostawcy nie ujawniają ich treści', async () => {
     for (const code of [400, 401, 402, 403, 404, 429, 500]) {
