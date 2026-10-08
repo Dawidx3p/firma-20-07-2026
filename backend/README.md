@@ -63,7 +63,8 @@ nie zostały zmienione. `js/chat-config.js` zawiera tylko publiczny adres i Site
 - Nie zapisujemy pytań do logów w kodzie. Providerzy mają własne zasady
   przetwarzania i retencji; brak własnej bazy nie oznacza braku retencji u nich.
 - Treści czatu są oznaczone do maskowania w Clarity; odpowiedzi są wstawiane
-  przez `textContent`, bez renderowania HTML dostarczonego przez model.
+  jako tekst i bezpiecznie utworzone elementy pogrubienia oraz linków.
+  Linki są ograniczone do znanych podstron KAIROX; HTML od modelu pozostaje tekstem.
 
 ## Wersja testowa i prywatność
 

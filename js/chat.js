@@ -74,7 +74,7 @@
   const leadForm = $(".kx-chat-lead");
   const leadStatus = $(".kx-chat-lead-status");
   const leadSend = $(".kx-chat-lead-send");
-  let inferService, sendContact, validateContact, activeService, pendingOffer, leadBusy = false, leadSent = false;
+  let renderMessage, inferService, sendContact, validateContact, activeService, pendingOffer, leadBusy = false, leadSent = false;
   const interests = new Map(), offeredServices = new Set();
   let chatSession = "", sessionExpiresAt = 0, sessionTimer;
   let history = [], token = "", widgetId, loading = false, scriptPromise, controller, generation = 0;
@@ -96,7 +96,8 @@
     name.className = "kx-chat-speaker";
     name.textContent = role === "user" ? "Ty" : "Bielik · AI";
     const messageText = document.createElement("span");
-    messageText.textContent = text;
+    if (role === "assistant" && renderMessage) renderMessage(messageText, text);
+    else messageText.textContent = text;
     message.append(name, messageText);
     thread.appendChild(message);
     content.scrollTop = content.scrollHeight;
@@ -123,10 +124,12 @@
     start.disabled = true;
     start.textContent = "Przygotowuję rozmowę…";
     try {
-      const [, interestModule, contactModule] = await Promise.all([
+      const [, interestModule, contactModule, formatModule] = await Promise.all([
         loadTurnstile(), import(new URL("./chat-interest.mjs", scriptUrl).href),
         import(new URL("./contact-service.mjs", scriptUrl).href),
+        import(new URL("./chat-format.mjs", scriptUrl).href),
       ]);
+      renderMessage = formatModule.renderMessage;
       inferService = interestModule.inferService;
       ({ sendContact, validateContact } = contactModule);
       $(".kx-chat-intro").hidden = true;

@@ -69,3 +69,5 @@
 .kx-chat-status:empty{display:none}
 .kx-chat-footnote{flex-shrink:0;margin:10px 18px 14px}
 @media(max-width:480px){.kx-chat-panel{height:min(650px,calc(100dvh - 100px))}.kx-chat-header h2{font-size:15px}.kx-chat-header-actions{gap:4px}.kx-chat-thread{max-height:none}.kx-chat-form{padding-top:10px}}
+
+.kx-chat-message a{color:#c9bdff;text-decoration:underline;text-underline-offset:3px;overflow-wrap:anywhere}.kx-chat-message a:hover{color:#fff}.kx-chat-message strong{font-weight:700;color:#fff}
