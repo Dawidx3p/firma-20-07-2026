@@ -156,6 +156,12 @@
     }
   });
   input.addEventListener("input", updateSend);
+  input.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" || event.shiftKey || event.ctrlKey || event.altKey || event.metaKey || event.isComposing) return;
+    if (panel.hidden || form.hidden || !input.value.trim()) return;
+    event.preventDefault();
+    if (!send.disabled) form.requestSubmit();
+  });
   function updateSuggestions(message = "") {
     const buttons = getSuggestions(message, history).map(question => {
       const button = document.createElement("button");
