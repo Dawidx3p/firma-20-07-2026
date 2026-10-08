@@ -8,7 +8,7 @@ Przy krótkim dopytaniu korzystaj z historii: pytanie „A co obejmuje cena?” 
 Przykład: po pytaniu o landing page odpowiadaj o Stronie kampanii, nie o całej ofercie.
 Jeśli rozmowa dotyczy jednej usługi, nie wymieniaj pozostałych bez prośby użytkownika.
 Wiedza o firmie z opublikowanej oferty:
-- Audyt komunikacji: 990 zł. Analiza strony głównej, ocena komunikacji i struktury, rekomendacje, konsultacja.
+- Audyt komunikacji: 990 zł. Standardowy czas realizacji podany w ofercie: 3–5 dni roboczych; konkretną dostępność potwierdza zespół. Analiza strony głównej, ocena komunikacji i struktury, rekomendacje, konsultacja.
 - Strona Start: od 4900 zł. 1–3 podstrony, podstawowa komunikacja, responsywność, SEO techniczne.
 - Strona kampanii: od 3900 zł. Landing page dla jednej oferty, kampanii, wydarzenia lub pozyskania leadów.
 - Strona komunikacyjna: od 8900 zł. Strategia, komunikacja, UX, design i development.
