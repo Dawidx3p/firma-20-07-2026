@@ -72,6 +72,7 @@
   const status = $(".kx-chat-status");
   const thread = $(".kx-chat-thread");
   const content = $(".kx-chat-content");
+  const verification = $(".kx-chat-verification");
   const leadForm = $(".kx-chat-lead");
   const leadStatus = $(".kx-chat-lead-status");
   const leadSend = $(".kx-chat-lead-send");
@@ -142,10 +143,12 @@
       $(".kx-chat-reset").hidden = false;
       addMessage("assistant", "Cześć! Pomogę Ci poznać ofertę KAIROX. Co chcesz poprawić na swojej stronie?");
       status.textContent = "Trwa weryfikacja bezpieczeństwa…";
-      widgetId = window.turnstile.render($(".kx-chat-verification"), {
+      verification.hidden = false;
+      widgetId = window.turnstile.render(verification, {
         sitekey: config.turnstileSiteKey, action: "kairox_chat", theme: "dark", size: "flexible", appearance: "interaction-only",
         callback: (value) => {
           token = value;
+          verification.hidden = true;
           if (!loading && /^(Trwa weryfikacja|Weryfikacja wygasła)/.test(status.textContent)) status.textContent = "";
           updateSend();
           if (queuedSuggestion && input.value === queuedSuggestion && !panel.hidden && !send.disabled) {
@@ -153,7 +156,13 @@
           }
         },
         "expired-callback": () => { token = ""; updateSend(); if (!hasSession()) resetVerification(); },
-        "error-callback": () => { token = ""; updateSend(); if (!hasSession()) status.textContent = "Weryfikacja się nie powiodła. Odśwież stronę lub użyj formularza kontaktowego."; },
+        "error-callback": () => {
+          token = ""; updateSend();
+          if (!hasSession()) {
+            verification.hidden = false;
+            status.textContent = "Weryfikacja się nie powiodła. Odśwież stronę lub użyj formularza kontaktowego.";
+          }
+        },
       });
       input.focus();
     } catch (error) {
@@ -188,6 +197,7 @@
   });
   function resetVerification() {
     token = ""; updateSend();
+    verification.hidden = false;
     if (widgetId !== undefined) window.turnstile.reset(widgetId);
   }
   $(".kx-chat-reset").addEventListener("click", () => {
