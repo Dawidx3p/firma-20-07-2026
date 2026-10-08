@@ -12,34 +12,30 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="img/180na180.png">
-  <link rel="stylesheet" href="css/style.css?v=footer-mobile-1">
+  <link rel="stylesheet" href="css/style.css?v=audit-2">
   <title>Porozmawiajmy o Twojej stronie — KAIROX</title>
+  <link rel="canonical" href="https://kairox.pl/formularz-kontaktowy.html">
 </head>
 <body>
-  <main>
+  <a class="skip-link" href="#main-content">Przejdź do treści</a>
+  <main id="main-content">
     <section class="contact-landing">
       <div class="contact-landing-intro">
-        <p class="contact-brand" aria-label="KAIROX">KAIROX</p>
+        <a class="contact-brand" href="index.html" aria-label="KAIROX — wróć na stronę główną">KAIROX</a>
         <p class="eyebrow">Bezpłatna konsultacja</p>
         <h1>Porozmawiajmy o Twojej stronie</h1>
         <p class="contact-landing-lead">
-          Opowiedz krótko, co dziś nie działa tak, jak powinno. Wrócimy do Ciebie,
-          żeby poznać kontekst i sprawdzić, czy możemy realnie pomóc.
+          Podaj kontakt i opowiedz, czego potrzebujesz. Wrócimy do Ciebie,
+          żeby omówić możliwy kolejny krok.
         </p>
 
-        <div class="contact-expectations" aria-label="Jak wygląda pierwszy kontakt">
-          <div><span>01</span><p>Wypełniasz krótki formularz.</p></div>
-          <div><span>02</span><p>Kontaktujemy się w wybrany przez Ciebie sposób.</p></div>
-          <div><span>03</span><p>Rozmawiamy o sytuacji, potrzebach i możliwym kolejnym kroku.</p></div>
-        </div>
-
-        <p class="contact-assurance">Bez zobowiązań i bez gotowej oferty wysyłanej w ciemno.</p>
       </div>
 
       <div class="contact-form-card" id="formularz">
         <p class="eyebrow">Zacznijmy rozmowę</p>
         <h2>Napisz, z czym się mierzysz</h2>
         <p>Wystarczy adres e-mail lub numer telefonu.</p>
+        <p id="contactServiceContext" hidden></p>
 
         <form id="contactForm" novalidate>
           <div class="contact-fields-row">
@@ -55,16 +51,19 @@
           <div class="contact-fields-row">
             <div class="form-group">
               <label for="email">Adres e-mail</label>
-              <input type="email" id="email" name="email" autocomplete="email">
+              <input type="email" id="email" name="email" autocomplete="email" aria-describedby="emailError">
+              <p class="field-error-note" id="emailError"></p>
             </div>
             <div class="form-group">
               <label for="phone">Numer telefonu</label>
-              <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel">
+              <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel" aria-describedby="phoneError">
+              <p class="field-error-note" id="phoneError"></p>
             </div>
           </div>
           <div class="form-group">
             <label for="contactMethod">Preferowana forma kontaktu</label>
             <select id="contactMethod" name="contactMethod">
+              <option value="">Bez preferencji</option>
               <option>E-mail</option>
               <option>Telefon</option>
               <option>WhatsApp</option>
@@ -76,16 +75,30 @@
             <textarea id="challenge" name="challenge" rows="5" placeholder="Napisz kilka zdań — nie musisz przygotowywać pełnego briefu."></textarea>
           </div>
           <div class="form-group checkbox">
-            <input type="checkbox" id="privacy" required>
+            <input type="checkbox" id="privacy" required aria-describedby="privacyError">
             <label for="privacy">
               Zapoznałem(-am) się z <a href="polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityką prywatności</a>
               i przyjmuję do wiadomości zasady przetwarzania danych.*
             </label>
           </div>
+          <p class="field-error-note" id="privacyError"></p>
           <button type="submit" class="primary-button" id="submitButton" disabled>Wyślij zgłoszenie</button>
           <p class="form-hint">Podaj e-mail lub telefon i zaakceptuj informację o przetwarzaniu danych.</p>
-          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </form>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite" tabindex="-1"></p>
+        <div id="contactSuccessActions" hidden>
+          <a class="secondary-button" href="index.html">Wróć na stronę główną</a>
+          <a class="secondary-button" href="realizacje.html">Zobacz realizacje</a>
+        </div>
+      </div>
+      <div class="contact-process">
+        <div class="contact-expectations" aria-label="Jak wygląda pierwszy kontakt">
+          <div><span>01</span><p>Wypełniasz krótki formularz.</p></div>
+          <div><span>02</span><p>Kontaktujemy się w wybrany przez Ciebie sposób.</p></div>
+          <div><span>03</span><p>Rozmawiamy o sytuacji, potrzebach i możliwym kolejnym kroku.</p></div>
+        </div>
+
+        <p class="contact-assurance">Bez zobowiązań i bez gotowej oferty wysyłanej w ciemno.</p>
       </div>
     </section>
   </main>
@@ -119,9 +132,9 @@
     </div>
   </div>
 
-  <script src="js/consent.js"></script>
-  <script src="js/contact-page.js"></script>
+  <script src="js/consent.js?v=audit-2"></script>
+  <script src="js/contact-page.js?v=audit-2"></script>
   <script src="js/chat-config.js"></script>
-  <script src="js/chat.js?v=enter-1"></script>
+  <script src="js/chat.js?v=audit-2"></script>
 </body>
 </html>

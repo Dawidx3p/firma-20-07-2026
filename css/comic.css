@@ -1,0 +1,78 @@
+/* KAIROX comic scenes: original artwork stays uncropped at every breakpoint. */
+.comic-block {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 72px 24px;
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: 40px;
+}
+.hero.comic-block { min-height: 0; padding-top: 64px; padding-bottom: 64px; }
+.comic-copy { min-width: 0; grid-column: 1; grid-row: 1; }
+.comic-copy h1, .comic-copy h2 {
+  max-width: 100%;
+  font-size: clamp(2.1rem, 3.3vw, 3.35rem);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+.comic-description { margin-top: 22px; color: var(--muted); font-size: 1.05rem; line-height: 1.7; }
+.comic-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 28px; }
+.comic-actions a { max-width: 100%; white-space: normal; text-align: center; }
+.comic-visual {
+  min-width: 0;
+  grid-column: 2;
+  grid-row: 1;
+  border: 1px solid rgba(0, 224, 255, .18);
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .3);
+}
+.comic-visual img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; }
+.comic-block--reverse { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); }
+.comic-block--reverse .comic-copy { grid-column: 2; }
+.comic-block--reverse .comic-visual { grid-column: 1; }
+.comic-block--closing { padding-bottom: 96px; }
+.page-layout .comic-block { gap: 28px; }
+.page-layout .comic-copy h1 { font-size: clamp(2rem, 2.7vw, 2.85rem); }
+.page-layout .toc {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+  width: auto;
+  max-width: calc(var(--max-width) - 48px);
+  margin: 0 auto 32px;
+  box-shadow: none;
+}
+.page-layout .toc h3 { margin: 0; font-size: .8rem; }
+.page-layout .toc a { margin: 0; }
+@media (max-width: 1180px) {
+  .page-layout .toc { margin-left: 24px; margin-right: 24px; }
+}
+@media (max-width: 980px) {
+  .comic-block, .hero.comic-block, .page-layout .comic-block {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    padding: 48px 24px;
+  }
+  /* Heading, illustration, explanation and action are a single reading flow. */
+  .comic-copy { display: contents; }
+  .comic-copy .eyebrow { grid-column: 1; grid-row: 1; }
+  .comic-copy h1, .comic-copy h2 { grid-column: 1; grid-row: 2; }
+  .comic-block .comic-visual { grid-column: 1; grid-row: 3; margin-top: 24px; }
+  .comic-description { grid-column: 1; grid-row: 4; margin-top: 22px; }
+  .comic-actions { grid-column: 1; grid-row: 5; margin-top: 24px; }
+  .comic-copy h1, .comic-copy h2, .page-layout .comic-copy h1 { max-width: 680px; font-size: clamp(2.1rem, 5vw, 3rem); }
+}
+@media (max-width: 600px) {
+  .comic-block, .hero.comic-block, .page-layout .comic-block { padding: 36px 18px; }
+  .comic-copy h1, .comic-copy h2, .page-layout .comic-copy h1 { font-size: clamp(1.9rem, 8.2vw, 2.55rem); }
+  .comic-visual { border-radius: 18px; }
+  .comic-description { font-size: 1rem; }
+  .comic-actions { align-items: stretch; }
+  .comic-actions a { width: 100%; }
+}

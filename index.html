@@ -29,12 +29,15 @@
   />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="img/180na180.png">
-  <link rel="stylesheet" href="css/style.css?v=footer-mobile-1" />
+  <link rel="stylesheet" href="css/style.css?v=audit-2" />
 
   <title>KAIROX — Strony, które komunikują wartość marki</title>
+  <link rel="canonical" href="https://kairox.pl/">
+  <link rel="stylesheet" href="css/comic.css?v=1">
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
     <nav class="navbar" aria-label="Główna nawigacja">
@@ -70,34 +73,25 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
 
-    <section class="hero" id="hero">
-      <div class="hero-content">
-        <p class="eyebrow">Strony internetowe jako narzędzie komunikacji</p>
-
-        <h1>
-          Pomagamy firmom lepiej komunikować swoją wartość
-        </h1>
-
-        <p class="hero-description">
-          Pomagamy firmom mówić o swojej wartości w sposób,
-          który klienci naprawdę rozumieją.
-        
-          Tworzymy strategię, komunikację i strony internetowe,
-          które pomagają podejmować lepsze decyzje zakupowe.
-        </p>
-        <div class="hero-actions">
-          <a class="primary-button" href="formularz-kontaktowy.html">
-          Umów bezpłatną konsultację
-        </a>
+    <section class="comic-block hero comic-block--hero" id="hero" aria-labelledby="hero-title">
+      <div class="comic-copy">
+        <p class="eyebrow">Strony internetowe i komunikacja</p>
+        <h1 id="hero-title">Masz stronę, ale trudno zrozumieć Twoją ofertę?</h1>
+        <p class="comic-description">Sprawdzamy, co warto uprościć, a następnie porządkujemy treść, strukturę i drogę do kontaktu. Pomagamy też zaprojektować nową stronę od podstaw.</p>
+        <div class="comic-actions">
+          <a class="primary-button" href="audyt-komunikacji.html">Zobacz, od czego zacząć</a>
+          <a class="secondary-button" href="modele-wspolpracy.html">Potrzebujesz nowej strony?</a>
         </div>
       </div>
-
-      <div class="hero-panel" aria-label="Główna idea KAIROX">
-        <p>Strona nie jest tylko wizytówką.</p>
-        <p>To rozmowa między marką a odbiorcą.</p>
-      </div>
+      <figure class="comic-visual">
+        <img src="img/illustrations/kairox-01-od-czego-zaczac.webp"
+          srcset="img/illustrations/kairox-01-od-czego-zaczac-768.webp 768w, img/illustrations/kairox-01-od-czego-zaczac.webp 1536w"
+          sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 48px), 650px"
+          width="1536" height="1024" alt="Klientka i projektant KAIROX przy chaotycznej stronie. Projektant porządkuje informacje turkusowym flamastrem. Dymek: „Od czego zacząć?”."
+          loading="eager" decoding="async" fetchpriority="high">
+      </figure>
     </section>
 
     <section class="website-check" aria-labelledby="website-check-title">
@@ -130,29 +124,18 @@
       </div>
     </section>
 
-    <section class="message" aria-labelledby="message-title">
-      <h2 id="message-title">
-        Większość firm nie ma problemu z ofertą
-      </h2>
 
-      <p>
-        Ma problem z jej komunikacją. Jeżeli klient nie rozumie wartości firmy
-        w pierwszych sekundach, często nie przechodzi dalej.
-      </p>
-    </section>
 
     <section class="site-paths" id="site-paths">
       <div class="section-header">
         <p class="eyebrow">Poznaj KAIROX</p>
 
         <h2>
-          Każda podstrona odpowiada na inne pytanie,
-          które możesz mieć przed rozpoczęciem współpracy
+          Wybierz krok, którego potrzebuje Twoja firma
         </h2>
 
         <p class="section-intro">
-          Każdy etap przygotowuje kolejny. Dzięki temu projekt nie powstaje przypadkiem,
-          lecz jest wynikiem spójnego procesu.
+          Sprawdź obecną stronę, poznaj sposób pracy albo porównaj zakresy współpracy.
         </p>
       </div>
       
@@ -216,105 +199,22 @@
       </div>
     </section>
 
-    <section class="process" id="process">
-      <div class="section-header">
-        <p class="eyebrow">Metoda</p>
-        <h2>Nie zaczynamy od wyglądu. Zaczynamy od zrozumienia</h2>
+    <section class="comic-block comic-block--reverse" id="process" aria-labelledby="process-title">
+      <div class="comic-copy">
+        <p class="eyebrow">Metoda Agent 0</p>
+        <h2 id="process-title">Najpierw ustalamy, co ma zrozumieć Twój klient</h2>
+        <p class="comic-description">Dla kogo jest oferta? Jaką daje korzyść? Dlaczego warto zaufać? Od tych odpowiedzi zaczynamy projekt.</p>
+        <div class="comic-actions">
+          <a class="primary-button" href="metoda.html">Poznaj naszą metodę</a>
+        </div>
       </div>
-
-      <ol class="process-list">
-        <li class="process-card">
-          <span class="process-number">
-            <img
-              class="process-icon"
-              src="img/icons/strategia.svg"
-              alt=""
-            >
-          </span>
-        
-          <h3>Strategia</h3>
-        
-          <p>
-            Rozumiemy firmę, odbiorców i cele biznesowe, zanim zaprojektujemy pierwszą sekcję strony.
-          </p>
-        </li>
-
-        <li class="process-card">
-          <span class="process-number">
-            <img
-              class="process-icon"
-              src="img/icons/komunikacja.svg"
-              alt=""
-            >
-          </span>
-        
-          <h3>Komunikacja</h3>
-        
-          <p>
-            Definiujemy przekaz, który pomaga klientom zrozumieć wartość marki już od pierwszych sekund.
-          </p>
-        </li>
-
-        <li class="process-card">
-          <span class="process-number">
-            <img
-              class="process-icon"
-              src="img/icons/ux.svg"
-              alt=""
-            >
-          </span>
-        
-          <h3>UX</h3>
-        
-          <p>
-            Projektujemy kolejność informacji tak, aby prowadzić użytkownika do właściwej decyzji.
-          </p>
-        </li>
-
-        <li class="process-card">
-          <span class="process-number">
-            <img
-              class="process-icon"
-              src="img/icons/design.svg"
-              alt=""
-            >
-          </span>
-        
-          <h3>Design</h3>
-        
-          <p>
-            Tworzymy estetykę, która wzmacnia komunikację, zamiast odciągać od niej uwagę.
-          </p>
-        </li>
-
-        <li class="process-card">
-          <span class="process-number">
-            <img
-              class="process-icon"
-              src="img/icons/development.svg"
-              alt=""
-            >
-          </span>
-        
-          <h3>Development</h3>
-        
-          <p>
-            Wdrażamy szybką, responsywną stronę przygotowaną pod SEO i dalszy rozwój.
-          </p>
-        </li>
-      </ol>
-
-      <div class="section-cta">
-
-        <p class="process-note">
-          Poznaj cały proces.
-        </p>
-      
-        <a href="metoda.html" class="primary-button">
-          Poznaj Metodę Agent 0
-        </a>
-      
-      </div>
+      <figure class="comic-visual">
+        <img src="img/illustrations/kairox-02-strategia.webp"
+          srcset="img/illustrations/kairox-02-strategia-768.webp 768w, img/illustrations/kairox-02-strategia.webp 1536w"
+          sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 48px), 650px"
+          width="1536" height="1024" alt="Klientka i projektant wspólnie układają ofertę: dla kogo, jaka korzyść, dlaczego zaufać. Dymek: „Ustalmy, co jest najważniejsze”."
+          loading="lazy" decoding="async">
+      </figure>
     </section>
 
     <section class="audit-highlight" id="audit">
@@ -382,7 +282,7 @@
               Najczęściej wybierany pierwszy krok
             </div>
             <p class="audit-price">
-                990 <span>zł</span>
+                990 <span>zł brutto</span>
             </p>
     
             <p class="audit-duration">
@@ -438,8 +338,8 @@
     
             </div>
     
-            <a class="primary-button" href="formularz-kontaktowy.html">
-          Umów konsultacje
+            <a class="primary-button" href="formularz-kontaktowy.html?service=audit&amp;source=%2Findex.html">
+          Umów konsultację
         </a>
     
         </div>
@@ -453,8 +353,8 @@
       <p class="eyebrow">Wybrane realizacje</p>
       <h2 id="projects-title">Projektujemy doświadczenia, które chce się odkrywać</h2>
       <p class="section-intro">
-        Każda realizacja łączy strategię, komunikację, interfejs i technologię
-        w jeden spójny system.
+        Dwa projekty koncepcyjne pokazują, jak upraszczamy odkrywanie oferty.
+        Wszystkie cztery projekty i działające wersje znajdziesz w realizacjach.
       </p>
       <a class="section-text-link" href="realizacje.html">Zobacz wszystkie realizacje →</a>
     </div>
@@ -477,8 +377,8 @@
 
         <h3>Galeria Klik</h3>
         <p class="project-lead">
-          Interaktywna galeria handlowa w przeglądarce, zbudowana wokół
-          odkrywania marek zamiast klasycznego katalogu sklepów.
+          Jak ułatwić wybór wśród wielu marek? W Galerii Klik mapa i tematyczne piętra
+          prowadzą do sklepów. To przykład nawigacji dla rozbudowanego katalogu.
         </p>
 
         <ul class="project-features">
@@ -491,69 +391,9 @@
       </div>
     </article>
 
-    <article class="project-showcase project-showcase-reverse">
-      <a class="project-visual" href="my-trip-world/" aria-label="Otwórz projekt My Trip World">
-        <img
-          src="img/projects/my-trip-world.jpg"
-          alt="Interaktywny globus projektu My Trip World z zaznaczonymi podróżami"
-          loading="lazy"
-        >
-        <span>Otwórz projekt ↗</span>
-      </a>
 
-      <div class="project-content">
-        <div class="project-meta">
-          <span>Projekt własny</span>
-          <span>UX / UI / Development</span>
-        </div>
 
-        <h3>My Trip World</h3>
-        <p class="project-lead">
-          Osobiste archiwum podróży, w którym wspomnienia odkrywa się
-          przez interaktywny globus i historie konkretnych miejsc.
-        </p>
 
-        <ul class="project-features">
-          <li>Globus jako główny model nawigacji</li>
-          <li>Relacje, zdjęcia i filmy połączone w jedną opowieść</li>
-          <li>Wyszukiwanie miejsc i lat</li>
-        </ul>
-
-        <a class="primary-button" href="my-trip-world/">Otwórz projekt</a>
-      </div>
-    </article>
-
-    <article class="project-showcase">
-      <a class="project-visual" href="archiwum-sledcze/" aria-label="Otwórz projekt Archiwum Śledcze">
-        <img
-          src="img/projects/archiwum-sledcze.jpg"
-          alt="Interfejs Archiwum Śledczego z aktami sprawy zaginięcia"
-          loading="lazy"
-        >
-        <span>Otwórz projekt ↗</span>
-      </a>
-
-      <div class="project-content">
-        <div class="project-meta">
-          <span>Projekt własny</span>
-          <span>UX / UI / Development</span>
-        </div>
-
-        <h3>Archiwum Śledcze</h3>
-        <p class="project-lead">
-          Przeglądarkowy symulator realistycznego śledztwa, w którym gracz
-          analizuje materiały i sam buduje końcową wersję wydarzeń.
-        </p>
-
-        <ul class="project-features">
-          <li>Akta, zeznania i dowody bez gotowych podpowiedzi</li>
-          <li>Decyzje zużywające czas i budżet śledztwa</li>
-          <li>Panoramiczne oględziny i lokalny zapis postępu</li>
-        </ul>
-
-        <a class="primary-button" href="archiwum-sledcze/">Otwórz projekt</a>
-      </div>
-    </article>
 
     <article class="project-showcase project-showcase-reverse">
       <a class="project-visual" href="amo/" aria-label="Otwórz projekt AMO">
@@ -573,8 +413,8 @@
 
         <h3>AMO</h3>
         <p class="project-lead">
-          Mobilne doświadczenie miejskiego bistro, które pomaga odkrywać
-          jedzenie przez apetyt i okazję zamiast długiej listy dań.
+          Jak pomóc wybrać danie na telefonie? W AMO bestsellery i filtry prowadzą
+          do krótkiego menu, zestawu i rezerwacji — od pomysłu na posiłek do kolejnego kroku.
         </p>
 
         <ul class="project-features">
@@ -633,23 +473,22 @@
   
   </section>
 
-    <section class="cta-section" id="contact">
-      <div class="cta-content">
-        <p class="eyebrow">Kontakt</p>
-
-        <h2>
-          Stwórzmy stronę, która lepiej opowie o Twojej marce.
-        </h2>
-
-        <p>
-          Pomożemy Ci uporządkować komunikację i zamienić ją w stronę,
-          która jasno pokazuje wartość Twojej firmy.
-        </p>
-
-        <a class="primary-button" href="formularz-kontaktowy.html">
-          Napisz do nas
-        </a>
+    <section class="comic-block comic-block--closing" id="contact" aria-labelledby="contact-title">
+      <div class="comic-copy">
+        <p class="eyebrow">Porozmawiajmy</p>
+        <h2 id="contact-title">Jasna oferta. Widoczny następny krok.</h2>
+        <p class="comic-description">Łączymy treść, wygląd i działanie strony, żeby odbiorca mógł poznać firmę i łatwo się skontaktować.</p>
+        <div class="comic-actions">
+          <a class="primary-button" href="formularz-kontaktowy.html?source=%2Findex.html">Porozmawiajmy</a>
+        </div>
       </div>
+      <figure class="comic-visual">
+        <img src="img/illustrations/kairox-03-jasny-kontakt.webp"
+          srcset="img/illustrations/kairox-03-jasny-kontakt-768.webp 768w, img/illustrations/kairox-03-jasny-kontakt.webp 1536w"
+          sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 48px), 650px"
+          width="1536" height="1024" alt="Klientka ogląda uporządkowaną stronę i wskazuje przycisk „Porozmawiajmy”. Dymek: „Teraz wiem, co dalej”."
+          loading="lazy" decoding="async">
+      </figure>
     </section>
 
   </main>
@@ -828,9 +667,9 @@
     </div>
   </div>
   </div>
-  <script src="js/consent.js"></script>
-  <script src="js/main.js?v=2"></script>
+  <script src="js/consent.js?v=audit-2"></script>
+  <script src="js/main.js?v=audit-2"></script>
   <script src="js/chat-config.js"></script>
-  <script src="js/chat.js?v=enter-1"></script>
+  <script src="js/chat.js?v=audit-2"></script>
 </body>
 </html>

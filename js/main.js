@@ -47,20 +47,34 @@ if (sections.length && links.length) {
 }
 
 if (menuToggle && navList) {
+  function closeMenu(returnFocus = false) {
+    navList.classList.remove("active");
+    menuToggle.classList.remove("active");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Otwórz menu");
+    document.body.classList.remove("menu-open");
+    if (returnFocus) menuToggle.focus();
+  }
   menuToggle.addEventListener("click", () => {
     const isOpen = navList.classList.toggle("active");
     menuToggle.classList.toggle("active", isOpen);
     menuToggle.setAttribute("aria-expanded", String(isOpen));
+    menuToggle.setAttribute("aria-label", isOpen ? "Zamknij menu" : "Otwórz menu");
     document.body.classList.toggle("menu-open", isOpen);
   });
 
   navList.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
-      navList.classList.remove("active");
-      menuToggle.classList.remove("active");
-      menuToggle.setAttribute("aria-expanded", "false");
-      document.body.classList.remove("menu-open");
+      closeMenu();
     });
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && navList.classList.contains("active")) {
+      event.preventDefault(); closeMenu(true);
+    }
+  });
+  document.addEventListener("click", event => {
+    if (navList.classList.contains("active") && !event.target.closest(".navbar")) closeMenu();
   });
 }
 

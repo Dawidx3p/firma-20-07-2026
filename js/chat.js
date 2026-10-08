@@ -127,7 +127,7 @@
     try {
       const [, interestModule, contactModule, formatModule, suggestionsModule] = await Promise.all([
         loadTurnstile(), import(new URL("./chat-interest.mjs", scriptUrl).href),
-        import(new URL("./contact-service.mjs", scriptUrl).href),
+        import(new URL("./contact-service.mjs?v=audit-2", scriptUrl).href),
         import(new URL("./chat-format.mjs", scriptUrl).href),
         import(new URL("./chat-suggestions.mjs", scriptUrl).href),
       ]);

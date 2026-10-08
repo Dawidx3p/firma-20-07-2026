@@ -5548,3 +5548,38 @@ article a:hover{
     transition: none;
   }
 }
+
+/* Audit fixes: compact contact flow and accessible validation. */
+.contact-brand { display: inline-block; }
+.contact-landing { column-gap: clamp(48px, 7vw, 100px); row-gap: 24px; }
+.contact-landing-intro { grid-column: 1; grid-row: 1; align-self: end; }
+.contact-process { grid-column: 1; grid-row: 2; align-self: start; }
+.contact-process .contact-expectations { margin-top: 0; }
+.contact-form-card { grid-column: 2; grid-row: 1 / span 2; }
+.field-error-note { color: var(--danger); font-size: .82rem; margin-top: 6px; }
+.field-error-note:empty { display: none; }
+#contactSuccessActions:not([hidden]) { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+@media (max-width: 980px) {
+  .contact-landing-intro, .contact-form-card, .contact-process { grid-column: 1; grid-row: auto; }
+  .contact-landing { gap: 28px; }
+}
+@media (max-width: 700px) {
+  .contact-landing { padding: 28px 18px; gap: 24px; }
+  .contact-brand { margin-bottom: 20px; }
+  .contact-landing h1 { font-size: clamp(2.1rem, 9vw, 2.65rem); }
+  .contact-landing-lead { margin-top: 16px; font-size: 1rem; }
+  .contact-form-card { padding: 22px 18px; }
+  .contact-form-card h2 { font-size: 1.7rem; }
+  .contact-process .contact-expectations > div { padding: 12px 0; }
+}
+
+.skip-link { position: fixed; top: 12px; left: 12px; z-index: 10001; transform: translateY(-160%); padding: 12px 18px; background: var(--bg); color: var(--text); border: 2px solid var(--accent-2); border-radius: 10px; }
+.skip-link:focus { transform: none; }
+.contact-footer { padding-right: 180px; }
+@media (max-width: 700px) { .contact-footer { padding-right: 18px; padding-bottom: 90px; } }
+@media (max-width: 700px) {
+  .cooperation-models .pricing-grid { grid-template-columns: minmax(0, 1fr); }
+  .cooperation-models .pricing-card { min-width: 0; }
+  .cooperation-models .pricing-card .primary-button,
+  .cooperation-models .pricing-card .secondary-button { white-space: normal; text-align: center; }
+}

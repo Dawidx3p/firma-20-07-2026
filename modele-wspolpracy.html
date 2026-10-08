@@ -32,14 +32,16 @@
 
   <link
     rel="canonical"
-    href="https://twojadomena.pl/modele-wspolpracy.html"
+    href="https://kairox.pl/modele-wspolpracy.html"
   />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="img/180na180.png">
-  <link rel="stylesheet" href="css/style.css?v=footer-mobile-1" />
+  <link rel="stylesheet" href="css/style.css?v=audit-2" />
+  <link rel="stylesheet" href="css/comic.css?v=1">
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
     <nav class="navbar" aria-label="Główna nawigacja">
@@ -76,37 +78,25 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
 
-    <section class="hero page-hero">
-      <div class="hero-content">
+    <section class="comic-block hero page-hero comic-block--hero" aria-labelledby="comic-hero-title">
+      <div class="comic-copy">
         <p class="eyebrow">Modele współpracy</p>
-
-        <h1>
-          Każda firma jest na innym etapie.
-          Dlatego nie każdy potrzebuje tego samego
-        </h1>
-
-        <p class="hero-description">
-          Pomagamy dobrać zakres współpracy do realnego problemu:
-          komunikacji, strony, kampanii albo długoterminowego rozwoju.
-        </p>
-
-        <div class="hero-actions">
-          <a class="primary-button" href="formularz-kontaktowy.html">
-          Dobierzmy model współpracy
-        </a>
-
-          <a href="#models" class="secondary-button">
-            Zobacz modele
-          </a>
+        <h1 id="comic-hero-title">Dobierzmy zakres do Twojej sytuacji</h1>
+        <p class="comic-description">Audyt, landing page, nowa strona albo stała współpraca — zaczynamy od tego, czego potrzebuje Twoja firma.</p>
+        <div class="comic-actions">
+          <a class="primary-button" href="#models">Porównaj modele współpracy</a>
+          <a class="secondary-button" href="formularz-kontaktowy.html?source=%2Fmodele-wspolpracy.html">Pomóżcie mi wybrać</a>
         </div>
       </div>
-
-      <div class="hero-panel">
-        <p>Nie sprzedajemy największej usługi.</p>
-        <p>Dobieramy właściwy zakres.</p>
-      </div>
+      <figure class="comic-visual">
+        <img src="img/illustrations/kairox-05-zakres.webp"
+          srcset="img/illustrations/kairox-05-zakres-768.webp 768w, img/illustrations/kairox-05-zakres.webp 1536w"
+          sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 48px), 650px"
+          width="1536" height="1024" alt="Klientka i projektant wybierają zakres spośród audytu, nowej strony i stałego rozwoju. Dymek: „Dobierzmy właściwy zakres”."
+          loading="eager" decoding="async" fetchpriority="high">
+      </figure>
     </section>
 
     <section class="message">
@@ -175,7 +165,7 @@
         <article class="pricing-card">
           <h3>Audyt komunikacji</h3>
 
-          <p class="price">990 zł</p>
+          <p class="price">990 zł brutto</p>
 
           <p class="pricing-description">
             Dla firm, które mają stronę, ale nie wiedzą, dlaczego nie generuje
@@ -198,7 +188,7 @@
         <article class="pricing-card">
           <h3>Strona Start</h3>
 
-          <p class="price">od 4 900 zł</p>
+          <p class="price">od 4 900 zł brutto</p>
 
           <p class="pricing-description">
             Dla firm, które chcą szybko zbudować profesjonalną obecność online,
@@ -213,7 +203,7 @@
             <li>Wdrożenie HTML / CSS / JS</li>
           </ul>
 
-          <a class="secondary-button" href="formularz-kontaktowy.html">
+          <a class="secondary-button" href="formularz-kontaktowy.html?service=start&amp;source=%2Fmodele-wspolpracy.html">
           Zapytaj o Start
         </a>
         </article>
@@ -221,7 +211,7 @@
         <article class="pricing-card">
           <h3>Strona kampanii</h3>
 
-          <p class="price">od 3 900 zł</p>
+          <p class="price">od 3 900 zł brutto</p>
 
           <p class="pricing-description">
             Landing page skupiony na jednym celu: promocji usługi, kampanii,
@@ -236,7 +226,7 @@
             <li>Wdrożenie i optymalizacja</li>
           </ul>
 
-          <a class="secondary-button" href="formularz-kontaktowy.html">
+          <a class="secondary-button" href="formularz-kontaktowy.html?service=campaign&amp;source=%2Fmodele-wspolpracy.html">
           Zapytaj o landing
         </a>
         </article>
@@ -244,7 +234,7 @@
         <article class="pricing-card featured">
           <h3>Strona komunikacyjna</h3>
 
-          <p class="price">od 8 900 zł</p>
+          <p class="price">od 8 900 zł brutto</p>
 
           <p class="pricing-description">
             Flagowy proces KAIROX: strategia, komunikacja, UX, design
@@ -260,7 +250,7 @@
             <li>SEO techniczne</li>
           </ul>
 
-          <a class="primary-button" href="formularz-kontaktowy.html">
+          <a class="primary-button" href="formularz-kontaktowy.html?service=communication&amp;source=%2Fmodele-wspolpracy.html">
           Porozmawiajmy o stronie
         </a>
         </article>
@@ -268,7 +258,7 @@
         <article class="pricing-card">
           <h3>Partnerstwo</h3>
 
-          <p class="price">od 1 990 zł / miesiąc</p>
+          <p class="price">od 1 990 zł brutto / miesiąc</p>
 
           <p class="pricing-description">
             Stała współpraca dla firm, które chcą rozwijać stronę,
@@ -609,9 +599,9 @@
     </div>
   </div>
   </div>
-  <script src="js/consent.js"></script>
-  <script src="js/main.js?v=2"></script>
+  <script src="js/consent.js?v=audit-2"></script>
+  <script src="js/main.js?v=audit-2"></script>
   <script src="js/chat-config.js"></script>
-  <script src="js/chat.js?v=enter-1"></script>
+  <script src="js/chat.js?v=audit-2"></script>
 </body>
 </html>

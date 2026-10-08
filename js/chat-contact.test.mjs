@@ -39,3 +39,33 @@ test('wysyłka kontaktu idzie do istniejącego Formspree, bez pełnej rozmowy', 
   globalThis.fetch = async () => new Response('', { status: 500 });
   await assert.rejects(sendContact({ email: 'test@example.com', phone: '', consent: true }), /Nie udało/);
 });
+
+test('zgłoszenie ze strony zachowuje usługę i źródłową podstronę', async (t) => {
+  const original = globalThis.fetch; t.after(() => { globalThis.fetch = original; });
+  globalThis.fetch = async (_url, options) => {
+    const body = JSON.parse(options.body);
+    assert.equal(body.service, 'Strona Start');
+    assert.equal(body.sourcePage, '/modele-wspolpracy.html');
+    assert(!('source' in body));
+    return Response.json({ ok: true });
+  };
+  await sendContact({ email: 'test@example.com', phone: '', consent: true,
+    service: 'Strona Start', sourcePage: '/modele-wspolpracy.html' });
+});
+
+test('zdarzenie zgłoszenia zawiera tylko kategorie i powstaje po udanej wysyłce', async (t) => {
+  const originalFetch = globalThis.fetch, originalDocument = globalThis.document;
+  t.after(() => { globalThis.fetch = originalFetch;
+    if (originalDocument === undefined) delete globalThis.document; else globalThis.document = originalDocument;
+  });
+  const events = [];
+  globalThis.document = { dispatchEvent: event => events.push(event) };
+  globalThis.fetch = async () => new Response('', { status: 500 });
+  const fields = { email: 'private@example.com', phone: '', consent: true, source: 'chat',
+    service: 'Strona kampanii', challenge: 'Private text', sourcePage: '/?private=value' };
+  await assert.rejects(sendContact(fields)); assert.equal(events.length, 0);
+  globalThis.fetch = async () => Response.json({ ok: true });
+  await sendContact(fields);
+  assert.equal(events.length, 1); assert.equal(events[0].type, 'kairox:lead-sent');
+  assert.deepEqual(events[0].detail, { source: 'chat', service: 'campaign' });
+});

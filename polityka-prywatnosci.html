@@ -20,10 +20,11 @@
 
   <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
   <link rel="apple-touch-icon" href="img/180na180.png" />
-  <link rel="stylesheet" href="css/style.css?v=footer-mobile-1" />
+  <link rel="stylesheet" href="css/style.css?v=audit-2" />
 </head>
 
 <body>
+  <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
     <nav class="navbar" aria-label="Główna nawigacja">
@@ -64,7 +65,7 @@
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
 
     <section class="hero page-hero legal-hero">
       <div class="hero-content">
@@ -295,6 +296,43 @@
           Przed wysłaniem formularza użytkownik powinien zapoznać się
           z niniejszą polityką prywatności.
         </p>
+        <h3 id="czat-ai">Czat z asystentem AI</h3>
+        <p>
+          Czat pomaga zapoznać się z ofertą KAIROX. Po rozpoczęciu rozmowy
+          pytanie oraz maksymalnie dwie ostatnie pary pytań i odpowiedzi są
+          przesyłane przez backend Cloudflare Workers do Hugging Face,
+          który kieruje je do PublicAI, dostawcy odpowiedzi modelu Bielik.
+          Nie wpisuj do rozmowy danych osobowych, haseł ani informacji poufnych.
+          Odpowiedzi AI mogą zawierać błędy; dostępność i indywidualne warunki
+          współpracy potwierdza zespół KAIROX.
+        </p>
+        <p>
+          Historia rozmowy pozostaje w pamięci otwartej karty. Nie zapisujemy
+          jej w bazie rozmów ani w localStorage; odświeżenie strony, zmiana
+          podstrony lub rozpoczęcie nowej rozmowy usuwa historię z widżetu.
+          Kod backendu nie zapisuje treści pytań w logach. Dostawcy infrastruktury
+          i modelu stosują własne zasady przetwarzania i przechowywania danych;
+          usunięcie rozmowy z widżetu nie usuwa danych u dostawców.
+        </p>
+        <p>
+          Cloudflare Turnstile służy do weryfikacji bezpieczeństwa i ograniczania
+          automatycznych zapytań. Backend wykorzystuje adres IP do ograniczenia
+          liczby żądań oraz powiązania krótkotrwałej sesji czatu. Token sesji
+          pozostaje w pamięci karty i nie jest przesyłany do modelu AI.
+        </p>
+        <p>
+          Jeśli zdecydujesz się zostawić kontakt w osobnym formularzu czatu,
+          dane kontaktowe, nazwa wybranej usługi i podstrona źródłowa trafiają
+          do Formspree. Nie dołączamy pełnej rozmowy i nie przesyłamy danych
+          z tego formularza do modelu AI. Treści widżetu są oznaczone do
+          maskowania w Microsoft Clarity.
+        </p>
+        <p>
+          Informacje dostawców:
+          <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare</a>,
+          <a href="https://huggingface.co/privacy" target="_blank" rel="noopener noreferrer">Hugging Face</a>
+          oraz <a href="https://huggingface.co/docs/inference-providers/en/providers/publicai" target="_blank" rel="noopener noreferrer">PublicAI w Hugging Face</a>.
+        </p>
       </section>
 
       <section class="legal-section">
@@ -310,6 +348,8 @@
           <li>dostawcy hostingu strony internetowej,</li>
           <li>dostawcy poczty elektronicznej,</li>
           <li>dostawcy formularza kontaktowego Formspree,</li>
+          <li>Cloudflare — w zakresie backendu czatu i weryfikacji bezpieczeństwa,</li>
+          <li>Hugging Face i PublicAI — w zakresie przetwarzania wiadomości i generowania odpowiedzi AI,</li>
           <li>
             podmiotom świadczącym usługi informatyczne lub administracyjne,
             jeśli będzie to niezbędne,
@@ -695,9 +735,9 @@
 
 </footer>
 
-    <script src="js/consent.js"></script>
-    <script src="js/main.js?v=2"></script>
+    <script src="js/consent.js?v=audit-2"></script>
+    <script src="js/main.js?v=audit-2"></script>
   <script src="js/chat-config.js"></script>
-  <script src="js/chat.js?v=enter-1"></script>
+  <script src="js/chat.js?v=audit-2"></script>
 </body>
 </html>
