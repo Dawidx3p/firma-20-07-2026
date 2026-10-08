@@ -86,3 +86,20 @@ Rzeczywisty Turnstile, bindingi oraz połączenie z modelem sprawdź po wdrożen
 - https://developers.cloudflare.com/turnstile/get-started/server-side-validation/
 - https://developers.cloudflare.com/workers/runtime-apis/bindings/rate-limit/
 - https://publicai.co/tc
+
+## Kontakt po rozmowie o usłudze
+
+Widget liczy udane pytania o konkretną usługę w pamięci karty. Po drugim pytaniu
+wyświetla propozycję zostawienia kontaktu; proste dopytania odwołują się do
+poprzednio nazwanej usługi. Ogólna lista/porównanie usług nie wybiera usługi.
+To rozpoznawanie po nazwach i frazach, nie pełna analiza znaczenia rozmowy.
+„Nie teraz” nie wywołuje wysyłki i wyłącza kolejne prośby o tę samą usługę.
+„Nowa rozmowa” zeruje liczniki.
+
+Po wyborze „Tak, zostawiam kontakt” klient wypełnia oddzielny formularz w czacie:
+imię opcjonalnie, e-mail lub telefon i akceptacja informacji o przetwarzaniu danych.
+Wysyłka używa wspólnego `js/contact-service.mjs` i tego samego endpointu Formspree
+co `formularz-kontaktowy.html`. Zgłoszenie ma `source=chat`, nazwę usługi oraz
+krótką informację o zainteresowaniu. Nie wysyłamy całej rozmowy; dane kontaktowe
+nie trafiają do endpointu Bielika. Sukces jest pokazywany dopiero po odpowiedzi
+2xx Formspree. Przy błędzie pola pozostają do poprawienia/ponowienia.

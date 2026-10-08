@@ -7,7 +7,7 @@ const privacy = document.getElementById("privacy");
 const submitButton = document.getElementById("submitButton");
 const formStatus = document.getElementById("formStatus");
 const website = document.getElementById("website");
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/mojoqowy";
+const contactServiceUrl = new URL("./contact-service.mjs", document.currentScript.src).href;
 
 const websiteFromUrl = new URLSearchParams(window.location.search).get("website");
 
@@ -60,23 +60,14 @@ form.addEventListener("submit", async (event) => {
   submitButton.textContent = "Wysyłanie...";
 
   try {
-    const response = await fetch(FORMSPREE_ENDPOINT, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({
-        name: document.getElementById("name").value.trim(),
-        website: website.value.trim(),
-        email: emailValue,
-        _replyto: emailValue,
-        phone: phoneValue,
-        contactMethod: document.getElementById("contactMethod").value,
-        challenge: document.getElementById("challenge").value.trim(),
-        sourcePage: window.location.pathname,
-        consent: true
-      })
+    const { sendContact } = await import(contactServiceUrl);
+    await sendContact({
+      name: document.getElementById("name").value.trim(),
+      website: website.value.trim(), email: emailValue, phone: phoneValue,
+      contactMethod: document.getElementById("contactMethod").value,
+      challenge: document.getElementById("challenge").value.trim(),
+      sourcePage: window.location.pathname, consent: privacy.checked
     });
-
-    if (!response.ok) throw new Error("Formspree error");
 
     form.reset();
     formStatus.textContent = "Dziękujemy! Za chwilę wrócisz na stronę główną.";

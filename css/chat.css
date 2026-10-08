@@ -36,3 +36,19 @@
 @media(max-width:480px){.kx-chat{right:16px;bottom:max(16px,env(safe-area-inset-bottom))}.kx-chat-panel{width:calc(100vw - 32px);bottom:64px;max-height:calc(100dvh - 100px)}.kx-chat-header{padding:16px}.kx-chat-launcher{padding:12px 16px}.kx-chat-thread{max-height:28dvh}}
 
 .kx-chat-intro .kx-chat-direct{margin:14px 0 0;font-size:12px;text-align:center}
+.kx-chat-contact-offer p{margin:0 0 10px}
+.kx-chat-offer-actions{display:flex;gap:8px;flex-wrap:wrap}
+.kx-chat-offer-actions button{border:1px solid #8d73dd;border-radius:9px;padding:9px 10px;min-height:40px;background:#33265a;font-size:12px}
+.kx-chat-offer-actions button+button{border-color:#ffffff24;background:transparent}
+.kx-chat-lead{padding:4px 18px 0}
+.kx-chat-lead-title{font-size:16px;font-weight:650;margin:0 0 4px}
+.kx-chat-lead-service{font-size:12px;color:#c5b5ff;margin:0 0 10px}
+.kx-chat-lead label{display:block;font-size:12px;margin:8px 0 5px;color:#c4c8d8}
+.kx-chat-lead input:not([type=checkbox]){width:100%;min-height:42px;background:#07080c;border:1px solid #484455;border-radius:9px;color:#f4f6fb;padding:9px;font:inherit}
+.kx-chat-lead input:focus-visible{outline:2px solid #00e0ff;outline-offset:2px}
+.kx-chat-lead .kx-chat-disclosure{font-size:11px;margin:10px 0}
+.kx-chat-lead .kx-chat-lead-consent{display:flex;align-items:flex-start;gap:8px;font-size:11px}
+.kx-chat-lead-consent input{flex-shrink:0;width:16px;height:16px;margin-top:2px;accent-color:#7c5cff}
+.kx-chat-lead-status{font-size:12px;color:#c5b5ff;margin:10px 0}
+.kx-chat-lead-cancel{background:transparent;border:0;padding:8px 0;font-size:11px!important;min-height:44px}
+.kx-chat-lead-send{background:#7250ea;border:1px solid #9c86ff;border-radius:10px;padding:10px 12px;min-height:44px;font-size:12px!important}

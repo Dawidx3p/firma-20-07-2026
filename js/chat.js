@@ -1,6 +1,7 @@
 (() => {
   "use strict";
   if (document.getElementById("kairox-chat")) return;
+  const scriptUrl = document.currentScript.src;
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
@@ -33,6 +34,20 @@
           <button type="button">Ile kosztuje strona?</button>
           <button type="button">Od czego zacząć?</button>
         </div>
+        <form class="kx-chat-lead" hidden novalidate>
+          <p class="kx-chat-lead-title">Zostaw kontakt</p>
+          <p class="kx-chat-lead-service"></p>
+          <label for="kx-lead-name">Imię (opcjonalnie)</label>
+          <input id="kx-lead-name" autocomplete="given-name" maxlength="120">
+          <label for="kx-lead-email">Adres e-mail</label>
+          <input id="kx-lead-email" type="email" autocomplete="email" maxlength="254">
+          <label for="kx-lead-phone">Numer telefonu</label>
+          <input id="kx-lead-phone" type="tel" autocomplete="tel" maxlength="30">
+          <p class="kx-chat-disclosure">Wystarczy e-mail lub telefon. Dane wyślemy do KAIROX przez formularz — nie do modelu AI.</p>
+          <label class="kx-chat-lead-consent"><input id="kx-lead-privacy" type="checkbox"> <span>Zapoznałem(-am) się z <a href="/polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityką prywatności</a> i przyjmuję do wiadomości zasady przetwarzania danych.</span></label>
+          <p class="kx-chat-lead-status" role="status" aria-live="polite"></p>
+          <div class="kx-chat-actions"><button class="kx-chat-lead-cancel" type="button">Wróć do rozmowy</button><button class="kx-chat-lead-send" type="submit" disabled>Wyślij zgłoszenie</button></div>
+        </form>
         <form class="kx-chat-form">
           <label for="kx-chat-message">Twoje pytanie</label>
           <textarea id="kx-chat-message" rows="2" maxlength="2000" placeholder="Np. mam stronę, ale nie dostaję zapytań…" required data-private="true"></textarea>
@@ -53,6 +68,11 @@
   const send = $(".kx-chat-send");
   const status = $(".kx-chat-status");
   const thread = $(".kx-chat-thread");
+  const leadForm = $(".kx-chat-lead");
+  const leadStatus = $(".kx-chat-lead-status");
+  const leadSend = $(".kx-chat-lead-send");
+  let inferService, sendContact, validateContact, activeService, pendingOffer, leadBusy = false, leadSent = false;
+  const interests = new Map(), offeredServices = new Set();
   let history = [], token = "", widgetId, loading = false, scriptPromise, controller, generation = 0;
   function updateSend() { send.disabled = loading || !token || !input.value.trim(); }
   function openChat() {
@@ -98,7 +118,12 @@
     start.disabled = true;
     start.textContent = "Przygotowuję rozmowę…";
     try {
-      await loadTurnstile();
+      const [, interestModule, contactModule] = await Promise.all([
+        loadTurnstile(), import(new URL("./chat-interest.mjs", scriptUrl).href),
+        import(new URL("./contact-service.mjs", scriptUrl).href),
+      ]);
+      inferService = interestModule.inferService;
+      ({ sendContact, validateContact } = contactModule);
       $(".kx-chat-intro").hidden = true;
       $(".kx-chat-conversation").hidden = false;
       addMessage("assistant", "Cześć! Pomogę Ci poznać ofertę KAIROX. Co chcesz poprawić na swojej stronie?");
@@ -130,12 +155,101 @@
   }
   $(".kx-chat-reset").addEventListener("click", () => {
     generation++; controller?.abort(); loading = false; history = []; input.value = "";
+    interests.clear(); offeredServices.clear(); activeService = undefined; pendingOffer = undefined; leadSent = false;
+    leadForm.reset(); leadStatus.textContent = ""; setCollecting(false);
     thread.replaceChildren(); addMessage("assistant", "Zaczynamy od nowa. W czym mogę pomóc?");
     status.textContent = ""; resetVerification(); input.focus();
+  });
+  function setCollecting(value) {
+    leadForm.hidden = !value;
+    form.hidden = value;
+    $(".kx-chat-suggestions").hidden = value;
+    $(".kx-chat-reset").disabled = leadBusy;
+  }
+  function offerContact(message) {
+    const service = inferService(message, history);
+    if (!service || leadSent) return;
+    const count = (interests.get(service.id) || 0) + 1;
+    interests.set(service.id, count);
+    if (count < 2 || offeredServices.has(service.id)) return;
+    offeredServices.add(service.id);
+    const offer = document.createElement("div");
+    offer.className = "kx-chat-message kx-chat-message--assistant kx-chat-contact-offer";
+    const question = document.createElement("p");
+    question.textContent = `Rozmawiamy o usłudze „${service.label}”. Czy chcesz zostawić kontakt, żebyśmy omówili Twój projekt?`;
+    const accept = document.createElement("button");
+    accept.type = "button"; accept.textContent = "Tak, zostawiam kontakt";
+    const decline = document.createElement("button");
+    decline.type = "button"; decline.textContent = "Nie teraz";
+    const options = document.createElement("div"); options.className = "kx-chat-offer-actions";
+    options.append(accept, decline); offer.append(question, options); thread.appendChild(offer);
+    thread.scrollTop = thread.scrollHeight;
+    pendingOffer = { accept, decline };
+    accept.addEventListener("click", () => {
+      if (leadBusy || leadSent) return;
+      pendingOffer = undefined;
+      activeService = service;
+      leadStatus.textContent = "";
+      $(".kx-chat-lead-service").textContent = `Interesuje Cię: ${service.label}`;
+      setCollecting(true); $("#kx-lead-email").focus();
+    });
+    decline.addEventListener("click", () => {
+      if (leadBusy) return;
+      pendingOffer = undefined;
+      options.remove(); question.textContent = "Jasne, możemy dalej porozmawiać o ofercie.";
+      input.focus();
+    });
+  }
+  function contactFields() {
+    return {
+      name: $("#kx-lead-name").value.trim(), email: $("#kx-lead-email").value.trim(),
+      phone: $("#kx-lead-phone").value.trim(), consent: $("#kx-lead-privacy").checked,
+    };
+  }
+  function updateLead() {
+    const fields = contactFields();
+    leadSend.disabled = leadBusy || !(fields.email || fields.phone) || !fields.consent;
+  }
+  leadForm.addEventListener("input", updateLead);
+  leadForm.addEventListener("change", updateLead);
+  $(".kx-chat-lead-cancel").addEventListener("click", () => {
+    if (leadBusy) return;
+    leadForm.reset(); leadStatus.textContent = ""; updateLead(); setCollecting(false); input.focus();
+  });
+  leadForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (leadBusy || !activeService) return;
+    const fields = contactFields();
+    const valid = validateContact(fields);
+    if (!valid.valid) { leadStatus.textContent = "Podaj poprawny e-mail lub telefon i zaakceptuj informację o przetwarzaniu danych."; return; }
+    leadBusy = true; updateLead(); $(".kx-chat-lead-cancel").disabled = true;
+    leadStatus.textContent = "Wysyłanie zgłoszenia…";
+    try {
+      await sendContact({ ...fields, website: "", contactMethod: fields.email ? "E-mail" : "Telefon",
+        source: "chat", service: activeService.label, sourcePage: window.location.pathname,
+        challenge: `Kontakt z czatu KAIROX. Zainteresowanie usługą: ${activeService.label}.`,
+      });
+      leadSent = true; leadForm.reset(); setCollecting(false);
+      addMessage("assistant", "Dziękujemy! Twoje zgłoszenie zostało wysłane do KAIROX. Możemy dalej porozmawiać o ofercie.");
+      thread.querySelectorAll(".kx-chat-contact-offer").forEach(offer => offer.remove());
+      input.focus();
+    } catch {
+      leadStatus.textContent = "Nie udało się wysłać zgłoszenia. Spróbuj ponownie lub użyj formularza kontaktowego na stronie.";
+    } finally {
+      leadBusy = false; updateLead(); $(".kx-chat-lead-cancel").disabled = false; $(".kx-chat-reset").disabled = false;
+    }
   });
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     const message = input.value.trim();
+    if (pendingOffer && !loading) {
+      const answer = message.toLowerCase().replace(/[.!?]+$/g, "").trim();
+      const action = /^(tak|tak,? (chcę|chce)|jasne|chętnie|chetnie|zostawię kontakt|zostawie kontakt)$/.test(answer) ? "accept" :
+        /^(nie|nie teraz|nie,? (dziękuję|dziekuje))$/.test(answer) ? "decline" : null;
+      if (action) {
+        addMessage("user", message); input.value = ""; pendingOffer[action].click(); updateSend(); return;
+      }
+    }
     if (loading || !token || !message) return;
     const turnstileToken = token;
     const currentGeneration = generation;
@@ -154,6 +268,7 @@
       if (currentGeneration !== generation) return;
       if (!response.ok || typeof data.reply !== "string") throw new Error(data.error || "Czat jest chwilowo niedostępny.");
       addMessage("assistant", data.reply);
+      offerContact(message);
       history = [...history, { role: "user", content: message.slice(0, 1000) }, { role: "assistant", content: data.reply.slice(0, 1000) }].slice(-4);
       status.textContent = "";
     } catch (error) {
