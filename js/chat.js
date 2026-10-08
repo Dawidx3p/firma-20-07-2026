@@ -32,8 +32,9 @@
         <div class="kx-chat-content" role="region" aria-label="Rozmowa z asystentem" tabindex="0">
         <div class="kx-chat-thread"></div>
         <div class="kx-chat-suggestions">
-          <button type="button">Ile kosztuje strona?</button>
           <button type="button">Od czego zacząć?</button>
+          <button type="button">Jakie macie realizacje?</button>
+          <button type="button">Jaki artykuł warto przeczytać?</button>
         </div>
         <form class="kx-chat-lead" hidden novalidate>
           <p class="kx-chat-lead-title">Zostaw kontakt</p>
@@ -74,7 +75,7 @@
   const leadForm = $(".kx-chat-lead");
   const leadStatus = $(".kx-chat-lead-status");
   const leadSend = $(".kx-chat-lead-send");
-  let renderMessage, inferService, sendContact, validateContact, activeService, pendingOffer, leadBusy = false, leadSent = false;
+  let getSuggestions, renderMessage, inferService, sendContact, validateContact, activeService, pendingOffer, leadBusy = false, leadSent = false;
   const interests = new Map(), offeredServices = new Set();
   let chatSession = "", sessionExpiresAt = 0, sessionTimer;
   let history = [], token = "", widgetId, loading = false, scriptPromise, controller, generation = 0;
@@ -124,11 +125,13 @@
     start.disabled = true;
     start.textContent = "Przygotowuję rozmowę…";
     try {
-      const [, interestModule, contactModule, formatModule] = await Promise.all([
+      const [, interestModule, contactModule, formatModule, suggestionsModule] = await Promise.all([
         loadTurnstile(), import(new URL("./chat-interest.mjs", scriptUrl).href),
         import(new URL("./contact-service.mjs", scriptUrl).href),
         import(new URL("./chat-format.mjs", scriptUrl).href),
+        import(new URL("./chat-suggestions.mjs", scriptUrl).href),
       ]);
+      getSuggestions = suggestionsModule.getSuggestions;
       renderMessage = formatModule.renderMessage;
       inferService = interestModule.inferService;
       ({ sendContact, validateContact } = contactModule);
@@ -153,6 +156,14 @@
     }
   });
   input.addEventListener("input", updateSend);
+  function updateSuggestions(message = "") {
+    const buttons = getSuggestions(message, history).map(question => {
+      const button = document.createElement("button");
+      button.type = "button"; button.textContent = question;
+      return button;
+    });
+    $(".kx-chat-suggestions").replaceChildren(...buttons);
+  }
   $(".kx-chat-suggestions").addEventListener("click", (event) => {
     const suggestion = event.target.closest("button");
     if (!suggestion || loading) return;
@@ -167,6 +178,7 @@
     interests.clear(); offeredServices.clear(); activeService = undefined; pendingOffer = undefined; leadSent = false;
     leadForm.reset(); leadStatus.textContent = ""; setCollecting(false);
     thread.replaceChildren(); addMessage("assistant", "Zaczynamy od nowa. W czym mogę pomóc?");
+    updateSuggestions();
     status.textContent = ""; if (!hasSession()) resetVerification(); else updateSend(); input.focus();
   });
   function setCollecting(value) {
@@ -286,6 +298,8 @@
       if (data.verificationRequired) { chatSession = ""; sessionExpiresAt = 0; }
       if (!response.ok || typeof data.reply !== "string") throw new Error(data.error || "Czat jest chwilowo niedostępny.");
       addMessage("assistant", data.reply);
+      updateSuggestions(message);
+      content.scrollTop = content.scrollHeight;
       offerContact(message);
       history = [...history, { role: "user", content: message.slice(0, 1000) }, { role: "assistant", content: data.reply.slice(0, 1000) }].slice(-4);
       status.textContent = "";
