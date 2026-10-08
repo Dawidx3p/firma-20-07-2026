@@ -5,7 +5,7 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css?v=typing-1", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=roomy-1", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
@@ -79,14 +79,16 @@
   const interests = new Map(), offeredServices = new Set();
   let chatSession = "", sessionExpiresAt = 0, sessionTimer;
   let history = [], token = "", widgetId, loading = false, scriptPromise, controller, generation = 0;
+  let queuedSuggestion = "";
   function hasSession() { return Boolean(chatSession && Date.now() < sessionExpiresAt); }
   function updateSend() { send.disabled = loading || (!token && !hasSession()) || !input.value.trim(); }
   function openChat() {
     panel.hidden = false;
+    launcher.hidden = true;
     launcher.setAttribute("aria-expanded", "true");
     (!leadForm.hidden ? $("#kx-lead-email") : $(".kx-chat-intro").hidden ? input : start).focus();
   }
-  function closeChat() { panel.hidden = true; launcher.setAttribute("aria-expanded", "false"); launcher.focus(); }
+  function closeChat() { queuedSuggestion = ""; panel.hidden = true; launcher.hidden = false; launcher.setAttribute("aria-expanded", "false"); launcher.focus(); }
   launcher.addEventListener("click", () => panel.hidden ? openChat() : closeChat());
   $(".kx-chat-close").addEventListener("click", closeChat);
   root.addEventListener("keydown", (event) => { if (event.key === "Escape" && !panel.hidden) { event.preventDefault(); closeChat(); } });
@@ -142,7 +144,14 @@
       status.textContent = "Trwa weryfikacja bezpieczeństwa…";
       widgetId = window.turnstile.render($(".kx-chat-verification"), {
         sitekey: config.turnstileSiteKey, action: "kairox_chat", theme: "dark", size: "flexible", appearance: "interaction-only",
-        callback: (value) => { token = value; if (!loading && /^(Trwa weryfikacja|Weryfikacja wygasła)/.test(status.textContent)) status.textContent = ""; updateSend(); },
+        callback: (value) => {
+          token = value;
+          if (!loading && /^(Trwa weryfikacja|Weryfikacja wygasła)/.test(status.textContent)) status.textContent = "";
+          updateSend();
+          if (queuedSuggestion && input.value === queuedSuggestion && !panel.hidden && !send.disabled) {
+            queuedSuggestion = ""; form.requestSubmit();
+          }
+        },
         "expired-callback": () => { token = ""; updateSend(); if (!hasSession()) resetVerification(); },
         "error-callback": () => { token = ""; updateSend(); if (!hasSession()) status.textContent = "Weryfikacja się nie powiodła. Odśwież stronę lub użyj formularza kontaktowego."; },
       });
@@ -155,7 +164,7 @@
       start.disabled = false;
     }
   });
-  input.addEventListener("input", updateSend);
+  input.addEventListener("input", () => { queuedSuggestion = ""; updateSend(); });
   input.addEventListener("keydown", (event) => {
     if (event.key !== "Enter" || event.shiftKey || event.ctrlKey || event.altKey || event.metaKey || event.isComposing) return;
     if (panel.hidden || form.hidden || !input.value.trim()) return;
@@ -172,15 +181,17 @@
   }
   $(".kx-chat-suggestions").addEventListener("click", (event) => {
     const suggestion = event.target.closest("button");
-    if (!suggestion || loading) return;
+    if (!suggestion || loading || panel.hidden || form.hidden) return;
     input.value = suggestion.textContent; input.focus(); updateSend();
+    if (!send.disabled) { queuedSuggestion = ""; form.requestSubmit(); }
+    else { queuedSuggestion = input.value; status.textContent = "Trwa weryfikacja bezpieczeństwa…"; }
   });
   function resetVerification() {
     token = ""; updateSend();
     if (widgetId !== undefined) window.turnstile.reset(widgetId);
   }
   $(".kx-chat-reset").addEventListener("click", () => {
-    generation++; controller?.abort(); loading = false; history = []; input.value = "";
+    generation++; controller?.abort(); loading = false; history = []; input.value = ""; queuedSuggestion = "";
     interests.clear(); offeredServices.clear(); activeService = undefined; pendingOffer = undefined; leadSent = false;
     leadForm.reset(); leadStatus.textContent = ""; setCollecting(false);
     thread.replaceChildren(); addMessage("assistant", "Zaczynamy od nowa. W czym mogę pomóc?");
@@ -270,6 +281,7 @@
   });
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    queuedSuggestion = "";
     const message = input.value.trim();
     if (pendingOffer && !loading) {
       const answer = message.toLowerCase().replace(/[.!?]+$/g, "").trim();
