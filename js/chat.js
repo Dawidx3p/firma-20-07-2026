@@ -5,7 +5,7 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=typing-1", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
@@ -279,7 +279,19 @@
     const currentGeneration = generation;
     loading = true; token = ""; updateSend();
     addMessage("user", message); input.value = "";
-    status.textContent = "Bielik przygotowuje odpowiedź…";
+    status.textContent = "";
+    const typing = document.createElement("p");
+    typing.className = "kx-chat-message kx-chat-message--assistant kx-chat-typing";
+    typing.setAttribute("role", "status");
+    typing.setAttribute("aria-label", "Bielik pisze odpowiedź");
+    const typingLabel = document.createElement("span");
+    typingLabel.textContent = "Bielik pisze";
+    const dots = document.createElement("span");
+    dots.className = "kx-chat-typing-dots";
+    dots.setAttribute("aria-hidden", "true");
+    for (let i = 0; i < 3; i++) dots.append(document.createElement("i"));
+    typing.append(typingLabel, dots); thread.append(typing);
+    content.scrollTop = content.scrollHeight;
     const requestController = new AbortController();
     controller = requestController;
     const timer = setTimeout(() => requestController.abort(), 55000);
@@ -297,6 +309,7 @@
       }
       if (data.verificationRequired) { chatSession = ""; sessionExpiresAt = 0; }
       if (!response.ok || typeof data.reply !== "string") throw new Error(data.error || "Czat jest chwilowo niedostępny.");
+      typing.remove();
       addMessage("assistant", data.reply);
       updateSuggestions(message);
       content.scrollTop = content.scrollHeight;
@@ -309,6 +322,7 @@
       input.value = message;
     } finally {
       clearTimeout(timer);
+      typing.remove();
       if (currentGeneration === generation) { loading = false; if (!hasSession()) resetVerification(); else updateSend(); }
     }
   });
