@@ -3318,7 +3318,7 @@ article a:hover{
   .website-check-content { grid-template-columns: 1fr; gap: 28px; }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 880px) {
   .website-check-row { flex-direction: column; }
   .website-check-row input { flex: none; width: 100%; }
   .website-check-row .primary-button { width: 100%; }
