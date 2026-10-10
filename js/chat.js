@@ -5,7 +5,7 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css?v=keyboard-1", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=keyboard-2", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
@@ -82,11 +82,22 @@
   let history = [], token = "", widgetId, loading = false, scriptPromise, controller, generation = 0;
   let queuedSuggestion = "";
   // Mobile keyboards resize the visual viewport, often leaving 100dvh unchanged.
-  let viewportFrame;
+  let viewportFrame, focusTimer, editing = false, focusSettled = false;
+  let unfocusedHeight = window.visualViewport?.height ?? window.innerHeight;
   function syncChatViewport() {
     const viewport = window.visualViewport;
-    root.style.setProperty("--kx-visible-height", `${viewport?.height ?? window.innerHeight}px`);
-    root.style.setProperty("--kx-visible-top", `${viewport?.offsetTop ?? 0}px`);
+    const top = viewport?.offsetTop ?? 0;
+    let bottom = Math.min(top + (viewport?.height ?? window.innerHeight), window.innerHeight);
+    const keyboard = navigator.virtualKeyboard?.boundingRect;
+    if (keyboard?.height > 0 && keyboard.width > 0 && keyboard.top > top) bottom = Math.min(bottom, keyboard.top);
+    const height = Math.max(0, bottom - top);
+    const focused = editing && root.contains(document.activeElement);
+    if (!editing) unfocusedHeight = height;
+    // Some in-app browsers overlay the keyboard without reporting any resize.
+    // Keep the composer near the top instead of guessing the keyboard's height.
+    root.classList.toggle("kx-chat-composer-top", focused && focusSettled && unfocusedHeight - height < 120);
+    root.style.setProperty("--kx-visible-height", `${height}px`);
+    root.style.setProperty("--kx-visible-top", `${top}px`);
   }
   function scheduleChatViewport() {
     cancelAnimationFrame(viewportFrame);
@@ -95,6 +106,22 @@
   window.visualViewport?.addEventListener("resize", scheduleChatViewport);
   window.visualViewport?.addEventListener("scroll", scheduleChatViewport);
   window.addEventListener("resize", scheduleChatViewport);
+  navigator.virtualKeyboard?.addEventListener("geometrychange", scheduleChatViewport);
+  root.addEventListener("focusin", (event) => {
+    if (!event.target.matches("textarea,input:not([type=checkbox])") || editing) return;
+    editing = true; focusSettled = false;
+    clearTimeout(focusTimer);
+    focusTimer = setTimeout(() => { focusSettled = true; scheduleChatViewport(); }, 500);
+    scheduleChatViewport();
+  });
+  root.addEventListener("focusout", () => {
+    // Delay until focus has reached the next control, including another lead field.
+    setTimeout(() => {
+      if (root.contains(document.activeElement) && document.activeElement.matches("textarea,input:not([type=checkbox])")) return;
+      if (form.contains(document.activeElement)) return;
+      editing = false; focusSettled = false; clearTimeout(focusTimer); scheduleChatViewport();
+    }, 0);
+  });
   syncChatViewport();
   function hasSession() { return Boolean(chatSession && Date.now() < sessionExpiresAt); }
   function updateSend() { send.disabled = loading || (!token && !hasSession()) || !input.value.trim(); }
