@@ -5,7 +5,7 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css?v=keyboard-3", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=keyboard-4", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
@@ -82,8 +82,8 @@
   let history = [], token = "", widgetId, loading = false, scriptPromise, controller, generation = 0;
   let queuedSuggestion = "";
   // Mobile keyboards resize the visual viewport, often leaving 100dvh unchanged.
-  let viewportFrame, focusTimer, editing = false, focusSettled = false;
-  let unfocusedHeight = window.visualViewport?.height ?? window.innerHeight;
+  let viewportFrame, editing = false, viewportWidth = window.innerWidth;
+  let fullViewportHeight = Math.min(window.visualViewport?.height ?? window.innerHeight, window.innerHeight);
   function syncChatViewport() {
     const viewport = window.visualViewport;
     const top = viewport?.offsetTop ?? 0;
@@ -92,10 +92,12 @@
     if (keyboard?.height > 0 && keyboard.width > 0 && keyboard.top > top) bottom = Math.min(bottom, keyboard.top);
     const height = Math.max(0, bottom - top);
     const focused = editing && root.contains(document.activeElement);
-    if (!editing) unfocusedHeight = height;
-    // Some in-app browsers overlay the keyboard without reporting any resize.
-    // Temporarily collapse the history; the composer stays after it in reading order.
-    root.classList.toggle("kx-chat-keyboard-compact", !form.hidden && focused && focusSettled && unfocusedHeight - height < 120);
+    if (viewportWidth !== window.innerWidth) {
+      viewportWidth = window.innerWidth; fullViewportHeight = height;
+    } else fullViewportHeight = Math.max(fullViewportHeight, height);
+    // Focus alone cannot tell whether the system keyboard is still open.
+    const keyboardOpen = keyboard?.height > 0 || fullViewportHeight - height > 120;
+    root.classList.toggle("kx-chat-keyboard-compact", !form.hidden && focused && keyboardOpen);
     root.style.setProperty("--kx-visible-height", `${height}px`);
     root.style.setProperty("--kx-visible-top", `${top}px`);
   }
@@ -109,9 +111,7 @@
   navigator.virtualKeyboard?.addEventListener("geometrychange", scheduleChatViewport);
   root.addEventListener("focusin", (event) => {
     if (!event.target.matches("textarea,input:not([type=checkbox])") || editing) return;
-    editing = true; focusSettled = false;
-    clearTimeout(focusTimer);
-    focusTimer = setTimeout(() => { focusSettled = true; scheduleChatViewport(); }, 500);
+    editing = true;
     scheduleChatViewport();
   });
   root.addEventListener("focusout", () => {
@@ -119,7 +119,7 @@
     setTimeout(() => {
       if (root.contains(document.activeElement) && document.activeElement.matches("textarea,input:not([type=checkbox])")) return;
       if (form.contains(document.activeElement)) return;
-      editing = false; focusSettled = false; clearTimeout(focusTimer); scheduleChatViewport();
+      editing = false; scheduleChatViewport();
     }, 0);
   });
   syncChatViewport();
@@ -130,13 +130,13 @@
     panel.hidden = false;
     launcher.hidden = true;
     launcher.setAttribute("aria-expanded", "true");
-    (!leadForm.hidden ? $("#kx-lead-email") : $(".kx-chat-intro").hidden ? input : start).focus();
+    ($(".kx-chat-intro").hidden ? $(".kx-chat-close") : start).focus();
   }
   function closeChat() { queuedSuggestion = ""; panel.hidden = true; launcher.hidden = false; launcher.setAttribute("aria-expanded", "false"); launcher.focus(); }
   launcher.addEventListener("click", () => panel.hidden ? openChat() : closeChat());
   $(".kx-chat-close").addEventListener("click", closeChat);
   $(".kx-chat-read").addEventListener("click", () => {
-    input.blur(); editing = false; focusSettled = false; clearTimeout(focusTimer);
+    input.blur(); editing = false;
     syncChatViewport(); content.focus();
   });
   root.addEventListener("keydown", (event) => { if (event.key === "Escape" && !panel.hidden) { event.preventDefault(); closeChat(); } });
@@ -211,7 +211,7 @@
           }
         },
       });
-      input.focus();
+      $(".kx-chat-close").focus();
     } catch (error) {
       $(".kx-chat-intro").hidden = false;
       $(".kx-chat-conversation").hidden = true;
@@ -238,7 +238,8 @@
   $(".kx-chat-suggestions").addEventListener("click", (event) => {
     const suggestion = event.target.closest("button");
     if (!suggestion || loading || panel.hidden || form.hidden) return;
-    input.value = suggestion.textContent; input.focus(); updateSend();
+    input.blur(); editing = false;
+    input.value = suggestion.textContent; updateSend(); scheduleChatViewport();
     if (!send.disabled) { queuedSuggestion = ""; form.requestSubmit(); }
     else { queuedSuggestion = input.value; status.textContent = "Trwa weryfikacja bezpieczeństwa…"; }
   });
