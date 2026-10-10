@@ -5,7 +5,7 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css?v=keyboard-2", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=keyboard-3", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
@@ -19,7 +19,7 @@
     <div id="kx-chat-panel" class="kx-chat-panel" role="dialog" aria-labelledby="kx-chat-title" hidden>
       <header class="kx-chat-header">
         <div><span class="kx-chat-eyebrow">KAIROX · BIELIK</span><h2 id="kx-chat-title">Porozmawiajmy o Twojej stronie</h2></div>
-        <div class="kx-chat-header-actions"><button class="kx-chat-reset" type="button" hidden>Nowa rozmowa</button><button class="kx-chat-close" type="button" aria-label="Zamknij czat">×</button></div>
+        <div class="kx-chat-header-actions"><button class="kx-chat-read" type="button">Pokaż rozmowę</button><button class="kx-chat-reset" type="button" hidden>Nowa rozmowa</button><button class="kx-chat-close" type="button" aria-label="Zamknij czat">×</button></div>
       </header>
       <div class="kx-chat-intro">
         <p>Nie wiesz, od czego zacząć? Pomogę Ci poznać ofertę i wybrać kierunek.</p>
@@ -94,8 +94,8 @@
     const focused = editing && root.contains(document.activeElement);
     if (!editing) unfocusedHeight = height;
     // Some in-app browsers overlay the keyboard without reporting any resize.
-    // Keep the composer near the top instead of guessing the keyboard's height.
-    root.classList.toggle("kx-chat-composer-top", focused && focusSettled && unfocusedHeight - height < 120);
+    // Temporarily collapse the history; the composer stays after it in reading order.
+    root.classList.toggle("kx-chat-keyboard-compact", !form.hidden && focused && focusSettled && unfocusedHeight - height < 120);
     root.style.setProperty("--kx-visible-height", `${height}px`);
     root.style.setProperty("--kx-visible-top", `${top}px`);
   }
@@ -135,6 +135,10 @@
   function closeChat() { queuedSuggestion = ""; panel.hidden = true; launcher.hidden = false; launcher.setAttribute("aria-expanded", "false"); launcher.focus(); }
   launcher.addEventListener("click", () => panel.hidden ? openChat() : closeChat());
   $(".kx-chat-close").addEventListener("click", closeChat);
+  $(".kx-chat-read").addEventListener("click", () => {
+    input.blur(); editing = false; focusSettled = false; clearTimeout(focusTimer);
+    syncChatViewport(); content.focus();
+  });
   root.addEventListener("keydown", (event) => { if (event.key === "Escape" && !panel.hidden) { event.preventDefault(); closeChat(); } });
   function addMessage(role, text) {
     const message = document.createElement("p");

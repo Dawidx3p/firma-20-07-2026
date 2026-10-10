@@ -87,6 +87,7 @@
 .kx-chat-suggestions button{font-size:12px}
 .kx-chat textarea{height:54px;min-height:54px;max-height:54px}
 .kx-chat-footnote{margin:8px 18px 10px}
+.kx-chat-read{display:none}
 @media(max-width:480px){
   .kx-chat{right:12px;bottom:max(12px,env(safe-area-inset-bottom))}
   .kx-chat-panel{width:calc(100vw - 24px);max-width:calc(100vw - 24px);height:calc(100dvh - 24px - env(safe-area-inset-bottom) - env(safe-area-inset-top));max-height:calc(100dvh - 24px - env(safe-area-inset-bottom) - env(safe-area-inset-top));bottom:0;border-radius:18px}
@@ -108,6 +109,11 @@
   }
   /* Prevent Safari from zooming the page when focusing a small input. */
   .kx-chat textarea,.kx-chat-lead input:not([type=checkbox]){font-size:16px}
-  .kx-chat-composer-top .kx-chat-form{order:-1;padding-bottom:10px;border-top:0;border-bottom:1px solid #ffffff14}
-  .kx-chat-composer-top .kx-chat-footnote{display:none}
+  .kx-chat-keyboard-compact .kx-chat-panel{height:auto}
+  .kx-chat-keyboard-compact .kx-chat-content,.kx-chat-keyboard-compact .kx-chat-footnote{display:none}
+  .kx-chat-keyboard-compact .kx-chat-form{padding-bottom:12px}
+  .kx-chat-keyboard-compact .kx-chat-header h2,.kx-chat-keyboard-compact .kx-chat-reset{display:none}
+  .kx-chat-keyboard-compact .kx-chat-eyebrow{margin:0}
+  .kx-chat-keyboard-compact .kx-chat-header{align-items:center}
+  .kx-chat-keyboard-compact .kx-chat-read{display:block;background:transparent;border:1px solid #ffffff24;border-radius:16px;padding:6px 10px;min-height:36px;font-size:12px}
 }
