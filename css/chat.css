@@ -95,3 +95,17 @@
   .kx-chat-message--user{margin-left:14px}
   .kx-chat-message--assistant{margin-right:0}
 }
+@media(max-width:600px),(max-height:600px) and (pointer:coarse){
+  .kx-chat-panel{
+    position:fixed;
+    top:calc(var(--kx-visible-top,0px) + 12px + env(safe-area-inset-top));
+    bottom:auto;
+    right:12px;
+    width:calc(100vw - 24px);
+    max-width:calc(100vw - 24px);
+    height:calc(var(--kx-visible-height,100dvh) - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    max-height:calc(var(--kx-visible-height,100dvh) - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  }
+  /* Prevent Safari from zooming the page when focusing a small input. */
+  .kx-chat textarea,.kx-chat-lead input:not([type=checkbox]){font-size:16px}
+}

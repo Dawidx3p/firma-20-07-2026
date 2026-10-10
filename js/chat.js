@@ -5,7 +5,7 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css?v=roomy-1", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=keyboard-1", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
@@ -81,9 +81,25 @@
   let chatSession = "", sessionExpiresAt = 0, sessionTimer;
   let history = [], token = "", widgetId, loading = false, scriptPromise, controller, generation = 0;
   let queuedSuggestion = "";
+  // Mobile keyboards resize the visual viewport, often leaving 100dvh unchanged.
+  let viewportFrame;
+  function syncChatViewport() {
+    const viewport = window.visualViewport;
+    root.style.setProperty("--kx-visible-height", `${viewport?.height ?? window.innerHeight}px`);
+    root.style.setProperty("--kx-visible-top", `${viewport?.offsetTop ?? 0}px`);
+  }
+  function scheduleChatViewport() {
+    cancelAnimationFrame(viewportFrame);
+    viewportFrame = requestAnimationFrame(syncChatViewport);
+  }
+  window.visualViewport?.addEventListener("resize", scheduleChatViewport);
+  window.visualViewport?.addEventListener("scroll", scheduleChatViewport);
+  window.addEventListener("resize", scheduleChatViewport);
+  syncChatViewport();
   function hasSession() { return Boolean(chatSession && Date.now() < sessionExpiresAt); }
   function updateSend() { send.disabled = loading || (!token && !hasSession()) || !input.value.trim(); }
   function openChat() {
+    syncChatViewport();
     panel.hidden = false;
     launcher.hidden = true;
     launcher.setAttribute("aria-expanded", "true");
