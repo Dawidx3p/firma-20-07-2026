@@ -29,13 +29,15 @@
   />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="img/180na180.png">
-  <link rel="stylesheet" href="css/style.css?v=audit-2" />
+  <link rel="stylesheet" href="css/style.css?v=motion-1" />
   <title>Audyt komunikacji strony — KAIROX</title>
   <link rel="canonical" href="https://kairox.pl/audyt-komunikacji.html">
   <link rel="stylesheet" href="css/comic.css?v=1">
+  <link rel="stylesheet" href="css/audit-report.css?v=2">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/typography.css?v=1">
-  <link rel="stylesheet" href="css/section-scroll.css?v=1">
+  <link rel="stylesheet" href="css/section-scroll.css?v=3">
+  <script src="js/section-motion.js?v=1" defer></script>
 </head>
 
 <body>
@@ -162,145 +164,88 @@
       </ol>
     </section>
 
-    <section class="audit-examples">
+    <section class="audit-examples audit-report" id="przykladowy-audyt" aria-labelledby="audit-report-title">
       <div class="section-header">
-        <p class="eyebrow">Przykładowe rekomendacje</p>
-    
-        <h2>
-          Tak mogą wyglądać zmiany zaproponowane po audycie
-        </h2>
-    
-        <p class="section-intro">
-          Nie chodzi wyłącznie o napisanie ładniejszego zdania.
-          Analizujemy, czego brakuje w komunikacie, co może być niejasne
-          dla odbiorcy i jak lepiej pokazać wartość oferty.
-        </p>
+        <p class="eyebrow">Od diagnozy do konkretnej zmiany</p>
+        <h2 id="audit-report-title">Tak mogą wyglądać zmiany zaproponowane po audycie</h2>
+        <p class="section-intro">Dowiesz się, co utrudnia zrozumienie oferty, co poprawić w pierwszej kolejności i jak może wyglądać rozwiązanie. Rekomendacje obejmują treść, typografię, interfejs i drogę klienta do kontaktu — z zachowaniem charakteru Twojej marki.</p>
       </div>
-    
-      <div class="audit-examples-list">
-    
-        <article class="audit-example">
-          <div class="audit-example-header">
-            <p class="audit-example-category">Firma IT</p>
-            <span>Przykład 01</span>
-          </div>
-    
-          <div class="audit-example-grid">
-    
-            <div class="audit-example-message is-before">
-              <span>Obecny komunikat</span>
-    
-              <p>
-                Oferujemy kompleksowe rozwiązania IT dla biznesu.
-              </p>
-            </div>
-    
-            <div class="audit-example-analysis">
-              <h3>Co może utrudniać decyzję?</h3>
-    
-              <ul>
-                <li>nie wiadomo, dla jakich firm jest oferta,</li>
-                <li>brakuje konkretnego rezultatu współpracy,</li>
-                <li>komunikat brzmi podobnie do wielu konkurentów.</li>
-              </ul>
-            </div>
-    
-            <div class="audit-example-message is-after">
-              <span>Przykładowa rekomendacja</span>
-    
-              <p>
-                Automatyzujemy procesy w firmach produkcyjnych,
-                dzięki czemu zespoły wykonują mniej powtarzalnej pracy.
-              </p>
-            </div>
-    
-          </div>
-        </article>
-    
-        <article class="audit-example">
-          <div class="audit-example-header">
-            <p class="audit-example-category">Kancelaria</p>
-            <span>Przykład 02</span>
-          </div>
-    
-          <div class="audit-example-grid">
-    
-            <div class="audit-example-message is-before">
-              <span>Obecny komunikat</span>
-    
-              <p>
-                Świadczymy profesjonalne usługi prawne.
-              </p>
-            </div>
-    
-            <div class="audit-example-analysis">
-              <h3>Co może utrudniać decyzję?</h3>
-    
-              <ul>
-                <li>komunikat jest poprawny, ale bardzo ogólny,</li>
-                <li>nie pokazuje problemu, który kancelaria rozwiązuje,</li>
-                <li>nie daje konkretnego powodu do kontaktu.</li>
-              </ul>
-            </div>
-    
-            <div class="audit-example-message is-after">
-              <span>Przykładowa rekomendacja</span>
-    
-              <p>
-                Pomagamy przedsiębiorcom rozwiązywać problemy prawne,
-                zanim staną się kosztowne.
-              </p>
-            </div>
-    
-          </div>
-        </article>
-    
-        <article class="audit-example">
-          <div class="audit-example-header">
-            <p class="audit-example-category">Biuro rachunkowe</p>
-            <span>Przykład 03</span>
-          </div>
-    
-          <div class="audit-example-grid">
-    
-            <div class="audit-example-message is-before">
-              <span>Obecny komunikat</span>
-    
-              <p>
-                Świadczymy kompleksowe usługi księgowe dla firm.
-              </p>
-            </div>
-    
-            <div class="audit-example-analysis">
-              <h3>Co może utrudniać decyzję?</h3>
-    
-              <ul>
-                <li>komunikat opisuje usługę zamiast efektu,</li>
-                <li>nie odnosi się do codziennych problemów właściciela firmy,</li>
-                <li>nie pokazuje, co klient zyskuje dzięki współpracy.</li>
-              </ul>
-            </div>
-    
-            <div class="audit-example-message is-after">
-              <span>Przykładowa rekomendacja</span>
-    
-              <p>
-                Dbamy o księgowość i podatki, żeby właściciele firm
-                mogli skupić się na rozwoju biznesu.
-              </p>
-            </div>
-    
-          </div>
-        </article>
-    
+
+      <div class="audit-report-context">
+        <div><span class="eyebrow">Przykładowy fragment audytu</span><h3>Strona biura rachunkowego</h3><p>Cel: pomóc właścicielowi małej firmy zrozumieć ofertę i wysłać zapytanie o obsługę.</p></div>
+        <p class="audit-report-label">Przykład demonstracyjny dla fikcyjnej firmy. W obu widokach zachowano tę samą nazwę, kolory i styl marki.</p>
       </div>
-    
-      <div class="audit-examples-note">
-        <p>
-          Finalne rekomendacje zawsze wynikają z analizy konkretnej firmy,
-          jej odbiorców, oferty i celu strony.
-        </p>
+
+      <div class="audit-preview-grid" aria-label="Porównanie przykładowego pierwszego ekranu strony">
+        <figure class="audit-preview audit-preview-before">
+          <figcaption><span>Przed</span>Oferta, którą trudno odróżnić</figcaption>
+          <div class="audit-mock audit-mock-before">
+            <div class="audit-mock-nav"><strong>Biuro rachunkowe</strong><span>Start · O nas · Oferta · Kontakt</span></div>
+            <div class="audit-mock-content">
+              <p class="audit-mock-title">Witamy na naszej stronie</p>
+              <p>Świadczymy kompleksowe i profesjonalne usługi księgowe. Jakość, doświadczenie i indywidualne podejście to nasze priorytety.</p>
+              <div class="audit-mock-actions"><span>Więcej</span><span>Nasza oferta</span><span>Kontakt</span></div>
+            </div>
+          </div>
+          <p class="audit-preview-caption">Ogólny nagłówek, zbity tekst i trzy równorzędne przyciski. Klient musi sam znaleźć informacje potrzebne do decyzji.</p>
+        </figure>
+        <figure class="audit-preview audit-preview-after">
+          <figcaption><span>Propozycja zmian</span>Jasny odbiorca i kolejny krok</figcaption>
+          <div class="audit-mock audit-mock-after">
+            <div class="audit-mock-nav"><strong>Biuro rachunkowe</strong><span>Start · O nas · Oferta · Kontakt</span></div>
+            <div class="audit-mock-content">
+              <p class="audit-mock-eyebrow">Księgowość dla małych firm</p>
+              <p class="audit-mock-title">Twoja księgowość.<br>Jasne zasady współpracy.</p>
+              <p>Prowadzisz jednoosobową działalność lub małą spółkę? Sprawdź zakres obsługi i opowiedz nam, jakiego wsparcia potrzebujesz.</p>
+              <div class="audit-mock-actions"><span>Zapytaj o obsługę →</span></div>
+              <p class="audit-mock-next">W formularzu: forma działalności, potrzebny zakres i e-mail.</p>
+            </div>
+          </div>
+          <p class="audit-preview-caption">Kolory i tożsamość firmy pozostają te same. Nagłówek wskazuje odbiorcę, tekst łatwiej przeskanować, a jeden główny przycisk prowadzi do formularza.</p>
+        </figure>
       </div>
+
+      <div class="audit-findings" aria-label="Przykładowe zalecenia audytu">
+        <article class="audit-finding">
+          <div class="audit-finding-meta"><span>01 / Komunikacja</span><span>Priorytet wysoki</span></div>
+          <h3>Powiedz, dla kogo jest oferta</h3>
+          <p><strong>Diagnoza:</strong> „Witamy na naszej stronie” nie wyjaśnia, komu firma pomaga.</p>
+          <p><strong>Zmiana:</strong> wskazać małe firmy i rodzaje obsługiwanej działalności. Pod nagłówkiem opisać zakres wsparcia, a dalej zasady rozpoczęcia współpracy.</p>
+          <p class="audit-finding-purpose">Po co: klient może ocenić, czy oferta pasuje do jego sytuacji.</p>
+        </article>
+        <article class="audit-finding">
+          <div class="audit-finding-meta"><span>02 / Typografia</span><span>Priorytet wysoki</span></div>
+          <h3>Ułatw skanowanie tekstu</h3>
+          <p><strong>Diagnoza:</strong> drobny tekst i podobna wielkość tytułów zacierają hierarchię informacji.</p>
+          <p><strong>Zmiana:</strong> zacząć od tekstu 16–18 px, interlinii około 1,5 i szerokości akapitu 55–70 znaków. Rozróżnić nagłówek główny, tytuły sekcji i opisy; sprawdzić kontrast oraz łamanie tekstu na telefonie.</p>
+          <p class="audit-finding-purpose">Po co: najważniejsze informacje są łatwiejsze do znalezienia i przeczytania.</p>
+        </article>
+        <article class="audit-finding">
+          <div class="audit-finding-meta"><span>03 / UI — interfejs</span><span>Priorytet średni</span></div>
+          <h3>Wyróżnij główne działanie</h3>
+          <p><strong>Diagnoza:</strong> trzy podobne przyciski konkurują o uwagę; odstępy nie porządkują treści.</p>
+          <p><strong>Zmiana:</strong> wyróżnić „Zapytaj o obsługę” w istniejącej palecie marki, ujednolicić przyciski i odstępy. Na telefonie zapewnić wygodne pola dotykowe, np. 44 × 44 px, oraz czytelne stany fokusu, błędu i wysyłania.</p>
+          <p class="audit-finding-purpose">Po co: wiadomo, co można kliknąć i który krok jest najważniejszy.</p>
+        </article>
+        <article class="audit-finding">
+          <div class="audit-finding-meta"><span>04 / UX — ścieżka klienta</span><span>Priorytet wysoki</span></div>
+          <h3>Skróć drogę do zapytania</h3>
+          <p><strong>Diagnoza:</strong> klient musi szukać kontaktu, zanim pozna zakres i sposób współpracy.</p>
+          <p><strong>Zmiana:</strong> uporządkować stronę: dla kogo → zakres → dowody zaufania → proces → kontakt. Ograniczyć wymagane pola do potrzebnych na start i pokazać potwierdzenie po wysłaniu.</p>
+          <p class="audit-finding-purpose">Po co: klient wie, o co pyta i co wydarzy się po zostawieniu kontaktu.</p>
+        </article>
+      </div>
+
+      <aside class="audit-visualization" aria-labelledby="audit-visualization-title">
+        <div>
+          <p class="eyebrow">Zalecenia, które łatwiej wdrożyć</p>
+          <h3 id="audit-visualization-title">Możemy też pokazać zmianę na wizualizacji</h3>
+          <p>Przygotowujemy wizualizacje wybranych fragmentów strony: pierwszego ekranu, sekcji oferty czy formularza. Pokazują poprawiony układ, hierarchię tekstu i przyciski w ramach istniejącej identyfikacji firmy. Zmiana kolorów, logo czy stylu marki wymaga osobnego uzgodnienia.</p>
+          <p>Zakres wizualizacji i jej wycenę ustalamy przed rozpoczęciem prac. Wizualizacja nie jest gotową stroną ani pełnym projektem wszystkich podstron; wdrożenie uzgadniamy osobno.</p>
+        </div>
+        <a class="secondary-button" href="formularz-kontaktowy.html?service=audit&amp;source=%2Faudyt-komunikacji.html%23przykladowy-audyt">Porozmawiajmy o audycie</a>
+      </aside>
+      <p class="audit-report-note">To przykładowe kierunki zmian. Konkretne parametry, priorytety i zakres rekomendacji dobieramy do Twojej strony.</p>
     </section>
 
     <section class="pricing">
@@ -526,7 +471,7 @@
   </div>
   </div>
   <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/main.js?v=audit-2"></script>
+  <script src="js/main.js?v=motion-1"></script>
   <script src="js/chat-config.js"></script>
   <script src="js/chat.js?v=keyboard-4"></script>
 </body>

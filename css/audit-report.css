@@ -1,0 +1,48 @@
+.audit-report { max-width: 1228px; margin: auto; }
+.audit-report-context { display: flex; justify-content: space-between; gap: 32px; align-items: center; margin: 36px 0 24px; }
+.audit-report-context h3 { margin: 8px 0; font-size: 1.35rem; }
+.audit-report-context p { color: var(--muted); }
+.audit-report-label { max-width: 320px; font-size: .85rem; border-left: 2px solid var(--accent-2); padding-left: 18px; }
+.audit-preview-grid, .audit-findings { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.audit-preview { min-width: 0; border: 1px solid var(--line); border-radius: 22px; padding: 20px; background: var(--bg-soft); }
+.audit-preview figcaption { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-bottom: 18px; font-size: .85rem; color: var(--muted); }
+.audit-preview figcaption span { color: var(--text); font-weight: 650; }
+.audit-preview-after { border-color: rgba(0,224,255,.35); }
+.audit-mock { border-radius: 12px; overflow: hidden; min-height: 355px; background: #e3e6ec; color: #333c4c; }
+.audit-mock-nav { padding: 15px 18px; display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; align-items: center; background: #d1d7e1; border-bottom: 1px solid #b7c0d0; font-size: .75rem; }
+.audit-mock-nav span { font-size: .65rem; }
+.audit-mock-content { padding: 30px 22px; }
+.audit-mock-before { color: #535969; }
+.audit-mock-before .audit-mock-title { font-size: 1.15rem; font-weight: 600; margin-bottom: 14px; }
+.audit-mock-before .audit-mock-content > p:not(.audit-mock-title) { font-size: .8rem; line-height: 1.35; }
+.audit-mock-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.audit-mock-actions span { padding: 10px 14px; border-radius: 6px; font-size: .8rem; font-weight: 600; }
+.audit-mock-before .audit-mock-actions span { background: #c6cdda; color: #333c4c; }
+.audit-mock-eyebrow { color: #535969; font-size: .75rem; margin-bottom: 12px; }
+.audit-mock-after .audit-mock-title { font-size: clamp(1.4rem,2.4vw,1.8rem); line-height: 1.2; font-weight: 650; letter-spacing: -.025em; margin-bottom: 16px; }
+.audit-mock-after .audit-mock-content > p:not(.audit-mock-title):not(.audit-mock-eyebrow):not(.audit-mock-next) { font-size: 1rem; line-height: 1.55; color: #535969; }
+.audit-mock-after .audit-mock-actions span { background: #c6cdda; color: #333c4c; }
+.audit-mock-next { font-size: .75rem; color: #535969; margin-top: 12px; }
+.audit-preview-caption { font-size: .9rem; color: var(--muted); margin-top: 18px; line-height: 1.6; }
+.audit-findings { margin-top: 28px; }
+.audit-finding { padding: 28px; border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,.025); }
+.audit-finding-meta { display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; margin-bottom: 18px; font-size: .75rem; color: var(--accent-2); }
+.audit-finding-meta span:last-child { color: var(--muted); }
+.audit-finding h3 { font-size: 1.25rem; margin-bottom: 16px; }
+.audit-finding p { color: var(--muted); margin-top: 12px; line-height: 1.65; }
+.audit-finding strong { color: var(--text); font-weight: 600; }
+.audit-finding .audit-finding-purpose { border-top: 1px solid var(--line); padding-top: 16px; color: var(--text); font-size: .9rem; }
+.audit-visualization { display: flex; align-items: center; gap: 32px; margin-top: 32px; padding: 32px; border-radius: 22px; background: linear-gradient(125deg,rgba(124,92,255,.14),rgba(0,224,255,.06)); border: 1px solid var(--line); }
+.audit-visualization > div { flex: 1; min-width: 0; }
+.audit-visualization h3 { font-size: 1.4rem; margin: 12px 0; }
+.audit-visualization p:not(.eyebrow) { color: var(--muted); margin-top: 12px; }
+.audit-visualization .secondary-button { flex-shrink: 0; text-align: center; }
+.audit-report-note { margin-top: 24px; font-size: .85rem; color: var(--muted); max-width: 850px; }
+@media (max-width: 760px) {
+  .audit-report-context, .audit-visualization { flex-direction: column; align-items: stretch; gap: 20px; }
+  .audit-report-label { max-width: none; }
+  .audit-preview-grid, .audit-findings { grid-template-columns: minmax(0,1fr); gap: 18px; }
+  .audit-finding, .audit-visualization { padding: 22px; }
+  .audit-preview { padding: 16px; }
+  .audit-mock { min-height: 0; }
+}

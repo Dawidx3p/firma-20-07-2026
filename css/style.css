@@ -1893,48 +1893,7 @@ article a:hover{
   height:40px;
 }
 
-/* ANIMACJE */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
-}
-
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.process-card,
-.case-card,
-.path-card,
-.pricing-card {
-  will-change: transform;
-}
-
-.process-card.is-visible,
-.case-card.is-visible,
-.path-card.is-visible,
-.pricing-card.is-visible {
-  transition-delay: var(--delay, 0s);
-}
-
-.hero-panel {
-  animation: heroFloat 7s ease-in-out infinite;
-}
-
-@keyframes heroFloat {
-  0%, 100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-}
+/* Interaction effects: page content stays visible while scrolling. */
 
 .process-icon {
   transition:
@@ -1948,8 +1907,6 @@ article a:hover{
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal,
-  .hero-panel,
   .process-icon {
     animation: none;
     transition: none;

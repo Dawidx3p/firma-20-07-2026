@@ -14,12 +14,33 @@ main > section {
   scroll-margin-top: 0;
 }
 
+/* One entrance per section, without moving the layout or hiding future text. */
+main > section.section-entering {
+  animation: section-enter 360ms ease-out;
+}
+
+@keyframes section-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* Do not reposition the page while someone types or uses the chat. */
-html:has(input:focus, textarea:focus, select:focus, [contenteditable="true"]:focus) {
+html:has(input:focus, textarea:focus, select:focus, [contenteditable="true"]:focus,
+  body.menu-open, .kx-chat-panel:not([hidden]), .consent-banner.is-visible) {
   scroll-snap-type: none;
 }
 
+@media (max-width: 640px) {
+  html:has(.site-header) {
+    scroll-padding-top: 84px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  main > section.section-entering {
+    animation: none;
+  }
+
   html {
     scroll-snap-type: none;
     scroll-behavior: auto;
