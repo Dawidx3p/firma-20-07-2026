@@ -14,3 +14,11 @@ test('model nie może wstawić obcej domeny, skryptu ani nieznanej podstrony', (
   const html = '<img src=x onerror=alert(1)>';
   assert.deepEqual(formatTokens(html), [{ type: 'text', text: html }]);
 });
+test('linki do założyciela, wizualizacji i przykładowego audytu zachowują kotwice', () => {
+  for (const path of ['/#zalozyciel', '/index.html#zalozyciel', '/strony-dla-firm/', '/strony-dla-firm/#wizualizacja', '/audyt-komunikacji.html#przykladowy-audyt', '/formularz-kontaktowy.html?service=audit#kontakt']) {
+    for (const text of [`https://kairox.pl${path}.`, `[Zobacz szczegóły](https://kairox.pl${path})`]) {
+      assert.equal(formatTokens(text).find(t => t.type === 'link')?.href, path);
+    }
+  }
+  assert.equal(formatTokens('(https://kairox.pl/#zalozyciel).').find(t => t.type === 'link')?.href, '/#zalozyciel');
+});

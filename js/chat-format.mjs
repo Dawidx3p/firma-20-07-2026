@@ -1,10 +1,10 @@
-const PAGES = new Set(['audyt-komunikacji.html', 'modele-wspolpracy.html', 'metoda.html', 'partnerstwo.html', 'realizacje.html', 'artykuly.html', 'formularz-kontaktowy.html']);
+const PAGES = new Set(['', 'index.html', 'strony-dla-firm/', 'audyt-komunikacji.html', 'modele-wspolpracy.html', 'metoda.html', 'partnerstwo.html', 'realizacje.html', 'artykuly.html', 'formularz-kontaktowy.html']);
 function safeLink(value) {
   try {
     const url = new URL(value, 'https://kairox.pl');
     if (url.protocol !== 'https:' || !['kairox.pl', 'www.kairox.pl'].includes(url.hostname) || url.username || url.password || url.port) return null;
     if (!PAGES.has(url.pathname.slice(1))) return null;
-    return url.pathname;
+    return url.pathname + url.search + url.hash;
   } catch { return null; }
 }
 export function formatTokens(text) {
@@ -14,7 +14,7 @@ export function formatTokens(text) {
     if (match.index > offset) tokens.push({ type: 'text', text: text.slice(offset, match.index) });
     if (match[3]) tokens.push({ type: 'strong', text: match[3] });
     else {
-      const raw = match[2] || match[0].replace(/[.,;!?]+$/, '');
+      const raw = match[2] || match[0].replace(/[.,;!?)]+$/, '');
       const href = safeLink(raw);
       tokens.push(href ? { type: 'link', text: (match[1] || raw).replace(/\*\*/g, ''), href } : { type: 'text', text: match[1] || match[0] });
       if (!match[2] && raw.length < match[0].length) tokens.push({ type: 'text', text: match[0].slice(raw.length) });
