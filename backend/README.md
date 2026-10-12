@@ -94,6 +94,11 @@ Rzeczywisty Turnstile, bindingi oraz połączenie z modelem sprawdź po wdrożen
 
 ## Kontakt po rozmowie o usłudze
 
+Po 10 sekundach widget może pokazać jednorazową zachętę do rozmowy. Stan
+wyświetlenia/zamknięcia jest zapamiętywany w sessionStorage dla tej karty
+(bez treści rozmowy). Wcześniejsze otwarcie czatu lub wypełnianie formularza
+pomija zachętę. Dymek nie wywołuje modelu; kliknięcie otwiera ekran rozpoczęcia.
+
 Widget liczy udane pytania o konkretną usługę w pamięci karty. Po drugim pytaniu
 wyświetla propozycję zostawienia kontaktu; proste dopytania odwołują się do
 poprzednio nazwanej usługi. Ogólna lista/porównanie usług nie wybiera usługi.

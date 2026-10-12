@@ -5,13 +5,19 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css?v=keyboard-4", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=invite-1", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
   root.className = "kx-chat";
   root.setAttribute("data-clarity-mask", "true");
   root.innerHTML = `
+    <div class="kx-chat-invite" hidden>
+      <button class="kx-chat-invite-close" type="button" aria-label="Zamknij zachętę do rozmowy">×</button>
+      <p class="kx-chat-invite-name">Bielik · asystent AI</p>
+      <p>Masz pytanie o swoją stronę? Pomogę Ci wybrać, od czego zacząć.</p>
+      <button class="kx-chat-invite-open" type="button">Porozmawiajmy →</button>
+    </div>
     <button class="kx-chat-launcher" type="button" aria-expanded="false" aria-controls="kx-chat-panel">
       <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 11.5a8 8 0 0 1-8 8H5l-3 3V11.5a9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
       Zapytaj AI
@@ -65,6 +71,35 @@
   const $ = (selector) => root.querySelector(selector);
   const launcher = $(".kx-chat-launcher");
   const panel = $(".kx-chat-panel");
+  const invite = $(".kx-chat-invite");
+  const inviteStorageKey = "kairox-chat-invite";
+  let inviteHandled = false;
+  try { inviteHandled = Boolean(sessionStorage.getItem(inviteStorageKey)); } catch { /* Storage can be unavailable. */ }
+  function dismissInvite(reason) {
+    inviteHandled = true;
+    invite.hidden = true;
+    clearTimeout(inviteTimer);
+    try { sessionStorage.setItem(inviteStorageKey, reason); } catch { /* Keep the in-memory state. */ }
+  }
+  const inviteTimer = setTimeout(() => {
+    if (inviteHandled) return;
+    const isEditing = document.activeElement?.matches("input, textarea, select, [contenteditable='true']");
+    if (!panel.hidden || isEditing || document.hidden || document.querySelector("body.menu-open, .consent-banner.is-visible, dialog[open]")) {
+      dismissInvite("skipped");
+      return;
+    }
+    dismissInvite("shown");
+    invite.hidden = false;
+  }, 10000);
+  $(".kx-chat-invite-close").addEventListener("click", () => {
+    dismissInvite("dismissed");
+    launcher.focus({ preventScroll: true });
+  });
+  $(".kx-chat-invite-open").addEventListener("click", openChat);
+  document.addEventListener("input", event => {
+    if (inviteHandled && invite.hidden) return;
+    if (event.target.closest("form") && !root.contains(event.target)) dismissInvite("form");
+  });
   const start = $(".kx-chat-start");
   const form = $(".kx-chat-form");
   const input = $("textarea");
@@ -126,6 +161,7 @@
   function hasSession() { return Boolean(chatSession && Date.now() < sessionExpiresAt); }
   function updateSend() { send.disabled = loading || (!token && !hasSession()) || !input.value.trim(); }
   function openChat() {
+    dismissInvite("opened");
     syncChatViewport();
     panel.hidden = false;
     launcher.hidden = true;
@@ -139,7 +175,11 @@
     input.blur(); editing = false;
     syncChatViewport(); content.focus();
   });
-  root.addEventListener("keydown", (event) => { if (event.key === "Escape" && !panel.hidden) { event.preventDefault(); closeChat(); } });
+  root.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    if (!panel.hidden) { event.preventDefault(); closeChat(); }
+    else if (!invite.hidden) { event.preventDefault(); dismissInvite("dismissed"); launcher.focus({ preventScroll: true }); }
+  });
   function addMessage(role, text) {
     const message = document.createElement("p");
     message.className = `kx-chat-message kx-chat-message--${role}`;

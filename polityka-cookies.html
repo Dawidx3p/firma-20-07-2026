@@ -241,7 +241,11 @@
           Wybór dotyczący analityki jest zapisywany w localStorage na okres
           do 180 dni. Czat nie zapisuje historii rozmowy w cookies ani
           localStorage; jego historia i krótkotrwały token sesji pozostają
-          w pamięci karty. Po rozpoczęciu czatu używamy Cloudflare Turnstile
+          w pamięci karty. W sessionStorage zapisujemy wyłącznie stan zachęty
+          do rozmowy, aby nie pokazywać jej ponownie podczas wizyty w tej karcie.
+          Ten zapis nie zawiera wiadomości ani danych kontaktowych i jest
+          usuwany wraz z zakończeniem sesji karty w przeglądarce.
+          Po rozpoczęciu czatu używamy Cloudflare Turnstile
           do weryfikacji bezpieczeństwa. Szczegóły działania i dostawców czatu
           opisuje <a href="polityka-prywatnosci.html#czat-ai">polityka prywatności</a>.
         </p>
@@ -663,6 +667,6 @@
     <script src="js/consent.js?v=audit-2"></script>
     <script src="js/main.js?v=motion-1"></script>
   <script src="js/chat-config.js"></script>
-  <script src="js/chat.js?v=keyboard-4"></script>
+  <script src="js/chat.js?v=invite-1"></script>
 </body>
 </html>

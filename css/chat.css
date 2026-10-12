@@ -117,3 +117,12 @@
   .kx-chat-keyboard-compact .kx-chat-header{align-items:center}
   .kx-chat-keyboard-compact .kx-chat-read{display:block;background:transparent;border:1px solid #ffffff24;border-radius:16px;padding:6px 10px;min-height:36px;font-size:12px}
 }
+
+/* A quiet, dismissible invitation. It never opens the chat by itself. */
+.kx-chat-invite{position:absolute;right:0;bottom:66px;width:300px;max-width:calc(100vw - 32px);padding:20px 44px 18px 20px;background:#151824;border:1px solid #ffffff26;border-radius:18px;box-shadow:0 12px 40px #0005;color:#f4f6fb;font-size:14px;line-height:1.55}
+.kx-chat-invite p{margin:0 0 12px}
+.kx-chat-invite .kx-chat-invite-name{font-size:11px;color:#c5b5ff;font-weight:650;margin-bottom:8px}
+.kx-chat-invite-close{position:absolute;right:4px;top:4px;width:40px;height:40px;border:0;border-radius:50%;background:transparent;font-size:24px!important;line-height:1;color:#c4c8d8}
+.kx-chat .kx-chat-invite-open{display:block;min-height:44px;padding:8px 0;background:transparent;border:0;color:#d7ccff;font-size:13px;font-weight:600;text-align:left}
+.kx-chat-invite button:hover{color:#fff}
+.kx-chat-invite button:focus-visible{outline:2px solid #b29dff;outline-offset:2px}
