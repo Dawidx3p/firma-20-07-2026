@@ -1,0 +1,26 @@
+/* Shared strip, with content aligned to the site's navigation width. */
+.project-invite{position:fixed;z-index:90;top:var(--project-invite-top,0px);left:0;right:0;box-sizing:border-box;border-bottom:1px solid #e6ddbb40;background:#161914;box-shadow:0 8px 24px #0003;color:#f3ead1;font:14px/1.4 Inter,system-ui,sans-serif;text-align:left;isolation:isolate}
+.project-invite *{box-sizing:border-box}
+.project-invite-inner{position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:1180px;min-height:80px;margin:0 auto;padding:12px 80px 12px 24px;isolation:isolate}
+.project-invite-art{position:absolute;top:0;bottom:0;right:280px;width:360px;z-index:-1;background-image:linear-gradient(90deg,#161914 0%,#16191400 45%,#16191444 85%,#161914 100%),url('../img/banners/archiwum-sledcze-strip-v2.jpg');background-size:100% 100%,auto 140%;background-position:center,right center;background-repeat:no-repeat;pointer-events:none}
+.project-invite-copy{flex-shrink:0}
+.project-invite p{margin:0}
+.project-invite .project-invite-label{font-size:12px;color:#e1d8c1;margin-bottom:3px}
+.project-invite .project-invite-title{font-size:22px;font-weight:650;line-height:1.2;letter-spacing:-.02em}
+.project-invite-close{position:absolute;right:24px;top:50%;transform:translateY(-50%);width:44px;height:44px;border:1px solid #f3ead133;border-radius:50%;background:#161914b3;color:#f3ead1;font:24px/1 system-ui;cursor:pointer}
+.project-invite a{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:0 18px;border:1px solid #e5ef69;border-radius:8px;background:#e5ef69;color:#171a0d;font-size:14px;font-weight:650;text-decoration:none;white-space:nowrap}
+.project-invite a:hover{background:#f0f69b}
+.project-invite :is(a,button):focus-visible{outline:2px solid #fff;outline-offset:3px}
+body.menu-open .project-invite{display:none}
+@media(min-width:641px) and (max-width:1000px){.project-invite-art{right:240px;width:280px}.project-invite-inner{gap:16px}.project-invite .project-invite-title{font-size:20px}}
+@media(max-width:640px){.project-invite-inner{min-height:76px;gap:10px;padding:10px 52px 10px 16px}.project-invite .project-invite-label{font-size:10px}.project-invite .project-invite-title{font-size:16px}.project-invite a{font-size:11px;padding:0 10px;gap:5px}.project-invite-close{right:4px;width:40px;height:40px}.project-invite-art{right:0;width:65%;background-size:100% 100%,auto 110%}}
+@media(max-width:360px){.project-invite-inner{gap:6px;padding-left:10px}.project-invite .project-invite-title{font-size:14px}.project-invite a{font-size:10px;padding:0 7px}}
+
+/* One entrance, followed by one button highlight; no repeating distraction. */
+.project-invite{animation:project-invite-slide .55s cubic-bezier(.22,1,.36,1) both}
+.project-invite a{position:relative;overflow:hidden;animation:project-invite-glow .85s ease-out .65s both}
+.project-invite a::after{content:"";position:absolute;inset:-30% auto -30% -70%;width:45%;background:linear-gradient(90deg,transparent,#ffffffa6,transparent);transform:skewX(-20deg);pointer-events:none;animation:project-invite-shine .85s ease-in-out .65s both}
+@keyframes project-invite-slide{from{opacity:0;transform:translateY(-100%)}to{opacity:1;transform:translateY(0)}}
+@keyframes project-invite-shine{from{left:-70%;opacity:0}20%{opacity:1}80%{opacity:1}to{left:130%;opacity:0}}
+@keyframes project-invite-glow{0%,100%{box-shadow:0 0 0 transparent}45%{box-shadow:0 0 18px #e5ef6966}}
+@media(prefers-reduced-motion:reduce){.project-invite,.project-invite a,.project-invite a::after{animation:none}.project-invite a::after{display:none}}

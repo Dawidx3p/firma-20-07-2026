@@ -81,6 +81,7 @@
     clearTimeout(inviteTimer);
     try { sessionStorage.setItem(inviteStorageKey, reason); } catch { /* Keep the in-memory state. */ }
   }
+  document.addEventListener("kairox-project-invite-shown", () => dismissInvite("project"));
   const inviteTimer = setTimeout(() => {
     if (inviteHandled) return;
     const isEditing = document.activeElement?.matches("input, textarea, select, [contenteditable='true']");
@@ -162,6 +163,7 @@
   function updateSend() { send.disabled = loading || (!token && !hasSession()) || !input.value.trim(); }
   function openChat() {
     dismissInvite("opened");
+    document.dispatchEvent(new Event("kairox-chat-opened"));
     syncChatViewport();
     panel.hidden = false;
     launcher.hidden = true;
