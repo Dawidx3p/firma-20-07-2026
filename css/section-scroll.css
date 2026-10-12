@@ -1,0 +1,27 @@
+/* Gentle section snapping: long sections remain freely scrollable. */
+html {
+  scroll-snap-type: y proximity;
+  scroll-padding-top: 20px;
+}
+
+html:has(.site-header) {
+  scroll-padding-top: 92px;
+}
+
+main > section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  scroll-margin-top: 0;
+}
+
+/* Do not reposition the page while someone types or uses the chat. */
+html:has(input:focus, textarea:focus, select:focus, [contenteditable="true"]:focus) {
+  scroll-snap-type: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+}
