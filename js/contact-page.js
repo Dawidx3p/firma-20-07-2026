@@ -14,11 +14,27 @@ const contactParams = new URLSearchParams(window.location.search);
 const websiteFromUrl = contactParams.get("website");
 const services = {
   audit: "Audyt komunikacji", start: "Strona Start", campaign: "Strona kampanii",
-  communication: "Strona komunikacyjna", partnership: "Partnerstwo"
+  communication: "Strona komunikacyjna", partnership: "Partnerstwo",
+  visualization: "Bezpłatna wizualizacja pierwszego ekranu"
 };
 const serviceId = contactParams.get("service");
 const selectedService = Object.hasOwn(services, serviceId) ? services[serviceId] : "";
 const serviceContext = document.getElementById("contactServiceContext");
+const isVisualization = serviceId === "visualization";
+const submitLabel = isVisualization ? "Zgłoś stronę do bezpłatnej wizualizacji" : "Wyślij zgłoszenie";
+if (isVisualization) {
+  document.title = "Bezpłatna wizualizacja pierwszego ekranu — KAIROX";
+  document.querySelector(".contact-landing-intro .eyebrow").textContent = "Bezpłatna wizualizacja";
+  document.querySelector(".contact-landing-intro h1").textContent = "Zobacz, jak może wyglądać pierwszy ekran Twojej strony";
+  document.querySelector(".contact-landing-lead").textContent = "Otrzymasz propozycję wyglądu, głównego komunikatu i przycisku kontaktu. Najpierw sprawdzimy zgłoszenie i potwierdzimy zakres oraz termin. Bez obowiązku zamówienia strony.";
+  document.querySelector(".contact-form-card h2").textContent = "Zgłoś stronę do bezpłatnej wizualizacji";
+  document.querySelector('label[for="challenge"]').textContent = "Czym zajmuje się Twoja firma i co chcesz pokazać lub poprawić?";
+  document.querySelector(".contact-expectations").setAttribute("aria-label", "Jak otrzymać bezpłatną wizualizację");
+  const steps = document.querySelectorAll(".contact-expectations p");
+  steps[1].textContent = "Sprawdzamy zgłoszenie i potwierdzamy zakres oraz termin.";
+  steps[2].textContent = "Otrzymujesz wizualizację pierwszego ekranu i oceniasz kierunek.";
+  submitButton.textContent = submitLabel;
+}
 if (selectedService) {
   serviceContext.textContent = `Temat rozmowy: ${selectedService}`;
   serviceContext.hidden = false;
@@ -116,7 +132,9 @@ form.addEventListener("submit", async (event) => {
 
     submitted = true;
     form.reset(); form.hidden = true;
-    formStatus.textContent = "Dziękujemy! Twoje zgłoszenie dotarło do KAIROX. Skontaktujemy się, żeby omówić Twoją sytuację i możliwy kolejny krok.";
+    formStatus.textContent = isVisualization
+      ? "Dziękujemy! Twoje zgłoszenie dotarło do KAIROX. Skontaktujemy się, żeby potwierdzić zakres i termin bezpłatnej wizualizacji pierwszego ekranu."
+      : "Dziękujemy! Twoje zgłoszenie dotarło do KAIROX. Skontaktujemy się, żeby omówić Twoją sytuację i możliwy kolejny krok.";
     formStatus.classList.add("is-success");
 
     formStatus.focus();
@@ -126,7 +144,7 @@ form.addEventListener("submit", async (event) => {
     formStatus.classList.add("is-error");
   } finally {
     submitting = false;
-    submitButton.textContent = "Wyślij zgłoszenie";
+    submitButton.textContent = submitLabel;
     validateForm();
   }
 });

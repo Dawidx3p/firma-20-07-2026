@@ -1,7 +1,11 @@
-/* Gentle section snapping: long sections remain freely scrollable. */
+/* Let the browser stop native momentum at section boundaries. */
 html {
-  scroll-snap-type: y proximity;
+  scroll-snap-type: none;
   scroll-padding-top: 20px;
+}
+
+html:has(main > section) {
+  scroll-snap-type: y mandatory;
 }
 
 html:has(.site-header) {
@@ -9,9 +13,33 @@ html:has(.site-header) {
 }
 
 main > section {
+  position: relative;
   scroll-snap-align: start;
-  scroll-snap-stop: normal;
-  scroll-margin-top: 0;
+}
+
+/* A separate boundary stops a fling on entry; the full section remains an
+   oversized snap area, so reading inside it does not return to the heading. */
+main > section::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Keep the footer reachable after the last section. */
+html:has(main > section) body > footer {
+  scroll-snap-align: end;
+  scroll-snap-stop: always;
+}
+
+/* Do not reposition the page while someone types or uses the chat. */
+html:has(input:focus, textarea:focus, select:focus, [contenteditable="true"]:focus,
+  body.menu-open, .kx-chat-panel:not([hidden]), .consent-banner.is-visible) {
+  scroll-snap-type: none;
 }
 
 /* One entrance per section, without moving the layout or hiding future text. */
@@ -22,12 +50,6 @@ main > section.section-entering {
 @keyframes section-enter {
   from { opacity: 0; }
   to { opacity: 1; }
-}
-
-/* Do not reposition the page while someone types or uses the chat. */
-html:has(input:focus, textarea:focus, select:focus, [contenteditable="true"]:focus,
-  body.menu-open, .kx-chat-panel:not([hidden]), .consent-banner.is-visible) {
-  scroll-snap-type: none;
 }
 
 @media (max-width: 640px) {
@@ -41,7 +63,7 @@ html:has(input:focus, textarea:focus, select:focus, [contenteditable="true"]:foc
     animation: none;
   }
 
-  html {
+  html:has(main > section) {
     scroll-snap-type: none;
     scroll-behavior: auto;
   }

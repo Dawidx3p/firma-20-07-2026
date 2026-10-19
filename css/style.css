@@ -3229,7 +3229,7 @@ article a:hover{
 
 .website-check-content h2 { font-size: clamp(2rem, 3.2vw, 3.25rem); }
 
-.website-check-content > div > p:last-child {
+.website-check-content > div > p:not(.eyebrow) {
   max-width: 570px;
   margin-top: 18px;
   color: var(--muted);
@@ -3242,11 +3242,15 @@ article a:hover{
   font-weight: 800;
 }
 
-.website-check-row { display: flex; gap: 10px; }
+.website-check-row { display: flex; flex-direction: column; gap: 10px; }
+
+.website-check-row .primary-button { width: 100%; white-space: normal; text-align: center; }
+
+.website-check-hint { margin-top: 12px; color: var(--muted); font-size: 0.88rem; }
 
 .website-check-row input {
   min-width: 0;
-  flex: 1;
+  flex: none;
   height: 50px;
   padding: 0 18px;
   border: 1px solid rgba(255,255,255,0.13);

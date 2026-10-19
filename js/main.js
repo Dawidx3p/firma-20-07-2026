@@ -73,7 +73,7 @@ if (websiteCheckForm) {
       websiteInput.classList.remove("field-error");
       websiteError.textContent = "";
       window.location.assign(
-        `formularz-kontaktowy.html?website=${encodeURIComponent(websiteUrl.href)}`
+        `formularz-kontaktowy.html?service=visualization&website=${encodeURIComponent(websiteUrl.href)}`
       );
     } catch (error) {
       websiteInput.classList.add("field-error");
