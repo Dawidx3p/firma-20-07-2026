@@ -1,4 +1,4 @@
-/* Native scrolling: section boundaries never reposition the reader. */
+/* Fine pointers use the trackpad controller; touch keeps native momentum. */
 html {
   scroll-snap-type: none;
   scroll-padding-top: 20px;
@@ -6,6 +6,23 @@ html {
 
 html:has(.site-header) {
   scroll-padding-top: 92px;
+}
+
+/* The browser handles both the finger movement and its inertia. `always`
+   stops a directional fling at the next boundary; proximity avoids forcing
+   every small movement to end at a heading. Use the whole section as the snap
+   area so long sections remain scrollable inside. */
+@media (hover: none) and (pointer: coarse) and (prefers-reduced-motion: no-preference) {
+  html:has(main > section) { scroll-snap-type: y proximity; }
+  main > section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  html:has(main > section) body > footer { scroll-snap-align: end; }
+  html:has(input:focus, textarea:focus, select:focus, [contenteditable="true"]:focus,
+    body.menu-open, .kx-chat-panel:not([hidden]), .consent-banner.is-visible) {
+    scroll-snap-type: none;
+  }
 }
 
 /* One entrance per section, without moving the layout or hiding future text. */
