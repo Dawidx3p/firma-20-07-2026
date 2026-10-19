@@ -14,6 +14,9 @@ html:has(.site-header) {
    area so long sections remain scrollable inside. */
 @media (hover: none) and (pointer: coarse) and (prefers-reduced-motion: no-preference) {
   html:has(main > section) { scroll-snap-type: y proximity; }
+  /* The touch brake only stops at crossed boundaries. CSS remains a fallback
+     when JS is unavailable, without a second snap after our stop. */
+  html.touch-boundary-control:has(main > section) { scroll-snap-type: none; }
   main > section {
     scroll-snap-align: start;
     scroll-snap-stop: always;
