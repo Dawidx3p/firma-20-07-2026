@@ -8,15 +8,11 @@ html:has(.site-header) {
   scroll-padding-top: 92px;
 }
 
-/* The browser handles both the finger movement and its inertia. `always`
-   stops a directional fling at the next boundary; proximity avoids forcing
-   every small movement to end at a heading. Use the whole section as the snap
-   area so long sections remain scrollable inside. */
+/* Touch scrolling and boundary stops belong to the browser. Keep whole
+   sections as snap areas so oversized sections remain readable inside.
+   Never correct scroll position from a scroll event: it fights native inertia. */
 @media (hover: none) and (pointer: coarse) and (prefers-reduced-motion: no-preference) {
-  html:has(main > section) { scroll-snap-type: y proximity; }
-  /* The touch brake only stops at crossed boundaries. CSS remains a fallback
-     when JS is unavailable, without a second snap after our stop. */
-  html.touch-boundary-control:has(main > section) { scroll-snap-type: none; }
+  html:has(main > section) { scroll-snap-type: y mandatory; }
   main > section {
     scroll-snap-align: start;
     scroll-snap-stop: always;
