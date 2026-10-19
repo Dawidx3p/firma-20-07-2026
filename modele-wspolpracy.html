@@ -9,7 +9,7 @@
         content="KAIROX — Modele współpracy">
   
   <meta property="og:description"
-        content="Poznaj modele współpracy KAIROX: audyt komunikacji, Strona na Start, strona kampanii, Strona Komunikacyjna i Partnerstwo.">
+        content="Poznaj modele współpracy KAIROX: audyt komunikacji, Strona Start, strona kampanii, strona komunikacyjna i Partnerstwo.">
   
   <meta property="og:url"
   content="https://kairox.pl/modele-wspolpracy">
@@ -36,7 +36,7 @@
   />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="img/180na180.png">
-  <link rel="stylesheet" href="css/style.css?v=partnership-2" />
+  <link rel="stylesheet" href="css/style.css?v=ui-1" />
   <link rel="stylesheet" href="css/comic.css?v=1">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/typography.css?v=1">
@@ -45,7 +45,7 @@
   <script src="js/section-scroll.js?v=14" defer></script>
 </head>
 
-<body>
+<body class="models-page">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
@@ -71,9 +71,10 @@
         <li><a href="audyt-komunikacji.html">Audyt</a></li>
         <li><a href="metoda.html">Metoda</a></li>
         <li><a href="partnerstwo.html">Partnerstwo</a></li>
-        <li><a href="modele-wspolpracy.html" class="active">Modele Współpracy</a></li>
+        <li><a href="modele-wspolpracy.html" class="active" aria-current="page">Modele Współpracy</a></li>
         <li><a href="realizacje.html">Realizacje</a></li>
         <li><a href="artykuly.html">Artykuły</a></li>
+        <li class="nav-contact-link"><a href="formularz-kontaktowy.html">Porozmawiajmy</a></li>
       </ul>
 
       <a class="nav-cta" href="formularz-kontaktowy.html">
@@ -89,7 +90,7 @@
       <div class="comic-copy">
         <p class="eyebrow">Modele współpracy</p>
         <h1 id="comic-hero-title">Dobierzmy zakres do Twojej sytuacji</h1>
-        <p class="comic-description">Audyt, landing page, nowa strona albo stała współpraca — zaczynamy od tego, czego potrzebuje Twoja firma.</p>
+        <p class="comic-description">Sprawdź obecną stronę, przedstaw firmę, promuj jedną ofertę albo uporządkuj całą komunikację — dobierzmy zakres do Twojego celu.</p>
         <div class="comic-actions">
           <a class="primary-button" href="#models">Porównaj modele współpracy</a>
           <a class="secondary-button" href="formularz-kontaktowy.html?source=%2Fmodele-wspolpracy.html">Pomóżcie mi wybrać</a>
@@ -104,73 +105,101 @@
       </figure>
     </section>
 
-    <section class="message">
-      <h2>Nie każda firma potrzebuje od razu pełnej przebudowy strony</h2>
-
-      <p>
-        Czasem wystarczy audyt. Czasem landing page. Czasem potrzebny jest
-        pełny proces strategiczny. Dlatego pracujemy w kilku modelach.
-      </p>
-    </section>
-
-    <section class="process cooperation-roadmap">
-      <div class="section-header">
-        <p class="eyebrow">Ścieżka współpracy</p>
-
-        <h2>Każdy model odpowiada na inny etap rozwoju firmy</h2>
-
-        <p class="section-intro">
-          Nie wybierasz pakietu z tabeli. Wybierasz kolejny najlepszy krok
-          dla swojej firmy.
-        </p>
-      </div>
-
-      <ol class="process-list">
-        <li class="process-card">
-          <span class="process-number">01</span>
-          <h3>Audyt</h3>
-          <p>Poznaj problem i sprawdź, co naprawdę blokuje skuteczność strony.</p>
-        </li>
-
-        <li class="process-card">
-          <span class="process-number">02</span>
-          <h3>Start</h3>
-          <p>Zbuduj profesjonalny fundament obecności online.</p>
-        </li>
-
-        <li class="process-card">
-          <span class="process-number">03</span>
-          <h3>Kampania</h3>
-          <p>Promuj jedną usługę, wydarzenie albo konkretną ofertę.</p>
-        </li>
-
-        <li class="process-card">
-          <span class="process-number">04</span>
-          <h3>Strona komunikacyjna</h3>
-          <p>Przejdź przez pełny proces KAIROX od strategii do wdrożenia.</p>
-        </li>
-
-        <li class="process-card">
-          <span class="process-number">05</span>
-          <h3>Partnerstwo</h3>
-          <p>Rozwijaj stronę i komunikację marki długoterminowo.</p>
-        </li>
-      </ol>
-    </section>
-
     <section class="pricing cooperation-models" id="models">
       <div class="section-header">
-        <p class="eyebrow">Modele współpracy</p>
+        <p class="eyebrow">Nowa strona</p>
 
-        <h2>Wybierz zakres, który pasuje do obecnej sytuacji Twojej firmy</h2>
+        <h2>Wybierz stronę do swojego celu</h2>
+        <p class="section-intro">Trzy zakresy — od przedstawienia firmy po uporządkowanie całej oferty.</p>
       </div>
 
       <div class="pricing-grid">
+        <article class="pricing-card">
+          <p class="eyebrow model-purpose">Przedstaw firmę</p>
+          <h3>Strona Start</h3>
 
+          <p class="price"><span class="price-amount"><small>od</small> 4 900 zł</span><span class="price-note">brutto / projekt</span></p>
+
+          <p class="pricing-description">
+            Dla firmy, która potrzebuje przedstawić usługi, pokazać podstawowe
+            informacje i ułatwić kontakt. Zakres: 1–3 podstrony.
+          </p>
+
+          <ul class="pricing-list">
+            <li>Opis usług i informacje o firmie</li>
+            <li>Kontakt w widocznym miejscu</li>
+            <li>Wersja na telefon i komputer</li>
+            <li>Przygotowanie dla wyszukiwarek</li>
+            <li>Uruchomiona strona</li>
+          </ul>
+
+          <a class="secondary-button" href="formularz-kontaktowy.html?service=start&amp;source=%2Fmodele-wspolpracy.html">
+          Zapytaj o Start
+        </a>
+        </article>
+
+        <article class="pricing-card">
+          <p class="eyebrow model-purpose">Promuj jedną ofertę</p>
+          <h3>Strona kampanii</h3>
+
+          <p class="price"><span class="price-amount"><small>od</small> 3 900 zł</span><span class="price-note">brutto / projekt</span></p>
+
+          <p class="pricing-description">
+            Jedna strona poświęcona konkretnej ofercie — z argumentami
+            i formularzem prowadzącymi do jednego działania.
+          </p>
+
+          <ul class="pricing-list">
+            <li>Treść jednej oferty lub wydarzenia</li>
+            <li>Argumenty do podjęcia decyzji</li>
+            <li>Wyraźne wezwanie do działania</li>
+            <li>Formularz zapytania lub zgłoszenia</li>
+            <li>Uruchomiona strona do kampanii</li>
+          </ul>
+
+          <a class="secondary-button" href="formularz-kontaktowy.html?service=campaign&amp;source=%2Fmodele-wspolpracy.html">
+          Zapytaj o stronę kampanii
+        </a>
+        </article>
+
+        <article class="pricing-card featured">
+          <p class="eyebrow model-purpose">Uporządkuj całą ofertę</p>
+          <h3>Strona komunikacyjna</h3>
+
+          <p class="price"><span class="price-amount"><small>od</small> 8 900 zł</span><span class="price-note">brutto / projekt</span></p>
+
+          <p class="pricing-description">
+            Dla firmy, która potrzebuje uporządkować sposób przedstawienia całej
+            oferty: od głównego komunikatu i argumentów po strukturę podstron,
+            projekt i wdrożenie.
+          </p>
+
+          <ul class="pricing-list">
+            <li>Główny komunikat: co i dla kogo</li>
+            <li>Argumenty pokazujące wartość oferty</li>
+            <li>Czytelny układ usług i podstron</li>
+            <li>Treści prowadzące do kontaktu</li>
+            <li>Projekt i wdrożenie na telefon i komputer</li>
+            <li>Przygotowanie dla wyszukiwarek</li>
+          </ul>
+
+          <a class="primary-button" href="formularz-kontaktowy.html?service=communication&amp;source=%2Fmodele-wspolpracy.html">
+          Porozmawiajmy o stronie
+        </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="pricing cooperation-models existing-site-options" aria-labelledby="existing-site-title">
+      <div class="section-header">
+        <p class="eyebrow">Twoja obecna strona</p>
+        <h2 id="existing-site-title">Sprawdź, co poprawić, albo zleć bieżące zmiany</h2>
+      </div>
+      <div class="pricing-grid">
         <article class="pricing-card">
           <h3>Audyt komunikacji</h3>
 
-          <p class="price">990 zł brutto</p>
+          <p class="price"><span class="price-amount">990 zł</span><span class="price-note">brutto / audyt</span></p>
 
           <p class="pricing-description">
             Dla firm, które mają stronę, ale nie wiedzą, dlaczego nie generuje
@@ -191,79 +220,9 @@
         </article>
 
         <article class="pricing-card">
-          <h3>Strona Start</h3>
-
-          <p class="price">od 4 900 zł brutto</p>
-
-          <p class="pricing-description">
-            Dla firm, które chcą szybko zbudować profesjonalną obecność online,
-            ale nie potrzebują jeszcze pełnego procesu strategicznego.
-          </p>
-
-          <ul class="pricing-list">
-            <li>1–3 podstrony</li>
-            <li>Podstawowa komunikacja</li>
-            <li>Responsywny layout</li>
-            <li>SEO techniczne</li>
-            <li>Wdrożenie HTML / CSS / JS</li>
-          </ul>
-
-          <a class="secondary-button" href="formularz-kontaktowy.html?service=start&amp;source=%2Fmodele-wspolpracy.html">
-          Zapytaj o Start
-        </a>
-        </article>
-
-        <article class="pricing-card">
-          <h3>Strona kampanii</h3>
-
-          <p class="price">od 3 900 zł brutto</p>
-
-          <p class="pricing-description">
-            Landing page skupiony na jednym celu: promocji usługi, kampanii,
-            webinaru, wydarzenia albo pozyskaniu leadów.
-          </p>
-
-          <ul class="pricing-list">
-            <li>Jedna konkretna oferta</li>
-            <li>Struktura pod konwersję</li>
-            <li>Komunikacja i CTA</li>
-            <li>Formularz kontaktowy</li>
-            <li>Wdrożenie i optymalizacja</li>
-          </ul>
-
-          <a class="secondary-button" href="formularz-kontaktowy.html?service=campaign&amp;source=%2Fmodele-wspolpracy.html">
-          Zapytaj o landing
-        </a>
-        </article>
-
-        <article class="pricing-card featured">
-          <h3>Strona komunikacyjna</h3>
-
-          <p class="price">od 8 900 zł brutto</p>
-
-          <p class="pricing-description">
-            Flagowy proces KAIROX: strategia, komunikacja, UX, design
-            i development.
-          </p>
-
-          <ul class="pricing-list">
-            <li>Strategia</li>
-            <li>Komunikacja</li>
-            <li>UX</li>
-            <li>Design</li>
-            <li>Development</li>
-            <li>SEO techniczne</li>
-          </ul>
-
-          <a class="primary-button" href="formularz-kontaktowy.html?service=communication&amp;source=%2Fmodele-wspolpracy.html">
-          Porozmawiajmy o stronie
-        </a>
-        </article>
-
-        <article class="pricing-card">
           <h3>Partnerstwo</h3>
 
-          <p class="price price--partnership">1 990 zł <span>brutto / miesiąc</span></p>
+          <p class="price"><span class="price-amount">1 990 zł</span><span class="price-note">brutto / miesiąc</span></p>
 
           <p class="pricing-description">
             Do 8 godzin miesięcznie na treść, projekt, wdrożenie i sprawdzenie zmian przy istniejącej stronie.
@@ -281,115 +240,81 @@
             Zobacz zakres i zasady
           </a>
         </article>
-
       </div>
-    </section>
-
-    <section class="problem">
-      <div class="section-header">
-        <p class="eyebrow">Jak wybrać?</p>
-
-        <h2>Nie musisz wiedzieć, czego dokładnie potrzebujesz</h2>
-
-        <p class="section-intro">
-          Wystarczy, że opowiesz nam, na jakim etapie jest Twoja firma.
-          Pomożemy dobrać model, który ma największy sens biznesowy.
-        </p>
-      </div>
-
-      <div class="problem-grid">
-        <article>
-          <h3>Mam stronę, ale nie działa</h3>
-          <p>
-            Zacznij od audytu komunikacji. Sprawdzimy, gdzie strona traci
-            uwagę, zaufanie albo potencjalnych klientów.
-          </p>
-        </article>
-
-        <article>
-          <h3>Potrzebuję szybko wystartować</h3>
-          <p>
-            Strona Start pozwala zbudować profesjonalną obecność online
-            bez pełnego procesu strategicznego.
-          </p>
-        </article>
-
-        <article>
-          <h3>Chcę promować jedną usługę</h3>
-          <p>
-            Strona kampanii sprawdzi się wtedy, gdy masz konkretną ofertę,
-            kampanię reklamową albo wydarzenie.
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section class="message">
-      <h2>Dobry model współpracy nie zaczyna się od ceny</h2>
-
-      <p>
-        Zaczyna się od pytania: co ma się zmienić po stronie klienta,
-        komunikacji albo wyników firmy?
-      </p>
     </section>
 
     <section class="problem">
       <div class="section-header">
         <p class="eyebrow">Najczęstsze pytania</p>
 
-        <h2>FAQ</h2>
+        <h2>Pytania przed rozpoczęciem współpracy</h2>
       </div>
 
-      <div class="problem-grid">
-        <article>
-          <h3>Czy mogę zacząć od audytu?</h3>
+      <div class="models-faq-list">
+        <details class="models-faq-item">
+          <summary>Czy mogę zacząć od audytu?</summary>
+          <div class="models-faq-answer">
           <p>
             Tak. To najczęściej najlepszy pierwszy krok, szczególnie jeśli
             masz już stronę i nie wiesz, co warto poprawić.
           </p>
-        </article>
+        </div>
+        </details>
 
-        <article>
-          <h3>Czy robicie małe strony?</h3>
+        <details class="models-faq-item">
+          <summary>Czy robicie małe strony?</summary>
+          <div class="models-faq-answer">
           <p>
-            Tak, ale nie jako przypadkowe wizytówki. Strona Start nadal opiera
-            się na komunikacji i dobrze zaprojektowanej strukturze.
+            Tak. Strona Start obejmuje 1–3 podstrony, które przedstawiają usługi,
+            najważniejsze informacje o firmie i sposób kontaktu.
           </p>
-        </article>
+        </div>
+        </details>
 
-        <article>
-          <h3>Czym różni się landing od strony?</h3>
+        <details class="models-faq-item">
+          <summary>Czym różnią się trzy modele stron?</summary>
+          <div class="models-faq-answer">
           <p>
-            Landing page skupia się na jednym celu. Strona komunikacyjna
-            porządkuje całą obecność firmy w internecie.
+            Start przedstawia firmę i usługi na 1–3 podstronach. Strona kampanii
+            prowadzi do jednego działania przy konkretnej ofercie.
+            Strona komunikacyjna porządkuje całą ofertę: jej przekaz, argumenty
+            i układ podstron, a następnie przekłada je na gotową stronę.
           </p>
-        </article>
+        </div>
+        </details>
 
-        <article>
-          <h3>Czy można przejść ze Startu do większej strony?</h3>
+        <details class="models-faq-item">
+          <summary>Czy można przejść ze Startu do większej strony?</summary>
+          <div class="models-faq-answer">
           <p>
             Tak. Strona Start może być fundamentem, który później rozbudujemy
             o kolejne sekcje, podstrony i komunikację.
           </p>
-        </article>
+        </div>
+        </details>
 
-        <article>
-          <h3>Czy muszę wiedzieć, który model wybrać?</h3>
+        <details class="models-faq-item">
+          <summary>Czy muszę wiedzieć, który model wybrać?</summary>
+          <div class="models-faq-answer">
           <p>
             Nie. Od tego jest pierwsza rozmowa. Pomagamy określić, który zakres
             ma największy sens w Twojej sytuacji.
           </p>
-        </article>
-        <article>
-          <h3>Czy istnieje możliwość płatności etapami?</h3>
+        </div>
+        </details>
+        <details class="models-faq-item">
+          <summary>Czy istnieje możliwość płatności etapami?</summary>
+          <div class="models-faq-answer">
           <p>
             Tak. Większe projekty rozliczamy etapowo. Dzięki temu realizacja jest
             przewidywalna zarówno dla Ciebie, jak i dla naszego zespołu.
           </p>
-        </article>
+        </div>
+        </details>
 
-        <article>
-          <h3>Ile trwa realizacja?</h3>
+        <details class="models-faq-item">
+          <summary>Ile trwa realizacja?</summary>
+          <div class="models-faq-answer">
 
           <p>
             Orientacyjny czas realizacji zależy od wybranego modelu współpracy:
@@ -406,7 +331,8 @@
           <p>
             Przed rozpoczęciem projektu zawsze przedstawiamy indywidualny harmonogram realizacji.
           </p>
-        </article>
+        </div>
+        </details>
       </div>
     </section>
 
@@ -606,6 +532,6 @@
   <script src="js/consent.js?v=audit-2"></script>
   <script src="js/main.js?v=project-5"></script>
   <script src="js/chat-config.js"></script>
-  <script src="js/chat.js?v=project-1"></script>
+  <script src="js/chat.js?v=ui-1"></script>
 </body>
 </html>

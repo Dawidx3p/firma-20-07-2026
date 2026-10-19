@@ -5,7 +5,7 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css?v=invite-1", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=ui-1", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
@@ -20,7 +20,7 @@
     </div>
     <button class="kx-chat-launcher" type="button" aria-expanded="false" aria-controls="kx-chat-panel">
       <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 11.5a8 8 0 0 1-8 8H5l-3 3V11.5a9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
-      Zapytaj AI
+      <span class="kx-chat-launcher-label">Zapytaj AI</span>
     </button>
     <div id="kx-chat-panel" class="kx-chat-panel" role="dialog" aria-labelledby="kx-chat-title" hidden>
       <header class="kx-chat-header">

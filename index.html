@@ -29,7 +29,7 @@
   />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="img/180na180.png">
-  <link rel="stylesheet" href="css/style.css?v=visualization-1" />
+  <link rel="stylesheet" href="css/style.css?v=ui-1" />
 
   <title>KAIROX — Strony, które komunikują wartość marki</title>
   <link rel="canonical" href="https://kairox.pl/">
@@ -42,7 +42,7 @@
   <script src="js/section-scroll.js?v=14" defer></script>
 </head>
 
-<body>
+<body class="home-page">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
@@ -70,6 +70,7 @@
         <li><a href="modele-wspolpracy.html">Modele Współpracy</a></li>
         <li><a href="realizacje.html">Realizacje</a></li>
         <li><a href="artykuly.html">Artykuły</a></li>
+        <li class="nav-contact-link"><a href="formularz-kontaktowy.html">Porozmawiajmy</a></li>
       </ul>
 
       <a class="nav-cta" href="formularz-kontaktowy.html">
@@ -132,76 +133,14 @@
 
 
 
-    <section class="site-paths" id="site-paths">
-      <div class="section-header">
-        <p class="eyebrow">Poznaj KAIROX</p>
-
-        <h2>
-          Wybierz krok, którego potrzebuje Twoja firma
-        </h2>
-
-        <p class="section-intro">
-          Sprawdź obecną stronę, poznaj sposób pracy albo porównaj zakresy współpracy.
-        </p>
-      </div>
-      
-      <div class="paths-grid">
-
-        <article class="path-card">
-          <span>01</span>
-          <h3>Audyt komunikacji</h3>
-          <p>
-            Pierwszy krok naszej współpracy. Sprawdzamy, czy Twoja strona jasno
-            komunikuje wartość firmy i wskazujemy, co naprawdę warto zmienić.
-          </p>
-          <a href="audyt-komunikacji.html">Zobacz audyt</a>
-        </article>
-
-        <article class="path-card">
-          <span>02</span>
-          <h3>Metoda Agent 0</h3>
-          <p>
-            Poznaj proces, dzięki któremu projektujemy strony oparte na strategii,
-            komunikacji, UX i dopiero na końcu designie.
-          </p>
-          <a href="metoda.html">Poznaj metodę</a>
-        </article>
-
-        <article class="path-card">
-          <span>03</span>
-        
-          <h3>Modele współpracy</h3>
-        
-          <p>
-            Zobacz dostępne zakresy — od audytu i strony kampanii
-            po pełną stronę komunikacyjną i stałe partnerstwo.
-          </p>
-        
-          <a href="modele-wspolpracy.html">
-            Zobacz modele
-          </a>
-        </article>
-
-        <article class="path-card">
-          <span>04</span>
-          <h3>Partnerstwo</h3>
-          <p>
-            Długoterminowe wsparcie w rozwoju strony, komunikacji, landing page'y,
-            optymalizacji i kolejnych wdrożeniach.
-          </p>
-          <a href="partnerstwo.html">Zobacz współpracę</a>
-        </article>
-
-        <article class="path-card">
-          <span>05</span>
-          <h3>Artykuły</h3>
-          <p>
-            Praktyczne artykuły o komunikacji, UX i stronach internetowych, które pomagają
-            lepiej zrozumieć nasz sposób pracy.
-          </p>
-          <a href="artykuly.html">Czytaj artykuły</a>
-        </article>
-
+    <section class="home-shortcuts" id="site-paths" aria-labelledby="shortcuts-title">
+      <div class="home-shortcuts-inner">
+        <p class="eyebrow" id="shortcuts-title">Czego potrzebujesz?</p>
+        <nav class="home-shortcuts-grid" aria-labelledby="shortcuts-title">
+          <a href="audyt-komunikacji.html"><span><strong>Chcę poprawić obecną stronę</strong><small>Sprawdź audyt komunikacji</small></span><span aria-hidden="true">↗</span></a>
+          <a href="modele-wspolpracy.html"><span><strong>Potrzebuję nowej strony</strong><small>Porównaj zakresy i ceny</small></span><span aria-hidden="true">↗</span></a>
+          <a href="partnerstwo.html"><span><strong>Szukam regularnego wsparcia</strong><small>Poznaj pakiet Partnerstwa</small></span><span aria-hidden="true">↗</span></a>
+        </nav>
       </div>
     </section>
 
@@ -228,7 +167,7 @@
       <div class="audit-content">
   
           <p class="eyebrow">
-              Pierwszy krok współpracy
+              Najpierw sprawdź, co warto zmienić
           </p>
   
           <h2>
@@ -236,31 +175,9 @@
           </h2>
   
           <p class="audit-description">
-  
-              Czasami problemem jest komunikacja.
-  
-              Czasami struktura.
-  
-              Czasami brak jasnej propozycji wartości.
-  
-              Dlatego zanim zaprojektujemy cokolwiek,
-              zaczynamy od audytu komunikacji.
-  
+              W audycie wskazujemy problemy, proponujemy rozwiązania i ustalamy
+              priorytety. Otrzymujesz raport PDF i konsultację — za 990 zł brutto.
           </p>
-  
-          <ul class="audit-list">
-  
-              <li>Analiza komunikacji strony</li>
-  
-              <li>Ocena ścieżki użytkownika</li>
-  
-              <li>Najważniejsze problemy</li>
-  
-              <li>Rekomendacje zmian</li>
-  
-              <li>Konsultacja po audycie</li>
-  
-          </ul>
   
           <div class="hero-actions">
   
@@ -268,7 +185,7 @@
                   href="audyt-komunikacji.html"
                   class="secondary-button"
               >
-                  Dowiedz się więcej
+                  Zobacz zakres i przykład audytu
               </a>
   
           </div>
@@ -285,7 +202,7 @@
     
             <h3>Audyt komunikacji</h3>
             <div class="audit-status">
-              Najczęściej wybierany pierwszy krok
+              Co otrzymujesz
             </div>
             <p class="audit-price">
                 990 <span>zł brutto</span>
@@ -303,27 +220,17 @@
     
             <div class="audit-feature">
                 <span>✓</span>
-                <p>Analiza komunikacji</p>
+                <p>Raport PDF z oceną strony głównej</p>
             </div>
     
             <div class="audit-feature">
                 <span>✓</span>
-                <p>Ocena ścieżki użytkownika</p>
+                <p>Lista problemów i propozycje zmian</p>
             </div>
     
             <div class="audit-feature">
                 <span>✓</span>
-                <p>Analiza CTA i argumentów</p>
-            </div>
-    
-            <div class="audit-feature">
-                <span>✓</span>
-                <p>Lista najważniejszych problemów</p>
-            </div>
-    
-            <div class="audit-feature">
-                <span>✓</span>
-                <p>Raport PDF</p>
+                <p>Priorytety: co poprawić najpierw</p>
             </div>
     
             <div class="audit-feature">
@@ -345,7 +252,7 @@
             </div>
     
             <a class="primary-button" href="formularz-kontaktowy.html?service=audit&amp;source=%2Findex.html">
-          Umów konsultację
+          Zamów audyt
         </a>
     
         </div>
@@ -357,7 +264,7 @@
   <section class="projects" id="realizacje" aria-labelledby="projects-title">
     <div class="section-header">
       <p class="eyebrow">Wybrane realizacje</p>
-      <h2 id="projects-title">Projektujemy doświadczenia, które chce się odkrywać</h2>
+      <h2 id="projects-title">Zobacz, jak rozwiązujemy konkretne problemy</h2>
       <p class="section-intro">
         Dwa projekty koncepcyjne pokazują, jak upraszczamy odkrywanie oferty.
         Wszystkie cztery projekty i działające wersje znajdziesz w realizacjach.
@@ -383,14 +290,14 @@
 
         <h3>Galeria Klik</h3>
         <p class="project-lead">
-          Jak ułatwić wybór wśród wielu marek? W Galerii Klik mapa i tematyczne piętra
-          prowadzą do sklepów. To przykład nawigacji dla rozbudowanego katalogu.
+          Jak uporządkować rozbudowany katalog? Podzieliliśmy galerię na tematyczne
+          piętra, żeby odbiorca mógł zacząć od kategorii, a potem wybrać markę.
         </p>
 
         <ul class="project-features">
-          <li>30 pól, 9 aktywnych marek i 3 tematyczne piętra</li>
-          <li>Interaktywna mapa i nawigacja między piętrami</li>
-          <li>Autorski, responsywny interfejs</li>
+          <li>Tematyczne piętra porządkują wybór kategorii</li>
+          <li>Mapa pokazuje układ galerii</li>
+          <li>Osobne przestrzenie zachowują charakter marek</li>
         </ul>
 
         <a class="primary-button" href="galeria-klik/">Otwórz projekt</a>
@@ -419,14 +326,14 @@
 
         <h3>AMO</h3>
         <p class="project-lead">
-          Jak pomóc wybrać danie na telefonie? W AMO bestsellery i filtry prowadzą
-          do krótkiego menu, zestawu i rezerwacji — od pomysłu na posiłek do kolejnego kroku.
+          Jak pomóc wybrać danie na telefonie? Filtry według apetytu i bestsellery
+          dają punkt startu bez konieczności przeglądania całego menu.
         </p>
 
         <ul class="project-features">
-          <li>Bestsellery, kategorie i filtry nastroju</li>
-          <li>Selektywne fotografie połączone z lekkim menu</li>
-          <li>Konfigurator zestawu, koszyk i rezerwacja stolika</li>
+          <li>Wybór według apetytu, kategorii lub budżetu</li>
+          <li>Zdjęcia wyróżniające wybrane dania</li>
+          <li>Przejście od menu do koszyka lub rezerwacji</li>
         </ul>
 
         <a class="primary-button" href="amo/">Otwórz projekt</a>
@@ -446,9 +353,7 @@
         </h2>
   
         <p class="section-intro">
-          Możemy zacząć od audytu, stworzyć landing page dla jednej usługi,
-          zbudować pełną stronę komunikacyjną albo rozwijać markę
-          w ramach stałego partnerstwa.
+          Porównaj efekty, zakresy i ceny. Sprawdź, który model pasuje do Twojej sytuacji.
         </p>
       </div>
   
@@ -458,15 +363,14 @@
         <a href="modele-wspolpracy.html"><span>Strona Start</span></a>
         <a href="modele-wspolpracy.html"><span>Strona kampanii</span></a>
         <a href="modele-wspolpracy.html"><span>Strona komunikacyjna</span></a>
-        <a href="modele-wspolpracy.html"><span>Partnerstwo</span></a>
+        <a href="partnerstwo.html"><span>Partnerstwo</span></a>
   
       </div>
   
       <div class="cooperation-preview-footer">
   
         <p>
-          Nie musisz samodzielnie wybierać usługi.
-          Pomożemy dobrać zakres do aktualnej sytuacji Twojej firmy.
+          Nie wiesz, co wybrać? Pomożemy Ci podczas pierwszej rozmowy.
         </p>
   
         <a href="modele-wspolpracy.html" class="primary-button">
@@ -499,8 +403,8 @@
     <section class="comic-block comic-block--closing" id="contact" aria-labelledby="contact-title">
       <div class="comic-copy">
         <p class="eyebrow">Porozmawiajmy</p>
-        <h2 id="contact-title">Jasna oferta. Widoczny następny krok.</h2>
-        <p class="comic-description">Łączymy treść, wygląd i działanie strony, żeby odbiorca mógł poznać firmę i łatwo się skontaktować.</p>
+        <h2 id="contact-title">Porozmawiajmy o Twojej stronie</h2>
+        <p class="comic-description">Napisz, co chcesz zmienić lub stworzyć. Na tej podstawie porozmawiamy o zakresie i dalszych krokach.</p>
         <div class="comic-actions">
           <a class="primary-button" href="formularz-kontaktowy.html?source=%2Findex.html">Porozmawiajmy</a>
         </div>
@@ -693,6 +597,6 @@
   <script src="js/consent.js?v=audit-2"></script>
   <script src="js/main.js?v=visualization-1"></script>
   <script src="js/chat-config.js"></script>
-  <script src="js/chat.js?v=project-1"></script>
+  <script src="js/chat.js?v=ui-1"></script>
 </body>
 </html>
