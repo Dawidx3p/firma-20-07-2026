@@ -1,0 +1,74 @@
+/* Partnership page: scope, workflow and one combined offer/rules section. */
+.partnership-page .partner-hero-meta {
+  margin-top: 22px;
+  color: var(--accent-2);
+  font-size: .95rem;
+  font-weight: 600;
+}
+.partnership-page .partner-hero-meta span { margin: 0 8px; opacity: .5; }
+.partnership-page .partner-section {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 72px 24px;
+}
+.partnership-page .partner-section-heading { max-width: 740px; margin-bottom: 32px; }
+.partnership-page .partner-section-heading h2,
+.partnership-page .partner-contact h2 { margin-top: 12px; font-size: clamp(1.75rem, 3vw, 2.65rem); }
+.partnership-page .partner-section-heading > p:last-child,
+.partnership-page .partner-contact p:last-child { margin-top: 18px; color: var(--muted); }
+.partnership-page .partner-scope-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.partnership-page .partner-scope-grid article { padding: 24px 0 0; border: 0; border-top: 1px solid var(--line); border-radius: 0; background: none; }
+.partnership-page .partner-scope-grid .eyebrow { color: var(--accent-2); }
+.partnership-page .partner-scope-grid h3 { margin: 14px 0 10px; font-size: 1.15rem; }
+.partnership-page .partner-scope-grid p { font-size: .95rem; }
+.partnership-page .partner-workflow { margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--line); }
+.partnership-page .partner-workflow > h3 { margin-bottom: 20px; font-size: 1rem; }
+.partnership-page .partner-workflow ol { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.partnership-page .partner-workflow li { display: flex; gap: 12px; }
+.partnership-page .partner-workflow li > span { color: var(--accent-2); font-size: .8rem; padding-top: 3px; }
+.partnership-page .partner-workflow strong { font-weight: 600; }
+.partnership-page .partner-workflow p { margin-top: 6px; color: var(--muted); font-size: .9rem; }
+.partnership-page .partner-offer { border-top: 1px solid var(--line); }
+.partnership-page .partner-offer-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+.partnership-page .partner-plan { padding: clamp(24px, 3vw, 36px); border: 1px solid rgba(124,92,255,.35); border-radius: 24px; background: linear-gradient(145deg, rgba(124,92,255,.16), rgba(255,255,255,.025)); }
+.partnership-page .partner-plan > .eyebrow { color: var(--muted); }
+.partnership-page .partner-plan-price { margin: 24px 0 8px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; font-size: clamp(2rem, 3.2vw, 2.8rem); font-weight: 650; letter-spacing: -.025em; line-height: 1.2; }
+.partnership-page .partner-plan-price span { font-size: .9rem; font-weight: 400; letter-spacing: 0; color: var(--muted); }
+.partnership-page .partner-plan-limit { font-size: 1.15rem; font-weight: 600; color: var(--accent-2); }
+.partnership-page .partner-plan-description { margin-top: 14px; color: var(--muted); font-size: .95rem; }
+.partnership-page .partner-plan-features { list-style: none; margin: 24px 0; }
+.partnership-page .partner-plan-features li { position: relative; padding-left: 23px; margin-top: 12px; font-size: .95rem; }
+.partnership-page .partner-plan-features li::before { content: "✓"; position: absolute; left: 0; color: var(--accent-2); }
+.partnership-page .partner-plan .primary-button { width: 100%; white-space: normal; text-align: center; }
+.partnership-page .partner-plan-note { margin-top: 14px; color: var(--muted); font-size: .85rem; }
+.partnership-page .partner-plan-note + .partner-plan-note { margin-top: 8px; }
+.partnership-page .partner-rules > h3 { margin-bottom: 12px; font-size: 1.1rem; }
+.partnership-page .partner-rules details { border-bottom: 1px solid var(--line); }
+.partnership-page .partner-rules summary { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 20px 0; cursor: pointer; list-style: none; font-weight: 550; }
+.partnership-page .partner-rules summary::-webkit-details-marker { display: none; }
+.partnership-page .partner-rules summary::after { content: "+"; color: var(--accent-2); font-size: 1.4rem; font-weight: 400; line-height: 1; }
+.partnership-page .partner-rules details[open] summary::after { content: "−"; }
+.partnership-page .partner-rules summary:hover { color: var(--accent-2); }
+.partnership-page .partner-rules summary:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 4px; border-radius: 4px; }
+.partnership-page .partner-rules details p { padding-bottom: 20px; color: var(--muted); font-size: .95rem; }
+.partnership-page .partner-contact { display: flex; align-items: center; justify-content: space-between; gap: 36px; border-top: 1px solid var(--line); }
+.partnership-page .partner-contact > div { max-width: 700px; }
+.partnership-page .partner-contact > .primary-button { flex-shrink: 0; }
+@media (max-width: 980px) {
+  .partnership-page .partner-hero-meta { grid-column: 1; grid-row: 5; }
+  .partnership-page .comic-actions { grid-row: 6; }
+  .partnership-page .partner-section { padding: 52px 24px; }
+  .partnership-page .partner-contact { align-items: flex-start; flex-direction: column; gap: 24px; }
+}
+@media (max-width: 760px) {
+  .partnership-page .partner-offer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .partnership-page .partner-scope-grid { grid-template-columns: 1fr; gap: 24px; }
+  .partnership-page .partner-workflow ol { grid-template-columns: 1fr; gap: 20px; }
+}
+@media (max-width: 600px) {
+  .partnership-page .partner-section { padding: 40px 18px; }
+  .partnership-page .partner-hero-meta { font-size: .9rem; }
+  .partnership-page .partner-hero-meta span { margin: 0 4px; }
+  .partnership-page .partner-section-heading { margin-bottom: 24px; }
+  .partnership-page .partner-contact > .primary-button { width: 100%; white-space: normal; text-align: center; }
+}

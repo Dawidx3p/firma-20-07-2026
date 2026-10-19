@@ -694,6 +694,25 @@ article a:hover{
   letter-spacing: -0.06em;
 }
 
+.price--partnership {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 12px;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.price--partnership span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+.pricing-description.partnership-plan-note { margin: 18px 0 24px; }
+.partnership-plan-cta { max-width: 100%; white-space: normal; text-align: center; }
+
 .pricing-card.featured {
   background:
     radial-gradient(circle at top right, rgba(0, 224, 255, 0.18), transparent 32%),

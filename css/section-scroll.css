@@ -1,45 +1,11 @@
-/* Gently align near a boundary without forcing small scrolls to another section. */
+/* Native scrolling: section boundaries never reposition the reader. */
 html {
   scroll-snap-type: none;
   scroll-padding-top: 20px;
 }
 
-html:has(main > section) {
-  scroll-snap-type: y proximity;
-}
-
 html:has(.site-header) {
   scroll-padding-top: 92px;
-}
-
-main > section {
-  position: relative;
-  scroll-snap-align: start;
-}
-
-/* A separate boundary stops a fling on entry; the full section remains an
-   oversized snap area, so reading inside it does not return to the heading. */
-main > section::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto auto 0;
-  width: 1px;
-  height: 1px;
-  pointer-events: none;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-}
-
-/* Keep the footer reachable after the last section. */
-html:has(main > section) body > footer {
-  scroll-snap-align: end;
-  scroll-snap-stop: always;
-}
-
-/* Do not reposition the page while someone types or uses the chat. */
-html:has(input:focus, textarea:focus, select:focus, [contenteditable="true"]:focus,
-  body.menu-open, .kx-chat-panel:not([hidden]), .consent-banner.is-visible) {
-  scroll-snap-type: none;
 }
 
 /* One entrance per section, without moving the layout or hiding future text. */
@@ -63,8 +29,7 @@ main > section.section-entering {
     animation: none;
   }
 
-  html:has(main > section) {
-    scroll-snap-type: none;
+  html {
     scroll-behavior: auto;
   }
 }
