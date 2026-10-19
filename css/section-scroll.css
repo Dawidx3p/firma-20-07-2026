@@ -1,11 +1,11 @@
-/* Let the browser stop native momentum at section boundaries. */
+/* Gently align near a boundary without forcing small scrolls to another section. */
 html {
   scroll-snap-type: none;
   scroll-padding-top: 20px;
 }
 
 html:has(main > section) {
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }
 
 html:has(.site-header) {
