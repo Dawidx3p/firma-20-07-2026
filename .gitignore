@@ -4,3 +4,7 @@
 !.dev.vars.example
 .env*
 !.env.example
+
+# Only the public redirect is allowed here; edition files stay private.
+/printer/*
+!/printer/index.html
