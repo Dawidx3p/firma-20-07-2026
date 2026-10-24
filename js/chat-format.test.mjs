@@ -22,3 +22,14 @@ test('linki do założyciela, wizualizacji i przykładowego audytu zachowują ko
   }
   assert.equal(formatTokens('(https://kairox.pl/#zalozyciel).').find(t => t.type === 'link')?.href, '/#zalozyciel');
 });
+
+test('dopisek z pełnym linkiem do podstrony lub sekcji jest klikalny', () => {
+  for (const path of ['/realizacje.html#bieg-rzeczy', '/czysty-uklad/jak-zamowic/', '/sloj-i-forma/renowacja/', '/bieg-rzeczy/o-warsztacie/', '/dlaczego-strony-nie-sprzedaja.html', '/polityka-prywatnosci.html']) {
+    const url = `https://kairox.pl${path}`;
+    assert.deepEqual(formatTokens(`Więcej informacji znajdziesz tu: ${url}`), [
+      { type: 'text', text: 'Więcej informacji znajdziesz tu: ' },
+      { type: 'link', text: url, href: path },
+    ]);
+  }
+  for (const path of ['/printer/', '/bieg-rzeczy/koncepcja/', '/nieznana-podstrona.html']) assert(!formatTokens(`https://kairox.pl${path}`).some(t => t.type === 'link'));
+});

@@ -100,11 +100,18 @@ test('Bielik: ochrona endpointów i połączenie z dostawcami', async (t) => {
     assert.equal(calls.length, 2);
     const verify = JSON.parse(calls[0].options.body); assert.equal(verify.secret, settings.TURNSTILE_SECRET_KEY); assert.equal(verify.response, 'verified-token'); assert(!calls[0].options.body.includes(settings.HF_TOKEN));
     const model = calls[1]; const payload = JSON.parse(model.options.body); assert.equal(model.options.headers.Authorization, `Bearer ${settings.HF_TOKEN}`);
-    assert.equal(payload.max_tokens, 300); assert.equal(payload.model, 'speakleash/Bielik-11B-v3.0-Instruct:publicai');
+    assert.equal(payload.max_tokens, 180); assert.equal(payload.model, 'speakleash/Bielik-11B-v3.0-Instruct:publicai');
     assert.equal(payload.messages[0].role, 'system'); assert.equal(payload.messages.length, 4); assert.equal(payload.messages.at(-1).content, 'Cena?');
     for (const fact of ['Wszystkie ceny są brutto', '2–3 tygodnie', 'około 2 tygodni', '4–8 tygodni']) {
       assert(payload.messages[0].content.includes(fact));
     }
+    assert(payload.messages[0].content.length <= 3500, 'instrukcje z pełną mapą podstron powinny pozostać krótkie');
+    assert(payload.messages[0].content.includes('Więcej informacji znajdziesz tu: https://kairox.pl/ścieżka'));
+    assert(payload.messages[0].content.includes('Jeden link z listy, bez Markdown i HTML'));
+    assert(payload.messages[0].content.includes('/czysty-uklad/jak-zamowic/'));
+    for (const project of ['Bieg Rzeczy', 'Czysty Układ', 'Słój i Forma', 'Galeria Klik', 'AMO', 'My Trip World', 'Archiwum Śledcze']) assert(payload.messages[0].content.includes(project));
+    assert(payload.messages[0].content.includes('fikcyjne marki'));
+    assert(payload.messages[0].content.includes('Wizualizacja po audycie i wdrożenie wyceniane osobno'));
     assert(!model.options.body.includes(settings.TURNSTILE_SECRET_KEY)); assert(!model.options.body.includes(settings.CHAT_TEST_KEY));
     for (const secret of [settings.HF_TOKEN, settings.TURNSTILE_SECRET_KEY, settings.CHAT_TEST_KEY]) assert(!text.includes(secret));
   });

@@ -54,7 +54,7 @@ nie zostały zmienione. `js/chat-config.js` zawiera tylko publiczny adres i Site
   Budżet HF i dostępne środki trzeba kontrolować osobno w panelu dostawcy.
 - `PUBLIC_CHAT_ENABLED=false` wyłącza publiczny czat bez usuwania widgetu.
 - Brak konfiguracji lub awaria limitera blokuje model, bez ścieżki obejścia.
-- Maksymalnie 2000 znaków pytania, 24 KB całego żądania, 300 tokenów odpowiedzi.
+- Maksymalnie 2000 znaków pytania, 24 KB całego żądania, 180 tokenów odpowiedzi.
 - Model dostaje najwyżej dwie ostatnie pary pytanie/odpowiedź po 1000 znaków.
   Użytkownik nie może podmienić modelu, instrukcji systemowej ani limitu tokenów.
   Historia od klienta jest niezaufana; instrukcje nie gwarantują braku halucynacji.
@@ -113,3 +113,29 @@ co `formularz-kontaktowy.html`. Zgłoszenie ma `source=chat`, nazwę usługi ora
 krótką informację o zainteresowaniu. Nie wysyłamy całej rozmowy; dane kontaktowe
 nie trafiają do endpointu Bielika. Sukces jest pokazywany dopiero po odpowiedzi
 2xx Formspree. Przy błędzie pola pozostają do poprawienia/ponowienia.
+
+## Krótki kontekst (24.10.2026)
+
+Instrukcja systemowa została skrócona z 8229 do 2424 znaków (o 70,5%). Zawiera
+ceny, podstawowe zakresy, zasady Partnerstwa i 7 projektów, w tym Bieg Rzeczy,
+Czysty Układ oraz Słój i Forma. Szczegóły oferty zastępują odnośniki do strony.
+Odpowiedź ma mieć 1–3 zdania; limit generowania wynosi 180 zamiast 300 tokenów.
+Nie zmieniono modelu, historii rozmowy, limitów ani weryfikacji użytkownika.
+
+To zmniejsza rozmiar wejścia i maksymalną długość generowania. Nie jest pomiarem
+przyspieszenia: opóźnienia dostawcy nadal mogą występować, a widget pokazuje
+odpowiedź po jej pełnym wygenerowaniu (`stream: false`). Testy lokalne używają
+atrap dostawców i nie potwierdzają czasu ani jakości odpowiedzi żywego modelu.
+
+## Linkowanie do treści
+
+Odpowiedź dotycząca treści strony ma kończyć się osobnym akapitem
+„Więcej informacji znajdziesz tu: https://…”. Model wybiera adres z mapy 35
+publicznych podstron: oferta, artykuły, projekty wraz z podstronami i polityki.
+Może wskazać podaną kotwicę konkretnej sekcji. Powitania pozostają bez linku.
+Prywatny Printer, komponenty techniczne, 404 i kopie `/koncepcja/` nie są w mapie.
+Nie jest to dostęp do przeglądania stron ani dodatkowa wiedza o ich treści.
+
+Pełny kontekst z mapą adresów ma 3288 znaków, około 60% mniej niż pierwotne
+8229. Limit odpowiedzi pozostaje na 180 tokenach. `js/chat-format.mjs` dopuszcza
+te same publiczne adresy i zamienia pełny URL w klikalny link.

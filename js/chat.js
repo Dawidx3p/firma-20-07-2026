@@ -220,7 +220,7 @@
       const [, interestModule, contactModule, formatModule, suggestionsModule] = await Promise.all([
         loadTurnstile(), import(new URL("./chat-interest.mjs", scriptUrl).href),
         import(new URL("./contact-service.mjs?v=audit-2", scriptUrl).href),
-        import(new URL("./chat-format.mjs?v=links-2", scriptUrl).href),
+        import(new URL("./chat-format.mjs?v=links-3", scriptUrl).href),
         import(new URL("./chat-suggestions.mjs", scriptUrl).href),
       ]);
       getSuggestions = suggestionsModule.getSuggestions;
