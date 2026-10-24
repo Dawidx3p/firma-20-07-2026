@@ -43,3 +43,8 @@
 
 @media(max-width:640px) and (prefers-reduced-motion:reduce){.home-mobile-contact{transition:none}}
 @media(max-width:640px) and (forced-colors:active){.home-mobile-contact{border:2px solid ButtonText;background:ButtonFace;color:ButtonText;box-shadow:none}.home-mobile-contact>.cta-arrow{background:ButtonFace;color:ButtonText}}
+
+/* Reuse the existing two-line shortcuts for the method link. */
+.comic-actions.home-shortcuts-grid.method-shortcut{display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:440px}
+.method-shortcut a{text-align:left}
+.method-shortcut a:focus-visible{outline:2px solid var(--accent-2);outline-offset:4px}
