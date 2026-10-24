@@ -43,7 +43,10 @@
   }
 
   function nextBoundary(y, direction) {
-    const padding = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const scrollport = getComputedStyle(document.documentElement);
+    const padding = parseFloat(scrollport.scrollPaddingTop) || 0;
+    const bottomPadding = parseFloat(scrollport.scrollPaddingBottom) || 0;
+    const visibleBottom = window.innerHeight - bottomPadding;
     const boxes = sections.map(section => {
       const box = section.getBoundingClientRect();
       return { top: Math.max(0, box.top + y - padding), bottom: box.bottom + y };
@@ -53,7 +56,7 @@
     if (direction > 0) return boxes[index + 1]?.top ?? null;
     // Enter the END of a long previous section when moving upward.
     const previous = boxes[index - 1];
-    return previous ? Math.max(previous.top, previous.bottom - window.innerHeight) : null;
+    return previous ? Math.max(previous.top, previous.bottom - visibleBottom) : null;
   }
 
   function onWheel(event) {

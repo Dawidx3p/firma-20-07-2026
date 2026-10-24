@@ -2,9 +2,15 @@
 @media(min-width:981px) and (max-width:1200px){.navbar{gap:16px}.nav-list{gap:14px;font-size:.85rem}.nav-cta{padding-inline:16px}}
 .home-mobile-contact{display:none}
 @media(max-width:640px){
+  html:has(body.home-mobile-test){
+    --home-contact-height:48px;
+    --home-contact-bottom:max(12px,env(safe-area-inset-bottom));
+    --home-contact-clearance:calc(var(--home-contact-height) + var(--home-contact-bottom) + 12px);
+    scroll-padding-bottom:var(--home-contact-clearance);
+  }
   .home-mobile-test{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
-  .home-mobile-contact{display:flex;align-items:center;justify-content:space-between;position:fixed;z-index:8990;left:12px;right:72px;bottom:max(12px,env(safe-area-inset-bottom));height:48px;min-height:48px;min-width:0;gap:12px;padding:9px 11px 9px 16px;border:1px solid #84f0ff;border-radius:14px;background:#00e0ff;color:#071219;font-size:15px;font-weight:700;line-height:1.4;box-shadow:0 6px 22px #0005;text-decoration:none;transition:background-color .15s ease,border-color .15s ease}
-  .home-mobile-test .kx-chat{right:12px;bottom:max(12px,env(safe-area-inset-bottom))}
+  .home-mobile-contact{display:flex;align-items:center;justify-content:space-between;position:fixed;z-index:8990;left:12px;right:72px;bottom:var(--home-contact-bottom);height:var(--home-contact-height);min-height:var(--home-contact-height);min-width:0;gap:12px;padding:9px 11px 9px 16px;border:1px solid #84f0ff;border-radius:14px;background:#00e0ff;color:#071219;font-size:15px;font-weight:700;line-height:1.4;box-shadow:0 6px 22px #0005;text-decoration:none;transition:background-color .15s ease,border-color .15s ease}
+  .home-mobile-test .kx-chat{right:12px;bottom:var(--home-contact-bottom)}
   .home-mobile-test.menu-open .home-mobile-contact,.home-mobile-test:has(.kx-chat-panel:not([hidden])) .home-mobile-contact{display:none}
   .home-mobile-contact>.cta-label{white-space:nowrap}
   .home-mobile-contact>.cta-arrow{display:grid;place-items:center;width:28px;height:28px;flex:0 0 28px;border-radius:7px;background:#10212e;color:#00e0ff;font-size:21px;font-weight:500;line-height:1}
