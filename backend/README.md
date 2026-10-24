@@ -175,7 +175,7 @@ klikniętych pytań aplikacja zachowuje ich temat również przy błędnym/braku
 znaczniku modelu. Przy pozostałych brakujących znacznikach stosuje dotychczasowe
 rozpoznanie z pytania, historii i odpowiedzi; nie zastępuje to klasyfikacji modelu.
 
-`js/chat-suggestions.mjs` losuje do 3 unikalnych pytań z wybranego tematu,
+`js/chat-suggestions.mjs` losuje do 2 unikalnych pytań z wybranego tematu,
 pomijając zadane pytania obecne w krótkiej historii. Po wyczerpaniu tej puli
 podpowiedzi może być mniej. Otwarcie/reset czatu nadal losuje 3 pytania
 z osobnej puli 20 pytań startowych. Losowanie nie wykonuje wywołań AI.

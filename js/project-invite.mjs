@@ -1,6 +1,6 @@
 // Project recommendation: once per tab session, without analytics or API calls.
 export function initProjectInvite() {
-  if (/\/(?:formularz-kontaktowy|polityka-prywatnosci|polityka-cookies|404)\.html$/.test(location.pathname) || location.pathname.includes('/archiwum-sledcze/')) return;
+  if (/\/(?:realizacje|formularz-kontaktowy|polityka-prywatnosci|polityka-cookies|404)\.html$/.test(location.pathname) || location.pathname.includes('/archiwum-sledcze/') || location.pathname.startsWith('/realizacje/')) return;
   const key = 'kairox-project-invite-v2';
   const preview = ['localhost', '127.0.0.1'].includes(location.hostname) &&
     new URLSearchParams(location.search).get('preview') === 'project-banner';
@@ -46,8 +46,8 @@ export function initProjectInvite() {
     banner.innerHTML = `<div class="project-invite-inner">
       <a class="project-invite-content" href="${new URL('../realizacje.html', import.meta.url).href}">
         <picture class="project-invite-art">
-          <source media="(max-width:760px)" srcset="${new URL('../img/banners/portfolio-overview-mobile.svg?v=portfolio-3', import.meta.url).href}">
-          <img src="${new URL('../img/banners/portfolio-overview.svg?v=portfolio-3', import.meta.url).href}" width="1600" height="180" alt="" decoding="async">
+          <source media="(max-width:760px)" srcset="${new URL('../img/banners/portfolio-overview-mobile.svg?v=retina-1', import.meta.url).href}">
+          <img src="${new URL('../img/banners/portfolio-overview.svg?v=retina-1', import.meta.url).href}" width="1600" height="180" alt="" decoding="async">
         </picture>
         <div class="project-invite-heading"><p class="project-invite-title">A gdyby Twoja strona wyglądała tak?</p>
         <p class="project-invite-hint">Kliknij w baner i zobacz więcej <span aria-hidden="true">→</span></p></div>

@@ -33,12 +33,12 @@ export function getOpeningSuggestions(random = Math.random) {
 export function getSuggestions(message = '', history = [], connector = '', random = Math.random) {
   if (!message) return getOpeningSuggestions(random);
   const pool = Object.hasOwn(CHAT_TOPICS, connector) ? CHAT_TOPICS[connector].questions : null;
-  if (!pool) return getOpeningSuggestions(random);
+  if (!pool) return getOpeningSuggestions(random).slice(0, 2);
   const asked = new Set([message, ...history.filter(item => item.role === 'user').map(item => item.content)].map(text => text.trim().toLocaleLowerCase('pl')));
   const candidates = [...new Set(pool)].filter(question => !asked.has(question.toLocaleLowerCase('pl')));
   for (let i = candidates.length - 1; i > 0; i--) {
     const j = Math.floor(random() * (i + 1));
     [candidates[i], candidates[j]] = [candidates[j], candidates[i]];
   }
-  return candidates.slice(0, 3);
+  return candidates.slice(0, 2);
 }

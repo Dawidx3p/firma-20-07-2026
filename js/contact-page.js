@@ -81,6 +81,59 @@ function setError(field, message) {
   if (note) note.textContent = message;
 }
 
+const wizardSteps = [...form.querySelectorAll('[data-contact-step]')];
+const wizardProgress = form.querySelector('.contact-wizard-progress');
+let currentStep = 0;
+function showStep(index, focus = true) {
+  currentStep = index;
+  wizardSteps.forEach((step, i) => { step.hidden = i !== index; });
+  [...wizardProgress.children].forEach((item, i) => {
+    if (i === index) item.setAttribute('aria-current', 'step');
+    else item.removeAttribute('aria-current');
+  });
+  if (index === 2) {
+    const summary = document.getElementById('contactSummary');
+    summary.replaceChildren();
+    const values = [
+      ['Temat', selectedService || 'Rozmowa o stronie'],
+      ['Strona', website.value.trim() || 'Nie podano'],
+      ['Opis', document.getElementById('challenge').value.trim() || 'Do omówienia w rozmowie'],
+      ['Kontakt', [email.value.trim(), phone.value.trim()].filter(Boolean).join(' / ')],
+      ['Forma kontaktu', contactMethod.value || 'Bez preferencji']
+    ];
+    for (const [label, value] of values) {
+      const dt = document.createElement('dt'), dd = document.createElement('dd');
+      dt.textContent = label; dd.textContent = value; summary.append(dt, dd);
+    }
+  }
+  formStatus.textContent = '';
+  if (focus) wizardSteps[index].querySelector('legend').focus();
+}
+function checkContactStep() {
+  const hasContact = Boolean(email.value.trim() || phone.value.trim());
+  const validEmail = !email.value.trim() || isValidEmail(email.value.trim());
+  const validPhone = !phone.value.trim() || isValidPhone(phone.value.trim());
+  setError(email, !hasContact ? 'Podaj e-mail lub numer telefonu.' : !validEmail ? 'Wpisz poprawny e-mail, np. imie@firma.pl.' : '');
+  setError(phone, !hasContact ? 'Podaj e-mail lub numer telefonu.' : !validPhone ? 'Wpisz numer zawierający od 9 do 15 cyfr.' : '');
+  if (!hasContact || !validEmail || !validPhone) {
+    (!hasContact || !validEmail ? email : phone).focus();
+    return false;
+  }
+  return true;
+}
+function nextStep() {
+  if (submitting || submitted) return;
+  if (currentStep === 1 && !checkContactStep()) return;
+  showStep(Math.min(2, currentStep + 1));
+}
+form.querySelectorAll('[data-contact-next]').forEach(button => button.addEventListener('click', nextStep));
+form.querySelectorAll('[data-contact-back]').forEach(button => button.addEventListener('click', () => {
+  if (!submitting && !submitted) showStep(Math.max(0, currentStep - 1));
+}));
+wizardProgress.hidden = false;
+form.querySelectorAll('[data-contact-navigation]').forEach(nav => { nav.hidden = false; });
+showStep(0, false);
+
 [email, phone, privacy].forEach(field => field.addEventListener("input", () => {
   setError(field, "");
   if (field === email && email.value.trim() && !phone.value.trim()) setError(phone, "");
@@ -93,6 +146,7 @@ privacy.addEventListener("change", validateForm);
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
   if (submitting || submitted) return;
+  if (currentStep < 2) { nextStep(); return; }
   formStatus.textContent = "";
   formStatus.className = "form-status";
 
@@ -110,6 +164,7 @@ form.addEventListener("submit", async (event) => {
   setError(privacy, !privacy.checked ? "Potwierdź zapoznanie się z informacją o przetwarzaniu danych." : "");
 
   if (!hasContact || !validEmail || !validPhone || !privacy.checked) {
+    if (!hasContact || !validEmail || !validPhone) showStep(1);
     formStatus.textContent = "Sprawdź zaznaczone pola.";
     formStatus.classList.add("is-error");
     (!hasContact || !validEmail ? email : !validPhone ? phone : privacy).focus();

@@ -82,9 +82,9 @@
 /* The open panel occupies the launcher's space and gives replies more room. */
 .kx-chat-panel{bottom:0;width:460px;height:min(800px,calc(100dvh - 48px));max-height:calc(100dvh - 48px)}
 .kx-chat-header{padding:14px 18px}
-.kx-chat-message{font-size:15px;line-height:1.65}
+.kx-chat-message{font-size:14px;line-height:1.5;padding:10px 12px;margin-bottom:10px}
 .kx-chat-suggestions{padding-top:6px;padding-bottom:10px}
-.kx-chat-suggestions button{font-size:12px}
+.kx-chat-suggestions button{font-size:11px;padding:6px 9px;line-height:1.35}
 .kx-chat textarea{height:54px;min-height:54px;max-height:54px}
 .kx-chat-footnote{margin:8px 18px 10px}
 .kx-chat-read{display:none}

@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="css/section-scroll.css?v=10">
   <script src="js/section-motion.js?v=5" defer></script>
   <script src="js/section-scroll.js?v=14" defer></script>
+  <link rel="stylesheet" href="css/site-refinements.css?v=ux-1">
 </head>
 <body>
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
@@ -43,42 +44,28 @@
         <p id="contactServiceContext" hidden></p>
 
         <form id="contactForm" novalidate>
-          <div class="contact-fields-row">
-            <div class="form-group">
-              <label for="website">Adres Twojej strony</label>
-              <input type="url" id="website" name="website" inputmode="url" autocomplete="url" placeholder="https://twojafirma.pl">
+          <ol class="contact-wizard-progress" aria-label="Etapy formularza" hidden><li>1. Twoja strona</li><li>2. Kontakt</li><li>3. Potwierdzenie</li></ol>
+          <fieldset class="contact-wizard-step" data-contact-step>
+            <legend tabindex="-1">1. Twoja strona</legend>
+            <p class="form-hint">Adres i opis pomogą nam zrozumieć sytuację. Możesz uzupełnić je później.</p>
+            <div class="form-group"><label for="website">Adres Twojej strony (opcjonalnie)</label><input type="url" id="website" name="website" inputmode="url" autocomplete="url" placeholder="https://twojafirma.pl"></div>
+            <div class="form-group"><label for="challenge">Co obecnie jest największym problemem Twojej strony?</label><textarea id="challenge" name="challenge" rows="4" placeholder="Napisz kilka zdań — nie musisz przygotowywać pełnego briefu."></textarea></div>
+            <div class="contact-wizard-actions" data-contact-navigation hidden><button type="button" class="primary-button" data-contact-next>Dalej →</button></div>
+          </fieldset>
+          <fieldset class="contact-wizard-step" data-contact-step>
+            <legend tabindex="-1">2. Jak się z Tobą skontaktować?</legend>
+            <p class="form-hint">Wystarczy e-mail lub numer telefonu.</p>
+            <div class="form-group"><label for="name">Jak mamy się do Ciebie zwracać? (opcjonalnie)</label><input type="text" id="name" name="name" autocomplete="name"></div>
+            <div class="contact-fields-row">
+              <div class="form-group"><label for="email">Adres e-mail</label><input type="email" id="email" name="email" autocomplete="email" aria-describedby="emailError"><p class="field-error-note" id="emailError"></p></div>
+              <div class="form-group"><label for="phone">Numer telefonu</label><input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel" aria-describedby="phoneError"><p class="field-error-note" id="phoneError"></p></div>
             </div>
-            <div class="form-group">
-              <label for="name">Jak mamy się do Ciebie zwracać?</label>
-              <input type="text" id="name" name="name" autocomplete="name">
-            </div>
-          </div>
-          <div class="contact-fields-row">
-            <div class="form-group">
-              <label for="email">Adres e-mail</label>
-              <input type="email" id="email" name="email" autocomplete="email" aria-describedby="emailError">
-              <p class="field-error-note" id="emailError"></p>
-            </div>
-            <div class="form-group">
-              <label for="phone">Numer telefonu</label>
-              <input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel" aria-describedby="phoneError">
-              <p class="field-error-note" id="phoneError"></p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="contactMethod">Preferowana forma kontaktu</label>
-            <select id="contactMethod" name="contactMethod">
-              <option value="">Bez preferencji</option>
-              <option>E-mail</option>
-              <option>Telefon</option>
-              <option>WhatsApp</option>
-              <option>Google Meet</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="challenge">Co obecnie jest największym problemem Twojej strony?</label>
-            <textarea id="challenge" name="challenge" rows="5" placeholder="Napisz kilka zdań — nie musisz przygotowywać pełnego briefu."></textarea>
-          </div>
+            <div class="form-group"><label for="contactMethod">Preferowana forma kontaktu</label><select id="contactMethod" name="contactMethod"><option value="">Bez preferencji</option><option>E-mail</option><option>Telefon</option><option>WhatsApp</option><option>Google Meet</option></select></div>
+            <div class="contact-wizard-actions" data-contact-navigation hidden><button type="button" class="secondary-button" data-contact-back>Wstecz</button><button type="button" class="primary-button" data-contact-next>Dalej →</button></div>
+          </fieldset>
+          <fieldset class="contact-wizard-step" data-contact-step>
+            <legend tabindex="-1">3. Sprawdź i wyślij</legend>
+            <dl class="contact-wizard-summary" id="contactSummary"></dl>
           <div class="form-group checkbox">
             <input type="checkbox" id="privacy" required aria-describedby="privacyError">
             <label for="privacy">
@@ -87,8 +74,9 @@
             </label>
           </div>
           <p class="field-error-note" id="privacyError"></p>
-          <button type="submit" class="primary-button" id="submitButton" disabled>Wyślij zgłoszenie</button>
-          <p class="form-hint">Podaj e-mail lub telefon i zaakceptuj informację o przetwarzaniu danych.</p>
+          <div class="contact-wizard-actions"><button type="button" class="secondary-button" data-contact-back>Wstecz</button><button type="submit" class="primary-button" id="submitButton" disabled>Wyślij zgłoszenie</button></div>
+          <p class="form-hint">Zgłoszenie wyślesz dopiero tym przyciskiem.</p>
+          </fieldset>
         </form>
         <p class="form-status" id="formStatus" role="status" aria-live="polite" tabindex="-1"></p>
         <div id="contactSuccessActions" hidden>
@@ -138,8 +126,8 @@
   </div>
 
   <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/contact-page.js?v=visualization-1"></script>
+  <script src="js/contact-page.js?v=steps-1"></script>
   <script src="js/chat-config.js"></script>
-  <script src="js/chat.js?v=hello-1"></script>
+  <script src="js/chat.js?v=ux-1"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css?v=hello-1", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=ux-1", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
@@ -54,7 +54,7 @@
         </div>
         <form class="kx-chat-form">
           <label for="kx-chat-message">Twoje pytanie</label>
-          <textarea id="kx-chat-message" rows="2" maxlength="2000" placeholder="Np. mam stronę, ale nie dostaję zapytań…" required data-private="true"></textarea>
+          <textarea id="kx-chat-message" rows="2" maxlength="2000" placeholder="Wiadomość" required data-private="true"></textarea>
           <button class="kx-chat-send" type="submit" disabled>Wyślij wiadomość ↗</button>
           <div class="kx-chat-verification"></div>
           <p class="kx-chat-status" role="status" aria-live="polite"></p>
@@ -167,7 +167,7 @@
   function hasSession() { return Boolean(chatSession && Date.now() < sessionExpiresAt); }
   function updateSend() { send.disabled = loading || (!token && !hasSession()) || !input.value.trim(); }
   function ensureSuggestions() {
-    if (!suggestionsPromise) suggestionsPromise = import(new URL("./chat-suggestions.mjs?v=connectors-1", scriptUrl).href)
+    if (!suggestionsPromise) suggestionsPromise = import(new URL("./chat-suggestions.mjs?v=ux-1", scriptUrl).href)
       .then(module => { getSuggestions = module.getSuggestions; return module; })
       .catch(error => { suggestionsPromise = undefined; throw error; });
     return suggestionsPromise;

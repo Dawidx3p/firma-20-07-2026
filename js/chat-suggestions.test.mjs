@@ -26,7 +26,7 @@ test('podpowiedzi powstają lokalnie bez dostawcy AI', () => {
   globalThis.fetch = () => { calls++; throw new Error('Podpowiedzi nie mogą wywoływać API'); };
   try {
     assert.equal(getSuggestions().length, 3);
-    assert.equal(getSuggestions('Co obejmuje audyt komunikacji?').length, 3);
+    assert.equal(getSuggestions('Co obejmuje audyt komunikacji?').length, 2);
     assert.equal(calls, 0);
   } finally { globalThis.fetch = originalFetch; }
 });
@@ -38,7 +38,7 @@ test('connector losuje wyłącznie pytania wskazanego projektu, bez powtórzenia
     assert.equal(new Set(topic.questions).size, topic.questions.length);
     const asked = topic.questions[0];
     const sample = getSuggestions(asked, [], connector, () => 0.5);
-    assert(sample.length >= 2 && sample.length <= 3, connector);
+    assert(sample.length === 2, connector);
     assert(!sample.includes(asked));
     assert(sample.every(q => topic.questions.includes(q)));
     const histories = [{ role: 'user', content: topic.questions[1] }];
@@ -49,5 +49,5 @@ test('kolejność i dobór podpowiedzi zmieniają się przy losowaniu', async ()
   const { CHAT_TOPICS } = await import('./chat-topics.mjs');
   const connector = Object.keys(CHAT_TOPICS)[0];
   assert.notDeepEqual(getSuggestions('pytanie', [], connector, () => 0), getSuggestions('pytanie', [], connector, () => 0.999));
-  assert.equal(getSuggestions('pytanie', [], '__proto__').length, 3);
+  assert.equal(getSuggestions('pytanie', [], '__proto__').length, 2);
 });
