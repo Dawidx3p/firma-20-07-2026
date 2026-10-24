@@ -8,7 +8,7 @@ function safeLink(value) {
   } catch { return null; }
 }
 export function formatTokens(text) {
-  const tokens = [], pattern = /\[([^\]\n]+)\]\(([^\s)]+)\)|\*\*([^*]+)\*\*|https:\/\/(?:www\.)?kairox\.pl\/[^\s<>]+/g;
+  const tokens = [], pattern = /\[([^\]\n]+)\]\(([^\s)]+)\)|\*\*([^*]+)\*\*|https:\/\/(?:www\.)?kairox\.pl\/[^\s<>]*/g;
   let offset = 0;
   for (const match of text.matchAll(pattern)) {
     if (match.index > offset) tokens.push({ type: 'text', text: text.slice(offset, match.index) });
@@ -29,7 +29,11 @@ export function renderMessage(element, text) {
     if (token.type === 'text') { element.append(document.createTextNode(token.text)); continue; }
     const node = document.createElement(token.type === 'strong' ? 'strong' : 'a');
     node.textContent = token.text;
-    if (token.type === 'link') node.setAttribute('href', token.href);
+    if (token.type === 'link') {
+      node.setAttribute('href', token.href);
+      node.setAttribute('target', '_blank');
+      node.setAttribute('rel', 'noopener noreferrer');
+    }
     element.append(node);
   }
 }

@@ -33,3 +33,16 @@ test('dopisek z pełnym linkiem do podstrony lub sekcji jest klikalny', () => {
   }
   for (const path of ['/printer/', '/bieg-rzeczy/koncepcja/', '/nieznana-podstrona.html']) assert(!formatTokens(`https://kairox.pl${path}`).some(t => t.type === 'link'));
 });
+
+test('renderer tworzy prawdziwy odnośnik z bezpiecznym otwarciem w nowej karcie', async () => {
+  const { renderMessage } = await import('./chat-format.mjs');
+  const originalDocument = globalThis.document;
+  globalThis.document = { createTextNode: text => ({ text }), createElement: tag => ({ tag, attrs: {}, setAttribute(key, value) { this.attrs[key] = value; } }) };
+  const children = [];
+  try {
+    renderMessage({ append: node => children.push(node) }, 'Więcej informacji znajdziesz tu: https://kairox.pl/partnerstwo.html');
+    const anchor = children.find(node => node.tag === 'a');
+    assert.deepEqual(anchor.attrs, { href: '/partnerstwo.html', target: '_blank', rel: 'noopener noreferrer' });
+    assert.equal(anchor.textContent, 'https://kairox.pl/partnerstwo.html');
+  } finally { globalThis.document = originalDocument; }
+});

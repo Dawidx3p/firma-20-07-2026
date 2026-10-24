@@ -1,6 +1,7 @@
 # Bielik dla KAIROX
 
-`bielik-worker.mjs` to kompletny kod do wklejenia w edytorze Cloudflare.
+`bielik-worker.mjs` wdrażamy przez Wrangler z tego repozytorium. Moduł
+`js/chat-reference.mjs` dopisuje odnośniki niezależnie od modelu.
 Widget jest dodany do głównych podstron KAIROX. Strony demonstracyjne w podfolderach
 nie zostały zmienione. `js/chat-config.js` zawiera tylko publiczny adres i Site Key.
 
@@ -25,8 +26,8 @@ nie zostały zmienione. `js/chat-config.js` zawiera tylko publiczny adres i Site
    istniejące sekrety tego Workera pozostają w Cloudflare. Namespace ID
    zmień, jeśli masz już inne limitery z tymi numerami. Konfigurację Workera
    utrzymuj odtąd w tym pliku, aby kolejne deploye zachowały limity.
-5. W Edit code zastąp kod zawartością `bielik-worker.mjs` i Deploy
-   (pomijasz to, jeśli wdrażasz plik przez Wrangler).
+5. Publikuj przez Wrangler (krok 4), który dołącza moduły. Samo wklejenie
+   pojedynczego pliku w Edit code nie wystarcza.
 6. Worker → Variables: dodaj **Text** `PUBLIC_CHAT_ENABLED` = `true` i Deploy.
    Przy Wrangler ustaw tę wartość w `vars` konfiguracji i ponownie deploy.
 7. Opublikuj zmienione pliki strony, w tym `js/chat-config.js`, `js/chat.js`
@@ -149,3 +150,42 @@ modelu ani Turnstile. Trwająca rozmowa lub wpisany tekst zachowują bieżący z
 Kliknięcie pytania na ekranie początkowym rozpoczyna zwykły proces weryfikacji,
 a po jej powodzeniu wysyła wybrane pytanie do Bielika. Samo otwarcie czatu i
 losowanie niczego nie wysyłają do dostawcy modelu.
+
+## Link niezależny od limitu modelu
+
+Worker dopisuje akapit „Więcej informacji znajdziesz tu: …” po odebraniu odpowiedzi
+od dostawcy. To nie zużywa limitu 180 tokenów. Urwany dopisek jest zastępowany
+pełnym adresem. Dobór używa reguł tematycznych pytania, kontekstu dopytania,
+dołączonego poprawnego linku lub odpowiedzi. Nie jest analizą znaczenia każdego
+możliwego pytania; rozpoznane porównania usług kierują do modeli współpracy.
+Powitania nie dostają odnośnika. Model ma pisać tylko treść odpowiedzi.
+
+### Tematy rozmowy i lokalne podpowiedzi
+
+`js/chat-topics.mjs` zawiera katalog copywritera: 56 tematów i 224 pytania (po 4).
+Każdy connector ma publiczną ścieżkę oraz pytania. Do promptu modelu trafia tylko
+mapa connectorów i ścieżek, bez katalogu pytań. Model zaczyna odpowiedź od
+`[connector:partnership]`, po czym podaje krótki tekst. `js/chat-response.mjs`
+usuwa znaczniki z tekstu, sprawdza klucz w katalogu i zwraca osobne pola
+`reply` oraz `connector`. Sam znacznik bez tekstu jest błędem odpowiedzi.
+
+Link z katalogu jest dopisywany po generowaniu, poza limitem 180 tokenów.
+Przeglądarka zamienia adres w odnośnik otwierany w nowej karcie. Dla rozpoznanych
+klikniętych pytań aplikacja zachowuje ich temat również przy błędnym/brakującym
+znaczniku modelu. Przy pozostałych brakujących znacznikach stosuje dotychczasowe
+rozpoznanie z pytania, historii i odpowiedzi; nie zastępuje to klasyfikacji modelu.
+
+`js/chat-suggestions.mjs` losuje do 3 unikalnych pytań z wybranego tematu,
+pomijając zadane pytania obecne w krótkiej historii. Po wyczerpaniu tej puli
+podpowiedzi może być mniej. Otwarcie/reset czatu nadal losuje 3 pytania
+z osobnej puli 20 pytań startowych. Losowanie nie wykonuje wywołań AI.
+Nieznany connector nie jest używany jako URL ani wyświetlany w wiadomości.
+
+Po zmianach frontendowych odświeżono wersję `chat.js`, importów i arkusza stylów,
+aby przeglądarki nie zachowywały starszego renderowania odpowiedzi.
+
+Testy (dostawcy modelu i weryfikacji są symulowani):
+
+```sh
+node --test backend/bielik-worker.test.mjs js/chat-response.test.mjs js/chat-reference.test.mjs js/chat-format.test.mjs js/chat-suggestions.test.mjs js/chat-contact.test.mjs
+```

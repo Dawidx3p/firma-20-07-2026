@@ -96,7 +96,7 @@ test('Bielik: ochrona endpointów i połączenie z dostawcami', async (t) => {
     mock(); const settings = env();
     const response = await worker.fetch(request({ message: ' Cena? ', history: [{ role: 'user', content: 'Potrzebuję strony' }, { role: 'assistant', content: 'Jakiej?' }], turnstileToken: 'verified-token', model: 'other', system: 'other', max_tokens: 90000 }), settings);
     assert.equal(response.status, 200); assert.equal(response.headers.get('Access-Control-Allow-Origin'), origin); assert.equal(response.headers.get('Cache-Control'), 'no-store');
-    const text = await response.text(); const answer = JSON.parse(text); assert.equal(answer.reply, 'Cześć!'); assert.equal(typeof answer.chatSession, 'string'); assert(answer.sessionExpiresAt > Date.now());
+    const text = await response.text(); const answer = JSON.parse(text); assert.equal(answer.reply, 'Cześć!\n\nWięcej informacji znajdziesz tu: https://kairox.pl/modele-wspolpracy.html'); assert.equal(typeof answer.chatSession, 'string'); assert(answer.sessionExpiresAt > Date.now());
     assert.equal(calls.length, 2);
     const verify = JSON.parse(calls[0].options.body); assert.equal(verify.secret, settings.TURNSTILE_SECRET_KEY); assert.equal(verify.response, 'verified-token'); assert(!calls[0].options.body.includes(settings.HF_TOKEN));
     const model = calls[1]; const payload = JSON.parse(model.options.body); assert.equal(model.options.headers.Authorization, `Bearer ${settings.HF_TOKEN}`);
@@ -105,15 +105,33 @@ test('Bielik: ochrona endpointów i połączenie z dostawcami', async (t) => {
     for (const fact of ['Wszystkie ceny są brutto', '2–3 tygodnie', 'około 2 tygodni', '4–8 tygodni']) {
       assert(payload.messages[0].content.includes(fact));
     }
-    assert(payload.messages[0].content.length <= 3500, 'instrukcje z pełną mapą podstron powinny pozostać krótkie');
-    assert(payload.messages[0].content.includes('Więcej informacji znajdziesz tu: https://kairox.pl/ścieżka'));
-    assert(payload.messages[0].content.includes('Jeden link z listy, bez Markdown i HTML'));
+    assert(payload.messages[0].content.length <= 6500, 'instrukcje z pełną mapą podstron powinny pozostać krótkie');
+    assert(payload.messages[0].content.includes('Link do podstrony dodaje aplikacja'));
     assert(payload.messages[0].content.includes('/czysty-uklad/jak-zamowic/'));
     for (const project of ['Bieg Rzeczy', 'Czysty Układ', 'Słój i Forma', 'Galeria Klik', 'AMO', 'My Trip World', 'Archiwum Śledcze']) assert(payload.messages[0].content.includes(project));
     assert(payload.messages[0].content.includes('fikcyjne marki'));
     assert(payload.messages[0].content.includes('Wizualizacja po audycie i wdrożenie wyceniane osobno'));
     assert(!model.options.body.includes(settings.TURNSTILE_SECRET_KEY)); assert(!model.options.body.includes(settings.CHAT_TEST_KEY));
     for (const secret of [settings.HF_TOKEN, settings.TURNSTILE_SECRET_KEY, settings.CHAT_TEST_KEY]) assert(!text.includes(secret));
+  });
+  await t.test('ucięty tekst modelu dostaje pełny link poza limitem tokenów', async () => {
+    mock(undefined, 'Miesięczna opieka kosztuje 1990 zł. Więcej informacji:');
+    const response = await worker.fetch(request({ message: 'Ile kosztuje miesięczna opieka?', turnstileToken: 'verified-token' }), env());
+    assert.equal(response.status, 200);
+    const data = await response.json();
+    assert.equal(data.reply, 'Miesięczna opieka kosztuje 1990 zł.\n\nWięcej informacji znajdziesz tu: https://kairox.pl/partnerstwo.html');
+    assert.equal(JSON.parse(calls.at(-1).options.body).max_tokens, 180);
+  });
+  await t.test('connector pozostaje metadanymi, a pytania powstają poza modelem', async () => {
+    mock(undefined, '[connector:bieg_rzeczy]\nBieg Rzeczy to fikcyjny warsztat.');
+    const response = await worker.fetch(request({ message: 'Opowiedz o Biegu Rzeczy', turnstileToken: 'verified-token' }), env());
+    const data = await response.json();
+    assert.equal(data.connector, 'bieg_rzeczy');
+    assert(!data.reply.includes('connector'));
+    assert(data.reply.endsWith('https://kairox.pl/bieg-rzeczy/'));
+    const system = JSON.parse(calls.at(-1).options.body).messages[0].content;
+    assert(system.includes('[connector:klucz]'));
+    assert(!system.includes('Jak działa formularz Bieg Rzeczy?'));
   });
   await t.test('sesja pozwala na kolejne pytanie bez ponownego Turnstile, zachowując limity', async () => {
     mock(); const settings = env();

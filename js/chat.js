@@ -5,7 +5,7 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css?v=opening-1", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=connectors-1", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
@@ -159,7 +159,7 @@
   function hasSession() { return Boolean(chatSession && Date.now() < sessionExpiresAt); }
   function updateSend() { send.disabled = loading || (!token && !hasSession()) || !input.value.trim(); }
   function ensureSuggestions() {
-    if (!suggestionsPromise) suggestionsPromise = import(new URL("./chat-suggestions.mjs?v=opening-1", scriptUrl).href)
+    if (!suggestionsPromise) suggestionsPromise = import(new URL("./chat-suggestions.mjs?v=connectors-1", scriptUrl).href)
       .then(module => { getSuggestions = module.getSuggestions; return module; })
       .catch(error => { suggestionsPromise = undefined; throw error; });
     return suggestionsPromise;
@@ -228,7 +228,7 @@
       const [, interestModule, contactModule, formatModule, suggestionsModule] = await Promise.all([
         loadTurnstile(), import(new URL("./chat-interest.mjs", scriptUrl).href),
         import(new URL("./contact-service.mjs?v=audit-2", scriptUrl).href),
-        import(new URL("./chat-format.mjs?v=links-3", scriptUrl).href),
+        import(new URL("./chat-format.mjs?v=connectors-1", scriptUrl).href),
         ensureSuggestions(),
       ]);
       getSuggestions = suggestionsModule.getSuggestions;
@@ -285,8 +285,8 @@
       return button;
     }));
   }
-  function updateSuggestions(message = "") {
-    const questions = getSuggestions(message, history);
+  function updateSuggestions(message = "", connector = "") {
+    const questions = getSuggestions(message, history, connector);
     if (!message) {
       openingQuestions = questions;
       renderSuggestions($(".kx-chat-opening"), questions);
@@ -452,7 +452,7 @@
       if (!response.ok || typeof data.reply !== "string") throw new Error(data.error || "Czat jest chwilowo niedostępny.");
       typing.remove();
       addMessage("assistant", data.reply);
-      updateSuggestions(message);
+      updateSuggestions(message, data.connector);
       content.scrollTop = content.scrollHeight;
       offerContact(message);
       history = [...history, { role: "user", content: message.slice(0, 1000) }, { role: "assistant", content: data.reply.slice(0, 1000) }].slice(-4);
