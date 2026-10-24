@@ -38,17 +38,19 @@ export function initProjectInvite() {
     remember();
     const style = document.createElement('link');
     style.rel = 'stylesheet';
-    style.href = new URL('../css/project-invite.css?v=portfolio-2', import.meta.url).href;
+    style.href = new URL('../css/project-invite.css?v=portfolio-3', import.meta.url).href;
     document.head.append(style);
     banner = document.createElement('aside');
     banner.className = 'project-invite';
     banner.setAttribute('aria-label', 'Projekty KAIROX');
     banner.innerHTML = `<div class="project-invite-inner">
       <a class="project-invite-content" href="${new URL('../realizacje.html', import.meta.url).href}">
-        <img class="project-invite-art" src="${new URL('../img/banners/portfolio-overview.svg', import.meta.url).href}" width="1400" height="350" alt="" decoding="async">
-        <div class="project-invite-heading"><p class="project-invite-label">KAIROX / Portfolio</p>
-        <p class="project-invite-title">Różne pomysły. Nasze projekty.</p></div>
-        <span class="project-invite-link">Zobacz realizacje <span aria-hidden="true">→</span></span>
+        <picture class="project-invite-art">
+          <source media="(max-width:760px)" srcset="${new URL('../img/banners/portfolio-overview-mobile.svg?v=portfolio-3', import.meta.url).href}">
+          <img src="${new URL('../img/banners/portfolio-overview.svg?v=portfolio-3', import.meta.url).href}" width="1600" height="180" alt="" decoding="async">
+        </picture>
+        <div class="project-invite-heading"><p class="project-invite-title">A gdyby Twoja strona wyglądała tak?</p>
+        <p class="project-invite-hint">Kliknij w baner i zobacz więcej <span aria-hidden="true">→</span></p></div>
       </a>
       <button type="button" class="project-invite-close" aria-label="Zamknij podgląd projektów">×</button></div>`;
     const header = document.querySelector('.site-header');
@@ -66,5 +68,5 @@ export function initProjectInvite() {
     document.addEventListener('kairox-chat-opened', dismiss, { once: true });
     document.addEventListener('input', onInput);
   }
-  setTimeout(showWhenReady, 20000);
+  setTimeout(showWhenReady, preview ? 0 : 20000);
 }

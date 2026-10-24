@@ -1,23 +1,23 @@
-/* One portfolio montage, one call to action. */
-.project-invite{position:fixed;z-index:90;top:var(--project-invite-top,0px);left:0;right:0;box-sizing:border-box;border-bottom:1px solid #aea0d54d;background:#11121b;box-shadow:0 10px 28px #0004;color:#f5f2ff;font:14px/1.4 Inter,system-ui,sans-serif;text-align:left;isolation:isolate}
+/* One edge-to-edge graphic, with its own reserved text area. */
+.project-invite{position:fixed;z-index:90;top:var(--project-invite-top,0px);left:0;right:0;box-sizing:border-box;border-bottom:1px solid #aea0d54d;background:#161426;box-shadow:0 10px 28px #0004;color:#fff;font:14px/1.4 Inter,system-ui,sans-serif;text-align:left;isolation:isolate}
 .project-invite *{box-sizing:border-box}
-.project-invite-inner{position:relative;max-width:1440px;margin:0 auto}.project-invite-content{position:relative;display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:112px;padding:18px 80px 18px 24px;color:inherit;text-decoration:none;isolation:isolate;overflow:hidden}
-.project-invite-art{position:absolute;z-index:-2;left:25%;top:0;width:62%;height:100%;object-fit:contain;pointer-events:none}
-.project-invite-content::before{content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,#11121b 0%,#11121bf2 19%,#11121b00 43%,#11121b00 74%,#11121be8 89%,#11121b 100%);pointer-events:none}
-.project-invite-heading{max-width:290px}
+.project-invite-inner{position:relative;width:100%}
+.project-invite-content{position:relative;display:flex;align-items:center;min-height:140px;padding:20px max(80px,calc((100vw - 1320px)/2));color:inherit;text-decoration:none;isolation:isolate;overflow:hidden}
+.project-invite-art{position:absolute;z-index:-1;inset:0;display:block;width:100%;height:100%;pointer-events:none}
+.project-invite-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.project-invite-heading{width:38%;max-width:440px}
 .project-invite p{margin:0}
-.project-invite .project-invite-label{color:#c7b4f7;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}
-.project-invite .project-invite-title{font-size:22px;font-weight:650;line-height:1.15;letter-spacing:-.025em;text-wrap:balance}
-.project-invite-link{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-height:44px;padding:0 17px;border:1px solid #c7b0ff;border-radius:7px;background:#c7b0ff;color:#161022;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap}
-.project-invite-content:hover .project-invite-link{background:#dfd1ff}
-.project-invite-link span{font-size:19px}
-.project-invite-close{position:absolute;right:20px;top:50%;transform:translateY(-50%);width:44px;height:44px;display:grid;place-items:center;padding:0;border:1px solid #b5a5dc66;border-radius:50%;background:#252330;color:#f5f2ff;font:26px/1 system-ui;cursor:pointer}
+.project-invite .project-invite-title{font-size:clamp(23px,2.1vw,29px);font-weight:650;line-height:1.13;letter-spacing:-.025em;text-wrap:balance}
+.project-invite .project-invite-hint{margin-top:11px;color:#e7ddfa;font-size:11px;line-height:1.4;font-weight:400}
+.project-invite-content:hover .project-invite-hint{text-decoration:underline;text-underline-offset:3px}
+.project-invite-close{position:absolute;right:16px;top:12px;width:44px;height:44px;display:grid;place-items:center;padding:0;border:1px solid #c7b5e38c;border-radius:50%;background:#211a34e8;color:#fff;font:26px/1 system-ui;cursor:pointer}
 .project-invite-close:hover{background:#443552}
 .project-invite :is(a,button):focus-visible{outline:2px solid #fff;outline-offset:3px}
 .project-invite-content:focus-visible{outline-offset:-4px}
 body.menu-open .project-invite{display:none}
-@media(max-width:760px){.project-invite-content{min-height:136px;display:block;padding:15px 64px 14px 20px}.project-invite-heading{max-width:210px}.project-invite .project-invite-label{margin-bottom:5px;font-size:9px}.project-invite .project-invite-title{font-size:18px;max-width:190px}.project-invite-art{left:auto;right:42px;top:18px;width:70%;height:100px;object-fit:contain;opacity:.9}.project-invite-content::before{background:linear-gradient(90deg,#11121b 0%,#11121bf5 27%,#11121b9c 49%,#11121b26 80%,#11121ba6 100%)}.project-invite-link{margin-top:10px;min-height:44px;padding:0 12px;font-size:12px;gap:12px}.project-invite-close{right:12px;top:12px;transform:none}}
-@media(max-width:360px){.project-invite-content{padding-left:16px}.project-invite .project-invite-title{font-size:17px;max-width:175px}}
+@media(max-width:1100px) and (min-width:761px){.project-invite-content{padding-left:28px}.project-invite-heading{width:44%}.project-invite-art img{object-position:62% center}}
+@media(max-width:760px){.project-invite-content{height:156px;min-height:156px;padding:16px 68px 16px 20px}.project-invite-heading{width:66%;max-width:230px}.project-invite .project-invite-title{font-size:23px;line-height:1.12}.project-invite .project-invite-hint{margin-top:10px;font-size:10px;max-width:215px}.project-invite-art img{object-fit:fill;object-position:center}.project-invite-close{right:10px;top:10px}}
+@media(max-width:360px){.project-invite-content{padding-left:16px}.project-invite-heading{width:72%;max-width:175px}.project-invite .project-invite-title{font-size:21px}.project-invite .project-invite-hint{font-size:10px;max-width:170px}}
 .project-invite{animation:project-invite-enter .3s ease-out both}
 @keyframes project-invite-enter{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.project-invite{animation:none}}
