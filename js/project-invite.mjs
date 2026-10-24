@@ -38,16 +38,19 @@ export function initProjectInvite() {
     remember();
     const style = document.createElement('link');
     style.rel = 'stylesheet';
-    style.href = new URL('../css/project-invite.css?v=5', import.meta.url).href;
+    style.href = new URL('../css/project-invite.css?v=portfolio-2', import.meta.url).href;
     document.head.append(style);
     banner = document.createElement('aside');
     banner.className = 'project-invite';
-    banner.setAttribute('aria-label', 'Poznaj projekt KAIROX');
-    banner.innerHTML = `<div class="project-invite-inner"><span class="project-invite-art" aria-hidden="true"></span>
-      <div class="project-invite-copy"><p class="project-invite-label">Sprawdź nasz projekt</p>
-      <p class="project-invite-title">Archiwum Śledcze</p></div>
-      <a href="${new URL('../archiwum-sledcze/', import.meta.url).href}">Podejmij śledztwo <span aria-hidden="true">→</span></a>
-      <button type="button" class="project-invite-close" aria-label="Zamknij polecenie projektu">×</button></div>`;
+    banner.setAttribute('aria-label', 'Projekty KAIROX');
+    banner.innerHTML = `<div class="project-invite-inner">
+      <a class="project-invite-content" href="${new URL('../realizacje.html', import.meta.url).href}">
+        <img class="project-invite-art" src="${new URL('../img/banners/portfolio-overview.svg', import.meta.url).href}" width="1400" height="350" alt="" decoding="async">
+        <div class="project-invite-heading"><p class="project-invite-label">KAIROX / Portfolio</p>
+        <p class="project-invite-title">Różne pomysły. Nasze projekty.</p></div>
+        <span class="project-invite-link">Zobacz realizacje <span aria-hidden="true">→</span></span>
+      </a>
+      <button type="button" class="project-invite-close" aria-label="Zamknij podgląd projektów">×</button></div>`;
     const header = document.querySelector('.site-header');
     const updateTop = () => banner.style.setProperty('--project-invite-top', `${header?.getBoundingClientRect().height || 0}px`);
     updateTop();
