@@ -48,3 +48,24 @@
 .comic-actions.home-shortcuts-grid.method-shortcut{display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:440px}
 .method-shortcut a{text-align:left}
 .method-shortcut a:focus-visible{outline:2px solid var(--accent-2);outline-offset:4px}
+
+/* Two independent destinations presented as one segmented choice. */
+.comic-actions.hero-choice-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;width:100%;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hero-choice-group a{display:flex;align-items:center;justify-content:space-between;gap:12px;align-self:stretch;min-width:0;min-height:84px;padding:18px 16px;text-align:left;color:var(--text);font-size:16px;font-weight:600;line-height:1.5;transition:background-color .2s ease}
+.hero-choice-group a+a{border-left:1px solid var(--line)}
+.hero-choice-group a>span:last-child{flex-shrink:0;color:var(--accent-2);font-size:20px}
+.hero-choice-group a:hover{background:rgba(0,224,255,.05)}
+.hero-choice-group a:focus-visible{outline:2px solid var(--accent-2);outline-offset:-3px}
+@media(max-width:480px){.hero-choice-group a{min-height:88px;padding:16px 10px;gap:6px;font-size:14px;line-height:1.4}}
+@media(prefers-reduced-motion:reduce){.hero-choice-group a{transition:none}}
+
+/* Single actions share the existing shortcut typography and separators. */
+.content-shortcut{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;max-width:440px;min-width:0;margin-top:28px;padding:24px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);text-align:left;color:var(--text);transition:background-color .2s ease}
+.content-shortcut strong{display:block;font-size:1rem;line-height:1.5;font-weight:600}
+.content-shortcut small{display:block;font-weight:400;margin-top:5px;color:var(--muted);font-size:.875rem;line-height:1.5}
+.content-shortcut>span:last-child{flex-shrink:0;color:var(--accent-2);font-size:1.3rem}
+.content-shortcut:hover{background:rgba(0,224,255,.05)}
+.content-shortcut:focus-visible{outline:2px solid var(--accent-2);outline-offset:4px}
+.cooperation-preview-footer .content-shortcut{margin-top:0}
+@media(max-width:760px){.content-shortcut{padding:20px 4px;margin-top:24px}}
+@media(prefers-reduced-motion:reduce){.content-shortcut{transition:none}}
