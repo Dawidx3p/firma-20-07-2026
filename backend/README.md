@@ -139,3 +139,13 @@ Nie jest to dostęp do przeglądania stron ani dodatkowa wiedza o ich treści.
 Pełny kontekst z mapą adresów ma 3288 znaków, około 60% mniej niż pierwotne
 8229. Limit odpowiedzi pozostaje na 180 tokenach. `js/chat-format.mjs` dopuszcza
 te same publiczne adresy i zamienia pełny URL w klikalny link.
+
+## Początkowe podpowiedzi czatu
+
+`js/chat-suggestions.mjs` zawiera 20 pytań zredagowanych z copywriterem.
+Przy otwarciu pustego czatu przeglądarka losuje trzy różne pytania bez wywołania
+modelu ani Turnstile. Trwająca rozmowa lub wpisany tekst zachowują bieżący zestaw.
+„Nowa rozmowa” losuje kolejny zestaw. Podpowiedzi po odpowiedzi nadal zależą od tematu.
+Kliknięcie pytania na ekranie początkowym rozpoczyna zwykły proces weryfikacji,
+a po jej powodzeniu wysyła wybrane pytanie do Bielika. Samo otwarcie czatu i
+losowanie niczego nie wysyłają do dostawcy modelu.

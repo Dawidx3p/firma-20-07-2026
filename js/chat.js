@@ -5,7 +5,7 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css?v=ui-1", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=opening-1", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
@@ -31,17 +31,14 @@
         <p>Nie wiesz, od czego zacząć? Pomogę Ci poznać ofertę i wybrać kierunek.</p>
         <p class="kx-chat-disclosure">To asystent AI w wersji testowej — może się mylić. Wiadomości i krótka historia rozmowy są przesyłane przez Cloudflare do Hugging Face i Public AI. Nie wpisuj danych osobowych ani poufnych informacji.</p>
         <p class="kx-chat-disclosure">Historia w tej karcie znika po odświeżeniu. Dostawcy przetwarzają wiadomości według swoich zasad. <a href="https://publicai.co/tc" target="_blank" rel="noopener noreferrer">Zasady Public AI ↗</a></p>
+        <div class="kx-chat-opening" role="group" aria-label="Przykładowe pytania"></div>
         <button class="kx-chat-start" type="button">Rozpocznij rozmowę</button>
         <p class="kx-chat-direct"><a href="/formularz-kontaktowy.html">Wolisz porozmawiać z zespołem?</a></p>
       </div>
       <div class="kx-chat-conversation" hidden>
         <div class="kx-chat-content" role="region" aria-label="Rozmowa z asystentem" tabindex="0">
         <div class="kx-chat-thread"></div>
-        <div class="kx-chat-suggestions">
-          <button type="button">Od czego zacząć?</button>
-          <button type="button">Jakie macie realizacje?</button>
-          <button type="button">Jaki artykuł warto przeczytać?</button>
-        </div>
+        <div class="kx-chat-suggestions" role="group" aria-label="Podpowiedzi pytań"></div>
         <form class="kx-chat-lead" hidden novalidate>
           <p class="kx-chat-lead-title">Zostaw kontakt</p>
           <p class="kx-chat-lead-service"></p>
@@ -116,7 +113,7 @@
   const interests = new Map(), offeredServices = new Set();
   let chatSession = "", sessionExpiresAt = 0, sessionTimer;
   let history = [], token = "", widgetId, loading = false, scriptPromise, controller, generation = 0;
-  let queuedSuggestion = "";
+  let queuedSuggestion = "", suggestionsPromise, openingQuestions = [];
   // Mobile keyboards resize the visual viewport, often leaving 100dvh unchanged.
   let viewportFrame, editing = false, viewportWidth = window.innerWidth;
   let fullViewportHeight = Math.min(window.visualViewport?.height ?? window.innerHeight, window.innerHeight);
@@ -161,11 +158,22 @@
   syncChatViewport();
   function hasSession() { return Boolean(chatSession && Date.now() < sessionExpiresAt); }
   function updateSend() { send.disabled = loading || (!token && !hasSession()) || !input.value.trim(); }
+  function ensureSuggestions() {
+    if (!suggestionsPromise) suggestionsPromise = import(new URL("./chat-suggestions.mjs?v=opening-1", scriptUrl).href)
+      .then(module => { getSuggestions = module.getSuggestions; return module; })
+      .catch(error => { suggestionsPromise = undefined; throw error; });
+    return suggestionsPromise;
+  }
   function openChat() {
     dismissInvite("opened");
     document.dispatchEvent(new Event("kairox-chat-opened"));
     syncChatViewport();
     panel.hidden = false;
+    if (!history.length && !loading && !input.value.trim()) {
+      ensureSuggestions().then(() => {
+        if (!history.length && !loading && !input.value.trim() && !panel.hidden) updateSuggestions();
+      }).catch(() => {}); // Offline suggestions never block opening the chat.
+    }
     launcher.hidden = true;
     launcher.setAttribute("aria-expanded", "true");
     ($(".kx-chat-intro").hidden ? $(".kx-chat-close") : start).focus();
@@ -221,7 +229,7 @@
         loadTurnstile(), import(new URL("./chat-interest.mjs", scriptUrl).href),
         import(new URL("./contact-service.mjs?v=audit-2", scriptUrl).href),
         import(new URL("./chat-format.mjs?v=links-3", scriptUrl).href),
-        import(new URL("./chat-suggestions.mjs", scriptUrl).href),
+        ensureSuggestions(),
       ]);
       getSuggestions = suggestionsModule.getSuggestions;
       renderMessage = formatModule.renderMessage;
@@ -230,6 +238,7 @@
       $(".kx-chat-intro").hidden = true;
       $(".kx-chat-conversation").hidden = false;
       $(".kx-chat-reset").hidden = false;
+      if (!openingQuestions.length) updateSuggestions();
       addMessage("assistant", "Cześć! Pomogę Ci poznać ofertę KAIROX. Co chcesz poprawić na swojej stronie?");
       status.textContent = "Trwa weryfikacja bezpieczeństwa…";
       verification.hidden = false;
@@ -269,14 +278,28 @@
     event.preventDefault();
     if (!send.disabled) form.requestSubmit();
   });
-  function updateSuggestions(message = "") {
-    const buttons = getSuggestions(message, history).map(question => {
+  function renderSuggestions(container, questions) {
+    container.replaceChildren(...questions.map(question => {
       const button = document.createElement("button");
       button.type = "button"; button.textContent = question;
       return button;
-    });
-    $(".kx-chat-suggestions").replaceChildren(...buttons);
+    }));
   }
+  function updateSuggestions(message = "") {
+    const questions = getSuggestions(message, history);
+    if (!message) {
+      openingQuestions = questions;
+      renderSuggestions($(".kx-chat-opening"), questions);
+    }
+    renderSuggestions($(".kx-chat-suggestions"), questions);
+  }
+  $(".kx-chat-opening").addEventListener("click", event => {
+    const suggestion = event.target.closest("button");
+    if (!suggestion || start.disabled || panel.hidden) return;
+    input.value = suggestion.textContent;
+    queuedSuggestion = input.value;
+    start.click();
+  });
   $(".kx-chat-suggestions").addEventListener("click", (event) => {
     const suggestion = event.target.closest("button");
     if (!suggestion || loading || panel.hidden || form.hidden) return;
