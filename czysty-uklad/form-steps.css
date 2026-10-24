@@ -1,0 +1,13 @@
+
+.form-progress{display:flex;gap:8px;padding:0;margin:0 0 22px;list-style:none;font-size:12px;line-height:1.4}
+.form-progress li{flex:1;border-top:3px solid currentColor;padding-top:10px;color:#6b706a}
+.form-progress li[aria-current="step"]{color:var(--ink);font-weight:750}
+.form-step-title{font-size:25px;line-height:1.25;margin:0 0 24px;letter-spacing:-.03em}
+.form-step[hidden],.form-actions [hidden]{display:none!important}
+.form-actions{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:26px 0 18px;flex-wrap:wrap}
+.form-back{font:inherit;min-height:48px;padding:10px 2px;border:0;border-bottom:1px solid currentColor;background:transparent;color:var(--ink);cursor:pointer}
+.form-actions .button{margin:0;min-height:48px}
+@media(max-width:480px){.form-progress{font-size:11px;gap:10px}.form-step-title{font-size:23px}.form-actions .button{font-size:14px;padding:14px 18px;gap:14px}}
+
+.mobile-cta.form-in-view{display:none!important}
+.form-step-title{scroll-margin-top:100px}

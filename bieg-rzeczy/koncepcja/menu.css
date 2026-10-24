@@ -1,0 +1,38 @@
+/* Bieg Rzeczy — service index. Deliberately independent of the other menus. */
+.header.navigation-header{padding-block:18px;gap:38px;border-bottom:2px solid #20231f;align-items:center}
+.navigation-header .brand{flex-shrink:0}
+.navigation-header .desktop-navigation{display:flex;align-items:stretch;margin-left:auto;gap:0}
+.navigation-header .desktop-navigation a{display:flex;flex-direction:column;justify-content:center;gap:3px;min-height:55px;padding:4px 15px;border-left:1px solid #20231f30;font-size:13px;line-height:1.4;font-weight:650;white-space:nowrap}
+.navigation-header .nav-chapter{font:10px/1.3 monospace;color:#a53515;letter-spacing:.06em}
+.navigation-header .desktop-navigation a:hover,.navigation-header .desktop-navigation a[aria-current]{background:#e7e1d6;color:#a53515}
+.navigation-header [data-menu-open]{display:none}
+.navigation-dialog:not([open]){display:none}
+#navigation-dialog{position:fixed;inset:12px;z-index:1000;margin:auto;width:calc(100% - 24px);max-width:540px;height:fit-content;max-height:calc(100dvh - 24px);padding:24px;background:#20231f;color:#f3f0e8;border:1px solid #62665a;border-top:5px solid #e65325;border-radius:0;box-shadow:0 22px 70px #0004;overflow:auto;overscroll-behavior:contain}
+#navigation-dialog[open]{display:block}
+#navigation-dialog::backdrop{background:#11160f99}
+#navigation-dialog .navigation-head{display:flex;align-items:center;justify-content:space-between;gap:20px}
+#navigation-dialog .navigation-kicker{font:11px/1.5 monospace;color:#ff9a77;letter-spacing:.08em;text-transform:uppercase}
+#navigation-dialog .navigation-close{display:grid;place-items:center;flex-shrink:0;width:44px;height:44px;padding:0;background:#e65325;color:#172016;border:0;border-radius:0;cursor:pointer}
+#navigation-dialog h2{font-family:Inter,Arial,sans-serif;font-size:34px;font-weight:700;letter-spacing:-1.7px;line-height:1.1;margin:26px 0 30px}
+#navigation-dialog .mobile-navigation{display:block;margin:0;position:static;background:none;padding:0;color:inherit;font-family:Inter,Arial,sans-serif}
+#navigation-dialog .mobile-navigation a{display:grid;grid-template-columns:27px 1fr 22px;align-items:center;gap:13px;min-height:62px;padding:13px 0;border-top:1px solid #f3f0e840;font-size:21px;font-weight:600;line-height:1.3}
+#navigation-dialog .mobile-navigation a:last-child{border-bottom:1px solid #f3f0e840}
+#navigation-dialog .nav-chapter{font:11px/1.5 monospace;color:#ff9a77}
+#navigation-dialog .nav-arrow{font:21px/1 Inter,Arial,sans-serif;color:#ff9a77}
+#navigation-dialog .mobile-navigation a:hover,#navigation-dialog .mobile-navigation a[aria-current]{color:#ff9a77}
+#navigation-dialog .navigation-foot{margin-top:22px}
+#navigation-dialog .navigation-foot a{min-height:44px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:14px;color:#d4d8c9}
+.navigation-header :focus-visible,#navigation-dialog :focus-visible{outline:3px solid #ff8b62;outline-offset:4px}
+@media(max-width:900px){.navigation-header .desktop-navigation{display:none}.header.navigation-header{position:relative;gap:15px;padding-block:18px}.navigation-header [data-menu-open]{display:flex;align-items:center;justify-content:space-between;gap:23px;margin-left:auto;min-width:108px;min-height:48px;padding:11px 14px;background:#20231f;color:#f3f0e8;border:0;border-left:3px solid #e65325;border-radius:0;font:650 15px/1.4 Inter,Arial,sans-serif;cursor:pointer}.trigger-bars{display:flex;flex-direction:column;gap:4px;width:19px}.trigger-bars i{display:block;height:1.7px;width:19px;background:#ff9875}.trigger-bars i:nth-child(2){width:13px}.navigation-header .brand{font-size:22px}}
+@media(max-width:390px){#navigation-dialog{padding:20px}#navigation-dialog h2{font-size:31px}#navigation-dialog .mobile-navigation a{font-size:19px;min-height:60px}}
+@media(prefers-reduced-motion:reduce){#navigation-dialog{scroll-behavior:auto}}
+
+html.navigation-open{overflow:hidden}
+@media(min-width:901px) and (max-width:1200px){.header.navigation-header{flex-wrap:wrap;gap:16px}.navigation-header .desktop-navigation{flex-basis:100%;margin:0;justify-content:space-between}.navigation-header .desktop-navigation a{font-size:12px;padding-inline:11px;flex:1}}
+@media(max-width:360px){.header.navigation-header{gap:10px}.navigation-header .brand{font-size:20px;gap:9px}.navigation-header .brand>svg{width:24px}.navigation-header .brand small{font-size:9px}.navigation-header [data-menu-open]{min-width:92px;min-height:46px;padding:10px 11px;gap:13px;font-size:14px;flex-shrink:0}}
+
+/* Keep mobile navigation reachable throughout the page. */
+@media(max-width:900px){
+ html{scroll-padding-top:88px}
+ .header.navigation-header{position:sticky;top:0;z-index:30;width:100%;max-width:none;margin-inline:0;padding:10px 20px;background:#f3f0e8;box-shadow:0 3px 12px #0000000d}
+}

@@ -40,6 +40,7 @@
   <link rel="stylesheet" href="css/section-scroll.css?v=10">
   <script src="js/section-motion.js?v=5" defer></script>
   <script src="js/section-scroll.js?v=14" defer></script>
+  <link rel="stylesheet" href="css/portfolio-showcase.css?v=1">
 </head>
 
 <body class="home-page">
@@ -264,81 +265,43 @@
   <section class="projects" id="realizacje" aria-labelledby="projects-title">
     <div class="section-header">
       <p class="eyebrow">Wybrane realizacje</p>
-      <h2 id="projects-title">Zobacz, jak rozwiązujemy konkretne problemy</h2>
-      <p class="section-intro">
-        Dwa projekty koncepcyjne pokazują, jak upraszczamy odkrywanie oferty.
-        Wszystkie cztery projekty i działające wersje znajdziesz w realizacjach.
-      </p>
+      <h2 id="projects-title">Od oferty do zapytania — zobacz przykłady</h2>
+      <p class="section-intro">Zobacz, jak prezentujemy ofertę i prowadzimy do kontaktu. Bieg Rzeczy i Słój i Forma to fikcyjne marki — możesz otworzyć ich strony i sprawdzić poszczególne kroki.</p>
       <a class="section-text-link" href="realizacje.html">Zobacz wszystkie realizacje →</a>
     </div>
 
-    <article class="project-showcase">
-      <a class="project-visual" href="galeria-klik/" aria-label="Otwórz projekt Galeria Klik">
-        <img
-          src="img/projects/galeria-klik-current.jpg"
-          alt="Aktualny interfejs Galerii Klik z kartami NORTH, LUMA i AERA"
-          loading="lazy"
-        >
-        <span>Otwórz projekt ↗</span>
-      </a>
+<article class="work-card work-card--garage" aria-labelledby="bieg-rzeczy-featured" id="bieg-rzeczy">
+ <div class="work-copy">
+  <p class="work-kind">Projekt koncepcyjny<span>Warsztat samochodowy</span></p>
+  <h3 id="bieg-rzeczy-featured">Bieg Rzeczy</h3>
+  <p class="work-lead">Strona warsztatu porządkuje usługi według objawów, wyjaśnia przebieg naprawy i prowadzi do zgłoszenia. Klient opisuje auto i problem w formularzu podzielonym na trzy kroki.</p>
 
-      <div class="project-content">
-        <div class="project-meta">
-          <span>Projekt koncepcyjny</span>
-          <span>UX / UI / Development</span>
-        </div>
+  <a class="primary-button work-link" href="bieg-rzeczy/">Zobacz koncepcję<span aria-hidden="true">↗</span><span class="sr-only"> — Bieg Rzeczy</span></a>
+ </div>
+ <figure class="work-preview">
+  <div class="work-screen"><picture>
+   <source media="(min-width:981px)" srcset="img/projects/screens/bieg-rzeczy-mobile.webp" width="390" height="844">
+   <img src="img/projects/screens/bieg-rzeczy-desktop.webp" width="1440" height="900" alt="Bieg Rzeczy — podgląd działającego interfejsu" loading="lazy" decoding="async">
+  </picture></div>
+  <figcaption><span class="work-view-mobile">Widok mobilny</span><span class="work-view-desktop">Widok desktopowy</span><span>Bieg Rzeczy</span></figcaption>
+ </figure>
+</article>
+<article class="work-card work-card--wood" aria-labelledby="sloj-i-forma-featured" id="sloj-i-forma">
+ <div class="work-copy">
+  <p class="work-kind">Projekt koncepcyjny<span>Meble na wymiar i renowacja</span></p>
+  <h3 id="sloj-i-forma-featured">Słój i Forma</h3>
+  <p class="work-lead">Strona oddziela meble na wymiar od renowacji, a galeria z filtrami pozwala przeglądać koncepcje. Każda z dwóch ścieżek prowadzi do formularza, w którym klient opisuje swój projekt krok po kroku.</p>
 
-        <h3>Galeria Klik</h3>
-        <p class="project-lead">
-          Jak uporządkować rozbudowany katalog? Podzieliliśmy galerię na tematyczne
-          piętra, żeby odbiorca mógł zacząć od kategorii, a potem wybrać markę.
-        </p>
-
-        <ul class="project-features">
-          <li>Tematyczne piętra porządkują wybór kategorii</li>
-          <li>Mapa pokazuje układ galerii</li>
-          <li>Osobne przestrzenie zachowują charakter marek</li>
-        </ul>
-
-        <a class="primary-button" href="galeria-klik/">Otwórz projekt</a>
-      </div>
-    </article>
-
-
-
-
-
-    <article class="project-showcase project-showcase-reverse">
-      <a class="project-visual" href="amo/" aria-label="Otwórz projekt AMO">
-        <img
-          src="img/projects/amo.jpg"
-          alt="Strona główna restauracji AMO z wnętrzem miejskiego bistro"
-          loading="lazy"
-        >
-        <span>Otwórz projekt ↗</span>
-      </a>
-
-      <div class="project-content">
-        <div class="project-meta">
-          <span>Projekt koncepcyjny</span>
-          <span>UX / UI / Development</span>
-        </div>
-
-        <h3>AMO</h3>
-        <p class="project-lead">
-          Jak pomóc wybrać danie na telefonie? Filtry według apetytu i bestsellery
-          dają punkt startu bez konieczności przeglądania całego menu.
-        </p>
-
-        <ul class="project-features">
-          <li>Wybór według apetytu, kategorii lub budżetu</li>
-          <li>Zdjęcia wyróżniające wybrane dania</li>
-          <li>Przejście od menu do koszyka lub rezerwacji</li>
-        </ul>
-
-        <a class="primary-button" href="amo/">Otwórz projekt</a>
-      </div>
-    </article>
+  <a class="primary-button work-link" href="sloj-i-forma/">Zobacz koncepcję<span aria-hidden="true">↗</span><span class="sr-only"> — Słój i Forma</span></a>
+ </div>
+ <figure class="work-preview">
+  <div class="work-screen"><picture>
+   <source media="(min-width:981px)" srcset="img/projects/screens/sloj-i-forma-mobile.webp" width="390" height="844">
+   <img src="img/projects/screens/sloj-i-forma-desktop.webp" width="1440" height="900" alt="Słój i Forma — podgląd działającego interfejsu" loading="lazy" decoding="async">
+  </picture></div>
+  <figcaption><span class="work-view-mobile">Widok mobilny</span><span class="work-view-desktop">Widok desktopowy</span><span>Słój i Forma</span></figcaption>
+ </figure>
+</article>
   </section>
 
   <section class="cooperation-preview" id="cooperation">

@@ -1,0 +1,160 @@
+{
+  "date": "2026-10-24",
+  "note": "Real browser screenshots. Fictional company concepts, not client results. Existing apps captured without modifying their saved state.",
+  "assets": [
+    {
+      "file": "img/projects/screens/bieg-rzeczy-mobile.webp",
+      "viewport": [
+        390,
+        844
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 40048,
+      "source_url": "http://127.0.0.1:8891/bieg-rzeczy/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/bieg-rzeczy-desktop.webp",
+      "viewport": [
+        1440,
+        900
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 89868,
+      "source_url": "http://127.0.0.1:8891/bieg-rzeczy/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/czysty-uklad-mobile.webp",
+      "viewport": [
+        390,
+        844
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 44416,
+      "source_url": "http://127.0.0.1:8891/czysty-uklad/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/czysty-uklad-desktop.webp",
+      "viewport": [
+        1440,
+        900
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 93202,
+      "source_url": "http://127.0.0.1:8891/czysty-uklad/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/sloj-i-forma-mobile.webp",
+      "viewport": [
+        390,
+        844
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 35558,
+      "source_url": "http://127.0.0.1:8891/sloj-i-forma/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/sloj-i-forma-desktop.webp",
+      "viewport": [
+        1440,
+        900
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 58536,
+      "source_url": "http://127.0.0.1:8891/sloj-i-forma/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/galeria-klik-mobile.webp",
+      "viewport": [
+        390,
+        844
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 33688,
+      "source_url": "https://dawidx3p.github.io/galeria-klik/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/galeria-klik-desktop.webp",
+      "viewport": [
+        1440,
+        900
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 69328,
+      "source_url": "https://dawidx3p.github.io/galeria-klik/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/my-trip-world-mobile.webp",
+      "viewport": [
+        390,
+        844
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 33300,
+      "source_url": "https://dawidx3p.github.io/myTripWorld/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/my-trip-world-desktop.webp",
+      "viewport": [
+        1440,
+        900
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 81218,
+      "source_url": "https://dawidx3p.github.io/myTripWorld/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/archiwum-sledcze-mobile.webp",
+      "viewport": [
+        390,
+        844
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 25154,
+      "source_url": "https://dawidx3p.github.io/case01/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/archiwum-sledcze-desktop.webp",
+      "viewport": [
+        1440,
+        900
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 63334,
+      "source_url": "https://dawidx3p.github.io/case01/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/amo-mobile.webp",
+      "viewport": [
+        390,
+        844
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 33796,
+      "source_url": "https://dawidx3p.github.io/restauracja2.0/",
+      "generated_image": false
+    },
+    {
+      "file": "img/projects/screens/amo-desktop.webp",
+      "viewport": [
+        1440,
+        900
+      ],
+      "source": "browser screenshot of current project",
+      "bytes": 86278,
+      "source_url": "https://dawidx3p.github.io/restauracja2.0/",
+      "generated_image": false
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+/* Czysty Układ — light, domestic navigation card. */
+.header.navigation-header{padding-block:22px;gap:35px;align-items:center}
+.navigation-header .brand{flex-shrink:0}
+.navigation-header .desktop-navigation{display:flex;align-items:center;gap:5px;padding:6px;margin-left:auto;border:1px solid #d4e6ef;border-radius:45px;background:#f2f8fb}
+.navigation-header .desktop-navigation a{display:flex;align-items:center;justify-content:center;padding:11px 21px;min-height:46px;border-radius:30px;font-size:15px;line-height:1.4;font-weight:550;color:#19333d;white-space:nowrap}
+.navigation-header .desktop-navigation a:hover,.navigation-header .desktop-navigation a[aria-current]{background:white;color:#ad3c2d;box-shadow:0 2px 7px #19333d0a}
+.navigation-header [data-menu-open]{display:none}
+.navigation-dialog:not([open]){display:none}
+#navigation-dialog{position:fixed;z-index:1000;inset:20px;margin:auto;width:calc(100% - 32px);max-width:430px;height:fit-content;max-height:calc(100dvh - 40px);padding:25px;background:white;color:#19333d;border:1px solid #d1e6ef;border-radius:30px;box-shadow:0 25px 90px #19333d20;overflow:auto;overscroll-behavior:contain}
+#navigation-dialog[open]{display:block}
+#navigation-dialog::backdrop{background:#19333d55}
+#navigation-dialog .navigation-head{display:flex;align-items:center;justify-content:space-between;gap:20px}
+#navigation-dialog .navigation-kicker{font:550 14px/1.5 Inter,Arial,sans-serif;color:#55727d}
+#navigation-dialog .navigation-close{display:grid;place-items:center;flex-shrink:0;min-width:46px;min-height:46px;padding:0;background:#eef6fa;color:#19333d;border:0;border-radius:50%;cursor:pointer}
+#navigation-dialog h2{font:600 37px/1.1 Inter,Arial,sans-serif;letter-spacing:-1.6px;margin:16px 0 30px}
+#navigation-dialog .mobile-navigation{display:flex;flex-direction:column;gap:12px;position:static;margin:0;padding:0;background:none;color:inherit}
+#navigation-dialog .mobile-navigation a{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:79px;padding:19px 20px;border:0;border-radius:18px;background:#edf6fa;color:#19333d;font-size:22px;font-weight:550;line-height:1.35}
+#navigation-dialog .mobile-navigation a:nth-child(2){background:#f6f6ef}
+#navigation-dialog .mobile-navigation a:nth-child(3){background:#fff0eb}
+#navigation-dialog .nav-arrow{display:grid;place-items:center;flex-shrink:0;width:32px;height:32px;border-radius:50%;background:#fff;color:#b03e2e;font-size:18px}
+#navigation-dialog .mobile-navigation a:hover,#navigation-dialog .mobile-navigation a[aria-current]{outline:1px solid #a9ccd9;outline-offset:-1px}
+#navigation-dialog .navigation-foot{margin-top:25px;border-top:1px solid #19333d1c;padding-top:13px}
+#navigation-dialog .navigation-foot a{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:44px;font-size:15px;color:#a83d2f}
+.navigation-header :focus-visible,#navigation-dialog :focus-visible{outline:3px solid #c64a38;outline-offset:4px}
+@media(max-width:900px){.navigation-header .desktop-navigation{display:none}.header.navigation-header{position:relative;padding-block:20px;gap:15px}.navigation-header [data-menu-open]{display:flex;align-items:center;gap:16px;margin-left:auto;min-height:48px;padding:11px 17px;background:#edf6fa;color:#19333d;border:1px solid #d3e6ee;border-radius:30px;font:550 15px/1.4 Inter,Arial,sans-serif;cursor:pointer}.trigger-dots{display:grid;grid-template-columns:5px 5px;gap:3px}.trigger-dots i{width:5px;height:5px;border-radius:50%;background:#c64a38}.navigation-header .brand{font-size:22px}}
+html.navigation-open{overflow:hidden}
+@media(max-width:360px){.header.navigation-header{gap:10px}.navigation-header .brand{font-size:20px;gap:8px}.navigation-header .brand svg{width:26px;height:26px}.navigation-header .brand small{font-size:9px}.navigation-header [data-menu-open]{padding:10px 13px;gap:12px;min-height:46px;font-size:14px;flex-shrink:0}}
+
+/* Keep mobile navigation reachable throughout the page. */
+@media(max-width:900px){
+ html{scroll-padding-top:88px}
+ .header.navigation-header{position:sticky;top:0;z-index:30;width:100%;max-width:none;margin-inline:0;padding:10px 20px;background:#ffffff;box-shadow:0 3px 12px #0000000d}
+}
