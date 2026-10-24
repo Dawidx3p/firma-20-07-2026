@@ -38,7 +38,7 @@ export function initProjectInvite() {
     remember();
     const style = document.createElement('link');
     style.rel = 'stylesheet';
-    style.href = new URL('../css/project-invite.css?v=portfolio-3', import.meta.url).href;
+    style.href = new URL('../css/project-invite.css?v=portfolio-4', import.meta.url).href;
     document.head.append(style);
     banner = document.createElement('aside');
     banner.className = 'project-invite';

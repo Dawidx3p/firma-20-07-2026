@@ -118,6 +118,6 @@ document.querySelectorAll(".copy-email").forEach((button) => {
 });
 
 // A lightweight recommendation of our own interactive project.
-import(new URL('./project-invite.mjs?v=portfolio-3', document.currentScript.src).href)
+import(new URL('./project-invite.mjs?v=portfolio-4', document.currentScript.src).href)
   .then(module => module.initProjectInvite())
   .catch(() => { /* Optional recommendation must not affect the page. */ });
