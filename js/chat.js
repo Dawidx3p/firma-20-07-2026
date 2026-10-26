@@ -5,7 +5,7 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css?v=ux-1", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=message-invite-1", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
@@ -13,12 +13,13 @@
   root.setAttribute("data-clarity-mask", "true");
   root.innerHTML = `
     <div class="kx-chat-invite" hidden>
-      <button class="kx-chat-invite-close" type="button" aria-label="Zamknij zachętę do rozmowy">×</button>
-      <button class="kx-chat-invite-open" type="button" aria-label="Otwórz czat z Bielikiem">Hej!</button>
+      <button class="kx-chat-invite-close" type="button" aria-label="Zamknij powiadomienie">×</button>
+      <button class="kx-chat-invite-open" type="button" aria-label="Otwórz czat z Bielikiem"><span class="kx-chat-invite-sender">Bielik · asystent AI</span><span class="kx-chat-invite-text">Hej!</span></button>
     </div>
     <button class="kx-chat-launcher" type="button" aria-expanded="false" aria-controls="kx-chat-panel">
       <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M20 11.5a8 8 0 0 1-8 8H5l-3 3V11.5a9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
       <span class="kx-chat-launcher-label">Zapytaj AI</span>
+      <span class="kx-chat-badge" aria-hidden="true" hidden>1</span>
     </button>
     <div id="kx-chat-panel" class="kx-chat-panel" role="dialog" aria-labelledby="kx-chat-title" hidden>
       <header class="kx-chat-header">
@@ -67,6 +68,16 @@
   const launcher = $(".kx-chat-launcher");
   const panel = $(".kx-chat-panel");
   const invite = $(".kx-chat-invite");
+  const badge = $(".kx-chat-badge");
+  const unreadStorageKey = "kairox-chat-invite-unread";
+  function setInviteUnread(unread) {
+    badge.hidden = !unread;
+    launcher.setAttribute("aria-label", unread ? "Otwórz czat — 1 nieprzeczytana wiadomość od asystenta AI" : "Otwórz czat z Bielikiem");
+    try { if (unread) sessionStorage.setItem(unreadStorageKey, "1"); else sessionStorage.removeItem(unreadStorageKey); } catch { /* Keep the visible state when storage is unavailable. */ }
+  }
+  let initialUnread = false;
+  try { initialUnread = sessionStorage.getItem(unreadStorageKey) === "1"; } catch { /* Storage can be unavailable. */ }
+  setInviteUnread(initialUnread);
   const inviteStorageKey = "kairox-chat-invite";
   const greetings = ['Hej!', 'Jak leci?', 'Co słychać?', 'Cześć!', 'Masz chwilę?', 'Pogadajmy?', 'Dzień dobry!', 'Co planujesz?', 'Jaki masz pomysł?', 'Od czego zaczynamy?'];
   let inviteHideTimer;
@@ -89,9 +100,10 @@
     }
     dismissInvite("shown");
     const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-    $(".kx-chat-invite-open").textContent = greeting;
+    $(".kx-chat-invite-text").textContent = greeting;
     $(".kx-chat-invite-open").setAttribute("aria-label", `${greeting} Otwórz czat z Bielikiem`);
     invite.hidden = false;
+    setInviteUnread(true);
     inviteHideTimer = setTimeout(() => {
       if (invite.contains(document.activeElement)) launcher.focus({ preventScroll: true });
       dismissInvite("timeout");
@@ -99,6 +111,7 @@
   }, 10000);
   $(".kx-chat-invite-close").addEventListener("click", () => {
     dismissInvite("dismissed");
+    setInviteUnread(false);
     launcher.focus({ preventScroll: true });
   });
   $(".kx-chat-invite-open").addEventListener("click", openChat);
@@ -174,6 +187,7 @@
   }
   function openChat() {
     dismissInvite("opened");
+    setInviteUnread(false);
     document.dispatchEvent(new Event("kairox-chat-opened"));
     syncChatViewport();
     panel.hidden = false;
@@ -196,7 +210,7 @@
   root.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
     if (!panel.hidden) { event.preventDefault(); closeChat(); }
-    else if (!invite.hidden) { event.preventDefault(); dismissInvite("dismissed"); launcher.focus({ preventScroll: true }); }
+    else if (!invite.hidden) { event.preventDefault(); dismissInvite("dismissed"); setInviteUnread(false); launcher.focus({ preventScroll: true }); }
   });
   function addMessage(role, text) {
     const message = document.createElement("p");
