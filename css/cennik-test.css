@@ -131,7 +131,7 @@
 @media (max-width: 760px) {
   .pricing-jump.has-selection {
     position: fixed;
-    right: 14px;
+    left: max(14px, env(safe-area-inset-left));
     bottom: max(14px, env(safe-area-inset-bottom));
     z-index: 2;
     display: block;
