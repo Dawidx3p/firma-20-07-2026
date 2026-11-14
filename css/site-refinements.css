@@ -75,12 +75,39 @@
 .content-shortcut>span:last-child{flex-shrink:0;color:var(--accent-2);font-size:1.3rem}
 .content-shortcut:hover{background:rgba(0,224,255,.05)}
 .content-shortcut:focus-visible{outline:2px solid var(--accent-2);outline-offset:4px}
-.cooperation-preview-footer .content-shortcut{margin-top:0}
 @media(max-width:760px){.content-shortcut{padding:20px 4px;margin-top:24px}}
 @media(prefers-reduced-motion:reduce){.content-shortcut{transition:none}}
 
 .home-services h2 { font-size: clamp(1.8rem, 4vw, 2.7rem); }
 .home-services .home-shortcuts-inner > p { color: var(--muted); margin: 6px 0 20px; }
+.home-services-art {
+  display: block;
+  margin: 0 0 16px;
+}
+.home-services-art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+  border-radius: 16px;
+}
+@media (min-width: 981px) {
+  .home-services .home-shortcuts-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(180px, 23vw, 250px);
+    grid-template-rows: auto auto 1fr;
+    column-gap: clamp(24px, 4vw, 52px);
+    align-items: start;
+  }
+  .home-services-art {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    margin: 0;
+  }
+  .home-services-art img { aspect-ratio: 2 / 3; }
+  .home-services .home-shortcuts-grid { align-self: center; }
+}
 @media (min-width: 960px) {
   #site-paths .home-shortcuts-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }

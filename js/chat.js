@@ -5,7 +5,7 @@
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
-  stylesheet.href = new URL("../css/chat.css?v=message-invite-1", document.currentScript.src).href;
+  stylesheet.href = new URL("../css/chat.css?v=direct-chat-1", document.currentScript.src).href;
   document.head.appendChild(stylesheet);
   const root = document.createElement("aside");
   root.id = "kairox-chat";
@@ -24,17 +24,9 @@
     <div id="kx-chat-panel" class="kx-chat-panel" role="dialog" aria-labelledby="kx-chat-title" hidden>
       <header class="kx-chat-header">
         <div><span class="kx-chat-eyebrow">KAIROX · BIELIK</span><h2 id="kx-chat-title">Porozmawiajmy o Twojej stronie</h2></div>
-        <div class="kx-chat-header-actions"><button class="kx-chat-read" type="button">Pokaż rozmowę</button><button class="kx-chat-reset" type="button" hidden>Nowa rozmowa</button><button class="kx-chat-close" type="button" aria-label="Zamknij czat">×</button></div>
+        <div class="kx-chat-header-actions"><button class="kx-chat-read" type="button">Pokaż rozmowę</button><button class="kx-chat-reset" type="button">Nowa rozmowa</button><button class="kx-chat-close" type="button" aria-label="Zamknij czat">×</button></div>
       </header>
-      <div class="kx-chat-intro">
-        <p>Nie wiesz, od czego zacząć? Pomogę Ci poznać ofertę i wybrać kierunek.</p>
-        <p class="kx-chat-disclosure">To asystent AI w wersji testowej — może się mylić. Wiadomości i krótka historia rozmowy są przesyłane przez Cloudflare do Hugging Face i Public AI. Nie wpisuj danych osobowych ani poufnych informacji.</p>
-        <p class="kx-chat-disclosure">Historia w tej karcie znika po odświeżeniu. Dostawcy przetwarzają wiadomości według swoich zasad. <a href="https://publicai.co/tc" target="_blank" rel="noopener noreferrer">Zasady Public AI ↗</a></p>
-        <div class="kx-chat-opening" role="group" aria-label="Przykładowe pytania"></div>
-        <button class="kx-chat-start" type="button">Rozpocznij rozmowę</button>
-        <p class="kx-chat-direct"><a href="/formularz-kontaktowy.html">Wolisz porozmawiać z zespołem?</a></p>
-      </div>
-      <div class="kx-chat-conversation" hidden>
+      <div class="kx-chat-conversation">
         <div class="kx-chat-content" role="region" aria-label="Rozmowa z asystentem" tabindex="0">
         <div class="kx-chat-thread"></div>
         <div class="kx-chat-suggestions" role="group" aria-label="Podpowiedzi pytań"></div>
@@ -57,10 +49,11 @@
           <label for="kx-chat-message">Twoje pytanie</label>
           <textarea id="kx-chat-message" rows="2" maxlength="2000" placeholder="Wiadomość" required data-private="true"></textarea>
           <button class="kx-chat-send" type="submit" disabled>Wyślij wiadomość ↗</button>
-          <div class="kx-chat-verification"></div>
+          <div class="kx-chat-verification" hidden></div>
+          <button class="kx-chat-retry" type="button" hidden>Ponów weryfikację</button>
           <p class="kx-chat-status" role="status" aria-live="polite"></p>
         </form>
-        <p class="kx-chat-footnote">AI może się mylić. Bez danych osobowych. <a href="/formularz-kontaktowy.html">Kontakt z zespołem</a></p>
+        <p class="kx-chat-footnote">Rozmawiasz z AI. Nie wpisuj danych osobowych ani poufnych. <a href="/polityka-prywatnosci.html#czat-ai">Prywatność czatu</a> · <a href="/formularz-kontaktowy.html">Kontakt z zespołem</a></p>
       </div>
     </div>`;
   document.body.appendChild(root);
@@ -79,7 +72,23 @@
   try { initialUnread = sessionStorage.getItem(unreadStorageKey) === "1"; } catch { /* Storage can be unavailable. */ }
   setInviteUnread(initialUnread);
   const inviteStorageKey = "kairox-chat-invite";
-  const greetings = ['Hej!', 'Jak leci?', 'Co słychać?', 'Cześć!', 'Masz chwilę?', 'Pogadajmy?', 'Dzień dobry!', 'Co planujesz?', 'Jaki masz pomysł?', 'Od czego zaczynamy?'];
+  const greetings = [
+    "Cześć!",
+    "Może mogę pomóc?",
+    "Jestem tu by ci służyć",
+    "A więc znowu się spotykamy!",
+    "Masz jakiś problem?",
+    "Witaj, podróżniku",
+    "Kto mnie tu zrespił?",
+  ];
+  const pickGreeting = () => greetings[Math.floor(Math.random() * greetings.length)];
+  const greetingKey = "kairox-chat-greeting";
+  let greeting = pickGreeting();
+  try {
+    const savedGreeting = sessionStorage.getItem(greetingKey);
+    if (greetings.includes(savedGreeting)) greeting = savedGreeting;
+    else sessionStorage.setItem(greetingKey, greeting);
+  } catch { /* Keep the in-memory greeting. */ }
   let inviteHideTimer;
   let inviteHandled = false;
   try { inviteHandled = Boolean(sessionStorage.getItem(inviteStorageKey)); } catch { /* Storage can be unavailable. */ }
@@ -99,7 +108,6 @@
       return;
     }
     dismissInvite("shown");
-    const greeting = greetings[Math.floor(Math.random() * greetings.length)];
     $(".kx-chat-invite-text").textContent = greeting;
     $(".kx-chat-invite-open").setAttribute("aria-label", `${greeting} Otwórz czat z Bielikiem`);
     invite.hidden = false;
@@ -119,7 +127,7 @@
     if (inviteHandled && invite.hidden) return;
     if (event.target.closest("form") && !root.contains(event.target)) dismissInvite("form");
   });
-  const start = $(".kx-chat-start");
+  const retry = $(".kx-chat-retry");
   const form = $(".kx-chat-form");
   const input = $("textarea");
   const send = $(".kx-chat-send");
@@ -134,7 +142,7 @@
   const interests = new Map(), offeredServices = new Set();
   let chatSession = "", sessionExpiresAt = 0, sessionTimer;
   let history = [], token = "", widgetId, loading = false, scriptPromise, controller, generation = 0;
-  let queuedSuggestion = "", suggestionsPromise, openingQuestions = [];
+  let queuedSuggestion = "", suggestionsPromise, verificationStarting = false;
   // Mobile keyboards resize the visual viewport, often leaving 100dvh unchanged.
   let viewportFrame, editing = false, viewportWidth = window.innerWidth;
   let fullViewportHeight = Math.min(window.visualViewport?.height ?? window.innerHeight, window.innerHeight);
@@ -191,6 +199,8 @@
     document.dispatchEvent(new Event("kairox-chat-opened"));
     syncChatViewport();
     panel.hidden = false;
+    if (!thread.firstElementChild) addMessage("assistant", greeting);
+    initializeChat();
     if (!history.length && !loading && !input.value.trim()) {
       ensureSuggestions().then(() => {
         if (!history.length && !loading && !input.value.trim() && !panel.hidden) updateSuggestions();
@@ -198,7 +208,7 @@
     }
     launcher.hidden = true;
     launcher.setAttribute("aria-expanded", "true");
-    ($(".kx-chat-intro").hidden ? $(".kx-chat-close") : start).focus();
+    $(".kx-chat-close").focus();
   }
   function closeChat() { queuedSuggestion = ""; panel.hidden = true; launcher.hidden = false; launcher.setAttribute("aria-expanded", "false"); launcher.focus(); }
   launcher.addEventListener("click", () => panel.hidden ? openChat() : closeChat());
@@ -239,37 +249,31 @@
     }).catch((error) => { scriptPromise = undefined; throw error; });
     return scriptPromise;
   }
-  start.addEventListener("click", async () => {
+  async function initializeChat() {
+    if (verificationStarting || widgetId !== undefined) return;
     if (!config.turnstileSiteKey || !config.endpoint) {
-      start.textContent = "Czat czeka na uruchomienie";
+      status.textContent = "Czat jest niedostępny. Skorzystaj z kontaktu z zespołem.";
       return;
     }
-    start.disabled = true;
-    start.textContent = "Przygotowuję rozmowę…";
+    verificationStarting = true;
+    retry.hidden = true;
+    status.textContent = "Trwa weryfikacja bezpieczeństwa…";
     try {
-      const [, interestModule, contactModule, formatModule, suggestionsModule] = await Promise.all([
+      const [, interestModule, contactModule, formatModule] = await Promise.all([
         loadTurnstile(), import(new URL("./chat-interest.mjs", scriptUrl).href),
         import(new URL("./contact-service.mjs?v=audit-2", scriptUrl).href),
         import(new URL("./chat-format.mjs?v=connectors-1", scriptUrl).href),
-        ensureSuggestions(),
       ]);
-      getSuggestions = suggestionsModule.getSuggestions;
       renderMessage = formatModule.renderMessage;
       inferService = interestModule.inferService;
       ({ sendContact, validateContact } = contactModule);
-      $(".kx-chat-intro").hidden = true;
-      $(".kx-chat-conversation").hidden = false;
-      $(".kx-chat-reset").hidden = false;
-      if (!openingQuestions.length) updateSuggestions();
-      addMessage("assistant", "Cześć! Pomogę Ci poznać ofertę KAIROX. Co chcesz poprawić na swojej stronie?");
-      status.textContent = "Trwa weryfikacja bezpieczeństwa…";
       verification.hidden = false;
       widgetId = window.turnstile.render(verification, {
         sitekey: config.turnstileSiteKey, action: "kairox_chat", theme: "dark", size: "flexible", appearance: "interaction-only",
         callback: (value) => {
           token = value;
           verification.hidden = true;
-          if (!loading && /^(Trwa weryfikacja|Weryfikacja wygasła)/.test(status.textContent)) status.textContent = "";
+          if (!loading && /^(Trwa weryfikacja|Weryfikacja się nie powiodła|Weryfikacja wygasła)/.test(status.textContent)) status.textContent = "";
           updateSend();
           if (queuedSuggestion && input.value === queuedSuggestion && !panel.hidden && !send.disabled) {
             queuedSuggestion = ""; form.requestSubmit();
@@ -280,18 +284,23 @@
           token = ""; updateSend();
           if (!hasSession()) {
             verification.hidden = false;
-            status.textContent = "Weryfikacja się nie powiodła. Odśwież stronę lub użyj formularza kontaktowego.";
+            status.textContent = "Weryfikacja się nie powiodła. Spróbuj ponownie.";
+            retry.hidden = false;
           }
         },
       });
-      $(".kx-chat-close").focus();
     } catch (error) {
-      $(".kx-chat-intro").hidden = false;
-      $(".kx-chat-conversation").hidden = true;
-      thread.replaceChildren();
-      start.textContent = error.message + " Kliknij, aby ponowić.";
-      start.disabled = false;
+      verification.hidden = true;
+      status.textContent = error.message;
+      retry.hidden = false;
+    } finally {
+      verificationStarting = false;
     }
+  }
+  retry.addEventListener("click", () => {
+    if (widgetId === undefined) initializeChat();
+    else resetVerification();
+    input.focus();
   });
   input.addEventListener("input", () => { queuedSuggestion = ""; updateSend(); });
   input.addEventListener("keydown", (event) => {
@@ -308,40 +317,34 @@
     }));
   }
   function updateSuggestions(message = "", connector = "") {
-    const questions = getSuggestions(message, history, connector);
-    if (!message) {
-      openingQuestions = questions;
-      renderSuggestions($(".kx-chat-opening"), questions);
-    }
-    renderSuggestions($(".kx-chat-suggestions"), questions);
+    if (getSuggestions) renderSuggestions($(".kx-chat-suggestions"), getSuggestions(message, history, connector));
   }
-  $(".kx-chat-opening").addEventListener("click", event => {
-    const suggestion = event.target.closest("button");
-    if (!suggestion || start.disabled || panel.hidden) return;
-    input.value = suggestion.textContent;
-    queuedSuggestion = input.value;
-    start.click();
-  });
   $(".kx-chat-suggestions").addEventListener("click", (event) => {
     const suggestion = event.target.closest("button");
     if (!suggestion || loading || panel.hidden || form.hidden) return;
     input.blur(); editing = false;
     input.value = suggestion.textContent; updateSend(); scheduleChatViewport();
     if (!send.disabled) { queuedSuggestion = ""; form.requestSubmit(); }
-    else { queuedSuggestion = input.value; status.textContent = "Trwa weryfikacja bezpieczeństwa…"; }
+    else queuedSuggestion = input.value;
   });
   function resetVerification() {
     token = ""; updateSend();
     verification.hidden = false;
-    if (widgetId !== undefined) window.turnstile.reset(widgetId);
+    if (widgetId !== undefined) {
+      retry.hidden = true;
+      status.textContent ||= "Trwa weryfikacja bezpieczeństwa…";
+      window.turnstile.reset(widgetId);
+    }
   }
   $(".kx-chat-reset").addEventListener("click", () => {
     generation++; controller?.abort(); loading = false; history = []; input.value = ""; queuedSuggestion = "";
     interests.clear(); offeredServices.clear(); activeService = undefined; pendingOffer = undefined; leadSent = false;
     leadForm.reset(); leadStatus.textContent = ""; setCollecting(false);
-    thread.replaceChildren(); addMessage("assistant", "Zaczynamy od nowa. W czym mogę pomóc?");
+    thread.replaceChildren(); addMessage("assistant", pickGreeting());
     updateSuggestions();
-    status.textContent = ""; if (!hasSession()) resetVerification(); else updateSend(); input.focus();
+    if (widgetId !== undefined && !hasSession()) resetVerification(); else updateSend();
+    if (hasSession()) status.textContent = "";
+    input.focus();
   });
   function setCollecting(value) {
     root.classList.toggle("kx-chat-is-collecting", value);

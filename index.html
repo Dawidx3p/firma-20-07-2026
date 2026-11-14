@@ -28,10 +28,23 @@
   />
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" href="img/180na180.png">
-  <link rel="stylesheet" href="css/style.css?v=ui-1" />
+  <link rel="stylesheet" href="css/style.css?v=compact-home-4" />
 
   <title>KAIROX — Strony, które komunikują wartość marki</title>
   <link rel="canonical" href="https://kairox.pl/">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "url": "https://kairox.pl/",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "contentUrl": "https://kairox.pl/img/kairox-miniatura-512.png",
+        "width": 512,
+        "height": 512
+      }
+    }
+  </script>
   <link rel="stylesheet" href="css/comic.css?v=hero-video-1">
   <link rel="stylesheet" href="css/founder.css?v=1">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
@@ -40,7 +53,7 @@
   <script src="js/section-motion.js?v=5" defer></script>
   <script src="js/section-scroll.js?v=dock-scroll-1" defer></script>
   <link rel="stylesheet" href="css/portfolio-showcase.css?v=1">
-  <link rel="stylesheet" href="css/site-refinements.css?v=mobile-contact-3">
+  <link rel="stylesheet" href="css/site-refinements.css?v=home-services-art-1">
 </head>
 
 <body class="home-page home-mobile-test">
@@ -110,23 +123,16 @@
           <p class="eyebrow">Bezpłatna wizualizacja</p>
           <h2 id="website-check-title">Zobacz pomysł na swoją stronę</h2>
           <p>
-            Po potwierdzeniu zgłoszenia przygotujemy pierwszy ekran:
-            wygląd, główny komunikat i przycisk kontaktu. Bezpłatnie i bez zobowiązań.
+            Po potwierdzeniu zgłoszenia przygotujemy projekt pierwszego ekranu Twojej strony. Bez zobowiązań.
           </p>
         </div>
 
-        <form class="website-check-form" id="websiteCheckForm" novalidate>
-          <label for="websiteCheckUrl">Adres strony internetowej</label>
+        <form class="website-check-form" id="websiteCheckForm" action="wizualizacja.html" method="get">
+          <input type="hidden" name="source" value="/index.html">
+          <label for="websiteCheckUrl">Adres strony (opcjonalnie)</label>
           <div class="website-check-row">
-            <input
-              type="text"
-              id="websiteCheckUrl"
-              name="website"
-              inputmode="url"
-              autocomplete="url"
-              placeholder="np. twojafirma.pl"
-              aria-describedby="websiteCheckError"
-            >
+            <input type="text" id="websiteCheckUrl" name="website" inputmode="url" autocomplete="url"
+              placeholder="np. twojafirma.pl" aria-describedby="websiteCheckError">
             <button class="primary-button" type="submit">Chcę zobaczyć wizualizację</button>
           </div>
           <p class="website-check-error" id="websiteCheckError" role="alert"></p>
@@ -307,44 +313,23 @@
 </article>
   </section>
 
-  <section class="cooperation-preview" id="cooperation">
+  <section class="cooperation-preview" id="cooperation" aria-labelledby="cooperation-title">
 
     <div class="cooperation-preview-content">
   
       <div class="section-header">
-        <p class="eyebrow">Modele współpracy</p>
-  
-        <h2>
-          Nie każda firma potrzebuje tego samego zakresu.
-        </h2>
-  
-        <p class="section-intro">
-          Porównaj efekty, zakresy i ceny. Sprawdź, który model pasuje do Twojej sytuacji.
-        </p>
+        <h2 id="cooperation-title">Modele współpracy</h2>
       </div>
   
-      <div class="cooperation-preview-options" aria-label="Dostępne modele współpracy">
-  
+      <nav class="cooperation-preview-options" aria-label="Dostępne modele współpracy">
         <a href="audyt-komunikacji.html"><span>Audyt komunikacji</span></a>
-        <a href="modele-wspolpracy.html"><span>Strona Start</span></a>
-        <a href="modele-wspolpracy.html"><span>Strona kampanii</span></a>
-        <a href="modele-wspolpracy.html"><span>Strona komunikacyjna</span></a>
+        <a href="modele-wspolpracy.html#model-start"><span>Strona Start</span></a>
+        <a href="modele-wspolpracy.html#model-kampanii"><span>Strona kampanii</span></a>
+        <a href="modele-wspolpracy.html#model-komunikacyjna"><span>Strona komunikacyjna</span></a>
         <a href="partnerstwo.html"><span>Partnerstwo</span></a>
-  
-      </div>
-  
-      <div class="cooperation-preview-footer">
-  
-        <p>
-          Nie wiesz, co wybrać? Pomożemy Ci podczas pierwszej rozmowy.
-        </p>
-  
-        <a href="modele-wspolpracy.html" class="content-shortcut">
-          <span><strong>Poznaj modele współpracy</strong><small>Porównaj zakresy i ceny</small></span><span aria-hidden="true">↗</span>
-        </a>
-  
-      </div>
-  
+        <a class="cooperation-preview-compare" href="modele-wspolpracy.html#models"><span>Porównaj zakresy i ceny</span></a>
+      </nav>
+
     </div>
   
   </section>
@@ -353,6 +338,10 @@
       <div class="home-shortcuts-inner">
         <h2 id="home-services-title">Logo, teksty i reklama</h2>
         <p>Wybierz pojedynczą usługę lub dodaj ją do projektu strony.</p>
+        <picture class="home-services-art">
+          <source media="(min-width: 981px)" srcset="img/home-services-desktop.jpg" width="600" height="900">
+          <img src="img/home-services-mobile.jpg" width="1440" height="960" alt="" loading="lazy" decoding="async">
+        </picture>
         <nav class="home-shortcuts-grid" aria-labelledby="home-services-title">
           <a href="modele-wspolpracy.html?kategoria=identyfikacja#cennik"><span><strong>Identyfikacja wizualna</strong><small>Logo, brandbook i wizytówki</small></span><span aria-hidden="true">↗</span></a>
           <a href="modele-wspolpracy.html?kategoria=komunikacja#cennik"><span><strong>Komunikacja i teksty</strong><small>Teksty na stronę, oferty i posty</small></span><span aria-hidden="true">↗</span></a>
@@ -574,8 +563,8 @@
   </div>
   <a class="home-mobile-contact" href="formularz-kontaktowy.html?source=%2Findex.html&amp;v=steps-8" aria-label="Przejdź do formularza kontaktowego"><span class="cta-label">Porozmawiajmy</span> <span class="cta-arrow" aria-hidden="true">→</span></a>
   <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/main.js?v=ux-3"></script>
+  <script src="js/main.js?v=optional-website-1"></script>
   <script src="js/chat-config.js"></script>
-  <script src="js/chat.js?v=message-invite-1"></script>
+  <script src="js/chat.js?v=direct-chat-1"></script>
 </body>
 </html>

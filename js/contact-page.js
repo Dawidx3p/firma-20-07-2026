@@ -17,27 +17,10 @@ const services = {
   communication: "Strona komunikacyjna", partnership: "Partnerstwo",
   visualization: "Bezpłatna wizualizacja pierwszego ekranu"
 };
-const serviceId = contactParams.get("service");
+const serviceId = form.dataset.service || contactParams.get("service");
 const selectedService = Object.hasOwn(services, serviceId) ? services[serviceId] : "";
 const serviceContext = document.getElementById("contactServiceContext");
 const isVisualization = serviceId === "visualization";
-const submitLabel = isVisualization ? "Zgłoś stronę do bezpłatnej wizualizacji" : "Wyślij zgłoszenie";
-if (isVisualization) {
-  document.querySelector(".contact-landing-intro").hidden = false;
-  document.title = "Bezpłatna wizualizacja pierwszego ekranu — KAIROX";
-  document.querySelector(".contact-landing-intro .eyebrow").textContent = "Bezpłatna wizualizacja";
-  document.querySelector(".contact-landing-intro h1").textContent = "Zobacz, jak może wyglądać pierwszy ekran Twojej strony";
-  document.querySelector(".contact-landing-lead").textContent = "Otrzymasz propozycję wyglądu, głównego komunikatu i przycisku kontaktu. Najpierw sprawdzimy zgłoszenie i potwierdzimy zakres oraz termin. Bez obowiązku zamówienia strony.";
-  const formTitle = document.querySelector(".contact-form-card h2");
-  formTitle.textContent = "Zgłoś stronę do bezpłatnej wizualizacji";
-  formTitle.hidden = false;
-  document.querySelector('label[for="challenge"]').textContent = "Czym zajmuje się Twoja firma i co chcesz pokazać lub poprawić?";
-  document.querySelector(".contact-expectations").setAttribute("aria-label", "Jak otrzymać bezpłatną wizualizację");
-  const stepTitles = document.querySelectorAll(".contact-expectations strong");
-  stepTitles[1].textContent = "Ustalimy zakres";
-  stepTitles[2].textContent = "Otrzymasz wizualizację";
-  submitButton.textContent = submitLabel;
-}
 if (selectedService) {
   serviceContext.textContent = `Temat rozmowy: ${selectedService}`;
   serviceContext.hidden = false;
@@ -203,7 +186,7 @@ form.addEventListener("submit", async (event) => {
     formStatus.classList.add("is-error");
   } finally {
     submitting = false;
-    submitButton.textContent = submitLabel;
+    submitButton.textContent = "Wyślij zgłoszenie";
     validateForm();
   }
 });

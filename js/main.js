@@ -58,32 +58,26 @@ if (websiteCheckForm) {
   const websiteError = document.getElementById("websiteCheckError");
 
   websiteCheckForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    const rawValue = websiteInput.value.trim();
-    const normalizedValue = /^https?:\/\//i.test(rawValue)
-      ? rawValue
-      : `https://${rawValue}`;
+    const value = websiteInput.value.trim();
+    if (!value) {
+      websiteInput.value = "";
+      return;
+    }
 
     try {
-      const websiteUrl = new URL(normalizedValue);
-
-      if (!websiteUrl.hostname.includes(".")) throw new Error("Invalid hostname");
-
-      websiteInput.classList.remove("field-error");
-      websiteError.textContent = "";
-      window.location.assign(
-        `formularz-kontaktowy.html?service=visualization&website=${encodeURIComponent(websiteUrl.href)}`
-      );
-    } catch (error) {
-      websiteInput.classList.add("field-error");
+      const url = new URL(/^https?:\/\//i.test(value) ? value : `https://${value}`);
+      if (!url.hostname.includes(".") || url.username || url.password) throw new Error("Niepoprawny adres");
+      websiteInput.value = url.href;
+    } catch {
+      event.preventDefault();
+      websiteInput.setAttribute("aria-invalid", "true");
       websiteError.textContent = "Wpisz poprawny adres, np. twojafirma.pl";
       websiteInput.focus();
     }
   });
 
   websiteInput.addEventListener("input", () => {
-    websiteInput.classList.remove("field-error");
+    websiteInput.removeAttribute("aria-invalid");
     websiteError.textContent = "";
   });
 }

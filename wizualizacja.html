@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+  <meta name="description" content="Zgłoś swoją stronę do bezpłatnej wizualizacji pierwszego ekranu od KAIROX.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Bezpłatna wizualizacja strony — KAIROX">
+  <meta property="og:description" content="Zgłoś swoją stronę do bezpłatnej wizualizacji pierwszego ekranu od KAIROX.">
+  <meta property="og:url" content="https://kairox.pl/wizualizacja.html">
+  <meta property="og:image" content="https://kairox.pl/img/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="img/180na180.png">
+  <link rel="stylesheet" href="css/style.css?v=ui-1">
+  <title>Bezpłatna wizualizacja strony — KAIROX</title>
+  <link rel="canonical" href="https://kairox.pl/wizualizacja.html">
+  <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/typography.css?v=1">
+  <link rel="stylesheet" href="css/section-scroll.css?v=10">
+  <script src="js/section-motion.js?v=5" defer></script>
+  <script src="js/section-scroll.js?v=14" defer></script>
+  <link rel="stylesheet" href="css/site-refinements.css?v=contact-compact-17">
+</head>
+<body class="compact-contact-page">
+  <a class="skip-link" href="#main-content">Przejdź do treści</a>
+  <main id="main-content">
+    <section class="contact-landing">
+      <a class="contact-brand contact-home-link" href="index.html" aria-label="KAIROX — wróć na stronę główną">
+        <span aria-hidden="true">←</span> KAIROX
+      </a>
+      <div class="contact-landing-intro" hidden>
+        <p class="eyebrow"></p>
+        <h1></h1>
+        <p class="contact-landing-lead"></p>
+      </div>
+      <div class="contact-process">
+        <ol class="contact-expectations" aria-label="Jak wygląda zgłoszenie do wizualizacji">
+          <li><strong>Wyślij zgłoszenie</strong></li>
+          <li><strong>Odezwiemy się</strong></li>
+          <li><strong>Ustalimy zakres i termin</strong></li>
+        </ol>
+
+      </div>
+      <div class="contact-form-card" id="formularz">
+        <h2 hidden></h2>
+        <p id="contactServiceContext" hidden></p>
+
+        <form id="contactForm" data-service="visualization" novalidate>
+          <ol class="contact-wizard-progress" aria-label="Etapy formularza" hidden><li>1. Twoja strona</li><li>2. Kontakt</li><li>3. Potwierdzenie</li></ol>
+          <fieldset class="contact-wizard-step" data-contact-step>
+            <legend tabindex="-1" class="contact-step-label">Twoja strona</legend>
+            <div class="form-group"><label for="website">Adres Twojej strony (opcjonalnie)</label><input type="url" id="website" name="website" inputmode="url" autocomplete="url" placeholder="https://twojafirma.pl"></div>
+            <div class="form-group"><label for="challenge">Co chcesz pokazać lub poprawić na swojej stronie?</label><textarea id="challenge" name="challenge" rows="4" placeholder="Napisz kilka zdań — nie musisz przygotowywać pełnego briefu."></textarea></div>
+            <div class="contact-wizard-actions" data-contact-navigation hidden><button type="button" class="primary-button" data-contact-next>Dalej <span aria-hidden="true">→</span></button></div>
+          </fieldset>
+          <fieldset class="contact-wizard-step contact-details-step" data-contact-step>
+            <legend tabindex="-1" class="contact-step-label">Kontakt</legend>
+            <p class="form-hint">Wystarczy e-mail lub numer telefonu.</p>
+            <div class="form-group"><label for="name">Jak mamy się do Ciebie zwracać? (opcjonalnie)</label><input type="text" id="name" name="name" autocomplete="name"></div>
+            <div class="contact-fields-row">
+              <div class="form-group"><label for="email">Adres e-mail</label><input type="email" id="email" name="email" autocomplete="email" aria-describedby="emailError"><p class="field-error-note" id="emailError"></p></div>
+              <div class="form-group"><label for="phone">Numer telefonu</label><input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel" aria-describedby="phoneError"><p class="field-error-note" id="phoneError"></p></div>
+            </div>
+            <div class="form-group">
+              <label for="contactMethod">Preferowana forma kontaktu (opcjonalnie)</label>
+              <div class="contact-method-picker">
+                <select id="contactMethod" name="contactMethod">
+                  <option value="">Bez preferencji</option>
+                  <option>E-mail</option>
+                  <option>Telefon</option>
+                  <option>WhatsApp</option>
+                  <option>Google Meet</option>
+                </select>
+              </div>
+            </div>
+            <div class="contact-wizard-actions" data-contact-navigation hidden><button type="button" class="secondary-button" data-contact-back><span aria-hidden="true">←</span> Wstecz</button><button type="button" class="primary-button" data-contact-next>Dalej <span aria-hidden="true">→</span></button></div>
+          </fieldset>
+          <fieldset class="contact-wizard-step" data-contact-step>
+            <legend tabindex="-1" class="contact-step-label">Potwierdzenie</legend>
+            <dl class="contact-wizard-summary" id="contactSummary"></dl>
+          <div class="form-group checkbox">
+            <input type="checkbox" id="privacy" required aria-describedby="privacyError">
+            <label for="privacy">
+              Zapoznałem(-am) się z <a href="polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityką prywatności</a>
+              i przyjmuję do wiadomości zasady przetwarzania danych.*
+            </label>
+          </div>
+          <p class="field-error-note" id="privacyError"></p>
+          <div class="contact-wizard-actions"><button type="button" class="secondary-button" data-contact-back><span aria-hidden="true">←</span> Wstecz</button><button type="submit" class="primary-button" id="submitButton" disabled>Wyślij zgłoszenie</button></div>
+          </fieldset>
+        </form>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite" tabindex="-1"></p>
+        <div id="contactSuccessActions" hidden>
+          <a class="secondary-button" href="index.html">Wróć na stronę główną</a>
+          <a class="secondary-button" href="realizacje.html">Zobacz realizacje</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="contact-footer">
+    <p>© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
+    <div class="footer-email footer-email-compact">
+      <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
+      <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
+      <span class="copy-email-status" role="status" aria-live="polite"></span>
+    </div>
+    <nav aria-label="Informacje prawne">
+      <a href="polityka-prywatnosci.html">Polityka prywatności</a>
+      <a href="polityka-cookies.html">Polityka cookies</a>
+      <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+    </nav>
+  </footer>
+
+  <div class="consent-banner" id="consentBanner" role="dialog" aria-modal="true" aria-labelledby="consentTitle" aria-describedby="consentDescription" hidden>
+    <div class="consent-card">
+      <div class="consent-content">
+        <p class="consent-label">Prywatność</p>
+        <h2 id="consentTitle">Pomóż nam rozwijać KAIROX</h2>
+        <p id="consentDescription">Korzystamy z Google Analytics i Microsoft Clarity, aby anonimowo analizować sposób korzystania ze strony.</p>
+        <p class="consent-note">Nie wykorzystujemy tych danych do personalizacji reklam. Możesz zmienić decyzję w dowolnym momencie.</p>
+      </div>
+      <div class="consent-actions">
+        <button class="secondary-button" id="rejectAnalytics" type="button">Tylko niezbędne</button>
+        <button class="primary-button" id="acceptAnalytics" type="button">Akceptuję analitykę</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/consent.js?v=audit-2"></script>
+  <script src="js/contact-page.js?v=visualization-page-1"></script>
+  <script src="js/chat-config.js"></script>
+  <script src="js/chat.js?v=direct-chat-1"></script>
+</body>
+</html>
