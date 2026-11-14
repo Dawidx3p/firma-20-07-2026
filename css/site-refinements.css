@@ -114,7 +114,9 @@
 }
 .compact-contact-page .contact-expectations li {
   position: relative;
-  padding: 4px 2px;
+  display: grid;
+  place-items: center;
+  padding: 6px 8px;
   border: 1px solid var(--line);
   border-radius: 6px;
   background: var(--bg-soft);
