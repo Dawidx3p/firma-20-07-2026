@@ -73,8 +73,7 @@ const monthly = document.querySelector('#bundle-monthly');
 const items = document.querySelector('#bundle-items');
 const open = document.querySelector('#bundle-open');
 const form = document.querySelector('#bundle-form');
-const email = document.querySelector('#bundle-email');
-const phone = document.querySelector('#bundle-phone');
+const contactInput = document.querySelector('#bundle-contact');
 const privacy = document.querySelector('#bundle-privacy');
 const send = document.querySelector('#bundle-send');
 const feedback = document.querySelector('#bundle-feedback');
@@ -251,7 +250,7 @@ open.addEventListener('click', () => {
   open.hidden = true;
   form.hidden = false;
   feedback.textContent = '';
-  email.focus();
+  contactInput.focus();
 });
 
 form.addEventListener('submit', async (event) => {
@@ -269,9 +268,11 @@ form.addEventListener('submit', async (event) => {
     'Proszę również o potwierdzenie zakresu i końcowej ceny brutto.',
   ].join('\n');
 
+  const contactValue = contactInput.value.trim();
+  const isEmail = contactValue.includes('@');
   const fields = {
-    email: email.value,
-    phone: phone.value,
+    email: isEmail ? contactValue : '',
+    phone: isEmail ? '' : contactValue,
     consent: privacy.checked,
     challenge: request,
     sourcePage: location.pathname + '#cennik',
@@ -289,13 +290,13 @@ form.addEventListener('submit', async (event) => {
   if (!validation.valid) {
     if (!validation.hasContact) {
       feedback.textContent = 'Podaj adres e-mail lub numer telefonu.';
-      email.focus();
+      contactInput.focus();
     } else if (!validation.validEmail) {
       feedback.textContent = 'Sprawdź adres e-mail.';
-      email.focus();
+      contactInput.focus();
     } else if (!validation.validPhone) {
       feedback.textContent = 'Sprawdź numer telefonu.';
-      phone.focus();
+      contactInput.focus();
     } else {
       feedback.textContent = 'Potwierdź zapoznanie się z polityką prywatności.';
       privacy.focus();
@@ -304,8 +305,7 @@ form.addEventListener('submit', async (event) => {
   }
   sending = true;
   send.disabled = true;
-  email.readOnly = true;
-  phone.readOnly = true;
+  contactInput.readOnly = true;
   privacy.disabled = true;
   feedback.textContent = 'Wysyłanie zapytania…';
   try {
@@ -321,8 +321,7 @@ form.addEventListener('submit', async (event) => {
   } finally {
     sending = false;
     send.disabled = false;
-    email.readOnly = false;
-    phone.readOnly = false;
+    contactInput.readOnly = false;
     privacy.disabled = false;
   }
 });

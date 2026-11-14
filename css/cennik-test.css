@@ -228,8 +228,7 @@
 }
 
 .pricing-form { margin-top: 14px; }
-.pricing-contact { min-width: 0; border: 0; }
-.pricing-contact legend { margin-bottom: 8px; font-weight: 650; }
+.pricing-contact label { font-weight: 650; }
 .pricing-contact input {
   display: block;
   width: 100%;
@@ -255,6 +254,10 @@
 }
 
 @media (max-width: 760px) {
+  .pricing-form { margin-top: 10px; }
+  .pricing-contact input { margin-bottom: 8px; }
+  .pricing-form .pricing-submit { margin-top: 8px; }
+
   html:has(.models-page .pricing-contact input:focus) {
     scroll-padding-top: 12px;
   }

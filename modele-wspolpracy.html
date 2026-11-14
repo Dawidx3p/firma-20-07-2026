@@ -53,8 +53,8 @@
       text-underline-offset: .2em;
     }
   </style>
-  <link rel="stylesheet" href="css/cennik-test.css?v=10">
-  <script src="js/cennik-test.js?v=9" defer></script>
+  <link rel="stylesheet" href="css/cennik-test.css?v=11">
+  <script src="js/cennik-test.js?v=10" defer></script>
 </head>
 
 <body class="models-page">
@@ -150,16 +150,13 @@
           <ul id="bundle-items" class="pricing-picked" aria-label="Wybrane usługi" hidden></ul>
           <button id="bundle-open" class="pricing-submit" type="button" aria-controls="bundle-form" aria-expanded="false" disabled>Wyślij zapytanie</button>
           <form id="bundle-form" class="pricing-form" hidden>
-            <fieldset class="pricing-contact">
-              <legend>Podaj e-mail lub numer telefonu</legend>
-              <label for="bundle-email">Adres e-mail</label>
-              <input id="bundle-email" type="email" name="email" autocomplete="email">
-              <label for="bundle-phone">Numer telefonu</label>
-              <input id="bundle-phone" type="tel" name="phone" autocomplete="tel">
-            </fieldset>
+            <div class="pricing-contact">
+              <label for="bundle-contact">E-mail lub numer telefonu</label>
+              <input id="bundle-contact" type="text" name="contact" autocapitalize="none" spellcheck="false" required>
+            </div>
             <label class="pricing-privacy">
               <input id="bundle-privacy" type="checkbox" required>
-              <span>Zapoznałem się z <a href="polityka-prywatnosci.html" target="_blank" rel="noopener">polityką prywatności</a> i przyjmuję do wiadomości zasady przetwarzania danych.</span>
+              <span>Potwierdzam zapoznanie się z <a href="polityka-prywatnosci.html" target="_blank" rel="noopener">polityką prywatności</a>.</span>
             </label>
             <button id="bundle-send" class="pricing-submit" type="submit">Wyślij zapytanie</button>
           </form>
