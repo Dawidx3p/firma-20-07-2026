@@ -9,13 +9,22 @@
     scroll-padding-bottom:var(--home-contact-clearance);
   }
   .home-mobile-test{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
-  .home-mobile-contact{display:flex;align-items:center;justify-content:space-between;position:fixed;z-index:8990;left:12px;right:72px;bottom:var(--home-contact-bottom);height:var(--home-contact-height);min-height:var(--home-contact-height);min-width:0;gap:12px;padding:9px 11px 9px 16px;border:1px solid #84f0ff;border-radius:14px;background:#00e0ff;color:#071219;font-size:15px;font-weight:700;line-height:1.4;box-shadow:0 6px 22px #0005;text-decoration:none;transition:background-color .15s ease,border-color .15s ease}
+  .home-mobile-contact{display:flex;align-items:center;justify-content:space-between;position:fixed;z-index:8990;left:12px;right:72px;bottom:var(--home-contact-bottom);height:var(--home-contact-height);min-height:var(--home-contact-height);min-width:0;gap:12px;padding:9px 11px 9px 16px;border:1px solid rgba(0,224,255,.24);border-radius:14px;background:radial-gradient(ellipse at 85% 0%,rgba(0,224,255,.24),transparent 72%),linear-gradient(180deg,#252630,#1c1d26);color:#f4f6fb;font-size:15px;font-weight:700;line-height:1.4;box-shadow:0 6px 22px #0005;text-decoration:none;transition:border-color .15s ease}
   .home-mobile-test .kx-chat{right:12px;bottom:var(--home-contact-bottom)}
   .home-mobile-test.menu-open .home-mobile-contact,.home-mobile-test:has(.kx-chat-panel:not([hidden])) .home-mobile-contact{display:none}
+  .home-mobile-contact::before {
+    content: "";
+    position: absolute;
+    inset: 0 10px auto;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-2), transparent);
+    opacity: .75;
+    pointer-events: none;
+  }
   .home-mobile-contact>.cta-label{white-space:nowrap}
-  .home-mobile-contact>.cta-arrow{display:grid;place-items:center;width:28px;height:28px;flex:0 0 28px;border-radius:7px;background:#10212e;color:#00e0ff;font-size:21px;font-weight:500;line-height:1}
-  .home-mobile-contact:hover{background:#55eaff;border-color:#b4f7ff}
-  .home-mobile-contact:active{background:#00c5df}
+  .home-mobile-contact>.cta-arrow{display:grid;place-items:center;width:28px;height:28px;flex:0 0 28px;color:var(--accent-2);font-size:23px;font-weight:700;line-height:1}
+  .home-mobile-contact:hover{border-color:rgba(0,224,255,.48)}
+  .home-mobile-contact:active{border-color:rgba(0,224,255,.65)}
   .home-mobile-contact:focus-visible{outline:3px solid #fff;outline-offset:3px}
 }
 .contact-wizard-step{border:0;padding:0;margin:22px 0 0;min-width:0}
