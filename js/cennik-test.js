@@ -245,6 +245,25 @@ function closeForm() {
   open.setAttribute('aria-expanded', 'false');
 }
 
+const contactViewport = window.visualViewport;
+if (contactViewport) {
+  let fullHeight = 0;
+  let keyboardWasOpen = false;
+
+  contactInput.addEventListener('focus', () => {
+    fullHeight = contactViewport.height * contactViewport.scale;
+    keyboardWasOpen = false;
+  });
+
+  contactViewport.addEventListener('resize', () => {
+    if (document.activeElement !== contactInput) return;
+    const height = contactViewport.height * contactViewport.scale;
+    // Ignore small changes from the browser toolbar and wait for the keyboard to retract.
+    if (fullHeight - height > 120) keyboardWasOpen = true;
+    if (keyboardWasOpen && height >= fullHeight - 60) contactInput.blur();
+  });
+}
+
 open.addEventListener('click', () => {
   open.setAttribute('aria-expanded', 'true');
   open.hidden = true;
