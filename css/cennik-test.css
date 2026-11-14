@@ -129,7 +129,7 @@
 .pricing-jump { display: none; }
 
 @media (max-width: 760px) {
-  .pricing-jump.has-selection {
+  .pricing-jump.has-selection:not([hidden]) {
     position: fixed;
     left: max(14px, env(safe-area-inset-left));
     bottom: max(14px, env(safe-area-inset-bottom));
@@ -216,7 +216,7 @@
 }
 
 @media (max-width: 760px) {
-  .pricing-jump.has-selection {
+  .pricing-jump.has-selection:not([hidden]) {
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -233,6 +233,11 @@ function updateBundle() {
   if (!sending) feedback.textContent = '';
 }
 
+const summaryObserver = new IntersectionObserver(([entry]) => {
+  jump.hidden = entry.isIntersecting;
+}, { rootMargin: '-77px 0px -48px 0px' });
+summaryObserver.observe(summary);
+
 jump.addEventListener('click', () => summary.focus({ preventScroll: true }));
 
 function closeForm() {
