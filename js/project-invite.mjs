@@ -43,14 +43,14 @@ export function initProjectInvite() {
     document.head.append(style);
     banner = document.createElement('aside');
     banner.className = 'project-invite';
-    banner.setAttribute('aria-label', 'Projekty KAIROX');
+    banner.setAttribute('aria-label', 'Nasze realizacje');
     banner.innerHTML = `<div class="project-invite-inner">
       <a class="project-invite-content" href="${new URL('../realizacje.html', import.meta.url).href}">
         <picture class="project-invite-art">
           <source media="(max-width:760px)" srcset="${new URL('../img/banners/portfolio-overview-mobile.svg?v=retina-1', import.meta.url).href}">
           <img src="${new URL('../img/banners/portfolio-overview.svg?v=retina-1', import.meta.url).href}" width="1600" height="180" alt="" decoding="async">
         </picture>
-        <div class="project-invite-heading"><p class="project-invite-title">A gdyby Twoja strona wyglądała tak?</p>
+        <div class="project-invite-heading"><p class="project-invite-title">Nasze realizacje</p>
         <p class="project-invite-hint">Kliknij w baner i zobacz więcej <span aria-hidden="true">→</span></p></div>
       </a>
       <button type="button" class="project-invite-close" aria-label="Zamknij podgląd projektów">×</button></div>`;
