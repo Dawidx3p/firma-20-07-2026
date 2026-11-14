@@ -253,3 +253,13 @@
     scroll-margin-bottom: 24px;
   }
 }
+
+@media (max-width: 760px) {
+  html:has(.models-page .pricing-contact input:focus) {
+    scroll-padding-top: 12px;
+  }
+
+  .models-page:has(.pricing-contact input:focus) .site-header {
+    visibility: hidden;
+  }
+}
