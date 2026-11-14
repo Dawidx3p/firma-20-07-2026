@@ -1,5 +1,6 @@
 // Project recommendation: once per tab session, without analytics or API calls.
 export function initProjectInvite() {
+  if (/^\/modele-wspolpracy(?:\.html|\/)?$/.test(location.pathname)) return;
   if (/\/(?:realizacje|formularz-kontaktowy|polityka-prywatnosci|polityka-cookies|404)\.html$/.test(location.pathname) || location.pathname.includes('/archiwum-sledcze/') || location.pathname.startsWith('/realizacje/')) return;
   const key = 'kairox-project-invite-v2';
   const preview = ['localhost', '127.0.0.1'].includes(location.hostname) &&
