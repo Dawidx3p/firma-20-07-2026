@@ -8,6 +8,7 @@ const models = {
 
 const categories = [
   {
+    key: 'identyfikacja',
     name: 'Identyfikacja wizualna',
     filter: 'Identyfikacja',
     services: [
@@ -20,6 +21,7 @@ const categories = [
     ],
   },
   {
+    key: 'strony',
     name: 'Strony internetowe',
     filter: 'Strony WWW',
     services: [
@@ -30,6 +32,7 @@ const categories = [
     ],
   },
   {
+    key: 'komunikacja',
     name: 'Komunikacja i copywriting',
     filter: 'Komunikacja',
     services: [
@@ -41,6 +44,7 @@ const categories = [
     ],
   },
   {
+    key: 'reklama',
     name: 'Reklama i kreacja',
     filter: 'Reklama',
     services: [
@@ -120,14 +124,17 @@ const groups = categories.map(({ name, services: groupServices }) => {
   return section;
 });
 
+const params = new URLSearchParams(location.search);
 const filterOptions = [{ name: 'Wszystkie usługi', filter: 'Wszystkie' }, ...categories];
+
+const requestedCategory = params.get('kategoria');
+const initialFilter = Math.max(0, filterOptions.findIndex(({ key }) => key === requestedCategory));
 
 filterOptions.forEach(({ name, filter }, index) => {
   const button = document.createElement('button');
   button.type = 'button';
   button.textContent = filter;
   button.setAttribute('aria-label', name);
-  button.setAttribute('aria-pressed', String(index === 0));
   button.addEventListener('click', () => {
     for (const option of filters.children) {
       option.setAttribute('aria-pressed', String(option === button));
@@ -138,8 +145,9 @@ filterOptions.forEach(({ name, filter }, index) => {
   });
   filters.append(button);
 });
+filters.children[initialFilter].click();
 
-const requestedModel = new URLSearchParams(location.search).get('model');
+const requestedModel = params.get('model');
 let selectedModel = Object.hasOwn(models, requestedModel) ? requestedModel : '';
 
 for (const [key, [name, price]] of [...Object.entries(models), ['', ['Same usługi', 'Bez modelu współpracy']]]) {

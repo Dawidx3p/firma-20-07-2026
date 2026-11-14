@@ -20,51 +20,64 @@
   <link rel="stylesheet" href="css/section-scroll.css?v=10">
   <script src="js/section-motion.js?v=5" defer></script>
   <script src="js/section-scroll.js?v=14" defer></script>
-  <link rel="stylesheet" href="css/site-refinements.css?v=ux-1">
+  <link rel="stylesheet" href="css/site-refinements.css?v=contact-compact-16">
 </head>
-<body>
+<body class="compact-contact-page">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
   <main id="main-content">
     <section class="contact-landing">
-      <div class="contact-landing-intro">
-        <a class="contact-brand" href="index.html" aria-label="KAIROX — wróć na stronę główną">KAIROX</a>
-        <p class="eyebrow">Bezpłatna konsultacja</p>
-        <h1>Porozmawiajmy o Twojej stronie</h1>
-        <p class="contact-landing-lead">
-          Podaj kontakt i opowiedz, czego potrzebujesz. Wrócimy do Ciebie,
-          żeby omówić możliwy kolejny krok.
-        </p>
+      <a class="contact-brand contact-home-link" href="index.html" aria-label="KAIROX — wróć na stronę główną">
+        <span aria-hidden="true">←</span> KAIROX
+      </a>
+      <div class="contact-landing-intro" hidden>
+        <p class="eyebrow"></p>
+        <h1></h1>
+        <p class="contact-landing-lead"></p>
+      </div>
+      <div class="contact-process">
+        <ol class="contact-expectations" aria-label="Jak wygląda pierwszy kontakt">
+          <li><strong>Wyślij zgłoszenie</strong></li>
+          <li><strong>Odezwiemy się</strong></li>
+          <li><strong>Omówimy potrzeby</strong></li>
+        </ol>
 
       </div>
-
       <div class="contact-form-card" id="formularz">
-        <p class="eyebrow">Zacznijmy rozmowę</p>
-        <h2>Napisz, z czym się mierzysz</h2>
-        <p>Wystarczy adres e-mail lub numer telefonu.</p>
+        <h2 hidden></h2>
         <p id="contactServiceContext" hidden></p>
 
         <form id="contactForm" novalidate>
           <ol class="contact-wizard-progress" aria-label="Etapy formularza" hidden><li>1. Twoja strona</li><li>2. Kontakt</li><li>3. Potwierdzenie</li></ol>
           <fieldset class="contact-wizard-step" data-contact-step>
-            <legend tabindex="-1">1. Twoja strona</legend>
-            <p class="form-hint">Adres i opis pomogą nam zrozumieć sytuację. Możesz uzupełnić je później.</p>
+            <legend tabindex="-1" class="contact-step-label">Twoja strona</legend>
             <div class="form-group"><label for="website">Adres Twojej strony (opcjonalnie)</label><input type="url" id="website" name="website" inputmode="url" autocomplete="url" placeholder="https://twojafirma.pl"></div>
             <div class="form-group"><label for="challenge">Co obecnie jest największym problemem Twojej strony?</label><textarea id="challenge" name="challenge" rows="4" placeholder="Napisz kilka zdań — nie musisz przygotowywać pełnego briefu."></textarea></div>
-            <div class="contact-wizard-actions" data-contact-navigation hidden><button type="button" class="primary-button" data-contact-next>Dalej →</button></div>
+            <div class="contact-wizard-actions" data-contact-navigation hidden><button type="button" class="primary-button" data-contact-next>Dalej <span aria-hidden="true">→</span></button></div>
           </fieldset>
-          <fieldset class="contact-wizard-step" data-contact-step>
-            <legend tabindex="-1">2. Jak się z Tobą skontaktować?</legend>
+          <fieldset class="contact-wizard-step contact-details-step" data-contact-step>
+            <legend tabindex="-1" class="contact-step-label">Kontakt</legend>
             <p class="form-hint">Wystarczy e-mail lub numer telefonu.</p>
             <div class="form-group"><label for="name">Jak mamy się do Ciebie zwracać? (opcjonalnie)</label><input type="text" id="name" name="name" autocomplete="name"></div>
             <div class="contact-fields-row">
               <div class="form-group"><label for="email">Adres e-mail</label><input type="email" id="email" name="email" autocomplete="email" aria-describedby="emailError"><p class="field-error-note" id="emailError"></p></div>
               <div class="form-group"><label for="phone">Numer telefonu</label><input type="tel" id="phone" name="phone" inputmode="tel" autocomplete="tel" aria-describedby="phoneError"><p class="field-error-note" id="phoneError"></p></div>
             </div>
-            <div class="form-group"><label for="contactMethod">Preferowana forma kontaktu</label><select id="contactMethod" name="contactMethod"><option value="">Bez preferencji</option><option>E-mail</option><option>Telefon</option><option>WhatsApp</option><option>Google Meet</option></select></div>
-            <div class="contact-wizard-actions" data-contact-navigation hidden><button type="button" class="secondary-button" data-contact-back>Wstecz</button><button type="button" class="primary-button" data-contact-next>Dalej →</button></div>
+            <div class="form-group">
+              <label for="contactMethod">Preferowana forma kontaktu (opcjonalnie)</label>
+              <div class="contact-method-picker">
+                <select id="contactMethod" name="contactMethod">
+                  <option value="">Bez preferencji</option>
+                  <option>E-mail</option>
+                  <option>Telefon</option>
+                  <option>WhatsApp</option>
+                  <option>Google Meet</option>
+                </select>
+              </div>
+            </div>
+            <div class="contact-wizard-actions" data-contact-navigation hidden><button type="button" class="secondary-button" data-contact-back><span aria-hidden="true">←</span> Wstecz</button><button type="button" class="primary-button" data-contact-next>Dalej <span aria-hidden="true">→</span></button></div>
           </fieldset>
           <fieldset class="contact-wizard-step" data-contact-step>
-            <legend tabindex="-1">3. Sprawdź i wyślij</legend>
+            <legend tabindex="-1" class="contact-step-label">Potwierdzenie</legend>
             <dl class="contact-wizard-summary" id="contactSummary"></dl>
           <div class="form-group checkbox">
             <input type="checkbox" id="privacy" required aria-describedby="privacyError">
@@ -74,8 +87,7 @@
             </label>
           </div>
           <p class="field-error-note" id="privacyError"></p>
-          <div class="contact-wizard-actions"><button type="button" class="secondary-button" data-contact-back>Wstecz</button><button type="submit" class="primary-button" id="submitButton" disabled>Wyślij zgłoszenie</button></div>
-          <p class="form-hint">Zgłoszenie wyślesz dopiero tym przyciskiem.</p>
+          <div class="contact-wizard-actions"><button type="button" class="secondary-button" data-contact-back><span aria-hidden="true">←</span> Wstecz</button><button type="submit" class="primary-button" id="submitButton" disabled>Wyślij zgłoszenie</button></div>
           </fieldset>
         </form>
         <p class="form-status" id="formStatus" role="status" aria-live="polite" tabindex="-1"></p>
@@ -83,15 +95,6 @@
           <a class="secondary-button" href="index.html">Wróć na stronę główną</a>
           <a class="secondary-button" href="realizacje.html">Zobacz realizacje</a>
         </div>
-      </div>
-      <div class="contact-process">
-        <div class="contact-expectations" aria-label="Jak wygląda pierwszy kontakt">
-          <div><span>01</span><p>Wypełniasz krótki formularz.</p></div>
-          <div><span>02</span><p>Kontaktujemy się w wybrany przez Ciebie sposób.</p></div>
-          <div><span>03</span><p>Rozmawiamy o sytuacji, potrzebach i możliwym kolejnym kroku.</p></div>
-        </div>
-
-        <p class="contact-assurance">Bez zobowiązań i bez gotowej oferty wysyłanej w ciemno.</p>
       </div>
     </section>
   </main>
@@ -126,7 +129,7 @@
   </div>
 
   <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/contact-page.js?v=steps-1"></script>
+  <script src="js/contact-page.js?v=steps-8"></script>
   <script src="js/chat-config.js"></script>
   <script src="js/chat.js?v=message-invite-1"></script>
 </body>

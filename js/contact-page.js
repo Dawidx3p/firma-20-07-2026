@@ -23,16 +23,19 @@ const serviceContext = document.getElementById("contactServiceContext");
 const isVisualization = serviceId === "visualization";
 const submitLabel = isVisualization ? "Zgłoś stronę do bezpłatnej wizualizacji" : "Wyślij zgłoszenie";
 if (isVisualization) {
+  document.querySelector(".contact-landing-intro").hidden = false;
   document.title = "Bezpłatna wizualizacja pierwszego ekranu — KAIROX";
   document.querySelector(".contact-landing-intro .eyebrow").textContent = "Bezpłatna wizualizacja";
   document.querySelector(".contact-landing-intro h1").textContent = "Zobacz, jak może wyglądać pierwszy ekran Twojej strony";
   document.querySelector(".contact-landing-lead").textContent = "Otrzymasz propozycję wyglądu, głównego komunikatu i przycisku kontaktu. Najpierw sprawdzimy zgłoszenie i potwierdzimy zakres oraz termin. Bez obowiązku zamówienia strony.";
-  document.querySelector(".contact-form-card h2").textContent = "Zgłoś stronę do bezpłatnej wizualizacji";
+  const formTitle = document.querySelector(".contact-form-card h2");
+  formTitle.textContent = "Zgłoś stronę do bezpłatnej wizualizacji";
+  formTitle.hidden = false;
   document.querySelector('label[for="challenge"]').textContent = "Czym zajmuje się Twoja firma i co chcesz pokazać lub poprawić?";
   document.querySelector(".contact-expectations").setAttribute("aria-label", "Jak otrzymać bezpłatną wizualizację");
-  const steps = document.querySelectorAll(".contact-expectations p");
-  steps[1].textContent = "Sprawdzamy zgłoszenie i potwierdzamy zakres oraz termin.";
-  steps[2].textContent = "Otrzymujesz wizualizację pierwszego ekranu i oceniasz kierunek.";
+  const stepTitles = document.querySelectorAll(".contact-expectations strong");
+  stepTitles[1].textContent = "Ustalimy zakres";
+  stepTitles[2].textContent = "Otrzymasz wizualizację";
   submitButton.textContent = submitLabel;
 }
 if (selectedService) {
@@ -95,13 +98,14 @@ function showStep(index, focus = true) {
     const summary = document.getElementById('contactSummary');
     summary.replaceChildren();
     const values = [
-      ['Temat', selectedService || 'Rozmowa o stronie'],
-      ['Strona', website.value.trim() || 'Nie podano'],
-      ['Opis', document.getElementById('challenge').value.trim() || 'Do omówienia w rozmowie'],
+      ['Temat', selectedService],
+      ['Strona', website.value.trim()],
+      ['Opis', document.getElementById('challenge').value.trim()],
       ['Kontakt', [email.value.trim(), phone.value.trim()].filter(Boolean).join(' / ')],
-      ['Forma kontaktu', contactMethod.value || 'Bez preferencji']
+      ['Forma kontaktu', contactMethod.value]
     ];
     for (const [label, value] of values) {
+      if (!value) continue;
       const dt = document.createElement('dt'), dd = document.createElement('dd');
       dt.textContent = label; dd.textContent = value; summary.append(dt, dd);
     }
