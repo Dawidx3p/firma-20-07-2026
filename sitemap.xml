@@ -1,25 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
     <loc>https://kairox.pl/</loc>
+    <image:image>
+      <image:loc>https://kairox.pl/video/kairox-hero-poster.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/illustrations/kairox-02-strategia.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/bieg-rzeczy-mobile.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/bieg-rzeczy-desktop.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/sloj-i-forma-mobile.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/sloj-i-forma-desktop.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/home-services-desktop.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/home-services-mobile.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/dawid-kairox.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/illustrations/kairox-03-jasny-kontakt.webp</image:loc>
+    </image:image>
   </url>
 
   <url>
     <loc>https://kairox.pl/strony-dla-firm/</loc>
+    <image:image>
+      <image:loc>https://kairox.pl/img/illustrations/kairox-01-od-czego-zaczac.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/amo.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/galeria-klik-current.jpg</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/dawid-kairox.jpg</image:loc>
+    </image:image>
   </url>
 
   <url>
     <loc>https://kairox.pl/audyt-komunikacji.html</loc>
+    <image:image>
+      <image:loc>https://kairox.pl/img/illustrations/kairox-04-audyt.webp</image:loc>
+    </image:image>
   </url>
 
   <url>
     <loc>https://kairox.pl/metoda.html</loc>
+    <image:image>
+      <image:loc>https://kairox.pl/img/illustrations/kairox-02-strategia.webp</image:loc>
+    </image:image>
   </url>
 
   <url>
     <loc>https://kairox.pl/partnerstwo.html</loc>
+    <image:image>
+      <image:loc>https://kairox.pl/img/illustrations/kairox-06-partnerstwo.webp</image:loc>
+    </image:image>
   </url>
 
   <url>
@@ -48,6 +100,9 @@
 
   <url>
     <loc>https://kairox.pl/modele-wspolpracy.html</loc>
+    <image:image>
+      <image:loc>https://kairox.pl/img/illustrations/kairox-05-zakres.webp</image:loc>
+    </image:image>
   </url>
 
   <url>
@@ -56,6 +111,48 @@
 
   <url>
     <loc>https://kairox.pl/realizacje.html</loc>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/bieg-rzeczy-mobile.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/bieg-rzeczy-desktop.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/czysty-uklad-mobile.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/czysty-uklad-desktop.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/sloj-i-forma-mobile.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/sloj-i-forma-desktop.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/galeria-klik-mobile.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/galeria-klik-desktop.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/my-trip-world-mobile.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/my-trip-world-desktop.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/archiwum-sledcze-mobile.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/archiwum-sledcze-desktop.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/amo-mobile.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://kairox.pl/img/projects/screens/amo-desktop.webp</image:loc>
+    </image:image>
   </url>
 
 </urlset>
