@@ -16,7 +16,6 @@ const rules = [
   [/my trip world/, '/realizacje.html#my-trip-world'],
   [/archiwum sledcze/, '/realizacje.html#archiwum-sledcze'],
   [/\bamo\b/, '/realizacje.html#amo'],
-  [/kraktax/, '/kraktax/'], [/ul car/, '/ul-car/'],
   [/dlaczego (?:wiekszosc )?stron\w* nie sprzedaj/, '/dlaczego-strony-nie-sprzedaja.html'],
   [/jak klient podejmuje decyzj/, '/jak-klient-podejmuje-decyzje.html'],
   [/bled\w* komunikacyjn/, '/bledy-komunikacyjne-firm-uslugowych.html'],

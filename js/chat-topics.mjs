@@ -485,23 +485,5 @@ export const CHAT_TOPICS = Object.freeze({
       "Jak przejść od menu AMO do rezerwacji?",
       "Jak AMO pokazuje bestsellery?"
     ]
-  },
-  "kraktax": {
-    "path": "/kraktax/",
-    "questions": [
-      "Jak koncepcja KrakTax pokazuje usługi?",
-      "Jak koncepcja KrakTax ułatwia kontakt?",
-      "Jak KrakTax przedstawia księgowość online?",
-      "Czy koncepcja KrakTax jest oficjalną stroną?"
-    ]
-  },
-  "ul_car": {
-    "path": "/ul-car/",
-    "questions": [
-      "Jak koncepcja UL CAR porządkuje usługi?",
-      "Jak UL CAR przedstawia rejestrację auta?",
-      "Jak koncepcja UL CAR ułatwia kontakt?",
-      "Czy koncepcja UL CAR jest oficjalną stroną?"
-    ]
   }
 });
