@@ -25,3 +25,16 @@ body :is(.primary-button, .secondary-button) { font-weight: 600; letter-spacing:
 body .form-group label { font-weight: 550; line-height: 1.5; }
 body .form-group :is(input, select, textarea) { font-size: 1rem; line-height: 1.5; }
 body :is(.logo, .footer-logo, .contact-brand) { letter-spacing: -.035em; font-weight: 800; }
+
+/* Brand lettering only; Inter retains the original logo style while loading
+   and when the custom font is unavailable. */
+@font-face {
+  font-family: 'KAIROX Display';
+  src: url('../fonts/KAIROX-Display.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+body :is(.logo, .footer-logo, .contact-brand) {
+  font-family: 'KAIROX Display', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
