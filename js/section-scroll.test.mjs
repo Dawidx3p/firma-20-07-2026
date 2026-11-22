@@ -116,6 +116,38 @@ test('oddzielne skoki kółka liczone w liniach nadal przewijają po ekranie', (
   assert.deepEqual(surface.scrolls, [760, 1520, 2280]);
 });
 
+test('kilka gestów o ułamkowych wartościach linii dołącza do kolejki podczas animacji', () => {
+  const surface = mount({ reduced: false });
+  for (const time of [0, 86, 172]) {
+    surface.wheel(.15, time, 1);
+    surface.wheel(.32, time + 12, 1);
+    surface.wheel(.08, time + 24, 1);
+  }
+  assert.equal(surface.position.textContent, '4 / 5');
+  surface.frame(650);
+  assert.equal(surface.scrolls.at(-1), 2280);
+});
+
+test('ułamkowy ogon w liniach nie przeskakuje, a kolejny lekki gest działa', () => {
+  const surface = mount();
+  surface.wheel(.42, 10, 1);
+  surface.wheel(.28, 28, 1);
+  surface.wheel(.12, 100, 1);
+  surface.wheel(.04, 190, 1);
+  surface.wheel(.02, 350, 1);
+  assert.deepEqual(surface.scrolls, [760]);
+  surface.wheel(.06, 410, 1);
+  assert.deepEqual(surface.scrolls, [760, 1520]);
+});
+
+test('lekki ruch w przeciwną stronę odblokowuje pierwszy ekran dla ułamkowego gestu', () => {
+  const surface = mount();
+  surface.wheel(-.6, 10, 1);
+  surface.wheel(-.05, 25, 1);
+  surface.wheel(.04, 65, 1);
+  assert.deepEqual(surface.scrolls, [760]);
+});
+
 test('lekki szybszy gest rozpoznajemy także przed końcem animacji', () => {
   const surface = mount();
   surface.wheel(6, 10);

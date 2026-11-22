@@ -199,19 +199,21 @@
   }
   updateControls();
 
-  function startsWheelGesture(previous, direction, magnitude, time, mode) {
+  function startsWheelGesture(previous, direction, magnitude, time, mode, fractionalLine) {
     if (!previous) return true;
 
     const gap = time - previous.time;
     // A late, very small impulse can still belong to the original stroke.
-    if (gap >= 440) return mode !== 0 || magnitude >= 2 || gap >= 700;
+    if (gap >= 440 && !fractionalLine) return mode !== 0 || magnitude >= 2 || gap >= 700;
+    if (gap >= 700) return true;
     if (direction !== previous.direction) {
-      if (previous.atBoundary) return magnitude >= 1.2;
+      if (previous.atBoundary) return magnitude >= (fractionalLine ? .5 : 1.2);
+      if (fractionalLine) return magnitude >= Math.max(.5, Math.min(2, previous.magnitude));
       return magnitude >= Math.max(1.5, Math.min(8, previous.peak * .08));
     }
 
     if (mode === 2) return gap >= wheelPause;
-    if (mode === 1) {
+    if (mode === 1 && !fractionalLine) {
       // Whole-line steps can repeat at the same value throughout a momentum tail.
       // Full-strength line steps after a pause can start another deliberate stroke.
       if (previous.samples === 1) return gap >= 64;
@@ -220,10 +222,14 @@
         magnitude >= Math.max(32, previous.magnitude * 1.6, previous.peak * .4);
     }
 
+    // Some touchpads report fractions of a line even when the browser uses line mode.
+    const pauseThreshold = fractionalLine
+      ? Math.max(.5, previous.magnitude, Math.min(3, previous.peak * .2))
+      : Math.max(1.6, previous.magnitude * .9, Math.min(8, previous.peak * .32));
     const restartedAfterPause = gap >= wheelPause &&
-      magnitude >= Math.max(1.6, previous.magnitude * .9, Math.min(8, previous.peak * .32));
+      magnitude >= pauseThreshold;
     const accelerated = previous.falling && gap >= 12 && gap <= 96 &&
-      magnitude >= Math.max(1.2, previous.magnitude * 1.8, previous.peak * .085);
+      magnitude >= Math.max(fractionalLine ? .5 : 1.2, previous.magnitude * 1.8, previous.peak * .085);
     return restartedAfterPause || accelerated;
   }
 
@@ -235,9 +241,11 @@
 
     const time = event.timeStamp;
     const direction = Math.sign(event.deltaY);
-    const magnitude = Math.abs(event.deltaY) * (mode === 1 ? 16 : mode === 2 ? root.clientHeight : 1);
+    const delta = Math.abs(event.deltaY);
+    const magnitude = delta * (mode === 1 ? 16 : mode === 2 ? root.clientHeight : 1);
+    const fractionalLine = mode === 1 && !Number.isInteger(delta);
     const previous = wheelGesture;
-    if (startsWheelGesture(previous, direction, magnitude, time, mode)) {
+    if (startsWheelGesture(previous, direction, magnitude, time, mode, fractionalLine)) {
       const atBoundary = move(direction);
       wheelGesture = { time, direction, magnitude, peak: magnitude, falling: false, samples: 1, atBoundary };
       return;
