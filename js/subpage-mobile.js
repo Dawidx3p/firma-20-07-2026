@@ -3,6 +3,8 @@
 
   const mobile = matchMedia("(max-width: 980px)");
   const root = document.documentElement;
+  const touchViewport = matchMedia("(hover: none) and (pointer: coarse)").matches;
+  let viewportWidth = root.clientWidth;
   const screens = [...document.querySelectorAll("main > .subpage-text-screen, main > .audit-mobile-screen")];
   const faqSelector = ".models-faq-item > summary, .partner-rules details > summary, .lp-faq details > summary";
   const desktopDetail = "[data-screen-all], " + faqSelector;
@@ -184,7 +186,8 @@
       summary.parentElement.open = false;
       summary.setAttribute("aria-haspopup", "dialog");
     }
-    const available = root.clientHeight - headerHeight;
+    const viewportHeight = parseFloat(root.style.getPropertyValue("--screen-viewport-height")) || root.clientHeight;
+    const available = viewportHeight - headerHeight;
     for (const screen of screens) {
       if (mobile.matches || screen.querySelector(".legal-section")) paginate(screen, available);
     }
@@ -211,6 +214,10 @@
   update();
   if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
   document.fonts.ready.then(schedule);
-  window.addEventListener("resize", schedule);
+  window.addEventListener("resize", () => {
+    if (touchViewport && root.clientWidth === viewportWidth) return;
+    viewportWidth = root.clientWidth;
+    schedule();
+  });
   mobile.addEventListener("change", schedule);
 })();

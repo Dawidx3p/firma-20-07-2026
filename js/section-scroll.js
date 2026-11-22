@@ -11,6 +11,9 @@
   const subpage = document.body.classList.contains("subpage-screen");
   const pageHeader = subpage && document.querySelector("body > header");
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const touchViewport = matchMedia("(hover: none) and (pointer: coarse)").matches;
+  // The screen styles share these height breakpoints with the initial mobile viewport.
+  const heightBreakpoints = [510, 520, 530, 540, 550, 560, 580, 600, 620, 640, 660, 690, 700, 710, 720, 760, 800];
   const transitionTime = 230;
   const extraStepTime = 70;
   const maxTransitionTime = 460;
@@ -24,7 +27,19 @@
   let swipe = null;
   let animationFrame = 0;
   let animation = null;
+  let viewportWidth;
+  let viewportHeight;
+  let cachedStops;
   const queue = [];
+
+  function measureViewport() {
+    viewportWidth = root.clientWidth;
+    viewportHeight = touchViewport ? root.clientHeight : window.innerHeight;
+    root.setAttribute("data-screen-height", heightBreakpoints.filter(height => viewportHeight <= height).join(" "));
+    if (touchViewport) root.style.setProperty("--screen-viewport-height", `${viewportHeight}px`);
+  }
+
+  measureViewport();
 
   function blocked(target, controls = editable) {
     return document.querySelector(overlays) ||
@@ -32,7 +47,7 @@
   }
 
   function getMaxScroll() {
-    return root.scrollHeight - root.clientHeight;
+    return Math.max(0, root.scrollHeight - root.clientHeight);
   }
 
   function cancelTransition() {
@@ -85,8 +100,9 @@
 
   function getContinuationStops(panel, box, start, y, max, headerHeight) {
     const clearance = parseFloat(getComputedStyle(panel).paddingBottom) || 0;
-    const pageDistance = Math.max(120, root.clientHeight - headerHeight - clearance - 12);
-    const bottom = Math.min(max, Math.round(box.bottom + y - root.clientHeight));
+    const height = touchViewport ? viewportHeight : root.clientHeight;
+    const pageDistance = Math.max(120, height - headerHeight - clearance - 12);
+    const bottom = Math.min(max, Math.round(box.bottom + y - height));
     if (bottom <= start + 6) return [];
 
     const landmarks = [...panel.querySelectorAll("h2, h3, h4, article, p, li, details, figure, .pricing-service")]
@@ -108,9 +124,10 @@
   }
 
   function getStops() {
+    if (cachedStops) return cachedStops;
     const y = window.scrollY;
     const padding = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0;
-    const max = getMaxScroll();
+    const max = touchViewport ? Math.max(0, root.scrollHeight - viewportHeight) : getMaxScroll();
     const visiblePanels = panels.filter(panel =>
       panel.getClientRects().length && getComputedStyle(panel).scrollSnapAlign !== "none"
     );
@@ -120,11 +137,15 @@
       const continuations = subpage ? getContinuationStops(panel, box, start, y, max, padding) : [];
       return [start, ...continuations];
     });
-    return [...new Set(stops)].sort((a, b) => a - b);
+    const orderedStops = [...new Set(stops)].sort((a, b) => a - b);
+    if (touchViewport) cachedStops = orderedStops;
+    return orderedStops;
   }
 
   function updateControls(stops = getStops()) {
-    const index = queue.at(-1)?.index ?? Math.max(0, stops.findLastIndex(stop => stop <= window.scrollY + 2));
+    const y = window.scrollY;
+    const atEnd = touchViewport && y > 0 && y >= getMaxScroll() - 2;
+    const index = queue.at(-1)?.index ?? Math.max(0, atEnd ? stops.length - 1 : stops.findLastIndex(stop => stop <= y + 2));
     const text = `${index + 1} / ${stops.length}`;
     if (positionLabel.textContent !== text) positionLabel.textContent = text;
     previousButton.setAttribute("aria-disabled", String(index === 0));
@@ -135,6 +156,7 @@
   function move(direction) {
     const stops = getStops();
     const last = queue.at(-1);
+    if (!last && touchViewport && direction > 0 && window.scrollY >= getMaxScroll() - 2) return true;
     const index = last
       ? last.index + direction
       : direction > 0
@@ -156,6 +178,7 @@
   }
 
   function syncLayout() {
+    cachedStops = undefined;
     const stops = getStops();
     if (animation) {
       if (!stops.length) {
@@ -309,7 +332,13 @@
     move(forward ? 1 : -1);
   });
 
-  window.addEventListener("resize", syncLayout);
+  window.addEventListener("resize", () => {
+    // A toolbar or keyboard can change only the height during a touch gesture.
+    if (touchViewport && root.clientWidth === viewportWidth) return;
+    measureViewport();
+    syncLayout();
+  });
+  if (touchViewport) window.addEventListener("load", syncLayout, { once: true });
   window.addEventListener("hashchange", () => {
     wheelGesture = null;
     cancelTransition();

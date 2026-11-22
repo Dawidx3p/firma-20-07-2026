@@ -5,10 +5,13 @@ import vm from 'node:vm';
 
 const source = readFileSync(new URL('./section-scroll.js', import.meta.url), 'utf8');
 
-function mount({ reduced = true } = {}) {
+function mount({ reduced = true, touch = false } = {}) {
   const listeners = new Map();
   const scrolls = [];
-  const root = { clientHeight: 844, scrollHeight: 3884, setAttribute() {}, removeAttribute() {} };
+  const style = new Map();
+  const root = { clientWidth: 390, clientHeight: 844, scrollHeight: 3884,
+    style: { setProperty: style.set.bind(style) }, setAttribute() {}, removeAttribute() {} };
+  let measurements = 0;
   const frames = new Map();
   let clock = 0;
   let frameId = 0;
@@ -22,13 +25,17 @@ function mount({ reduced = true } = {}) {
     }
   };
   const window = {
+    innerHeight: 844,
     scrollY: 0,
     scrollTo({ top }) { this.scrollY = top; scrolls.push(top); },
     addEventListener(type, listener) { listeners.set(type, listener); }
   };
   const panels = [84, 844, 1604, 2364, 3124].map(top => ({
     getClientRects: () => [{}],
-    getBoundingClientRect: () => ({ top: top - window.scrollY })
+    getBoundingClientRect: () => {
+      measurements++;
+      return { top: top - window.scrollY };
+    }
   }));
   const document = {
     body: { classList: { contains: () => false } },
@@ -37,14 +44,22 @@ function mount({ reduced = true } = {}) {
     querySelectorAll: () => panels
   };
   vm.runInNewContext(source, {
-    document, window, Element: class {}, matchMedia: () => ({ matches: reduced }),
+    document, window, Element: class {},
+    matchMedia: query => ({ matches: query.includes('pointer: coarse') ? touch : reduced }),
     getComputedStyle: () => ({ scrollPaddingTop: '84px', scrollSnapAlign: 'start' }),
     performance: { now: () => clock },
     requestAnimationFrame(callback) { frames.set(++frameId, callback); return frameId; },
     cancelAnimationFrame(id) { frames.delete(id); }
   });
   return {
-    scrolls, position, frames,
+    scrolls, position, frames, style,
+    get measurements() { return measurements; },
+    load() { listeners.get('load')?.(); },
+    resize(width, height) {
+      root.clientWidth = width;
+      root.clientHeight = window.innerHeight = height;
+      listeners.get('resize')();
+    },
     frame(now) {
       clock = now;
       const callbacks = [...frames.values()];
@@ -62,6 +77,23 @@ function mount({ reduced = true } = {}) {
     }
   };
 }
+
+test('wysokość paska przeglądarki nie zmienia punktów ekranów na dotyku', () => {
+  const surface = mount({ touch: true });
+  surface.load();
+  const measurements = surface.measurements;
+  surface.wheel(100, 10);
+  surface.resize(390, 924);
+  surface.wheel(100, 100);
+  assert.equal(surface.style.get('--screen-viewport-height'), '844px');
+  assert.equal(surface.measurements, measurements);
+  assert.equal(surface.position.textContent, '3 / 5');
+  assert.deepEqual(surface.scrolls, [760, 1520]);
+
+  surface.resize(844, 390);
+  assert.equal(surface.style.get('--screen-viewport-height'), '390px');
+  assert(surface.measurements > measurements);
+});
 
 test('zanikające impulsy jednego gestu przesuwają widok tylko o jeden ekran', () => {
   const surface = mount();

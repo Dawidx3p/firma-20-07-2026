@@ -94,7 +94,7 @@
 
 .pricing-total { font-size: 1.65rem; font-weight: 750; line-height: 1.25; margin-top: 6px; }
 .pricing-monthly { margin-top: 7px; color: var(--accent-2); font-weight: 650; }
-.pricing-picked { list-style: none; margin-top: 14px; max-height: 25vh; overflow: auto; }
+.pricing-picked { list-style: none; margin-top: 14px; max-height: calc(var(--screen-viewport-height, 100vh) * 0.25); overflow: auto; }
 .pricing-picked li { padding-block: 5px; border-bottom: 1px solid var(--line); font-size: .875rem; }
 
 .pricing-submit {
@@ -297,14 +297,14 @@
     column-gap: clamp(22px, 4vw, 56px);
     align-items: center;
   }
-  .pricing-start .pricing-intro { margin-bottom: clamp(9px, 1.7dvh, 18px); }
+  .pricing-start .pricing-intro { margin-bottom: clamp(9px, calc(var(--screen-viewport-height, 100dvh) * 0.017), 18px); }
   .pricing-start .pricing-category-menu { min-width: 0; }
   .pricing-start .pricing-services-title { margin-block: 0 10px; }
   .pricing-start .pricing-category-menu .pricing-filters {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-bottom: 0;
   }
-  .pricing-start .pricing-filters button { min-height: clamp(44px, 8dvh, 66px); font-size: .96rem; }
+  .pricing-start .pricing-filters button { min-height: clamp(44px, calc(var(--screen-viewport-height, 100dvh) * 0.08), 66px); font-size: .96rem; }
   .pricing-start .pricing-filters button:first-child { grid-column: 1 / -1; }
   .subpage-configurator [data-show-all] > .pricing-pair {
     display: grid;
@@ -383,7 +383,7 @@
   }
   .models-page .screen-detail-body #bundle-items { max-height: none; overflow: visible; }
   .models-page main > :is(#models, #obecna-strona, #pytania) {
-    padding-block: clamp(10px, 2dvh, 19px) 64px;
+    padding-block: clamp(10px, calc(var(--screen-viewport-height, 100dvh) * 0.02), 19px) 64px;
   }
   .models-page :is(#models, #obecna-strona) .section-header { margin-bottom: 10px; }
   .models-page :is(#models, #obecna-strona) .section-header .eyebrow { margin-bottom: 4px; }
@@ -430,36 +430,38 @@
   .models-page #pytania .cta-content p { margin: 7px 0; font-size: .9rem; line-height: 1.35; }
   .models-page #pytania .cta-content .primary-button { margin-top: 6px; }
 }
-@media (min-width: 981px) and (max-height: 620px) {
-  .models-page .view .pricing-start .pricing-intro h2 {
-    max-width: none;
-    font-size: clamp(1.65rem, 2.7vw, 2.1rem);
+@media (min-width: 981px) {
+  :where(html[data-screen-height~="620"]) {
+    .models-page .view .pricing-start .pricing-intro h2 {
+      max-width: none;
+      font-size: clamp(1.65rem, 2.7vw, 2.1rem);
+    }
+    .subpage-configurator .pricing-start { padding-top: 8px; }
+    .pricing-start .pricing-intro p:last-child { margin-top: 4px; font-size: .95rem; line-height: 1.4; }
+    .pricing-start .pricing-model { padding: 10px; }
+    .pricing-start .pricing-model-options { gap: 4px; }
+    .pricing-start .pricing-model-options button { min-height: 46px; padding-block: 4px; }
+    .pricing-start :is(#pricing-model-description, #pricing-model-note) { margin-top: 5px; line-height: 1.32; }
+    .models-page main > :is(#models, #obecna-strona, #pytania) { padding-block: 8px 63px; }
+    .models-page :is(#models, #obecna-strona, #pytania) .section-header {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: baseline;
+      justify-content: start;
+      column-gap: 9px;
+      row-gap: 3px;
+      margin-bottom: 4px;
+    }
+    .models-page :is(#models, #obecna-strona, #pytania) .section-header .section-intro { grid-column: 1 / -1; margin-top: 0; }
+    .models-page :is(#models, #obecna-strona, #pytania) .section-header .eyebrow { margin: 0; }
+    .models-page :is(#models, #obecna-strona) .pricing-card { padding-block: 6px; }
+    .models-page :is(#models, #obecna-strona) .model-purpose { margin-bottom: 2px; }
+    .models-page :is(#models, #obecna-strona) .price { margin-block: 4px; }
+    .models-page :is(#models, #obecna-strona) .pricing-description { line-height: 1.23; }
+    .models-page :is(#models, #obecna-strona) .pricing-list { margin-block: 4px 6px; }
+    .models-page :is(#models, #obecna-strona) .pricing-list li { margin-top: 1px; font-size: .83rem; line-height: 1.22; }
+    .models-page :is(#models, #obecna-strona) .model-bundle-link { margin-top: 2px; line-height: 1.2; }
   }
-  .subpage-configurator .pricing-start { padding-top: 8px; }
-  .pricing-start .pricing-intro p:last-child { margin-top: 4px; font-size: .95rem; line-height: 1.4; }
-  .pricing-start .pricing-model { padding: 10px; }
-  .pricing-start .pricing-model-options { gap: 4px; }
-  .pricing-start .pricing-model-options button { min-height: 46px; padding-block: 4px; }
-  .pricing-start :is(#pricing-model-description, #pricing-model-note) { margin-top: 5px; line-height: 1.32; }
-  .models-page main > :is(#models, #obecna-strona, #pytania) { padding-block: 8px 63px; }
-  .models-page :is(#models, #obecna-strona, #pytania) .section-header {
-    display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: baseline;
-    justify-content: start;
-    column-gap: 9px;
-    row-gap: 3px;
-    margin-bottom: 4px;
-  }
-  .models-page :is(#models, #obecna-strona, #pytania) .section-header .section-intro { grid-column: 1 / -1; margin-top: 0; }
-  .models-page :is(#models, #obecna-strona, #pytania) .section-header .eyebrow { margin: 0; }
-  .models-page :is(#models, #obecna-strona) .pricing-card { padding-block: 6px; }
-  .models-page :is(#models, #obecna-strona) .model-purpose { margin-bottom: 2px; }
-  .models-page :is(#models, #obecna-strona) .price { margin-block: 4px; }
-  .models-page :is(#models, #obecna-strona) .pricing-description { line-height: 1.23; }
-  .models-page :is(#models, #obecna-strona) .pricing-list { margin-block: 4px 6px; }
-  .models-page :is(#models, #obecna-strona) .pricing-list li { margin-top: 1px; font-size: .83rem; line-height: 1.22; }
-  .models-page :is(#models, #obecna-strona) .model-bundle-link { margin-top: 2px; line-height: 1.2; }
 }
 @media (max-width: 980px) {
   .mobile-subpages .models-page .subpage-configurator,
@@ -493,7 +495,7 @@
   .mobile-subpages .pricing-services-title { margin-top: 0; }
   .mobile-subpages .pricing-category-menu .pricing-filters {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(6px, 1.2dvh, 12px);
+    gap: clamp(6px, calc(var(--screen-viewport-height, 100dvh) * 0.012), 12px);
     margin-bottom: 14px;
     padding: 0;
     border: 0;
@@ -501,7 +503,7 @@
   }
   .mobile-subpages .pricing-category-menu .pricing-filters button {
     grid-column: auto;
-    min-height: clamp(56px, 12dvh, 116px);
+    min-height: clamp(56px, calc(var(--screen-viewport-height, 100dvh) * 0.12), 116px);
     padding: 10px 13px;
     border-color: var(--line);
     border-radius: 14px;
@@ -611,65 +613,71 @@
   .mobile-subpages .models-faq-screen .cta-content > .eyebrow { margin: 0; }
   .mobile-subpages .models-faq-screen .cta-content > a { margin: 0; min-height: 44px; }
 }
-@media (max-width: 420px) and (max-height: 540px) {
-  .mobile-subpages .models-faq-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 7px;
+@media (max-width: 420px) {
+  :where(html[data-screen-height~="540"]) {
+    .mobile-subpages .models-faq-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 7px;
+    }
+    .mobile-subpages .models-faq-item summary { height: 100%; }
   }
-  .mobile-subpages .models-faq-item summary { height: 100%; }
 }
 
-@media (max-width: 360px) and (max-height: 540px) {
-  .mobile-subpages .models-page main > :is(#models, #pytania) { padding-block: 10px 17px; }
-  .mobile-subpages .models-page #models .pricing-grid { gap: 5px; }
-  .mobile-subpages .models-page #models .pricing-card { padding-block: 5px; }
-  .mobile-subpages .models-page #models .section-header { margin-bottom: 6px; }
-  .mobile-subpages .models-page .pricing-mobile-view:not([hidden], .pricing-start, .pricing-pair) { padding-block: 10px 19px; }
-  .mobile-subpages .models-page .pricing-model-options button {
-    min-height: 58px;
-    padding: 4px 10px 4px 6px;
-    line-height: 1.12;
+@media (max-width: 360px) {
+  :where(html[data-screen-height~="540"]) {
+    .mobile-subpages .models-page main > :is(#models, #pytania) { padding-block: 10px 17px; }
+    .mobile-subpages .models-page #models .pricing-grid { gap: 5px; }
+    .mobile-subpages .models-page #models .pricing-card { padding-block: 5px; }
+    .mobile-subpages .models-page #models .section-header { margin-bottom: 6px; }
+    .mobile-subpages .models-page .pricing-mobile-view:not([hidden], .pricing-start, .pricing-pair) { padding-block: 10px 19px; }
+    .mobile-subpages .models-page .pricing-model-options button {
+      min-height: 58px;
+      padding: 4px 10px 4px 6px;
+      line-height: 1.12;
+    }
+    .mobile-subpages .models-page .pricing-model-options button strong { font-size: .8rem; }
+    .mobile-subpages .models-page .pricing-model-options button span { font-size: .69rem; }
+    .mobile-subpages .models-page .pricing-model-options { gap: 4px; }
+    .mobile-subpages .models-page .pricing-intro p:last-child { line-height: 1.3; }
+    .mobile-subpages .models-page .pricing-service-tile .pricing-service-detail { min-height: 33px; }
+    .mobile-subpages .models-page .models-faq-item summary { font-size: .84rem; }
+    .mobile-subpages .models-page .models-faq-screen .cta-content { padding: 6px 8px; gap: 4px; }
+    .mobile-subpages .models-page .models-faq-screen .cta-content > .eyebrow { font-size: .72rem; }
+    .mobile-subpages .models-page .models-faq-screen .cta-content > a { padding-inline: 9px; font-size: .85rem; }
   }
-  .mobile-subpages .models-page .pricing-model-options button strong { font-size: .8rem; }
-  .mobile-subpages .models-page .pricing-model-options button span { font-size: .69rem; }
-  .mobile-subpages .models-page .pricing-model-options { gap: 4px; }
-  .mobile-subpages .models-page .pricing-intro p:last-child { line-height: 1.3; }
-  .mobile-subpages .models-page .pricing-service-tile .pricing-service-detail { min-height: 33px; }
-  .mobile-subpages .models-page .models-faq-item summary { font-size: .84rem; }
-  .mobile-subpages .models-page .models-faq-screen .cta-content { padding: 6px 8px; gap: 4px; }
-  .mobile-subpages .models-page .models-faq-screen .cta-content > .eyebrow { font-size: .72rem; }
-  .mobile-subpages .models-page .models-faq-screen .cta-content > a { padding-inline: 9px; font-size: .85rem; }
 }
 
-@media (min-width: 981px) and (max-height: 550px) {
-  .models-page main > section.subpage-hero { padding-block: 8px 50px; }
-  .subpage-configurator [data-show-all] > .pricing-pair { padding-block: 8px 50px; }
-  .subpage-configurator [data-show-all] .pricing-pair .pricing-group h4 { margin-bottom: 5px; }
-  .subpage-configurator [data-show-all] .pricing-pair .pricing-service-grid { gap: 4px; }
-  .subpage-configurator [data-show-all] .pricing-pair .pricing-service-detail {
-    min-height: 35px;
-    padding-block: 3px;
-  }
-  .models-page main > :is(#models, #obecna-strona, #pytania) { padding-block: 6px 50px; }
-  .models-page main > :is(#models, #obecna-strona) { padding-inline: clamp(24px, 3vw, 42px); }
-  .models-page :is(#models, #obecna-strona) .pricing-card { padding-block: 5px; }
-  .models-page :is(#models, #obecna-strona) .price { margin-block: 2px; }
-  .models-page :is(#models, #obecna-strona) .price-amount { font-size: 1.2rem; }
-  .models-page :is(#models, #obecna-strona) .pricing-description { font-size: .84rem; }
-  .models-page :is(#models, #obecna-strona) .pricing-list { margin-block: 3px 4px; }
-  .models-page :is(#models, #obecna-strona) .pricing-list li { margin: 0; line-height: 1.18; }
-  .models-page :is(#models, #obecna-strona) .pricing-card :is(.primary-button, .secondary-button) {
-    min-height: 36px;
-    padding: 4px 8px;
-  }
-  .models-page #pytania .models-faq-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 16px;
-  }
-  .models-page #pytania .models-faq-item summary {
-    height: 100%;
-    font-size: .875rem;
+@media (min-width: 981px) {
+  :where(html[data-screen-height~="550"]) {
+    .models-page main > section.subpage-hero { padding-block: 8px 50px; }
+    .subpage-configurator [data-show-all] > .pricing-pair { padding-block: 8px 50px; }
+    .subpage-configurator [data-show-all] .pricing-pair .pricing-group h4 { margin-bottom: 5px; }
+    .subpage-configurator [data-show-all] .pricing-pair .pricing-service-grid { gap: 4px; }
+    .subpage-configurator [data-show-all] .pricing-pair .pricing-service-detail {
+      min-height: 35px;
+      padding-block: 3px;
+    }
+    .models-page main > :is(#models, #obecna-strona, #pytania) { padding-block: 6px 50px; }
+    .models-page main > :is(#models, #obecna-strona) { padding-inline: clamp(24px, 3vw, 42px); }
+    .models-page :is(#models, #obecna-strona) .pricing-card { padding-block: 5px; }
+    .models-page :is(#models, #obecna-strona) .price { margin-block: 2px; }
+    .models-page :is(#models, #obecna-strona) .price-amount { font-size: 1.2rem; }
+    .models-page :is(#models, #obecna-strona) .pricing-description { font-size: .84rem; }
+    .models-page :is(#models, #obecna-strona) .pricing-list { margin-block: 3px 4px; }
+    .models-page :is(#models, #obecna-strona) .pricing-list li { margin: 0; line-height: 1.18; }
+    .models-page :is(#models, #obecna-strona) .pricing-card :is(.primary-button, .secondary-button) {
+      min-height: 36px;
+      padding: 4px 8px;
+    }
+    .models-page #pytania .models-faq-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 16px;
+    }
+    .models-page #pytania .models-faq-item summary {
+      height: 100%;
+      font-size: .875rem;
+    }
   }
 }
