@@ -60,14 +60,15 @@
 
   function jumpTo(top) {
     cancelTransition();
-    window.scrollTo({ top, behavior: "instant" });
+    window.scrollTo({ top: Math.min(top, getMaxScroll()), behavior: "instant" });
   }
 
   function animateTo(top, extend = false) {
     const now = performance.now();
     const remaining = animation ? animation.startedAt + animation.duration - now : 0;
     animation = {
-      top,
+      // A saved stop can lie beyond the bottom after the viewport grows.
+      top: Math.min(top, getMaxScroll()),
       from: window.scrollY,
       startedAt: now,
       duration: extend ? Math.min(maxTransitionTime, Math.max(transitionTime, remaining + extraStepTime)) : transitionTime
@@ -186,7 +187,7 @@
       } else {
         for (const run of queue) run.index = Math.min(run.index, stops.length - 1);
         const target = stops[queue[0].index];
-        if (animation.top !== target) animateTo(target);
+        if (animation.top !== Math.min(target, getMaxScroll())) animateTo(target);
       }
     }
     updateControls(stops);

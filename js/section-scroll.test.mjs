@@ -95,6 +95,31 @@ test('wysokość paska przeglądarki nie zmienia punktów ekranów na dotyku', (
   assert(surface.measurements > measurements);
 });
 
+test('ostatni ekran zatrzymuje się na fizycznym końcu dokumentu', () => {
+  for (const reduced of [true, false]) {
+    const surface = mount({ touch: true, reduced });
+    surface.load();
+    for (const time of [0, 300, 600]) {
+      surface.wheel(100, time);
+      surface.frame(time + 240);
+    }
+    assert.equal(surface.scrolls.at(-1), 2280);
+
+    surface.resize(390, 944);
+    surface.wheel(100, 900);
+    surface.frame(1070);
+    surface.frame(1140);
+    assert.equal(surface.scrolls.at(-1), 2940);
+    assert(surface.scrolls.every(top => top <= 2940));
+    assert.equal(surface.position.textContent, '5 / 5');
+
+    const scrollCount = surface.scrolls.length;
+    surface.wheel(100, 1200);
+    assert.equal(surface.frames.size, 0);
+    assert.equal(surface.scrolls.length, scrollCount);
+  }
+});
+
 test('zanikające impulsy jednego gestu przesuwają widok tylko o jeden ekran', () => {
   const surface = mount();
   surface.wheel(100, 10);
