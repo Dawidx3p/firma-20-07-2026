@@ -458,6 +458,32 @@ html:has(.home-screen-scroll) {
   .footer-privacy .view-links > .view--mobile { display: none; }
   .audit-overview .secondary-button.view--desktop { display: inline-flex; }
   .contact-actions .footer-social.view--desktop { display: flex; }
+  #contact .contact-actions .footer-social { margin-top: 4px; }
+  #contact .view-email .copy-email {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 7.25rem;
+    min-height: 36px;
+    padding: 4px 11px;
+    background: var(--card);
+    border-color: var(--view-border);
+    color: var(--view-text);
+    font: inherit;
+    font-size: .8125rem;
+    font-weight: 650;
+    line-height: 1.2;
+    cursor: pointer;
+  }
+  #contact .view-email .copy-email:is(:hover, [data-copy-state="success"]) {
+    background: color-mix(in srgb, var(--view-accent) 10%, var(--card));
+    border-color: var(--view-accent);
+    color: var(--view-accent);
+  }
+  #contact .view-email .copy-email[data-copy-state="error"] {
+    border-color: #ffb2b9;
+    color: #ffb2b9;
+  }
   .view-media--project { grid-template-columns: minmax(0, 1fr) minmax(0, .28fr); gap: 10px; padding: 8px; }
   .view-media--project .view-project-phone { display: block; }
   .view-actions:has(.content-shortcut) .content-shortcut { width: auto; min-width: 190px; }
@@ -597,4 +623,12 @@ html:has(.home-screen-scroll) {
     gap: 8px;
   }
   #zalozyciel .view-checklist li { gap: 4px; padding-block: 2px; font-size: .88rem; }
+}
+
+@media (min-width: 981px) and (max-height: 550px) {
+  .home-screen-scroll:not(.subpage-screen) main > .view { padding-bottom: 50px; }
+  .home-screen-scroll .view-controls { bottom: 8px; }
+  .home-screen-scroll .view-controls button { width: 36px; height: 36px; }
+  .home-screen-scroll .kx-chat { right: 12px; bottom: 8px; }
+  .home-screen-scroll .kx-chat .kx-chat-launcher { min-height: 38px; padding: 6px 12px; }
 }

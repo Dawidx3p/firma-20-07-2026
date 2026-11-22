@@ -83,29 +83,46 @@ if (websiteCheckForm) {
 }
 
 document.querySelectorAll(".copy-email").forEach((button) => {
+  let resetTimer;
+  let copying = false;
+  const label = button.textContent;
   button.addEventListener("click", async () => {
+    if (copying) return;
+    copying = true;
+    window.clearTimeout(resetTimer);
     const emailAddress = button.dataset.email;
     const status = button.parentElement.querySelector(".copy-email-status");
+    let copied = false;
 
     try {
       await navigator.clipboard.writeText(emailAddress);
-    } catch (error) {
+      copied = true;
+    } catch {
       const temporaryField = document.createElement("textarea");
       temporaryField.value = emailAddress;
       temporaryField.setAttribute("readonly", "");
       temporaryField.style.position = "fixed";
       temporaryField.style.opacity = "0";
       document.body.appendChild(temporaryField);
-      temporaryField.select();
-      document.execCommand("copy");
-      temporaryField.remove();
+      try {
+        temporaryField.select();
+        copied = document.execCommand("copy");
+      } catch {
+        copied = false;
+      } finally {
+        temporaryField.remove();
+        button.focus({ preventScroll: true });
+      }
     }
 
-    button.textContent = "Skopiowano";
-    status.textContent = `Skopiowano adres ${emailAddress}`;
+    button.dataset.copyState = copied ? "success" : "error";
+    button.textContent = copied ? "Skopiowano" : "Spróbuj znów";
+    status.textContent = copied ? `Skopiowano adres ${emailAddress}` : "Nie udało się skopiować adresu e-mail.";
+    copying = false;
 
-    window.setTimeout(() => {
-      button.textContent = "Kopiuj";
+    resetTimer = window.setTimeout(() => {
+      button.textContent = label;
+      delete button.dataset.copyState;
       status.textContent = "";
     }, 2200);
   });

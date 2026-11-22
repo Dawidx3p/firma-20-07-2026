@@ -337,3 +337,31 @@
   }
   .audit-screen-page #audit-zalecenia .section-header .eyebrow { margin: 0; }
 }
+
+@media (min-width: 981px) {
+  .audit-screen-page .audit-finding {
+    align-content: stretch;
+    grid-template-rows: auto auto 1fr auto;
+  }
+}
+
+@media (min-width: 981px) and (max-height: 550px) {
+  .audit-screen-page main > :is(#audit-porownanie-desktop, #audit-zalecenia) {
+    padding-inline: clamp(24px, 3vw, 42px);
+  }
+  .audit-screen-page .audit-preview { padding: 5px; }
+  .audit-screen-page .audit-preview figcaption { margin-bottom: 3px; }
+  .audit-screen-page .audit-preview-caption { font-size: .76rem; line-height: 1.22; }
+  .audit-screen-page .audit-mock-content { padding-block: 4px; }
+  .audit-screen-page .audit-mock-actions span { padding-block: 2px; }
+  .audit-screen-page .audit-mock-nav { padding-block: 3px; }
+  .audit-screen-page .audit-comparison-heading :is(.section-intro, .audit-report-context p) { line-height: 1.25; }
+  .audit-screen-page .audit-finding { padding: 5px 8px; gap: 2px; }
+  .audit-screen-page .view .audit-finding h3 { line-height: 1.24 !important; }
+  .audit-screen-page main > #audit-zalecenia { padding-top: 4px; }
+  .audit-screen-page #audit-zalecenia .audit-report .section-header { margin-bottom: 5px; }
+  .audit-screen-page .audit-findings { gap: 5px 7px; }
+  .audit-screen-page .audit-finding > p { line-height: 1.28; }
+  .audit-screen-page .audit-finding-detail { min-height: 31px; padding-block: 2px; }
+  .audit-screen-page .audit-report-note { margin-top: 5px; }
+}
