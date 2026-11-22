@@ -40,10 +40,10 @@ function mount() {
   });
   return {
     scrolls, position,
-    wheel(deltaY, timeStamp) {
+    wheel(deltaY, timeStamp, deltaMode = 0) {
       let prevented = false;
       listeners.get('wheel')({
-        target: document.body, deltaY, deltaX: 0, deltaMode: 0, timeStamp,
+        target: document.body, deltaY, deltaX: 0, deltaMode, timeStamp,
         preventDefault() { prevented = true; }
       });
       assert(prevented);
@@ -69,4 +69,47 @@ test('kolejne gesty przechodzą o kolejne ekrany i pozwalają wrócić', () => {
   surface.wheel(-100, 180);
   assert.deepEqual(surface.scrolls, [760, 1520, 2280, 1520]);
   assert.equal(surface.position.textContent, '3 / 5');
+});
+
+test('opóźniony i słabszy impuls pikselowy nie rozpoczyna następnego gestu', () => {
+  const surface = mount();
+  surface.wheel(64, 10);
+  surface.wheel(48, 26);
+  surface.wheel(34, 42);
+  surface.wheel(20, 115);
+  surface.wheel(8, 170);
+  surface.wheel(2, 352);
+  assert.deepEqual(surface.scrolls, [760]);
+  surface.wheel(8, 425);
+  assert.deepEqual(surface.scrolls, [760, 1520]);
+});
+
+test('końcowy impuls w liniach nie rozpoczyna nowego przewinięcia', () => {
+  const surface = mount();
+  surface.wheel(3, 10, 1);
+  surface.wheel(3, 26, 1);
+  surface.wheel(1, 44, 1);
+  surface.wheel(1, 119, 1);
+  surface.wheel(1, 285, 1);
+  assert.deepEqual(surface.scrolls, [760]);
+  surface.wheel(3, 341, 1);
+  assert.deepEqual(surface.scrolls, [760, 1520]);
+});
+
+test('oddzielne skoki kółka liczone w liniach nadal przewijają po ekranie', () => {
+  const surface = mount();
+  surface.wheel(3, 10, 1);
+  surface.wheel(3, 82, 1);
+  surface.wheel(3, 154, 1);
+  assert.deepEqual(surface.scrolls, [760, 1520, 2280]);
+});
+
+test('lekki szybszy gest rozpoznajemy także przed końcem animacji', () => {
+  const surface = mount();
+  surface.wheel(6, 10);
+  surface.wheel(14, 26);
+  surface.wheel(4, 42);
+  surface.wheel(.5, 58);
+  surface.wheel(1.3, 71);
+  assert.deepEqual(surface.scrolls, [760, 1520]);
 });

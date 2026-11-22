@@ -175,6 +175,32 @@
   }
   updateControls();
 
+  function startsWheelGesture(previous, direction, magnitude, time, mode) {
+    if (!previous) return true;
+
+    const gap = time - previous.time;
+    // A late, very small impulse can still belong to the original stroke.
+    if (gap >= 440) return mode !== 0 || magnitude >= 2 || gap >= 700;
+    if (direction !== previous.direction) {
+      return magnitude >= Math.max(1.5, Math.min(8, previous.peak * .08));
+    }
+
+    if (mode === 2) return gap >= wheelPause;
+    if (mode === 1) {
+      // Whole-line steps can repeat at the same value throughout a momentum tail.
+      // Keep discrete wheel notches responsive and require acceleration after a burst.
+      if (previous.samples === 1) return gap >= 64;
+      return previous.falling && gap >= 28 &&
+        magnitude >= Math.max(32, previous.magnitude * 1.6, previous.peak * .4);
+    }
+
+    const restartedAfterPause = gap >= wheelPause &&
+      magnitude >= Math.max(1.6, previous.magnitude * .9, previous.peak * .32);
+    const accelerated = previous.falling && gap >= 12 && gap <= 96 &&
+      magnitude >= Math.max(1.2, previous.magnitude * 1.8, previous.peak * .085);
+    return restartedAfterPause || accelerated;
+  }
+
   window.addEventListener("wheel", event => {
     const mode = event.deltaMode;
     if (event.defaultPrevented || event.ctrlKey || event.shiftKey || !event.deltaY ||
@@ -184,30 +210,18 @@
     const time = event.timeStamp;
     const direction = Math.sign(event.deltaY);
     const magnitude = Math.abs(event.deltaY) * (mode === 1 ? 16 : mode === 2 ? root.clientHeight : 1);
-    // Advance only on a fresh gesture, even while a previous transition is still animating.
     const previous = wheelGesture;
-    const gap = time - (previous?.time ?? time);
-    const paused = gap >= wheelPause &&
-      (!previous.fading || magnitude > previous.magnitude || gap >= 3 * wheelPause);
-    // A new stroke can start before the previous stroke's tail has fully decayed.
-    const rebound = previous?.falling && gap >= 24 &&
-      magnitude >= Math.max(2, previous.magnitude * 1.25);
-    const begins = !previous || paused ||
-      (direction !== previous.direction
-        ? magnitude >= 1.5
-        : rebound || (previous.fading && magnitude >= Math.max(1, previous.magnitude * 1.6 + .25)));
-
-    if (begins) {
-      wheelGesture = { time, direction, magnitude, peak: magnitude, falling: false, fading: false };
+    if (startsWheelGesture(previous, direction, magnitude, time, mode)) {
+      wheelGesture = { time, direction, magnitude, peak: magnitude, falling: false, samples: 1 };
       move(direction);
       return;
     }
 
     previous.time = time;
     if (direction !== previous.direction) return;
+    previous.samples++;
     previous.peak = Math.max(previous.peak, magnitude);
-    previous.falling = magnitude < previous.magnitude;
-    previous.fading = magnitude < previous.peak * .4;
+    if (magnitude !== previous.magnitude) previous.falling = magnitude < previous.magnitude;
     previous.magnitude = magnitude;
   }, { passive: false, capture: true });
 
