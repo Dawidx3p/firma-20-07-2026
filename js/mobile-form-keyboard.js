@@ -90,8 +90,11 @@
   }
 
   function schedule() {
-    cancelAnimationFrame(frame);
-    frame = requestAnimationFrame(sync);
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      sync();
+    });
   }
 
   document.addEventListener("focusin", event => {
@@ -104,7 +107,9 @@
   });
   document.addEventListener("focusout", schedule);
   viewport?.addEventListener("resize", schedule);
-  viewport?.addEventListener("scroll", schedule);
+  viewport?.addEventListener("scroll", () => {
+    if (lastField || activeForm) schedule();
+  });
   nativeKeyboard?.addEventListener("geometrychange", schedule);
   window.addEventListener("resize", schedule);
   mobile.addEventListener("change", schedule);

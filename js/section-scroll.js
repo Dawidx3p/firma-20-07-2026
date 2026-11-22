@@ -292,14 +292,14 @@
   }, { passive: true, capture: true });
 
   function acceptSwipe(finger, event) {
-    if (!swipe || !finger || finger.identifier !== swipe.id || blocked(event.target)) return;
+    if (!swipe || !finger || finger.identifier !== swipe.id) return;
     if (swipe.moved) {
       if (event.cancelable) event.preventDefault();
       return;
     }
     const x = finger.clientX - swipe.x;
     const y = swipe.y - finger.clientY;
-    if (Math.abs(y) < swipeThreshold || Math.abs(y) <= Math.abs(x)) return;
+    if (Math.abs(y) < swipeThreshold || Math.abs(y) <= Math.abs(x) || blocked(event.target)) return;
     if (event.cancelable) event.preventDefault();
     swipe.moved = true;
     move(Math.sign(y));

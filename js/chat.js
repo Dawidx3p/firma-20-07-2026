@@ -146,7 +146,7 @@
   let history = [], token = "", widgetId, loading = false, scriptPromise, controller, generation = 0;
   let queuedSuggestion = "", suggestionsPromise, verificationStarting = false;
   // Mobile keyboards resize the visual viewport, often leaving 100dvh unchanged.
-  let viewportFrame, editing = false, viewportWidth = window.innerWidth;
+  let viewportFrame = 0, editing = false, viewportWidth = window.innerWidth;
   let fullViewportHeight = Math.min(window.visualViewport?.height ?? window.innerHeight, window.innerHeight);
   function syncChatViewport() {
     const viewport = window.visualViewport;
@@ -166,8 +166,11 @@
     root.style.setProperty("--kx-visible-top", `${top}px`);
   }
   function scheduleChatViewport() {
-    cancelAnimationFrame(viewportFrame);
-    viewportFrame = requestAnimationFrame(syncChatViewport);
+    if (panel.hidden || viewportFrame) return;
+    viewportFrame = requestAnimationFrame(() => {
+      viewportFrame = 0;
+      if (!panel.hidden) syncChatViewport();
+    });
   }
   window.visualViewport?.addEventListener("resize", scheduleChatViewport);
   window.visualViewport?.addEventListener("scroll", scheduleChatViewport);
@@ -186,7 +189,6 @@
       editing = false; scheduleChatViewport();
     }, 0);
   });
-  syncChatViewport();
   function hasSession() { return Boolean(chatSession && Date.now() < sessionExpiresAt); }
   function updateSend() { send.disabled = loading || (!token && !hasSession()) || !input.value.trim(); }
   function ensureSuggestions() {
