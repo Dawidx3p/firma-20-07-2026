@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
   <meta property="og:type" content="website">
 
   <meta property="og:title"
         content="KAIROX — Strony jako narzędzie komunikacji">
-  
+
   <meta property="og:description"
         content="Pomagamy firmom lepiej komunikować swoją wartość za pomocą stron internetowych.">
-  
+
   <meta property="og:url"
   content="https://kairox.pl/dlaczego-nie-zaczynamy-od-designu">
-  
+
   <meta property="og:image" content="https://kairox.pl/img/kairox-share-1200x400-glow.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="400">
   <meta property="og:image:alt" content="KAIROX. Pomagamy firmom lepiej komunikować swoją wartość.">
-  
-  
+
+
   <meta property="og:site_name" content="KAIROX">
-  
+
   <meta name="twitter:card" content="summary_large_image">
   <meta
   name="description"
@@ -35,13 +36,17 @@
   <link rel="canonical" href="https://kairox.pl/dlaczego-nie-zaczynamy-od-designu.html">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/typography.css?v=1">
-  <link rel="stylesheet" href="css/section-scroll.css?v=10">
-  <script src="js/section-motion.js?v=5" defer></script>
-  <script src="js/section-scroll.js?v=14" defer></script>
   <link rel="stylesheet" href="css/site-refinements.css?v=ux-1">
+
+  <link rel="stylesheet" href="css/section-scroll.css?v=desktop-fit-1">
+  <link rel="stylesheet" href="css/subpage-views.css?v=desktop-fit-1">
+  <script src="js/section-scroll.js?v=desktop-fit-1" defer></script>
+  <link rel="stylesheet" href="css/article-screens.css?v=6">
+  <script src="js/subpage-mobile.js?v=desktop-fit-1" defer></script>
+  <link rel="stylesheet" href="css/mobile-illustrations.css?v=4">
 </head>
 
-<body>
+<body class="home-screen-scroll subpage-screen">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
@@ -65,7 +70,7 @@
       <ul class="nav-list">
         <li><a href="index.html">Strona główna</a></li>
         <li><a href="modele-wspolpracy.html">Modele Współpracy</a></li>
-        
+
         <li><a href="audyt-komunikacji.html">Audyt</a></li>
         <li><a href="metoda.html">Metoda</a></li>
         <li><a href="partnerstwo.html">Partnerstwo</a></li>
@@ -81,382 +86,103 @@
     </nav>
   </header>
 
-  <main id="main-content">
-    <section class="hero page-hero">
 
-        <div class="hero-content">
-      
-          <p class="eyebrow">Artykuł</p>
-      
-          <h1>Dlaczego nie zaczynamy od designu?</h1>
-      
-          <p class="hero-description">
+<div class="view-controls" role="group" aria-label="Przełącz ekrany strony" hidden>
+    <button type="button" data-view-step="-1" aria-label="Poprzedni ekran" aria-disabled="true">↑</button>
+    <output class="view-position" aria-live="polite"></output>
+    <button type="button" data-view-step="1" aria-label="Następny ekran">↓</button>
+  </div>
+<main id="main-content">
+    <section class="view view--paired subpage-view subpage-hero" aria-labelledby="subpage-title">
+<div class="view-inner split-layout subpage-hero-layout">
+      <div class="split-heading"><p class="eyebrow">Artykuł</p><h1 id="subpage-title">Dlaczego nie zaczynamy od designu?</h1></div>
+      <div class="split-body"><p class="hero-description">
             Większość stron internetowych powstaje od końca. Najpierw wygląd,
             później treść. My pracujemy odwrotnie.
-          </p>
-      
-          <div class="article-meta">
+          </p><div class="article-meta">
             <span>KAIROX</span>
             <span>•</span>
-            <span>6 min czytania</span>
-          </div>
-      
-        </div>
-      
-        <div class="hero-panel">
-          <p>
+            <span>1 min czytania</span>
+          </div><div class="subpage-hero-proof view--desktop"><p>
             Design nie rozwiązuje problemów komunikacyjnych.
             Może je tylko ukryć.
-          </p>
-        </div>
-      
-      </section>
-      <section>
-
-        <div class="section-header">
-      
-          <p class="eyebrow">Najczęstszy błąd</p>
-      
-          <h2>Większość projektów zaczyna się od pytania o wygląd</h2>
-      
-          <p class="section-intro">
-            Jakie kolory lubisz? Jakie strony Ci się podobają?
-            Jakie animacje chcesz mieć?
-            To popularne pytania. Problem w tym, że nie odpowiadają na najważniejszą kwestię:
-            co użytkownik powinien zrozumieć po wejściu na stronę?
-          </p>
-      
-        </div>
-      
-      </section>
-      <section class="message">
-
-        <h2>Piękna strona może nadal nie działać</h2>
-      
-        <p>
-          Jeżeli klient nie rozumie oferty, nie widzi wartości i nie wie,
-          dlaczego miałby zaufać firmie, design nie rozwiąże problemu.
-        </p>
-      
-      </section>
-      <section>
-
-        <div class="section-header">
-      
-          <p class="eyebrow">Typowy proces</p>
-      
-          <h2>Jak wygląda większość projektów?</h2>
-      
-        </div>
-      
-        <div class="article-grid">
-      
-          <article>
-            <h3>Krok 1</h3>
-      
-            <p>
-              Zbieranie inspiracji i projektowanie wyglądu.
-            </p>
-          </article>
-      
-          <article>
-            <h3>Krok 2</h3>
-      
-            <p>
-              Próba dopasowania treści do gotowego projektu.
-            </p>
-          </article>
-      
-        </div>
-      
-        <p class="article-note">
-          Efekt? Ładna strona, która często nie odpowiada na pytania klientów.
-        </p>
-      
-      </section>
-      <section>
-
-        <div class="section-header">
-      
-          <p class="eyebrow">Metoda Agent 0</p>
-      
-          <h2>Zaczynamy od zrozumienia</h2>
-      
-        </div>
-      
-        <ol class="process-list">
-      
-          <li>
-            <h3>Strategia</h3>
-            <p>Poznanie firmy, klientów, konkurencji i celów biznesowych.</p>
-          </li>
-      
-          <li>
-            <h3>Komunikacja</h3>
-            <p>Określenie najważniejszych przekazów i argumentów.</p>
-          </li>
-      
-          <li>
-            <h3>UX</h3>
-            <p>Zaprojektowanie ścieżki użytkownika i kolejności informacji.</p>
-          </li>
-      
-          <li>
-            <h3>Design</h3>
-            <p>Nadanie odpowiedniej formy wcześniej zaprojektowanemu doświadczeniu.</p>
-          </li>
-      
-          <li>
-            <h3>Development</h3>
-            <p>Wdrożenie wszystkiego w szybki i nowoczesny produkt.</p>
-          </li>
-      
+          </p></div></div>
+      <figure class="view-media split-media mobile-illustration">
+      <img src="img/illustrations/kairox-05-zakres-768.webp" srcset="img/illustrations/kairox-05-zakres-768.webp 768w, img/illustrations/kairox-05-zakres.webp 1536w"
+        sizes="(max-width: 980px) 100vw, 55vw" width="1536" height="1024" alt="" decoding="async" fetchpriority="high">
+    </figure>
+      <div class="split-actions subpage-hero-actions"></div>
+    </div>
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen article-reading-screen" id="punkt-wyjscia" aria-labelledby="punkt-wyjscia-tytul">
+      <div class="article-reading-layout">
+        <header><p class="eyebrow">Punkt wyjścia</p><h2 id="punkt-wyjscia-tytul">Od jakiego pytania zacząć projekt?</h2></header>
+        <p class="article-reading-lead">Gdy najpierw zbieramy inspiracje, wybieramy kolory i projektujemy wygląd, treść trzeba dopasować do gotowego układu.</p>
+        <ul class="article-reading-list article-reading-list--pair">
+          <li><h3>Projekt zaczyna się od wyglądu</h3><p>Pierwsze pytania dotyczą kolorów, inspiracji i animacji.</p></li>
+          <li><h3>Projekt zaczyna się od komunikacji</h3><p>Co klient powinien zrozumieć, co zapamiętać i jaką decyzję podjąć?</p></li>
+        </ul>
+        <p class="article-reading-note">Wygląd wzmacnia ofertę, gdy klient rozumie jej wartość i widzi powody, by zaufać firmie.</p>
+      </div>
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen article-reading-screen article-reading-checklist" id="etapy-metody" aria-labelledby="etapy-metody-tytul">
+      <div class="article-reading-layout">
+        <header><p class="eyebrow">Metoda Agent 0</p><h2 id="etapy-metody-tytul">Zaczynamy od zrozumienia</h2></header>
+        <ol class="article-reading-list article-reading-list--numbered">
+          <li><h3>Strategia</h3><p>Poznanie firmy, klientów, konkurencji i celów biznesowych.</p></li>
+          <li><h3>Komunikacja</h3><p>Określenie najważniejszych przekazów i argumentów.</p></li>
+          <li><h3>UX</h3><p>Zaprojektowanie ścieżki użytkownika i kolejności informacji.</p></li>
+          <li><h3>Design</h3><p>Nadanie odpowiedniej formy wcześniej zaprojektowanemu doświadczeniu.</p></li>
+          <li><h3>Development</h3><p>Wdrożenie wszystkiego w szybki i nowoczesny produkt.</p></li>
         </ol>
-      
-      </section>
-      <section>
-
-        <div class="section-header">
-      
-          <p class="eyebrow">Porównanie</p>
-      
-          <h2>Dwa sposoby myślenia o stronie</h2>
-      
-        </div>
-      
-        <div class="article-grid">
-      
-          <article>
-            <h3>Design first</h3>
-      
-            <p>
-              Jak ma wyglądać strona?
-            </p>
-      
-            <p>
-              Jakie kolory?
-            </p>
-      
-            <p>
-              Jakie animacje?
-            </p>
-          </article>
-      
-          <article>
-            <h3>Communication first</h3>
-      
-            <p>
-              Co klient powinien zrozumieć?
-            </p>
-      
-            <p>
-              Co powinien zapamiętać?
-            </p>
-      
-            <p>
-              Jaką decyzję powinien podjąć?
-            </p>
-          </article>
-      
-        </div>
-      
-      </section>
-      <section>
-
-        <div class="section-header">
-      
-          <p class="eyebrow">Podsumowanie</p>
-      
-          <h2>Design jest ważny. Ale nie powinien być początkiem procesu</h2>
-      
-          <p class="section-intro">
-            Najlepsze strony internetowe nie zaczynają się od kolorów.
-            Zaczynają się od zrozumienia ludzi, którzy będą z nich korzystać.
-          </p>
-      
-        </div>
-      
-      </section>
-      <section class="related-articles">
-
-            <div class="section-header">
-              <p class="eyebrow">Czytaj dalej</p>
-          
-              <h2>Co warto zobaczyć dalej?</h2>
-          
-              <p class="section-intro">
-                Skoro znasz już nasze podejście do projektowania stron,
-                zobacz jak przekłada się ono na sposób myślenia o komunikacji marki
-                i poznaj pełny proces Agent 0.
-              </p>
-            </div>
-          
-            <div class="article-grid">
-          
-              <article>
-          
-                <h3>Strona internetowa to nie wizytówka</h3>
-          
-                <p>
-                  Dowiedz się, dlaczego nowoczesna strona internetowa powinna być
-                  narzędziem komunikacji i wsparciem procesu sprzedaży.
-                </p>
-          
-                <a href="strona-jako-narzedzie-komunikacji.html">
-                  Czytaj artykuł →
-                </a>
-          
-              </article>
-          
-              <article>
-          
-                <h3>Poznaj metodę Agent 0</h3>
-          
-                <p>
-                  Zobacz pełny proces pracy — od strategii i komunikacji,
-                  przez UX i design, aż po wdrożenie.
-                </p>
-          
-                <a href="metoda.html">
-                  Poznaj metodę →
-                </a>
-          
-              </article>
-          
-            </div>
-          
-      </section>
+      </div>
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen article-reading-screen" id="czytaj-dalej" aria-labelledby="czytaj-dalej-tytul">
+      <div class="article-reading-layout">
+        <header><h2 id="czytaj-dalej-tytul">Czytaj dalej</h2></header>
+        <ul class="article-reading-links">
+          <li><a href="strona-jako-narzedzie-komunikacji.html">Strona internetowa to nie wizytówka</a></li>
+          <li><a href="metoda.html">Metoda Agent 0</a></li>
+        </ul>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
-
-    <div class="footer-grid">
-
-        <div class="footer-brand">
-
-            <a href="index.html" class="footer-logo">
-                KAIROX
-            </a>
-
-            <p>
-                Strony internetowe jako narzędzie komunikacji marki.
-            </p>
-
-            <div class="footer-email">
-
-
+    <div class="view-footer-grid">
+      <div class="view view--paired" id="informacje">
+        <div class="view-panel-grid footer-layout">
+          <div class="view-inner footer-navigation">
+            <h2 class="footer-logo" id="footer-nav-title">KAIROX</h2>
+            <div class="footer-email footer-email-compact subpage-footer-email">
               <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
-
-
               <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
-
-
               <span class="copy-email-status" role="status" aria-live="polite"></span>
-
-
             </div>
-
-
-            <div class="footer-social">
-
-                <a
-                    href="https://www.facebook.com/profile.php?id=61591724616267"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Facebook
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/company/kairoxpl/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    LinkedIn
-                </a>
-
+            <nav class="view-options cooperation-preview-options" aria-labelledby="footer-nav-title">
+              <a href="audyt-komunikacji.html">Audyt</a><a href="metoda.html">Metoda Agent 0</a>
+              <a href="modele-wspolpracy.html">Modele współpracy</a><a href="partnerstwo.html">Partnerstwo</a>
+              <a href="realizacje.html">Realizacje</a><a href="artykuly.html">Artykuły</a>
+            </nav>
+          </div>
+          <div class="view-inner footer-privacy">
+            <h2>Informacje i prywatność</h2>
+            <div class="view-links">
+              <a href="polityka-prywatnosci.html">Polityka prywatności <span aria-hidden="true">↗</span></a>
+              <a href="polityka-cookies.html">Polityka cookies <span aria-hidden="true">↗</span></a>
+              <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+              <a class="view--mobile" href="#main-content">Wróć na początek <span aria-hidden="true">↑</span></a>
             </div>
-
+            <div class="footer-social footer-social--mobile view--mobile">
+              <a href="https://www.facebook.com/profile.php?id=61591724616267" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.linkedin.com/company/kairoxpl/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+          <p class="view-copyright">© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
         </div>
-
-        <nav class="footer-column">
-
-            <h3>Nawigacja</h3>
-
-            <a href="index.html">Start</a>
-            
-            <a href="audyt-komunikacji.html">Audyt</a>
-            <a href="metoda.html">Metoda Agent 0</a>
-            <a href="modele-wspolpracy.html">Modele współpracy</a>
-            <a href="partnerstwo.html">Partnerstwo</a>
-            <a href="artykuly.html">Artykuły</a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Usługi</h3>
-
-            <a href="audyt-komunikacji.html">
-                Audyt komunikacji
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Start
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Landing Page
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Komunikacyjna
-            </a>
-
-            <a href="partnerstwo.html">
-                Partnerstwo
-            </a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Informacje</h3>
-
-            <a href="polityka-prywatnosci.html">
-                Polityka prywatności
-            </a>
-
-            <a href="polityka-cookies.html">
-                Polityka cookies
-            </a>
-
-            <button
-            class="footer-privacy-button"
-            id="privacySettings"
-            type="button"
-          >
-            Ustawienia prywatności
-          </button>
-
-        </nav>
-
+      </div>
     </div>
-
-    <div class="footer-bottom">
-
-        <p>
-            © 2026 KAIROX. Wszystkie prawa zastrzeżone.
-        </p>
-
-        <p>
-            Projektujemy strony, które pomagają firmom
-            lepiej komunikować swoją wartość.
-        </p>
-
-    </div>
-
-</footer>
+  </footer>
   <div class="consent-banner"
   id="consentBanner"
   role="dialog"
@@ -503,7 +229,7 @@
   </div>
   </div>
   <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/main.js?v=ux-3"></script>
+  <script src="js/main.js?v=demo-banner-off-1"></script>
   <script src="js/chat-config.js"></script>
   <script src="js/chat.js?v=direct-chat-1"></script>
 </body>

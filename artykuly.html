@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
   <meta property="og:type" content="website">
 
   <meta property="og:title"
   content="KAIROX — Strony jako narzędzie komunikacji">
-  
+
   <meta property="og:description"
 
   content="Pomagamy firmom lepiej komunikować swoją wartość za pomocą stron internetowych.">
@@ -15,14 +16,14 @@
 <meta property="og:site_name" content="KAIROX">
   <meta property="og:url"
         content="https://kairox.pl/artykuly">
-  
+
   <meta property="og:image" content="https://kairox.pl/img/kairox-share-1200x400-glow.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="400">
   <meta property="og:image:alt" content="KAIROX. Pomagamy firmom lepiej komunikować swoją wartość.">
-  
-  
+
+
   <meta name="twitter:card" content="summary_large_image">
   <meta
   name="description"
@@ -35,13 +36,18 @@
   <link rel="canonical" href="https://kairox.pl/artykuly.html">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/typography.css?v=1">
-  <link rel="stylesheet" href="css/section-scroll.css?v=10">
-  <script src="js/section-motion.js?v=5" defer></script>
-  <script src="js/section-scroll.js?v=14" defer></script>
   <link rel="stylesheet" href="css/site-refinements.css?v=ux-1">
+
+  <link rel="stylesheet" href="css/section-scroll.css?v=desktop-fit-1">
+  <link rel="stylesheet" href="css/subpage-views.css?v=desktop-fit-1">
+  <script src="js/section-scroll.js?v=desktop-fit-1" defer></script>
+  <link rel="stylesheet" href="css/article-screens.css?v=6">
+  <script src="js/subpage-mobile.js?v=desktop-fit-1" defer></script>
+  <script type="module" src="js/article-topics.mjs?v=1"></script>
+  <link rel="stylesheet" href="css/mobile-illustrations.css?v=4">
 </head>
 
-<body>
+<body class="home-screen-scroll subpage-screen">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
@@ -57,7 +63,7 @@
       <ul class="nav-list">
         <li><a href="index.html">Strona główna</a></li>
         <li><a href="modele-wspolpracy.html">Modele Współpracy</a></li>
-        
+
         <li><a href="audyt-komunikacji.html">Audyt</a></li>
         <li><a href="metoda.html">Metoda</a></li>
         <li><a href="partnerstwo.html">Partnerstwo</a></li>
@@ -72,239 +78,149 @@
     </nav>
   </header>
 
-  <main id="main-content">
 
-    <section class="hero page-hero">
-      <div class="hero-content">
-        <p class="eyebrow">Artykuły KAIROX</p>
-
-        <h1>Uczymy firmy lepiej komunikować wartość w internecie</h1>
-
-        <p class="hero-description">
+<div class="view-controls" role="group" aria-label="Przełącz ekrany strony" hidden>
+    <button type="button" data-view-step="-1" aria-label="Poprzedni ekran" aria-disabled="true">↑</button>
+    <output class="view-position" aria-live="polite"></output>
+    <button type="button" data-view-step="1" aria-label="Następny ekran">↓</button>
+  </div>
+<main id="main-content">
+    <section class="view view--paired subpage-view subpage-hero" aria-labelledby="subpage-title">
+<div class="view-inner split-layout subpage-hero-layout">
+      <div class="split-heading"><p class="eyebrow">Artykuły KAIROX</p><h1 id="subpage-title">Uczymy firmy lepiej komunikować wartość w internecie</h1></div>
+      <div class="split-body"><p class="hero-description">
           Piszemy o stronach internetowych, UX, komunikacji marki i decyzjach,
           które użytkownik podejmuje po wejściu na stronę.
-        </p>
-
-        <div class="hero-actions">
+        </p><div class="subpage-hero-proof view--desktop"><p>Dobra strona zaczyna się od dobrego zrozumienia klienta.</p></div></div>
+      <figure class="view-media split-media mobile-illustration">
+      <img src="img/illustrations/kairox-01-od-czego-zaczac-768.webp" srcset="img/illustrations/kairox-01-od-czego-zaczac-768.webp 768w, img/illustrations/kairox-01-od-czego-zaczac.webp 1536w"
+        sizes="(max-width: 980px) 100vw, 55vw" width="1536" height="1024" alt="" decoding="async" fetchpriority="high">
+    </figure>
+      <div class="split-actions subpage-hero-actions"><div class="hero-actions">
           <a href="#articles" class="primary-button">
             Zobacz artykuły
           </a>
 
-          <a class="secondary-button" href="formularz-kontaktowy.html">
+          <a class="secondary-button" href="#zaproponuj-temat">
           Zaproponuj temat
         </a>
+        </div></div>
+    </div>
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen" id="articles" aria-labelledby="articles-title">
+      <div class="article-catalog">
+        <h2 id="articles-title">Artykuły</h2>
+        <ul class="article-title-list">
+          <li>
+            <button type="button" data-screen-all data-screen-detail="summary-dlaczego-strony-nie-sprzedaja" data-screen-title="Dlaczego większość stron nie sprzedaje?" aria-haspopup="dialog">
+              <span>Dlaczego większość stron nie sprzedaje?</span><span class="article-list-plus" aria-hidden="true">+</span>
+            </button>
+            <div id="summary-dlaczego-strony-nie-sprzedaja" class="article-summary-source">
+              <p>Problem często nie leży w wyglądzie, tylko w tym, że użytkownik nie rozumie wartości firmy wystarczająco szybko.</p>
+              <p class="article-reading-time">2 min czytania</p>
+              <a class="primary-button" href="dlaczego-strony-nie-sprzedaja.html">Idź do artykułu</a>
+            </div>
+          </li>
+          <li>
+            <button type="button" data-screen-all data-screen-detail="summary-jak-klient-podejmuje-decyzje" data-screen-title="Jak klient podejmuje decyzję na stronie?" aria-haspopup="dialog">
+              <span>Jak klient podejmuje decyzję na stronie?</span><span class="article-list-plus" aria-hidden="true">+</span>
+            </button>
+            <div id="summary-jak-klient-podejmuje-decyzje" class="article-summary-source">
+              <p>Użytkownik nie czyta strony liniowo. Skanuje, porównuje, szuka dowodów i próbuje zmniejszyć ryzyko decyzji.</p>
+              <p class="article-reading-time">2 min czytania</p>
+              <a class="primary-button" href="jak-klient-podejmuje-decyzje.html">Idź do artykułu</a>
+            </div>
+          </li>
+          <li>
+            <button type="button" data-screen-all data-screen-detail="summary-bledy-komunikacyjne-firm-uslugowych" data-screen-title="5 błędów komunikacyjnych firm usługowych" aria-haspopup="dialog">
+              <span>5 błędów komunikacyjnych firm usługowych</span><span class="article-list-plus" aria-hidden="true">+</span>
+            </button>
+            <div id="summary-bledy-komunikacyjne-firm-uslugowych" class="article-summary-source">
+              <p>Ogólniki, brak odbiorcy, brak konkretnej korzyści i zbyt duże skupienie na sobie zamiast na problemie klienta.</p>
+              <p class="article-reading-time">1 min czytania</p>
+              <a class="primary-button" href="bledy-komunikacyjne-firm-uslugowych.html">Idź do artykułu</a>
+            </div>
+          </li>
+          <li>
+            <button type="button" data-screen-all data-screen-detail="summary-dlaczego-nie-zaczynamy-od-designu" data-screen-title="Dlaczego nie zaczynamy od designu?" aria-haspopup="dialog">
+              <span>Dlaczego nie zaczynamy od designu?</span><span class="article-list-plus" aria-hidden="true">+</span>
+            </button>
+            <div id="summary-dlaczego-nie-zaczynamy-od-designu" class="article-summary-source">
+              <p>Design powinien wzmacniać komunikację. Jeśli komunikat jest niejasny, nawet najlepszy wygląd nie rozwiąże problemu.</p>
+              <p class="article-reading-time">1 min czytania</p>
+              <a class="primary-button" href="dlaczego-nie-zaczynamy-od-designu.html">Idź do artykułu</a>
+            </div>
+          </li>
+          <li>
+            <button type="button" data-screen-all data-screen-detail="summary-strona-jako-narzedzie-komunikacji" data-screen-title="Strona internetowa to nie wizytówka" aria-haspopup="dialog">
+              <span>Strona internetowa to nie wizytówka</span><span class="article-list-plus" aria-hidden="true">+</span>
+            </button>
+            <div id="summary-strona-jako-narzedzie-komunikacji" class="article-summary-source">
+              <p>Strona nie jest tylko wizytówką. To miejsce, w którym klient decyduje, czy rozumie firmę i czy może jej zaufać.</p>
+              <p class="article-reading-time">2 min czytania</p>
+              <a class="primary-button" href="strona-jako-narzedzie-komunikacji.html">Idź do artykułu</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen" id="zaproponuj-temat" aria-labelledby="article-topic-title">
+      <div class="view-inner split-layout split-layout--reverse subpage-hero-layout">
+        <div class="split-heading"><h2 id="article-topic-title">Zaproponuj temat</h2></div>
+        <div class="split-body"><p>Jakie pytanie o stronę lub komunikację w Twojej branży warto omówić? Możemy przygotować analizę, audyt albo przykład przed i po.</p></div>
+        <figure class="view-media split-media mobile-illustration"><img src="img/illustrations/kairox-04-audyt-768.webp"
+          srcset="img/illustrations/kairox-04-audyt-768.webp 768w, img/illustrations/kairox-04-audyt.webp 1536w"
+          sizes="(max-width: 980px) calc(100vw - 36px), 650px" width="1536" height="1024" alt="Projektantka i projektant analizują, jak obecna strona prowadzi klienta do kontaktu." loading="lazy"></figure>
+        <div class="split-actions subpage-hero-actions">
+          <button type="button" class="primary-button article-topic-trigger" data-screen-all data-screen-detail="article-topic-form" data-screen-title="Zaproponuj temat" data-screen-move aria-haspopup="dialog">Zaproponuj temat</button>
         </div>
       </div>
-
-      <div class="hero-panel">
-        <p>Dobra strona zaczyna się od dobrego zrozumienia klienta.</p>
-      </div>
     </section>
-
-    <section class="articles" id="articles">
-      <div class="section-header">
-        <p class="eyebrow">Baza wiedzy</p>
-        <h2>Tematy, które pomagają spojrzeć na stronę inaczej</h2>
+    <form id="article-topic-form" class="article-topic-form">
+      <div>
+        <label for="article-topic-message">Jaki temat proponujesz?</label>
+        <textarea id="article-topic-message" name="message" rows="4" maxlength="1500" required></textarea>
       </div>
-
-      <div class="articles-grid">
-
-        <article class="article-card">
-          <h3>Dlaczego większość stron nie sprzedaje?</h3>
-          <p>
-            Problem często nie leży w wyglądzie, tylko w tym, że użytkownik
-            nie rozumie wartości firmy wystarczająco szybko.
-          </p>
-          <a href="dlaczego-strony-nie-sprzedaja.html">Przeczytaj artykuł</a>
-        </article>
-
-        <article class="article-card">
-          <h3>Jak klient podejmuje decyzję na stronie?</h3>
-          <p>
-            Użytkownik nie czyta strony liniowo. Skanuje, porównuje, szuka
-            dowodów i próbuje zmniejszyć ryzyko decyzji.
-          </p>
-          <a href="jak-klient-podejmuje-decyzje.html">Przeczytaj artykuł</a>
-        </article>
-
-        <article class="article-card">
-          <h3>5 błędów komunikacyjnych firm usługowych</h3>
-          <p>
-            Ogólniki, brak odbiorcy, brak konkretnej korzyści i zbyt duże
-            skupienie na sobie zamiast na problemie klienta.
-          </p>
-          <a href="bledy-komunikacyjne-firm-uslugowych.html">Przeczytaj artykuł</a>
-        </article>
-
-        <article class="article-card">
-          <h3>Dlaczego nie zaczynamy od designu?</h3>
-          <p>
-            Design powinien wzmacniać komunikację. Jeśli komunikat jest niejasny,
-            nawet najlepszy wygląd nie rozwiąże problemu.
-          </p>
-          <a href="dlaczego-nie-zaczynamy-od-designu.html">Przeczytaj artykuł</a>
-        </article>
-
-        <article class="article-card">
-          <h3>Strona internetowa to nie wizytówka</h3>
-          <p>
-            Strona nie jest tylko wizytówką. To miejsce, w którym klient
-            decyduje, czy rozumie firmę i czy może jej zaufać.
-          </p>
-          <a href="strona-jako-narzedzie-komunikacji.html">Przeczytaj artykuł</a>
-        </article>
-
-      </div>
-    </section>
-
-    <section class="cta-section">
-      <div class="cta-content">
-        <p class="eyebrow">Masz temat?</p>
-
-        <h2>Chcesz, żebyśmy przeanalizowali komunikację w Twojej branży?</h2>
-
-        <p>
-          Napisz do nas. Możemy przygotować analizę, audyt lub przykład
-          komunikacji przed i po dla konkretnego typu firmy.
-        </p>
-
-        <a class="primary-button" href="formularz-kontaktowy.html">
-          Zaproponuj temat
-        </a>
-      </div>
-    </section>
-
+      <button type="submit" class="primary-button" disabled>Wyślij</button>
+      <p class="article-topic-status" role="status"></p>
+    </form>
   </main>
 
   <footer class="site-footer">
-
-    <div class="footer-grid">
-
-        <div class="footer-brand">
-
-            <a href="index.html" class="footer-logo">
-                KAIROX
-            </a>
-
-            <p>
-                Strony internetowe jako narzędzie komunikacji marki.
-            </p>
-
-            <div class="footer-email">
-
-
+    <div class="view-footer-grid">
+      <div class="view view--paired" id="informacje">
+        <div class="view-panel-grid footer-layout">
+          <div class="view-inner footer-navigation">
+            <h2 class="footer-logo" id="footer-nav-title">KAIROX</h2>
+            <div class="footer-email footer-email-compact subpage-footer-email">
               <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
-
-
               <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
-
-
               <span class="copy-email-status" role="status" aria-live="polite"></span>
-
-
             </div>
-
-
-            <div class="footer-social">
-
-                <a
-                    href="https://www.facebook.com/profile.php?id=61591724616267"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Facebook
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/company/kairoxpl/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    LinkedIn
-                </a>
-
+            <nav class="view-options cooperation-preview-options" aria-labelledby="footer-nav-title">
+              <a href="audyt-komunikacji.html">Audyt</a><a href="metoda.html">Metoda Agent 0</a>
+              <a href="modele-wspolpracy.html">Modele współpracy</a><a href="partnerstwo.html">Partnerstwo</a>
+              <a href="realizacje.html">Realizacje</a><a href="artykuly.html">Artykuły</a>
+            </nav>
+          </div>
+          <div class="view-inner footer-privacy">
+            <h2>Informacje i prywatność</h2>
+            <div class="view-links">
+              <a href="polityka-prywatnosci.html">Polityka prywatności <span aria-hidden="true">↗</span></a>
+              <a href="polityka-cookies.html">Polityka cookies <span aria-hidden="true">↗</span></a>
+              <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+              <a class="view--mobile" href="#main-content">Wróć na początek <span aria-hidden="true">↑</span></a>
             </div>
-
+            <div class="footer-social footer-social--mobile view--mobile">
+              <a href="https://www.facebook.com/profile.php?id=61591724616267" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.linkedin.com/company/kairoxpl/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+          <p class="view-copyright">© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
         </div>
-
-        <nav class="footer-column">
-
-            <h3>Nawigacja</h3>
-
-            <a href="index.html">Start</a>
-            
-            <a href="audyt-komunikacji.html">Audyt</a>
-            <a href="metoda.html">Metoda Agent 0</a>
-            <a href="modele-wspolpracy.html">Modele współpracy</a>
-            <a href="partnerstwo.html">Partnerstwo</a>
-            <a href="artykuly.html">Artykuły</a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Usługi</h3>
-
-            <a href="audyt-komunikacji.html">
-                Audyt komunikacji
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Start
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Landing Page
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Komunikacyjna
-            </a>
-
-            <a href="partnerstwo.html">
-                Partnerstwo
-            </a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Informacje</h3>
-
-            <a href="polityka-prywatnosci.html">
-                Polityka prywatności
-            </a>
-
-            <a href="polityka-cookies.html">
-                Polityka cookies
-            </a>
-
-            <button
-            class="footer-privacy-button"
-            id="privacySettings"
-            type="button"
-          >
-            Ustawienia prywatności
-          </button>
-
-        </nav>
-
+      </div>
     </div>
-
-    <div class="footer-bottom">
-
-        <p>
-            © 2026 KAIROX. Wszystkie prawa zastrzeżone.
-        </p>
-
-        <p>
-            Projektujemy strony, które pomagają firmom
-            lepiej komunikować swoją wartość.
-        </p>
-
-    </div>
-
-</footer>
+  </footer>
   <div class="consent-banner"
   id="consentBanner"
   role="dialog"
@@ -351,7 +267,7 @@
   </div>
   </div>
   <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/main.js?v=ux-3"></script>
+  <script src="js/main.js?v=demo-banner-off-1"></script>
   <script src="js/chat-config.js"></script>
   <script src="js/chat.js?v=direct-chat-1"></script>
 </body>

@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
   <meta property="og:type" content="website">
 
   <meta property="og:title"
         content="KAIROX — Strony jako narzędzie komunikacji">
-  
+
   <meta property="og:description"
         content="Pomagamy firmom lepiej komunikować swoją wartość za pomocą stron internetowych.">
-  
+
   <meta property="og:url"
   content="https://kairox.pl/metoda">
-  
+
   <meta property="og:image" content="https://kairox.pl/img/kairox-share-1200x400-glow.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="400">
   <meta property="og:image:alt" content="KAIROX. Pomagamy firmom lepiej komunikować swoją wartość.">
-  
-  
+
+
   <meta property="og:site_name" content="KAIROX">
-  
+
   <meta name="twitter:card" content="summary_large_image">
   <meta
     name="description"
@@ -37,13 +38,16 @@
   <link rel="stylesheet" href="css/comic.css?v=1">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/typography.css?v=1">
-  <link rel="stylesheet" href="css/section-scroll.css?v=10">
-  <script src="js/section-motion.js?v=5" defer></script>
-  <script src="js/section-scroll.js?v=14" defer></script>
   <link rel="stylesheet" href="css/site-refinements.css?v=ux-1">
+
+  <link rel="stylesheet" href="css/section-scroll.css?v=desktop-fit-1">
+  <link rel="stylesheet" href="css/subpage-views.css?v=desktop-fit-1">
+  <script src="js/section-scroll.js?v=desktop-fit-1" defer></script>
+  <script src="js/subpage-mobile.js?v=desktop-fit-1" defer></script>
+  <link rel="stylesheet" href="css/mobile-illustrations.css?v=4">
 </head>
 
-<body>
+<body class="home-screen-scroll subpage-screen">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
@@ -59,7 +63,7 @@
       <ul class="nav-list">
         <li><a href="index.html">Strona główna</a></li>
         <li><a href="modele-wspolpracy.html">Modele Współpracy</a></li>
-        
+
         <li><a href="audyt-komunikacji.html">Audyt</a></li>
         <li><a href="metoda.html" class="active" aria-current="page">Metoda</a></li>
         <li><a href="partnerstwo.html">Partnerstwo</a></li>
@@ -73,410 +77,216 @@
         </a>
     </nav>
   </header>
-  <div class="page-layout">
 
 
-  <main id="main-content">
 
-    <section class="comic-block hero page-hero comic-block--hero" aria-labelledby="comic-hero-title">
-      <div class="comic-copy">
-        <p class="eyebrow">Metoda Agent 0</p>
-        <h1 id="comic-hero-title">Najpierw ustalamy, co ma zrozumieć Twój klient</h1>
-        <p class="comic-description">Dla kogo jest oferta? Jaką daje korzyść? Dlaczego warto zaufać? Strategia i komunikacja wyznaczają kierunek UX, designu i wdrożenia.</p>
-        <div class="comic-actions">
-          <a class="primary-button" href="#strategia">Poznaj etapy pracy</a>
-          <a class="secondary-button" href="formularz-kontaktowy.html?source=%2Fmetoda.html">Porozmawiajmy o stronie</a>
-        </div>
-      </div>
-      <figure class="comic-visual">
-        <img src="img/illustrations/kairox-02-strategia.webp"
+
+<div class="view-controls" role="group" aria-label="Przełącz ekrany strony" hidden>
+    <button type="button" data-view-step="-1" aria-label="Poprzedni ekran" aria-disabled="true">↑</button>
+    <output class="view-position" aria-live="polite"></output>
+    <button type="button" data-view-step="1" aria-label="Następny ekran">↓</button>
+  </div>
+<main id="main-content">
+    <section class="view view--paired subpage-view subpage-hero" aria-labelledby="comic-hero-title">
+<div class="view-inner split-layout subpage-hero-layout">
+      <div class="split-heading"><p class="eyebrow">Metoda Agent 0</p><h1 id="comic-hero-title">Najpierw ustalamy, co ma zrozumieć Twój klient</h1></div>
+      <div class="split-body"><p class="comic-description">Dla kogo jest oferta? Jaką daje korzyść? Dlaczego warto zaufać? Strategia i komunikacja wyznaczają kierunek UX, designu i wdrożenia.</p></div>
+      <figure class="view-media split-media mobile-illustration"><img src="img/illustrations/kairox-02-strategia.webp"
           srcset="img/illustrations/kairox-02-strategia-768.webp 768w, img/illustrations/kairox-02-strategia.webp 1536w"
           sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 48px), 650px"
           width="1536" height="1024" alt="Klientka i projektant wspólnie układają ofertę: dla kogo, jaka korzyść, dlaczego zaufać. Dymek: „Ustalmy, co jest najważniejsze”."
-          loading="eager" decoding="async" fetchpriority="high">
-      </figure>
+          loading="eager" fetchpriority="high"></figure>
+      <div class="split-actions subpage-hero-actions"><div class="comic-actions">
+          <a class="primary-button" href="#strategia">Poznaj etapy pracy</a>
+          <a class="secondary-button" href="formularz-kontaktowy.html?source=%2Fmetoda.html">Porozmawiajmy o stronie</a>
+        </div></div>
+    </div>
     </section>
-
-    <section class="message">
-      <h2>Większość stron powstaje od końca</h2>
-      <p>
-        Najpierw wybiera się wygląd, kolory i animacje. My zaczynamy wcześniej:
-        od pytania, co klient ma zrozumieć i jaką decyzję ma podjąć.
-      </p>
-    </section>
-
-    <section class="method-step" id="strategia">
-
-      <div class="step-number">01</div>
-    
-      <div class="step-content">
-    
-        <p class="eyebrow">Strategia</p>
-    
-        <h2>Zanim powstanie strona, musimy zrozumieć biznes</h2>
-    
-        <p>
-          Analizujemy ofertę, grupę docelową, konkurencję i cele firmy.
-          Dzięki temu wiemy, jakie informacje są naprawdę ważne
-          i co powinien zapamiętać użytkownik.
-        </p>
-    
-        <ul class="step-list">
-          <li>Analiza firmy i oferty</li>
-          <li>Analiza odbiorców</li>
-          <li>Analiza konkurencji</li>
-          <li>Określenie celu strony</li>
-        </ul>
-        <div class="step-link">
-          <span class="step-link-label">Dowiedz się więcej</span>
-        
-          <a href="strona-jako-narzedzie-komunikacji.html" class="step-link-card">
-            <div class="step-link-content">
-              <h3>Dlaczego strona internetowa nie jest wizytówką?</h3>
-              <p>
-                Poznaj filozofię stojącą za metodą Agent 0 i zobacz,
-                dlaczego zaczynamy od strategii zamiast od wyglądu.
-              </p>
-            </div>
-        
-            <span class="step-link-arrow">→</span>
-          </a>
+    <section class="view view--paired subpage-view subpage-text-screen method-stage" id="strategia" aria-labelledby="strategia-title">
+      <div class="method-step subpage-panel">
+        <div class="step-content">
+          <p class="eyebrow">Strategia</p>
+          <h2 id="strategia-title">Zanim powstanie strona, musimy zrozumieć biznes</h2>
+          <p>Analizujemy ofertę, odbiorców, konkurencję i cele firmy. Najpierw ustalamy, co klient ma zrozumieć i jaką decyzję podjąć. Wygląd dobieramy później.</p>
+          <ul class="step-list">
+            <li>Analiza firmy i oferty</li>
+            <li>Analiza odbiorców</li>
+            <li>Analiza konkurencji</li>
+            <li>Określenie celu strony</li>
+          </ul>
+          <div class="step-link">
+            <span class="step-link-label">Dowiedz się więcej</span>
+            <a href="strona-jako-narzedzie-komunikacji.html" class="step-link-card">
+              <div class="step-link-content">
+                <h3>Dlaczego strona internetowa nie jest wizytówką?</h3>
+                <p>Poznaj filozofię stojącą za metodą Agent 0 i zobacz, dlaczego zaczynamy od strategii zamiast od wyglądu.</p>
+              </div>
+              <span class="step-link-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </div>
-
     </section>
-    <section class="method-step" id="komunikacja">
-
-      <div class="step-number">02</div>
-    
-      <div class="step-content">
-    
-        <p class="eyebrow">Komunikacja</p>
-    
-        <h2>Definiujemy przekaz, który ma zostać zapamiętany</h2>
-    
-        <p>
-          Użytkownik nie zapamięta całej strony.
-          Zapamięta jedną główną myśl.
-          Pomagamy ją znaleźć i zbudować wokół niej komunikację.
-        </p>
-    
-        <ul class="step-list">
-          <li>Główny komunikat marki</li>
-          <li>Argumenty sprzedażowe</li>
-          <li>Język komunikacji</li>
-          <li>Hierarchia treści</li>
-        </ul>
-        <div class="step-link">
-          <span class="step-link-label">Dowiedz się więcej</span>
-        
-          <a href="bledy-komunikacyjne-firm-uslugowych.html" class="step-link-card">
-            <div class="step-link-content">
-              <h3>5 błędów komunikacyjnych firm usługowych</h3>
-              <p>
-                Zobacz, dlaczego wiele stron brzmi poprawnie,
-                ale nie pomaga klientom zrozumieć wartości oferty.
-              </p>
-            </div>
-        
-            <span class="step-link-arrow">→</span>
-          </a>
+    <section class="view view--paired subpage-view subpage-text-screen method-stage" id="komunikacja" aria-labelledby="komunikacja-title">
+      <div class="method-step subpage-panel">
+        <div class="step-content">
+          <p class="eyebrow">Komunikacja</p>
+          <h2 id="komunikacja-title">Definiujemy przekaz, który ma zostać zapamiętany</h2>
+          <p>Użytkownik nie zapamięta całej strony. Zapamięta jedną główną myśl. Pomagamy ją znaleźć i zbudować wokół niej komunikację.</p>
+          <ul class="step-list">
+            <li>Główny komunikat marki</li>
+            <li>Argumenty sprzedażowe</li>
+            <li>Język komunikacji</li>
+            <li>Hierarchia treści</li>
+          </ul>
+          <div class="step-link">
+            <span class="step-link-label">Dowiedz się więcej</span>
+            <a href="bledy-komunikacyjne-firm-uslugowych.html" class="step-link-card">
+              <div class="step-link-content">
+                <h3>5 błędów komunikacyjnych firm usługowych</h3>
+                <p>Zobacz, dlaczego wiele stron brzmi poprawnie, ale nie pomaga klientom zrozumieć wartości oferty.</p>
+              </div>
+              <span class="step-link-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </div>
-    
     </section>
-    <section class="method-step" id="ux">
-
-      <div class="step-number">03</div>
-    
-      <div class="step-content">
-    
-        <p class="eyebrow">UX</p>
-    
-        <h2>Projektujemy drogę użytkownika</h2>
-    
-        <p>
-          Zastanawiamy się, czego użytkownik szuka,
-          czego się obawia i jakie informacje powinien zobaczyć
-          w odpowiednim momencie.
-        </p>
-    
-        <ul class="step-list">
-          <li>Struktura strony</li>
-          <li>Kolejność informacji</li>
-          <li>Projekt ścieżki użytkownika</li>
-          <li>Punkty konwersji</li>
-        </ul>
-        <div class="step-link">
-          <span class="step-link-label">Dowiedz się więcej</span>
-        
-          <a href="jak-klient-podejmuje-decyzje.html" class="step-link-card">
-            <div class="step-link-content">
-              <h3>Jak klient podejmuje decyzję na stronie?</h3>
-              <p>
-                Poznaj sposób, w jaki użytkownik skanuje stronę,
-                buduje zaufanie i decyduje, czy warto się skontaktować.
-              </p>
-            </div>
-        
-            <span class="step-link-arrow">→</span>
-          </a>
+    <section class="view view--paired subpage-view subpage-text-screen method-stage" id="ux" aria-labelledby="ux-title">
+      <div class="method-step subpage-panel">
+        <div class="step-content">
+          <p class="eyebrow">UX</p>
+          <h2 id="ux-title">Projektujemy drogę użytkownika</h2>
+          <p>Zastanawiamy się, czego użytkownik szuka, czego się obawia i jakie informacje powinien zobaczyć w odpowiednim momencie.</p>
+          <ul class="step-list">
+            <li>Struktura strony</li>
+            <li>Kolejność informacji</li>
+            <li>Projekt ścieżki użytkownika</li>
+            <li>Punkty konwersji</li>
+          </ul>
+          <div class="step-link">
+            <span class="step-link-label">Dowiedz się więcej</span>
+            <a href="jak-klient-podejmuje-decyzje.html" class="step-link-card">
+              <div class="step-link-content">
+                <h3>Jak klient podejmuje decyzję na stronie?</h3>
+                <p>Poznaj sposób, w jaki użytkownik skanuje stronę, buduje zaufanie i decyduje, czy warto się skontaktować.</p>
+              </div>
+              <span class="step-link-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </div>
-
     </section>
-    <section class="method-step" id="design">
-
-      <div class="step-number">04</div>
-    
-      <div class="step-content">
-    
-        <p class="eyebrow">Design</p>
-    
-        <h2>Wygląd wzmacnia komunikat</h2>
-    
-        <p>
-          Design nie jest celem.
-          Jest narzędziem, które pomaga budować zaufanie,
-          czytelność i zapamiętywalność marki.
-        </p>
-    
-        <ul class="step-list">
-          <li>Layout</li>
-          <li>Typografia</li>
-          <li>Kolory</li>
-          <li>Komponenty interfejsu</li>
-        </ul>
-        <div class="step-link">
-          <span class="step-link-label">Dowiedz się więcej</span>
-        
-          <a href="dlaczego-nie-zaczynamy-od-designu.html" class="step-link-card">
-            <div class="step-link-content">
-              <h3>Dlaczego nie zaczynamy od designu?</h3>
-              <p>
-                Zobacz, dlaczego wygląd powinien wzmacniać komunikację,
-                a nie zastępować strategię i UX.
-              </p>
-            </div>
-        
-            <span class="step-link-arrow">→</span>
-          </a>
+    <section class="view view--paired subpage-view subpage-text-screen method-stage" id="design" aria-labelledby="design-title">
+      <div class="method-step subpage-panel">
+        <div class="step-content">
+          <p class="eyebrow">Design</p>
+          <h2 id="design-title">Wygląd wzmacnia komunikat</h2>
+          <p>Design nie jest celem. Jest narzędziem, które pomaga budować zaufanie, czytelność i zapamiętywalność marki.</p>
+          <ul class="step-list">
+            <li>Layout</li>
+            <li>Typografia</li>
+            <li>Kolory</li>
+            <li>Komponenty interfejsu</li>
+          </ul>
+          <div class="step-link">
+            <span class="step-link-label">Dowiedz się więcej</span>
+            <a href="dlaczego-nie-zaczynamy-od-designu.html" class="step-link-card">
+              <div class="step-link-content">
+                <h3>Dlaczego nie zaczynamy od designu?</h3>
+                <p>Zobacz, dlaczego wygląd powinien wzmacniać komunikację, a nie zastępować strategię i UX.</p>
+              </div>
+              <span class="step-link-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </div>
-
     </section>
-    <section class="method-step" id="development">
-
-      <div class="step-number">05</div>
-    
-      <div class="step-content">
-    
-        <p class="eyebrow">Development</p>
-    
-        <h2>Dopiero teraz budujemy stronę</h2>
-    
-        <p>
-          Kiedy strategia, komunikacja i UX są gotowe,
-          wdrożenie staje się naturalnym etapem procesu,
-          a nie próbą naprawiania problemów po fakcie.
-        </p>
-    
-        <ul class="step-list">
-          <li>Responsywność</li>
-          <li>Wydajność</li>
-          <li>SEO techniczne</li>
-          <li>Dalszy rozwój</li>
-        </ul>
-        <div class="step-link">
-          <span class="step-link-label">Następny krok</span>
-        
-          <a href="audyt-komunikacji.html" class="step-link-card">
-            <div class="step-link-content">
-              <h3>Sprawdź komunikację swojej strony</h3>
-              <p>
-                Audyt pokaże, czy Twoja obecna strona jasno tłumaczy wartość firmy
-                i prowadzi użytkownika do działania.
-              </p>
-            </div>
-        
-            <span class="step-link-arrow">→</span>
-          </a>
+    <section class="view view--paired subpage-view subpage-text-screen method-stage" id="development" aria-labelledby="development-title">
+      <div class="method-step subpage-panel">
+        <div class="step-content">
+          <p class="eyebrow">Development</p>
+          <h2 id="development-title">Dopiero teraz budujemy stronę</h2>
+          <p>Kiedy strategia, komunikacja i UX są gotowe, wdrożenie staje się naturalnym etapem procesu, a nie próbą naprawiania problemów po fakcie.</p>
+          <ul class="step-list">
+            <li>Responsywność</li>
+            <li>Wydajność</li>
+            <li>SEO techniczne</li>
+            <li>Dalszy rozwój</li>
+          </ul>
+          <div class="step-link">
+            <span class="step-link-label">Następny krok</span>
+            <a href="audyt-komunikacji.html" class="step-link-card">
+              <div class="step-link-content">
+                <h3>Sprawdź komunikację swojej strony</h3>
+                <p>Audyt pokaże, czy Twoja obecna strona jasno tłumaczy wartość firmy i prowadzi użytkownika do działania.</p>
+              </div>
+              <span class="step-link-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </div>
-
     </section>
-
-    <section class="problem">
-      <div class="section-header">
-        <p class="eyebrow">Dlaczego to działa</p>
-        <h2>Strona nie ma tylko wyglądać. Ma pomagać klientowi zrozumieć wartość firmy</h2>
-      </div>
-
-      <div class="problem-grid">
-        <article>
-          <h3>Jasny przekaz</h3>
-          <p>Użytkownik szybciej rozumie, czym się zajmujesz i dla kogo jest Twoja oferta.</p>
-        </article>
-
-        <article>
-          <h3>Lepsza decyzja</h3>
-          <p>Strona odpowiada na pytania, obawy i potrzeby odbiorcy.</p>
-        </article>
-
-        <article>
-          <h3>Więcej zaufania</h3>
-          <p>Komunikacja, struktura i design pracują razem na wiarygodność marki.</p>
-        </article>
+    <section class="view view--paired subpage-view subpage-text-screen method-conversation" id="rozmowa" aria-labelledby="method-conversation-title">
+      <div class="view-panel-grid view-panel-grid--priority subpage-pair">
+        <div class="method-conversation-intro">
+          <h2 id="method-conversation-title">Zacznijmy od rozmowy</h2>
+          <p>Sprawdźmy, czy Twoja strona jasno pokazuje wartość firmy i pomaga klientowi podjąć decyzję.</p>
+          <a class="primary-button" href="formularz-kontaktowy.html">Umów konsultację</a>
+        </div>
+        <ul class="method-benefits">
+          <li>
+            <h3>Jasny przekaz</h3>
+            <p>Klient szybko rozumie, czym się zajmujesz i dla kogo jest oferta.</p>
+          </li>
+          <li>
+            <h3>Lepsza decyzja</h3>
+            <p>Strona odpowiada na pytania, obawy i potrzeby odbiorcy.</p>
+          </li>
+          <li>
+            <h3>Więcej zaufania</h3>
+            <p>Komunikacja, struktura i design wzmacniają wiarygodność marki.</p>
+          </li>
+        </ul>
       </div>
     </section>
-
-    <section class="cta-section">
-      <div class="cta-content">
-        <p class="eyebrow">Zacznijmy od rozmowy</p>
-
-        <h2>Sprawdźmy, czy Twoja strona dobrze komunikuje wartość firmy</h2>
-
-        <p>
-          Porozmawiajmy o tym, co klient powinien zrozumieć po wejściu na Twoją stronę.
-        </p>
-
-        <a class="primary-button" href="formularz-kontaktowy.html">
-          Umów konsultację
-        </a>
-      </div>
-    </section>
-
   </main>
-</div>
-<footer class="site-footer">
 
-  <div class="footer-grid">
-
-      <div class="footer-brand">
-
-          <a href="index.html" class="footer-logo">
-              KAIROX
-          </a>
-
-          <p>
-              Strony internetowe jako narzędzie komunikacji marki.
-          </p>
-
-          <div class="footer-email">
-
-
-            <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
-
-
-            <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
-
-
-            <span class="copy-email-status" role="status" aria-live="polite"></span>
-
-
+  <footer class="site-footer">
+    <div class="view-footer-grid">
+      <div class="view view--paired" id="informacje">
+        <div class="view-panel-grid footer-layout">
+          <div class="view-inner footer-navigation">
+            <h2 class="footer-logo" id="footer-nav-title">KAIROX</h2>
+            <div class="footer-email footer-email-compact subpage-footer-email">
+              <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
+              <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
+              <span class="copy-email-status" role="status" aria-live="polite"></span>
+            </div>
+            <nav class="view-options cooperation-preview-options" aria-labelledby="footer-nav-title">
+              <a href="audyt-komunikacji.html">Audyt</a><a href="metoda.html">Metoda Agent 0</a>
+              <a href="modele-wspolpracy.html">Modele współpracy</a><a href="partnerstwo.html">Partnerstwo</a>
+              <a href="realizacje.html">Realizacje</a><a href="artykuly.html">Artykuły</a>
+            </nav>
           </div>
-
-
-          <div class="footer-social">
-
-              <a
-                  href="https://www.facebook.com/profile.php?id=61591724616267"
-                  target="_blank"
-                  rel="noopener"
-              >
-                  Facebook
-              </a>
-
-              <a
-                  href="https://www.linkedin.com/company/kairoxpl/"
-                  target="_blank"
-                  rel="noopener"
-              >
-                  LinkedIn
-              </a>
-
+          <div class="view-inner footer-privacy">
+            <h2>Informacje i prywatność</h2>
+            <div class="view-links">
+              <a href="polityka-prywatnosci.html">Polityka prywatności <span aria-hidden="true">↗</span></a>
+              <a href="polityka-cookies.html">Polityka cookies <span aria-hidden="true">↗</span></a>
+              <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+              <a class="view--mobile" href="#main-content">Wróć na początek <span aria-hidden="true">↑</span></a>
+            </div>
+            <div class="footer-social footer-social--mobile view--mobile">
+              <a href="https://www.facebook.com/profile.php?id=61591724616267" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.linkedin.com/company/kairoxpl/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
           </div>
-
+          <p class="view-copyright">© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
+        </div>
       </div>
-
-      <nav class="footer-column">
-
-          <h3>Nawigacja</h3>
-
-          <a href="index.html">Start</a>
-          
-          <a href="audyt-komunikacji.html">Audyt</a>
-          <a href="metoda.html">Metoda Agent 0</a>
-          <a href="modele-wspolpracy.html">Modele współpracy</a>
-          <a href="partnerstwo.html">Partnerstwo</a>
-          <a href="artykuly.html">Artykuły</a>
-
-      </nav>
-
-      <nav class="footer-column">
-
-          <h3>Usługi</h3>
-
-          <a href="audyt-komunikacji.html">
-              Audyt komunikacji
-          </a>
-
-          <a href="modele-wspolpracy.html">
-              Strona Start
-          </a>
-
-          <a href="modele-wspolpracy.html">
-              Landing Page
-          </a>
-
-          <a href="modele-wspolpracy.html">
-              Strona Komunikacyjna
-          </a>
-
-          <a href="partnerstwo.html">
-              Partnerstwo
-          </a>
-
-      </nav>
-
-      <nav class="footer-column">
-
-          <h3>Informacje</h3>
-
-          <a href="polityka-prywatnosci.html">
-              Polityka prywatności
-          </a>
-
-          <a href="polityka-cookies.html">
-              Polityka cookies
-          </a>
-
-          <button
-          class="footer-privacy-button"
-          id="privacySettings"
-          type="button"
-        >
-          Ustawienia prywatności
-        </button>
-
-      </nav>
-
-  </div>
-
-  <div class="footer-bottom">
-
-      <p>
-          © 2026 KAIROX. Wszystkie prawa zastrzeżone.
-      </p>
-
-      <p>
-          Projektujemy strony, które pomagają firmom
-          lepiej komunikować swoją wartość.
-      </p>
-
-  </div>
-
-</footer>
+    </div>
+  </footer>
   <div class="consent-banner"
   id="consentBanner"
   role="dialog"
@@ -523,7 +333,7 @@
   </div>
   </div>
   <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/main.js?v=ux-3"></script>
+  <script src="js/main.js?v=demo-banner-off-1"></script>
   <script src="js/chat-config.js"></script>
   <script src="js/chat.js?v=direct-chat-1"></script>
 </body>

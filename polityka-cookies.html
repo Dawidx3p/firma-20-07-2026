@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
 
@@ -10,10 +11,7 @@
     name="description"
     content="Polityka cookies serwisu KAIROX. Informacje o plikach cookies, ich rodzajach, celach stosowania i sposobach zarządzania ustawieniami."
   />
-
-  <meta name="robots" content="index, follow" />
-
-  <link
+<link
     rel="canonical"
     href="https://kairox.pl/polityka-cookies.html"
   />
@@ -23,13 +21,15 @@
   <link rel="stylesheet" href="css/style.css?v=ui-1" />
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/typography.css?v=1">
-  <link rel="stylesheet" href="css/section-scroll.css?v=10">
-  <script src="js/section-motion.js?v=5" defer></script>
-  <script src="js/section-scroll.js?v=14" defer></script>
   <link rel="stylesheet" href="css/site-refinements.css?v=ux-1">
+
+  <link rel="stylesheet" href="css/section-scroll.css?v=desktop-fit-1">
+  <link rel="stylesheet" href="css/subpage-views.css?v=desktop-fit-1">
+  <script src="js/section-scroll.js?v=desktop-fit-1" defer></script>
+  <script src="js/subpage-mobile.js?v=desktop-fit-1" defer></script>
 </head>
 
-<body>
+<body class="home-screen-scroll subpage-screen">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
@@ -57,7 +57,7 @@
       <ul class="nav-list">
         <li><a href="index.html">Strona główna</a></li>
         <li><a href="modele-wspolpracy.html">Modele współpracy</a></li>
-        
+
         <li><a href="audyt-komunikacji.html">Audyt</a></li>
         <li><a href="metoda.html">Metoda</a></li>
         <li><a href="partnerstwo.html">Partnerstwo</a></li>
@@ -73,29 +73,27 @@
     </nav>
   </header>
 
-  <main id="main-content">
 
-    <section class="hero page-hero legal-hero">
-      <div class="hero-content">
-        <p class="eyebrow">Dokumenty</p>
-
-        <h1>Polityka cookies</h1>
-
-        <p class="hero-description">
+<div class="view-controls" role="group" aria-label="Przełącz ekrany strony" hidden>
+    <button type="button" data-view-step="-1" aria-label="Poprzedni ekran" aria-disabled="true">↑</button>
+    <output class="view-position" aria-live="polite"></output>
+    <button type="button" data-view-step="1" aria-label="Następny ekran">↓</button>
+  </div>
+<main id="main-content">
+    <section class="view view--paired subpage-view subpage-text-screen" aria-labelledby="subpage-title">
+<div class="view-panel-grid subpage-pair">
+<div class="subpage-panel subpage-plain-hero"><p class="eyebrow">Dokumenty</p><h1 id="subpage-title">Polityka cookies</h1><p class="hero-description">
           Wyjaśniamy, czym są pliki cookies, w jakim celu mogą być
           wykorzystywane w serwisie KAIROX oraz jak można nimi zarządzać.
-        </p>
-      </div>
-
-      <div class="hero-panel">
+        </p></div>
+<div class="hero-panel subpage-panel">
         <p>Analitykę uruchamiamy wyłącznie po Twojej zgodzie.</p>
         <p>W każdej chwili możesz zmienić swój wybór.</p>
       </div>
+</div>
     </section>
-
-    <article class="legal-content">
-
-      <section class="legal-section">
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">01</p>
         <h2>Informacje ogólne</h2>
 
@@ -119,8 +117,9 @@
           która opisuje zasady przetwarzania danych osobowych.
         </p>
       </section>
-
-      <section class="legal-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">02</p>
         <h2>Czym są pliki cookies?</h2>
 
@@ -141,8 +140,9 @@
           w serwisie.
         </p>
       </section>
-
-      <section class="legal-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">03</p>
         <h2>Administrator serwisu</h2>
 
@@ -165,8 +165,9 @@
           </p>
         </div>
       </section>
-
-      <section class="legal-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">04</p>
         <h2>Jakie rodzaje cookies mogą być wykorzystywane?</h2>
 
@@ -231,11 +232,12 @@
 
         </div>
       </section>
-
-      <section class="legal-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">05</p>
         <h2>Technologie wykorzystywane obecnie</h2>
-      
+
         <p>
           Serwis KAIROX wykorzystuje technologie niezbędne do prawidłowego
           działania strony oraz zapamiętania wyboru użytkownika dotyczącego
@@ -245,58 +247,63 @@
           Wybór dotyczący analityki jest zapisywany w localStorage na okres
           do 180 dni. Czat nie zapisuje historii rozmowy w cookies ani
           localStorage; jego historia i krótkotrwały token sesji pozostają
-          w pamięci karty. W sessionStorage zapisujemy wyłącznie stan zachęt
+          w pamięci karty.
+        </p>
+        <p>
+          W sessionStorage zapisujemy wyłącznie stan zachęt
           do rozmowy i poznania projektu Archiwum Śledcze, aby nie pokazywać ich ponownie podczas wizyty w tej karcie.
           Ten zapis nie zawiera wiadomości ani danych kontaktowych i jest
           usuwany wraz z zakończeniem sesji karty w przeglądarce.
+        </p>
+        <p>
           Po rozpoczęciu czatu używamy Cloudflare Turnstile
           do weryfikacji bezpieczeństwa. Szczegóły działania i dostawców czatu
           opisuje <a href="polityka-prywatnosci.html#czat-ai">polityka prywatności</a>.
         </p>
-      
+
         <p>
           Po wyrażeniu zgody na analitykę mogą zostać uruchomione:
         </p>
-      
+
         <div class="legal-grid">
-      
+
           <article class="legal-card">
             <h3>Google Analytics 4</h3>
-      
+
             <p>
               Narzędzie służy do mierzenia ruchu w serwisie, źródeł wejścia,
               odwiedzanych podstron oraz podstawowych interakcji użytkowników.
             </p>
-      
+
             <p>
               Google Analytics 4 może wykorzystywać pliki cookies, takie jak
               <code>_ga</code> oraz cookies rozpoczynające się od
               <code>_ga_</code>.
             </p>
           </article>
-      
+
           <article class="legal-card">
             <h3>Microsoft Clarity</h3>
-      
+
             <p>
               Narzędzie służy do tworzenia map kliknięć i przewijania,
               wykrywania problematycznych interakcji oraz analizy sposobu
               korzystania ze strony.
             </p>
-      
+
             <p>
               Microsoft Clarity może wykorzystywać między innymi cookies
               <code>_clck</code> i <code>_clsk</code>.
             </p>
           </article>
-      
+
         </div>
-      
+
         <div class="legal-box">
           <p>
             <strong>Ważne:</strong>
           </p>
-      
+
           <p>
             Google Analytics 4 i Microsoft Clarity nie są ładowane przed
             wyrażeniem zgody na analitykę. Wybranie opcji „Tylko niezbędne”
@@ -304,15 +311,16 @@
           </p>
         </div>
       </section>
-
-      <section class="legal-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">06</p>
         <h2>Do czego wykorzystujemy analitykę?</h2>
-      
+
         <p>
           Po uzyskaniu zgody dane analityczne mogą być wykorzystywane do:
         </p>
-      
+
         <ul class="legal-list">
           <li>mierzenia liczby odwiedzin i wyświetleń podstron,</li>
           <li>sprawdzania źródeł ruchu,</li>
@@ -322,14 +330,15 @@
           <li>oceny skuteczności formularzy i elementów CTA,</li>
           <li>ulepszania struktury, treści i użyteczności serwisu.</li>
         </ul>
-      
+
         <p>
           Obecnie nie wykorzystujemy danych analitycznych do personalizacji
           reklam ani prowadzenia remarketingu.
         </p>
       </section>
-
-      <section class="legal-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">07</p>
         <h2>Formularz kontaktowy i Formspree</h2>
 
@@ -352,44 +361,46 @@
           </a>.
         </p>
       </section>
-
-      <section class="legal-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">08</p>
         <h2>Zgoda na analitykę</h2>
-      
+
         <p>
           Podczas pierwszej wizyty użytkownik może wybrać jedną z dwóch opcji:
         </p>
-      
+
         <ul class="legal-list">
           <li>
             <strong>Akceptuję analitykę</strong> — zezwala na uruchomienie
             Google Analytics 4 i Microsoft Clarity,
           </li>
-      
+
           <li>
             <strong>Tylko niezbędne</strong> — powoduje, że narzędzia
             analityczne nie są uruchamiane.
           </li>
         </ul>
-      
+
         <p>
           Brak zgody na analitykę nie ogranicza dostępu do serwisu
           ani jego podstawowych funkcji.
         </p>
-      
+
         <p>
           Wybór użytkownika jest zapisywany lokalnie w przeglądarce
           i obowiązuje na wszystkich podstronach serwisu KAIROX.
         </p>
-      
+
         <p>
           Decyzję można w każdej chwili zmienić za pomocą przycisku
           „Ustawienia prywatności” dostępnego w stopce.
         </p>
       </section>
-
-      <section class="legal-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">09</p>
         <h2>Jak zarządzać cookies w przeglądarce?</h2>
 
@@ -419,33 +430,36 @@
           działanie niektórych funkcji strony.
         </p>
       </section>
-
-      <section class="legal-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">10</p>
         <h2>Dostawcy zewnętrzni</h2>
-      
+
         <p>
           Po wyrażeniu zgody serwis może korzystać z technologii dostarczanych
           przez następujące podmioty:
         </p>
-      
+
         <ul class="legal-list">
           <li>
             <strong>Google Analytics 4</strong> — usługa dostarczana przez Google,
           </li>
-      
+
           <li>
             <strong>Microsoft Clarity</strong> — usługa dostarczana przez Microsoft.
           </li>
         </ul>
-      
+
         <p>
           Dostawcy mogą wykorzystywać własne pliki cookies i podobne technologie
           zgodnie ze swoimi zasadami prywatności oraz konfiguracją zgody
           przekazywaną przez serwis KAIROX.
         </p>
       </section>
-      <section class="legal-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">11</p>
         <h2>Przekazywanie danych poza Europejski Obszar Gospodarczy</h2>
 
@@ -471,34 +485,36 @@
           </p>
 
       </section>
-
-      <section class="legal-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">12</p>
         <h2>Okres przechowywania</h2>
-      
+
         <p>
           Informację o wyborze dotyczącym analityki zapisujemy lokalnie
           w przeglądarce przez maksymalnie 180 dni.
         </p>
-      
+
         <p>
           Po upływie tego czasu użytkownik może zostać ponownie poproszony
           o dokonanie wyboru.
         </p>
-      
+
         <p>
           Cookies wykorzystywane przez Google Analytics 4 i Microsoft Clarity
           mogą mieć różne okresy ważności, zależne od rodzaju pliku,
           konfiguracji usługi oraz ustawień przeglądarki.
         </p>
-      
+
         <p>
           Użytkownik może w dowolnym momencie usunąć cookies i dane lokalne
           za pomocą ustawień swojej przeglądarki.
         </p>
       </section>
-
-      <section class="legal-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="legal-section subpage-panel">
         <p class="eyebrow">13</p>
         <h2>Zmiany polityki cookies</h2>
 
@@ -517,10 +533,9 @@
             14.07.2026
           </p>
       </section>
-
-    </article>
-
-    <section class="cta-section">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="cta-section subpage-panel">
       <div class="cta-content">
         <p class="eyebrow">Kontakt</p>
 
@@ -536,140 +551,46 @@
         </a>
       </div>
     </section>
-
+    </section>
   </main>
 
   <footer class="site-footer">
-
-    <div class="footer-grid">
-
-        <div class="footer-brand">
-
-            <a href="index.html" class="footer-logo">
-                KAIROX
-            </a>
-
-            <p>
-                Strony internetowe jako narzędzie komunikacji marki.
-            </p>
-
-            <div class="footer-email">
-
-
+    <div class="view-footer-grid">
+      <div class="view view--paired" id="informacje">
+        <div class="view-panel-grid footer-layout">
+          <div class="view-inner footer-navigation">
+            <h2 class="footer-logo" id="footer-nav-title">KAIROX</h2>
+            <div class="footer-email footer-email-compact subpage-footer-email">
               <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
-
-
               <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
-
-
               <span class="copy-email-status" role="status" aria-live="polite"></span>
-
-
             </div>
-
-
-            <div class="footer-social">
-
-                <a
-                    href="https://www.facebook.com/profile.php?id=61591724616267"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Facebook
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/company/kairoxpl/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    LinkedIn
-                </a>
-
+            <nav class="view-options cooperation-preview-options" aria-labelledby="footer-nav-title">
+              <a href="audyt-komunikacji.html">Audyt</a><a href="metoda.html">Metoda Agent 0</a>
+              <a href="modele-wspolpracy.html">Modele współpracy</a><a href="partnerstwo.html">Partnerstwo</a>
+              <a href="realizacje.html">Realizacje</a><a href="artykuly.html">Artykuły</a>
+            </nav>
+          </div>
+          <div class="view-inner footer-privacy">
+            <h2>Informacje i prywatność</h2>
+            <div class="view-links">
+              <a href="polityka-prywatnosci.html">Polityka prywatności <span aria-hidden="true">↗</span></a>
+              <a href="polityka-cookies.html">Polityka cookies <span aria-hidden="true">↗</span></a>
+              <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+              <a class="view--mobile" href="#main-content">Wróć na początek <span aria-hidden="true">↑</span></a>
             </div>
-
+            <div class="footer-social footer-social--mobile view--mobile">
+              <a href="https://www.facebook.com/profile.php?id=61591724616267" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.linkedin.com/company/kairoxpl/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+          <p class="view-copyright">© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
         </div>
-
-        <nav class="footer-column">
-
-            <h3>Nawigacja</h3>
-
-            <a href="index.html">Start</a>
-            
-            <a href="audyt-komunikacji.html">Audyt</a>
-            <a href="metoda.html">Metoda Agent 0</a>
-            <a href="modele-wspolpracy.html">Modele współpracy</a>
-            <a href="partnerstwo.html">Partnerstwo</a>
-            <a href="artykuly.html">Artykuły</a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Usługi</h3>
-
-            <a href="audyt-komunikacji.html">
-                Audyt komunikacji
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Start
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Landing Page
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Komunikacyjna
-            </a>
-
-            <a href="partnerstwo.html">
-                Partnerstwo
-            </a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Informacje</h3>
-
-            <a href="polityka-prywatnosci.html">
-                Polityka prywatności
-            </a>
-
-            <a href="polityka-cookies.html">
-                Polityka cookies
-            </a>
-
-            <button
-            class="footer-privacy-button"
-            id="privacySettings"
-            type="button"
-          >
-            Ustawienia prywatności
-          </button>
-
-        </nav>
-
+      </div>
     </div>
-
-    <div class="footer-bottom">
-
-        <p>
-            © 2026 KAIROX. Wszystkie prawa zastrzeżone.
-        </p>
-
-        <p>
-            Projektujemy strony, które pomagają firmom
-            lepiej komunikować swoją wartość.
-        </p>
-
-    </div>
-
-</footer>
+  </footer>
     <script src="js/consent.js?v=audit-2"></script>
-    <script src="js/main.js?v=ux-3"></script>
+    <script src="js/main.js?v=demo-banner-off-1"></script>
   <script src="js/chat-config.js"></script>
   <script src="js/chat.js?v=direct-chat-1"></script>
 </body>

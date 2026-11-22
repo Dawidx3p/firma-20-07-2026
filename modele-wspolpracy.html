@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
   <meta property="og:type" content="website">
 
   <meta property="og:title"
         content="KAIROX — Modele współpracy">
-  
+
   <meta property="og:description"
         content="Poznaj modele współpracy KAIROX: audyt komunikacji, Strona Start, strona kampanii, strona komunikacyjna i Partnerstwo.">
-  
+
   <meta property="og:url"
   content="https://kairox.pl/modele-wspolpracy">
-  
+
   <meta property="og:image" content="https://kairox.pl/img/banners/kairox-share-modele-wspolpracy-komiks-19.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1235">
   <meta property="og:image:height" content="650">
   <meta property="og:image:alt" content="Klientka i projektant wybierają zakres: audyt, nowa strona, stały rozwój.">
-  
-  
+
+
   <meta property="og:site_name" content="KAIROX">
-  
+
   <meta name="twitter:card" content="summary_large_image">
   <title>Modele współpracy | KAIROX</title>
 
@@ -41,9 +42,6 @@
   <link rel="stylesheet" href="css/comic.css?v=1">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/typography.css?v=1">
-  <link rel="stylesheet" href="css/section-scroll.css?v=10">
-  <script src="js/section-motion.js?v=5" defer></script>
-  <script src="js/section-scroll.js?v=14" defer></script>
   <link rel="stylesheet" href="css/site-refinements.css?v=ux-1">
   <style>
     .model-bundle-link {
@@ -55,11 +53,17 @@
       text-underline-offset: .2em;
     }
   </style>
-  <link rel="stylesheet" href="css/cennik-test.css?v=11">
-  <script src="js/cennik-test.js?v=12" defer></script>
+  <link rel="stylesheet" href="css/cennik-test.css?v=24">
+  <script src="js/cennik-test.js?v=18" defer></script>
+
+  <link rel="stylesheet" href="css/section-scroll.css?v=desktop-fit-1">
+  <link rel="stylesheet" href="css/subpage-views.css?v=desktop-fit-1">
+  <script src="js/section-scroll.js?v=desktop-fit-1" defer></script>
+  <script src="js/subpage-mobile.js?v=desktop-fit-2" defer></script>
+  <link rel="stylesheet" href="css/mobile-illustrations.css?v=4">
 </head>
 
-<body class="models-page">
+<body class="models-page home-screen-scroll subpage-screen">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
@@ -83,7 +87,7 @@
       <ul class="nav-list">
         <li><a href="index.html">Strona główna</a></li>
         <li><a href="modele-wspolpracy.html" class="active" aria-current="page">Modele Współpracy</a></li>
-        
+
         <li><a href="audyt-komunikacji.html">Audyt</a></li>
         <li><a href="metoda.html">Metoda</a></li>
         <li><a href="partnerstwo.html">Partnerstwo</a></li>
@@ -99,48 +103,57 @@
     </nav>
   </header>
 
-  <main id="main-content">
 
-    <section class="comic-block hero page-hero comic-block--hero" aria-labelledby="comic-hero-title">
-      <div class="comic-copy">
-        <p class="eyebrow">Modele współpracy</p>
-        <h1 id="comic-hero-title">Dobierzmy zakres do Twojej sytuacji</h1>
-        <p class="comic-description">Sprawdź obecną stronę, przedstaw firmę, promuj jedną ofertę albo uporządkuj całą komunikację — dobierzmy zakres do Twojego celu.</p>
-        <div class="comic-actions">
-          <a class="primary-button" href="#models">Porównaj modele współpracy</a>
-          <a class="secondary-button" href="#cennik">Dobierz usługi do projektu</a>
-        </div>
-      </div>
-      <figure class="comic-visual">
-        <img src="img/illustrations/kairox-05-zakres.webp"
+<div class="view-controls" role="group" aria-label="Przełącz ekrany strony" hidden>
+    <button type="button" data-view-step="-1" aria-label="Poprzedni ekran" aria-disabled="true">↑</button>
+    <output class="view-position" aria-live="polite"></output>
+    <button type="button" data-view-step="1" aria-label="Następny ekran">↓</button>
+  </div>
+<main id="main-content">
+    <section class="view view--paired subpage-view subpage-hero" aria-labelledby="comic-hero-title">
+<div class="view-inner split-layout subpage-hero-layout">
+      <div class="split-heading"><p class="eyebrow">Modele współpracy</p><h1 id="comic-hero-title">Dobierzmy zakres do Twojej sytuacji</h1></div>
+      <div class="split-body"><p class="comic-description">Sprawdź obecną stronę, przedstaw firmę, promuj jedną ofertę albo uporządkuj całą komunikację — dobierzmy zakres do Twojego celu.</p></div>
+      <figure class="view-media split-media mobile-illustration"><img src="img/illustrations/kairox-05-zakres.webp"
           srcset="img/illustrations/kairox-05-zakres-768.webp 768w, img/illustrations/kairox-05-zakres.webp 1536w"
           sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 48px), 650px"
           width="1536" height="1024" alt="Klientka i projektant wybierają zakres spośród audytu, nowej strony i stałego rozwoju. Dymek: „Dobierzmy właściwy zakres”."
-          loading="eager" decoding="async" fetchpriority="high">
-      </figure>
+          loading="eager" fetchpriority="high"></figure>
+      <div class="split-actions subpage-hero-actions"><div class="comic-actions">
+          <a class="primary-button" href="#models">Porównaj modele współpracy</a>
+          <a class="secondary-button" href="#cennik">Dobierz usługi do projektu</a>
+        </div></div>
+    </div>
     </section>
-
-    <section class="pricing-builder" id="cennik" aria-labelledby="pricing-title">
-      <div class="pricing-intro">
-        <p class="eyebrow">Cennik 2026</p>
-        <h2 id="pricing-title" tabindex="-1">Skomponuj swój zestaw</h2>
-        <p>Zacznij od modelu współpracy lub wybierz pojedyncze usługi. Na koniec wyślij zapytanie o wycenę.</p>
-      </div>
-      <noscript><p>Włącz JavaScript, aby wyświetlić cennik i skomponować zestaw.</p></noscript>
-      <div class="pricing-layout">
-        <div>
+    <section class="view view--paired subpage-view subpage-configurator">
+<section class="pricing-builder subpage-panel" aria-labelledby="pricing-title">
+      <div id="cennik" class="pricing-start pricing-mobile-view">
+        <div class="pricing-setup pricing-mobile-view">
+          <div class="pricing-intro">
+            <p class="eyebrow">Cennik 2026</p>
+            <h2 id="pricing-title" tabindex="-1">Skomponuj swój zestaw</h2>
+            <p>Zacznij od modelu współpracy lub wybierz pojedyncze usługi. Na koniec wyślij zapytanie o wycenę.</p>
+          </div>
+          <noscript><p>Włącz JavaScript, aby wyświetlić cennik i skomponować zestaw.</p></noscript>
           <section class="pricing-group pricing-model" aria-labelledby="pricing-model-title">
             <h3 id="pricing-model-title">Model współpracy</h3>
             <div id="pricing-models" class="pricing-model-options" role="group" aria-labelledby="pricing-model-title"></div>
             <p id="pricing-model-description" role="status" hidden></p>
             <p id="pricing-model-note" role="status" hidden></p>
           </section>
+        </div>
+        <div class="pricing-category-menu pricing-mobile-view">
           <h3 id="pricing-services-title" class="pricing-services-title">Usługi z cennika</h3>
           <div id="pricing-filters" class="pricing-filters" role="group" aria-label="Kategorie usług"></div>
+          <p class="pricing-terms">Stawki dotyczą zakresu opisanego przy usługach. W cenie projektów są dwie rundy poprawek. Rozszerzenia, budżet reklamowy, hosting, druk i licencje wyceniamy osobno.</p>
+        </div>
+      </div>
+      <div class="pricing-layout">
+        <div class="pricing-selection">
           <div id="pricing-catalog"></div>
         </div>
 
-        <aside id="twoj-zestaw" class="pricing-summary" tabindex="-1" aria-labelledby="bundle-title">
+        <aside id="twoj-zestaw" class="pricing-summary pricing-mobile-view" tabindex="-1" aria-labelledby="bundle-title">
           <h3 id="bundle-title">Twój zestaw</h3>
           <div role="status" aria-atomic="true">
             <p id="bundle-model" hidden></p>
@@ -150,6 +163,7 @@
             <p id="bundle-monthly" class="pricing-monthly" hidden></p>
           </div>
           <ul id="bundle-items" class="pricing-picked" aria-label="Wybrane usługi" hidden></ul>
+          <button id="bundle-items-detail" class="screen-detail-button" type="button" data-screen-all data-screen-detail="bundle-items" data-screen-title="Wybrane usługi" data-screen-move aria-haspopup="dialog" hidden>Wybrane usługi</button>
           <button id="bundle-open" class="pricing-submit" type="button" aria-controls="bundle-form" aria-expanded="false" disabled>Wyślij zapytanie</button>
           <form id="bundle-form" class="pricing-form" hidden>
             <div class="pricing-contact">
@@ -165,28 +179,27 @@
           <p id="bundle-feedback" role="status"></p>
         </aside>
       </div>
-      <p class="pricing-terms">Stawki dotyczą zakresu opisanego przy usługach. W cenie projektów są dwie rundy poprawek. Rozszerzenia, budżet reklamowy, hosting, druk i licencje wyceniamy osobno.</p>
       <a id="bundle-jump" class="pricing-jump" href="#twoj-zestaw"><span id="bundle-jump-label">Twój zestaw</span><span aria-hidden="true">↓</span></a>
     </section>
-
-    <section class="pricing cooperation-models" id="models">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen" id="models" aria-labelledby="new-site-title">
+<section class="pricing cooperation-models subpage-panel">
       <div class="section-header">
         <p class="eyebrow">Nowa strona</p>
 
-        <h2>Wybierz stronę do swojego celu</h2>
+        <h2 id="new-site-title">Wybierz stronę do swojego celu</h2>
         <p class="section-intro">Trzy zakresy — od przedstawienia firmy po uporządkowanie całej oferty.</p>
       </div>
 
       <div class="pricing-grid">
-        <article id="model-start" class="pricing-card">
+        <article id="model-start" class="pricing-card" data-model-summary="1–3 podstrony z ofertą firmy i kontaktem.">
           <p class="eyebrow model-purpose">Przedstaw firmę</p>
           <h3>Strona Start</h3>
 
           <p class="price"><span class="price-amount"><small>od</small> 2 449 zł</span><span class="price-note">brutto / projekt</span></p>
 
           <p class="pricing-description">
-            Dla firmy, która potrzebuje przedstawić usługi, pokazać podstawowe
-            informacje i ułatwić kontakt. Zakres: 1–3 podstrony.
+            Strona na 1–3 podstrony, która przedstawia firmę, pokazuje usługi i ułatwia kontakt.
           </p>
 
           <ul class="pricing-list">
@@ -203,15 +216,14 @@
           <a class="model-bundle-link" href="?model=start#cennik" data-pricing-model="start">Dobierz usługi do Startu →</a>
         </article>
 
-        <article id="model-kampanii" class="pricing-card">
+        <article id="model-kampanii" class="pricing-card" data-model-summary="Jedna oferta, jedno działanie i formularz.">
           <p class="eyebrow model-purpose">Promuj jedną ofertę</p>
           <h3>Strona kampanii</h3>
 
           <p class="price"><span class="price-amount"><small>od</small> 1 949 zł</span><span class="price-note">brutto / projekt</span></p>
 
           <p class="pricing-description">
-            Landing page poświęcony konkretnej ofercie — z argumentami
-            i formularzem prowadzącymi do jednego działania.
+            Jedna oferta lub wydarzenie, argumenty i formularz prowadzący do jednego działania.
           </p>
 
           <ul class="pricing-list">
@@ -228,16 +240,14 @@
           <a class="model-bundle-link" href="?model=campaign#cennik" data-pricing-model="campaign">Dobierz usługi do kampanii →</a>
         </article>
 
-        <article id="model-komunikacyjna" class="pricing-card featured">
+        <article id="model-komunikacyjna" class="pricing-card featured" data-model-summary="Przekaz, treści, układ oferty i wdrożenie.">
           <p class="eyebrow model-purpose">Uporządkuj całą ofertę</p>
           <h3>Strona komunikacyjna</h3>
 
           <p class="price"><span class="price-amount"><small>od</small> 4 449 zł</span><span class="price-note">brutto / projekt</span></p>
 
           <p class="pricing-description">
-            Dla firmy, która potrzebuje uporządkować sposób przedstawienia całej
-            oferty: od głównego komunikatu i argumentów po strukturę podstron,
-            projekt i wdrożenie.
+            Porządkujemy całą ofertę: główny przekaz, argumenty, strukturę podstron, projekt i wdrożenie.
           </p>
 
           <ul class="pricing-list">
@@ -256,14 +266,15 @@
         </article>
       </div>
     </section>
-
-    <section class="pricing cooperation-models existing-site-options" aria-labelledby="existing-site-title">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen" id="obecna-strona" aria-labelledby="existing-site-title">
+<section class="pricing cooperation-models existing-site-options subpage-panel">
       <div class="section-header">
         <p class="eyebrow">Twoja obecna strona</p>
         <h2 id="existing-site-title">Sprawdź, co poprawić, albo zleć bieżące zmiany</h2>
       </div>
       <div class="pricing-grid">
-        <article class="pricing-card">
+        <article class="pricing-card" data-model-summary="Analiza strony głównej, zalecenia i konsultacja.">
           <h3>Audyt komunikacji</h3>
 
           <p class="price"><span class="price-amount">499 zł</span><span class="price-note">brutto / audyt</span></p>
@@ -287,7 +298,7 @@
           <a class="model-bundle-link" href="?model=audit#cennik" data-pricing-model="audit">Dobierz usługi do audytu →</a>
         </article>
 
-        <article class="pricing-card">
+        <article class="pricing-card" data-model-summary="Do 8 godzin miesięcznie na bieżące zmiany.">
           <h3>Partnerstwo</h3>
 
           <p class="price"><span class="price-amount">999 zł</span><span class="price-note">brutto / miesiąc</span></p>
@@ -311,12 +322,14 @@
         </article>
       </div>
     </section>
-
-    <section class="problem">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen models-faq-screen" id="pytania">
+<div class="view-panel-grid view-panel-grid--priority subpage-pair">
+<section class="problem subpage-panel">
       <div class="section-header">
-        <p class="eyebrow">Najczęstsze pytania</p>
-
-        <h2>Pytania przed rozpoczęciem współpracy</h2>
+        <p class="eyebrow models-faq-desktop-heading">Najczęstsze pytania</p>
+        <h2 class="models-faq-desktop-heading">Pytania przed rozpoczęciem współpracy</h2>
+        <h2 class="models-faq-mobile-heading">Najczęstsze pytania</h2>
       </div>
 
       <div class="models-faq-list">
@@ -404,8 +417,7 @@
         </details>
       </div>
     </section>
-
-    <section class="cta-section">
+<section class="cta-section subpage-panel">
       <div class="cta-content">
         <p class="eyebrow">Nie wiesz, od czego zacząć?</p>
 
@@ -421,138 +433,45 @@
         </a>
       </div>
     </section>
-
+</div>
+    </section>
   </main>
 
   <footer class="site-footer">
-
-    <div class="footer-grid">
-
-        <div class="footer-brand">
-
-            <a href="index.html" class="footer-logo">
-                KAIROX
-            </a>
-
-            <p>
-                Strony internetowe jako narzędzie komunikacji marki.
-            </p>
-
-            <div class="footer-email">
-
-
+    <div class="view-footer-grid">
+      <div class="view view--paired" id="informacje">
+        <div class="view-panel-grid footer-layout">
+          <div class="view-inner footer-navigation">
+            <h2 class="footer-logo" id="footer-nav-title">KAIROX</h2>
+            <div class="footer-email footer-email-compact subpage-footer-email">
               <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
-
-
               <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
-
-
               <span class="copy-email-status" role="status" aria-live="polite"></span>
-
-
             </div>
-
-
-            <div class="footer-social">
-
-                <a
-                    href="https://www.facebook.com/profile.php?id=61591724616267"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Facebook
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/company/kairoxpl/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    LinkedIn
-                </a>
-
+            <nav class="view-options cooperation-preview-options" aria-labelledby="footer-nav-title">
+              <a href="audyt-komunikacji.html">Audyt</a><a href="metoda.html">Metoda Agent 0</a>
+              <a href="modele-wspolpracy.html">Modele współpracy</a><a href="partnerstwo.html">Partnerstwo</a>
+              <a href="realizacje.html">Realizacje</a><a href="artykuly.html">Artykuły</a>
+            </nav>
+          </div>
+          <div class="view-inner footer-privacy">
+            <h2>Informacje i prywatność</h2>
+            <div class="view-links">
+              <a href="polityka-prywatnosci.html">Polityka prywatności <span aria-hidden="true">↗</span></a>
+              <a href="polityka-cookies.html">Polityka cookies <span aria-hidden="true">↗</span></a>
+              <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+              <a class="view--mobile" href="#main-content">Wróć na początek <span aria-hidden="true">↑</span></a>
             </div>
-
+            <div class="footer-social footer-social--mobile view--mobile">
+              <a href="https://www.facebook.com/profile.php?id=61591724616267" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.linkedin.com/company/kairoxpl/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+          <p class="view-copyright">© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
         </div>
-
-        <nav class="footer-column">
-
-            <h3>Nawigacja</h3>
-
-            <a href="index.html">Start</a>
-            
-            <a href="audyt-komunikacji.html">Audyt</a>
-            <a href="metoda.html">Metoda Agent 0</a>
-            <a href="modele-wspolpracy.html">Modele współpracy</a>
-            <a href="partnerstwo.html">Partnerstwo</a>
-            <a href="artykuly.html">Artykuły</a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Usługi</h3>
-
-            <a href="audyt-komunikacji.html">
-                Audyt komunikacji
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Start
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Landing Page
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Komunikacyjna
-            </a>
-
-            <a href="partnerstwo.html">
-                Partnerstwo
-            </a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Informacje</h3>
-
-            <a href="polityka-prywatnosci.html">
-                Polityka prywatności
-            </a>
-
-            <a href="polityka-cookies.html">
-                Polityka cookies
-            </a>
-
-            <button
-            class="footer-privacy-button"
-            id="privacySettings"
-            type="button"
-          >
-            Ustawienia prywatności
-          </button>
-
-        </nav>
-
+      </div>
     </div>
-
-    <div class="footer-bottom">
-
-        <p>
-            © 2026 KAIROX. Wszystkie prawa zastrzeżone.
-        </p>
-
-        <p>
-            Projektujemy strony, które pomagają firmom
-            lepiej komunikować swoją wartość.
-        </p>
-
-    </div>
-
-</footer>
+  </footer>
   <div class="consent-banner"
   id="consentBanner"
   role="dialog"
@@ -599,7 +518,7 @@
   </div>
   </div>
   <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/main.js?v=ux-3"></script>
+  <script src="js/main.js?v=demo-banner-off-1"></script>
   <script src="js/chat-config.js"></script>
   <script src="js/chat.js?v=direct-chat-1"></script>
 </body>

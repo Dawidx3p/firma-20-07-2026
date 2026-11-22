@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+
   <meta charset="UTF-8" />
   <meta name='impact-site-verification' value='8e623ab0-67f7-41a3-b923-fd63dad1f921'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
@@ -8,10 +9,10 @@
 
   <meta property="og:title"
         content="KAIROX — Strony jako narzędzie komunikacji">
-  
+
   <meta property="og:description"
         content="Pomagamy firmom lepiej komunikować swoją wartość za pomocą stron internetowych.">
-  
+
   <meta property="og:url" content="https://kairox.pl/">
   <meta property="og:image" content="https://kairox.pl/img/kairox-share-komiks-bez-tekstu.jpg">
   <meta property="og:image:type" content="image/jpeg">
@@ -20,7 +21,7 @@
   <meta property="og:image:alt" content="Dwie komiksowe postacie przy stole ze świecącym logo KAIROX.">
 
   <meta property="og:site_name" content="KAIROX">
-  
+
   <meta name="twitter:card" content="summary_large_image">
   <meta
     name="description"
@@ -45,18 +46,15 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/comic.css?v=hero-video-1">
-  <link rel="stylesheet" href="css/founder.css?v=1">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/typography.css?v=1">
-  <link rel="stylesheet" href="css/section-scroll.css?v=10">
-  <script src="js/section-motion.js?v=5" defer></script>
-  <script src="js/section-scroll.js?v=dock-scroll-1" defer></script>
-  <link rel="stylesheet" href="css/portfolio-showcase.css?v=1">
+  <script src="js/section-scroll.js?v=desktop-fit-1" defer></script>
   <link rel="stylesheet" href="css/site-refinements.css?v=home-services-art-1">
+  <link rel="stylesheet" href="css/section-scroll.css?v=desktop-fit-2">
+  <link rel="stylesheet" href="css/mobile-illustrations.css?v=4">
 </head>
 
-<body class="home-page home-mobile-test">
+<body class="home-page home-mobile-test home-screen-scroll">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
@@ -94,428 +92,251 @@
 
     </nav>
   </header>
+  <div class="view-controls" role="group" aria-label="Przełącz ekrany strony" hidden>
+    <button type="button" data-view-step="-1" aria-label="Poprzedni ekran" aria-disabled="true">↑</button>
+    <output class="view-position" aria-live="polite"></output>
+    <button type="button" data-view-step="1" aria-label="Następny ekran">↓</button>
+  </div>
 
   <main id="main-content">
-
-    <section class="comic-block hero comic-block--hero" id="hero" aria-labelledby="hero-title">
-      <div class="comic-copy">
-        <p class="eyebrow">Strony internetowe i komunikacja</p>
-        <h1 id="hero-title">Masz stronę, ale trudno zrozumieć Twoją ofertę?</h1>
-        <p class="comic-description">Sprawdzamy, co warto uprościć, a następnie porządkujemy treść, strukturę i drogę do kontaktu. Pomagamy też zaprojektować nową stronę od podstaw.</p>
-        <div class="comic-actions hero-choice-group" role="group" aria-label="Wybierz kierunek dla swojej strony">
+    <section class="view view--intro view--paired" id="hero" aria-labelledby="hero-title">
+      <div class="view-inner split-layout">
+        <div class="split-heading">
+          <p class="view-label">Strony internetowe i komunikacja</p>
+          <h1 id="hero-title">Strony, które jasno pokazują Twoją ofertę</h1>
+        </div>
+        <p class="split-body">Porządkujemy treść i ułatwiamy kontakt. Projektujemy też nowe strony od podstaw.</p>
+        <figure class="view-media view-media--hero split-media">
+          <video autoplay muted playsinline preload="auto" poster="video/kairox-hero-poster.jpg"
+            aria-label="Film KAIROX — od czego zacząć pracę nad stroną">
+            <source src="video/kairox-hero.mp4" type="video/mp4">
+            <a href="video/kairox-hero.mp4">Otwórz film</a>
+          </video>
+        </figure>
+        <div class="comic-actions hero-choice-group split-actions" role="group" aria-label="Wybierz kierunek dla swojej strony">
           <a href="audyt-komunikacji.html"><span>Zobacz, od czego zacząć</span><span aria-hidden="true">↗</span></a>
           <a href="modele-wspolpracy.html"><span>Potrzebujesz nowej strony?</span><span aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <figure class="comic-visual">
-        <video autoplay muted playsinline preload="auto"
-          poster="video/kairox-hero-poster.jpg"
-          aria-label="Film KAIROX — od czego zacząć pracę nad stroną">
-          <source src="video/kairox-hero.mp4" type="video/mp4">
-          Twoja przeglądarka nie obsługuje filmu. <a href="video/kairox-hero.mp4">Otwórz film</a>.
-        </video>
-      </figure>
     </section>
 
-    <section class="website-check" aria-labelledby="website-check-title">
-      <div class="website-check-content">
-        <div>
-          <p class="eyebrow">Bezpłatna wizualizacja</p>
-          <h2 id="website-check-title">Zobacz pomysł na swoją stronę</h2>
-          <p>
-            Po potwierdzeniu zgłoszenia przygotujemy projekt pierwszego ekranu Twojej strony. Bez zobowiązań.
-          </p>
-        </div>
-
-        <form class="website-check-form" id="websiteCheckForm" action="wizualizacja.html" method="get">
-          <input type="hidden" name="source" value="/index.html">
-          <label for="websiteCheckUrl">Adres strony (opcjonalnie)</label>
-          <div class="website-check-row">
+    <section class="view view--paired" id="wizualizacja" aria-labelledby="website-check-title">
+      <div class="view-panel-grid view-panel-grid--priority">
+        <div class="website-check-content view-inner">
+          <p class="view-label view--desktop">Bezpłatna wizualizacja</p>
+          <h2 id="website-check-title"><span class="view--desktop">Zobacz pomysł na swoją stronę</span><span class="view--mobile">Bezpłatna wizualizacja</span></h2>
+          <p>Po potwierdzeniu zgłoszenia zaprojektujemy pierwszy ekran Twojej strony. Bez zobowiązań.</p>
+          <form class="view-form website-check-row" id="websiteCheckForm" action="wizualizacja.html" method="get">
+            <input type="hidden" name="source" value="/index.html">
+            <label for="websiteCheckUrl">Adres strony <span>(opcjonalnie)</span></label>
             <input type="text" id="websiteCheckUrl" name="website" inputmode="url" autocomplete="url"
-              placeholder="np. twojafirma.pl" aria-describedby="websiteCheckError">
+              placeholder="twojafirma.pl" aria-describedby="websiteCheckError">
+            <p id="websiteCheckError" role="alert"></p>
             <button class="primary-button" type="submit">Chcę zobaczyć wizualizację</button>
-          </div>
-          <p class="website-check-error" id="websiteCheckError" role="alert"></p>
-        </form>
+          </form>
+        </div>
+        <div class="view-inner visualization-paths" id="site-paths">
+          <h2 id="shortcuts-title"><span class="view--desktop">Wybierz, od czego zacząć</span><span class="view--mobile">Czego potrzebujesz?</span></h2>
+          <nav class="view-links home-shortcuts-grid" aria-labelledby="shortcuts-title">
+            <a href="audyt-komunikacji.html"><span><strong>Poprawa obecnej strony</strong><small>Audyt komunikacji</small></span><span aria-hidden="true">↗</span></a>
+            <a href="modele-wspolpracy.html"><span><strong>Projekt nowej strony</strong><small>Zakresy i ceny</small></span><span aria-hidden="true">↗</span></a>
+            <a href="partnerstwo.html"><span><strong>Regularne wsparcie</strong><small>Pakiet Partnerstwa</small></span><span aria-hidden="true">↗</span></a>
+            <a href="#pozostale-uslugi"><span><strong>Logo, teksty lub reklama</strong><small>Dodatkowe usługi</small></span><span aria-hidden="true">↓</span></a>
+          </nav>
+        </div>
       </div>
     </section>
 
-
-
-    <section class="home-shortcuts" id="site-paths" aria-labelledby="shortcuts-title">
-      <div class="home-shortcuts-inner">
-        <p class="eyebrow" id="shortcuts-title">Czego potrzebujesz?</p>
-        <nav class="home-shortcuts-grid" aria-labelledby="shortcuts-title">
-          <a href="audyt-komunikacji.html"><span><strong>Chcę poprawić obecną stronę</strong><small>Sprawdź audyt komunikacji</small></span><span aria-hidden="true">↗</span></a>
-          <a href="modele-wspolpracy.html"><span><strong>Potrzebuję nowej strony</strong><small>Porównaj zakresy i ceny</small></span><span aria-hidden="true">↗</span></a>
-          <a href="partnerstwo.html"><span><strong>Szukam regularnego wsparcia</strong><small>Poznaj pakiet Partnerstwa</small></span><span aria-hidden="true">↗</span></a>
-          <a href="#pozostale-uslugi"><span><strong>Szukam logo, tekstów lub reklamy</strong><small>Zobacz dodatkowe usługi</small></span><span aria-hidden="true">↓</span></a>
-        </nav>
-      </div>
-    </section>
-
-    <section class="comic-block comic-block--reverse" id="process" aria-labelledby="process-title">
-      <div class="comic-copy">
-        <p class="eyebrow">Metoda Agent 0</p>
-        <h2 id="process-title">Najpierw ustalamy, co ma zrozumieć Twój klient</h2>
-        <p class="comic-description">Dla kogo jest oferta? Jaką daje korzyść? Dlaczego warto zaufać? Od tych odpowiedzi zaczynamy projekt.</p>
-        <div class="comic-actions home-shortcuts-grid method-shortcut">
+    <section class="view view--paired" id="process" aria-labelledby="process-title">
+      <div class="view-inner split-layout split-layout--reverse">
+        <div class="split-heading">
+          <p class="view-label">Metoda Agent 0</p>
+          <h2 id="process-title">Co ma zrozumieć Twój klient?</h2>
+        </div>
+        <p class="split-body">Dla kogo jest oferta? Co klient zyskuje? Dlaczego ma zaufać? Od tych odpowiedzi zaczynamy projekt.</p>
+        <figure class="view-media split-media mobile-illustration">
+          <img src="img/illustrations/kairox-02-strategia-768.webp" width="768" height="512"
+            alt="Klientka i projektant wspólnie porządkują ofertę." loading="lazy" decoding="async">
+        </figure>
+        <div class="comic-actions home-shortcuts-grid method-shortcut split-actions">
           <a href="metoda.html"><span><strong>Poznaj naszą metodę</strong><small>Sprawdź, jak pracujemy nad stroną</small></span><span aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <figure class="comic-visual">
-        <img src="img/illustrations/kairox-02-strategia.webp"
-          srcset="img/illustrations/kairox-02-strategia-768.webp 768w, img/illustrations/kairox-02-strategia.webp 1536w"
-          sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 48px), 650px"
-          width="1536" height="1024" alt="Klientka i projektant wspólnie układają ofertę: dla kogo, jaka korzyść, dlaczego zaufać. Dymek: „Ustalmy, co jest najważniejsze”."
-          loading="lazy" decoding="async">
-      </figure>
     </section>
 
-    <section class="audit-highlight" id="audit">
-
-      <div class="audit-content">
-  
-          <p class="eyebrow">
-              Najpierw sprawdź, co warto zmienić
-          </p>
-  
-          <h2>
-              Nie każda firma potrzebuje nowej strony.
-          </h2>
-  
-          <p class="audit-description">
-              W audycie wskazujemy problemy, proponujemy rozwiązania i ustalamy
-              priorytety. Otrzymujesz raport PDF i konsultację — za 499 zł brutto.
-          </p>
-  
-          <div class="hero-actions">
-  
-              <a
-                  href="audyt-komunikacji.html"
-                  class="secondary-button"
-              >
-                  Zobacz zakres i przykład audytu
-              </a>
-  
+    <section class="view view--paired" id="audit" aria-labelledby="audit-title">
+      <div class="view-panel-grid view-panel-grid--priority audit-layout">
+        <div class="audit-highlight view-inner audit-overview">
+          <p class="view-label view--desktop">Audyt komunikacji</p>
+          <h2 id="audit-title"><span class="view--desktop">Sprawdź, co warto zmienić na obecnej stronie</span><span class="view--mobile">Audyt komunikacji</span></h2>
+          <p><span class="view--desktop">Wskażemy problemy i ustalimy, które poprawki warto zrobić w pierwszej kolejności.</span><span class="view--mobile">Wskażemy problemy i ustalimy kolejność poprawek.</span></p>
+          <dl class="view-facts">
+            <div><dt>Cena</dt><dd>499 zł brutto</dd></div>
+            <div><dt>Realizacja</dt><dd>3–5 dni roboczych</dd></div>
+          </dl>
+          <a href="audyt-komunikacji.html" class="secondary-button view--desktop">Zobacz zakres i przykład audytu</a>
+        </div>
+        <div class="audit-card view-inner audit-results">
+          <h2 id="audit-details-title">Co otrzymasz w audycie</h2>
+          <ul class="view-checklist">
+            <li>Raport PDF z oceną strony głównej</li>
+            <li>Listę problemów i propozycje poprawek</li>
+            <li>Priorytety wdrożenia</li>
+            <li>Konsultację online</li>
+          </ul>
+          <div class="audit-actions">
+            <a class="primary-button" href="formularz-kontaktowy.html?service=audit&amp;source=%2Findex.html">Zamów audyt</a>
+            <a class="secondary-button view--mobile" href="audyt-komunikacji.html">Zakres i przykład</a>
           </div>
-  
+        </div>
       </div>
-  
-      <aside class="audit-card">
+    </section>
 
-        <div class="audit-card-top">
-    
-            <span class="audit-badge">
-                Pierwszy krok
-            </span>
-    
-            <h3>Audyt komunikacji</h3>
-            <div class="audit-status">
-              Co otrzymujesz
-            </div>
-            <p class="audit-price">
-                499 <span>zł brutto</span>
-            </p>
-    
-            <p class="audit-duration">
-                Realizacja w 3–5 dni roboczych
-            </p>
-    
+    <section class="view view--paired" id="realizacje" aria-labelledby="bieg-rzeczy-featured">
+      <div class="view-inner split-layout project-layout" id="bieg-rzeczy">
+        <div class="split-heading">
+          <p class="view-label">Koncepcja strony warsztatu</p>
+          <h2 id="bieg-rzeczy-featured">Bieg Rzeczy</h2>
         </div>
-    
-        <div class="audit-divider"></div>
-    
-        <div class="audit-features">
-    
-            <div class="audit-feature">
-                <span>✓</span>
-                <p>Raport PDF z oceną strony głównej</p>
-            </div>
-    
-            <div class="audit-feature">
-                <span>✓</span>
-                <p>Lista problemów i propozycje zmian</p>
-            </div>
-    
-            <div class="audit-feature">
-                <span>✓</span>
-                <p>Priorytety: co poprawić najpierw</p>
-            </div>
-    
-            <div class="audit-feature">
-                <span>✓</span>
-                <p>Konsultacja online</p>
-            </div>
-    
-        </div>
-    
-        <div class="audit-divider"></div>
-    
-        <div class="audit-footer">
-    
-            <div class="audit-meta">
-    
-                <strong>Online</strong>
-                <span>Całość zdalnie</span>
-    
-            </div>
-    
-            <a class="primary-button" href="formularz-kontaktowy.html?service=audit&amp;source=%2Findex.html">
-          Zamów audyt
-        </a>
-    
-        </div>
-    
-    </aside>
-  
-  </section>
-
-  <section class="projects" id="realizacje" aria-labelledby="projects-title">
-    <div class="section-header">
-      <p class="eyebrow">Wybrane realizacje</p>
-      <h2 id="projects-title">Od oferty do zapytania — zobacz przykłady</h2>
-      <p class="section-intro">Zobacz, jak prezentujemy ofertę i prowadzimy do kontaktu. Bieg Rzeczy i Słój i Forma to fikcyjne marki — możesz otworzyć ich strony i sprawdzić poszczególne kroki.</p>
-      <a class="section-text-link" href="realizacje.html">Zobacz wszystkie realizacje →</a>
-    </div>
-
-<article class="work-card work-card--garage" aria-labelledby="bieg-rzeczy-featured" id="bieg-rzeczy">
- <div class="work-copy">
-  <p class="work-kind">Projekt koncepcyjny<span>Warsztat samochodowy</span></p>
-  <h3 id="bieg-rzeczy-featured">Bieg Rzeczy</h3>
-  <p class="work-lead">Strona warsztatu porządkuje usługi według objawów, wyjaśnia przebieg naprawy i prowadzi do zgłoszenia. Klient opisuje auto i problem w formularzu podzielonym na trzy kroki.</p>
-
-  <a class="content-shortcut" href="bieg-rzeczy/"><span><strong>Zobacz koncepcję</strong><small>Bieg Rzeczy</small></span><span aria-hidden="true">↗</span></a>
- </div>
- <figure class="work-preview">
-  <div class="work-screen"><picture>
-   <source media="(min-width:981px)" srcset="img/projects/screens/bieg-rzeczy-mobile.webp" width="390" height="844">
-   <img src="img/projects/screens/bieg-rzeczy-desktop.webp" width="1440" height="900" alt="Bieg Rzeczy — podgląd działającego interfejsu" loading="lazy" decoding="async">
-  </picture></div>
-  <figcaption><span class="work-view-mobile">Widok mobilny</span><span class="work-view-desktop">Widok desktopowy</span><span>Bieg Rzeczy</span></figcaption>
- </figure>
-</article>
-<article class="work-card work-card--wood" aria-labelledby="sloj-i-forma-featured" id="sloj-i-forma">
- <div class="work-copy">
-  <p class="work-kind">Projekt koncepcyjny<span>Meble na wymiar i renowacja</span></p>
-  <h3 id="sloj-i-forma-featured">Słój i Forma</h3>
-  <p class="work-lead">Strona oddziela meble na wymiar od renowacji, a galeria z filtrami pozwala przeglądać koncepcje. Każda z dwóch ścieżek prowadzi do formularza, w którym klient opisuje swój projekt krok po kroku.</p>
-
-  <a class="content-shortcut" href="sloj-i-forma/"><span><strong>Zobacz koncepcję</strong><small>Słój i Forma</small></span><span aria-hidden="true">↗</span></a>
- </div>
- <figure class="work-preview">
-  <div class="work-screen"><picture>
-   <source media="(min-width:981px)" srcset="img/projects/screens/sloj-i-forma-mobile.webp" width="390" height="844">
-   <img src="img/projects/screens/sloj-i-forma-desktop.webp" width="1440" height="900" alt="Słój i Forma — podgląd działającego interfejsu" loading="lazy" decoding="async">
-  </picture></div>
-  <figcaption><span class="work-view-mobile">Widok mobilny</span><span class="work-view-desktop">Widok desktopowy</span><span>Słój i Forma</span></figcaption>
- </figure>
-</article>
-  </section>
-
-  <section class="cooperation-preview" id="cooperation" aria-labelledby="cooperation-title">
-
-    <div class="cooperation-preview-content">
-  
-      <div class="section-header">
-        <h2 id="cooperation-title">Modele współpracy</h2>
+        <p class="split-body">Usługi według objawów, przebieg naprawy i formularz zgłoszenia w trzech krokach.</p>
+        <figure class="view-media view-media--project split-media">
+          <img class="view-project-desktop" src="img/projects/screens/bieg-rzeczy-desktop.webp" width="1440" height="900"
+            alt="Podgląd strony Bieg Rzeczy" loading="lazy" decoding="async">
+          <img class="view-project-phone" src="img/projects/screens/bieg-rzeczy-mobile.webp" width="390" height="844"
+            alt="Widok mobilny strony Bieg Rzeczy" loading="lazy" decoding="async">
+        </figure>
+        <a class="content-shortcut split-actions" href="/bieg-rzeczy/"><span><strong>Zobacz koncepcję</strong><small>Bieg Rzeczy</small></span><span aria-hidden="true">↗</span></a>
       </div>
-  
-      <nav class="cooperation-preview-options" aria-label="Dostępne modele współpracy">
-        <a href="audyt-komunikacji.html"><span>Audyt komunikacji</span></a>
-        <a href="modele-wspolpracy.html#model-start"><span>Strona Start</span></a>
-        <a href="modele-wspolpracy.html#model-kampanii"><span>Strona kampanii</span></a>
-        <a href="modele-wspolpracy.html#model-komunikacyjna"><span>Strona komunikacyjna</span></a>
-        <a href="partnerstwo.html"><span>Partnerstwo</span></a>
-        <a class="cooperation-preview-compare" href="modele-wspolpracy.html#models"><span>Porównaj zakresy i ceny</span></a>
-      </nav>
+    </section>
 
-    </div>
-  
-  </section>
+    <section class="view view--paired" id="sloj-i-forma" aria-labelledby="sloj-i-forma-featured">
+      <div class="view-inner split-layout split-layout--reverse project-layout">
+        <div class="split-heading">
+          <p class="view-label">Koncepcja strony pracowni mebli</p>
+          <h2 id="sloj-i-forma-featured">Słój i Forma</h2>
+        </div>
+        <p class="split-body">Meble na wymiar i renowacja, galeria z filtrami i formularz do opisania projektu.</p>
+        <figure class="view-media view-media--project split-media">
+          <img class="view-project-desktop" src="img/projects/screens/sloj-i-forma-desktop.webp" width="1440" height="900"
+            alt="Podgląd strony Słój i Forma" loading="lazy" decoding="async">
+          <img class="view-project-phone" src="img/projects/screens/sloj-i-forma-mobile.webp" width="390" height="844"
+            alt="Widok mobilny strony Słój i Forma" loading="lazy" decoding="async">
+        </figure>
+        <div class="view-actions split-actions">
+          <a class="content-shortcut" href="/sloj-i-forma/"><span><strong>Zobacz koncepcję</strong><small>Słój i Forma</small></span><span aria-hidden="true">↗</span></a>
+          <a class="view-text-link" href="realizacje.html">Wszystkie realizacje <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
 
-    <section class="home-shortcuts home-services" id="pozostale-uslugi" aria-labelledby="home-services-title">
-      <div class="home-shortcuts-inner">
-        <h2 id="home-services-title">Logo, teksty i reklama</h2>
-        <p>Wybierz pojedynczą usługę lub dodaj ją do projektu strony.</p>
-        <picture class="home-services-art">
-          <source media="(min-width: 981px)" srcset="img/home-services-desktop.jpg" width="600" height="900">
-          <img src="img/home-services-mobile.jpg" width="1440" height="960" alt="" loading="lazy" decoding="async">
+    <section class="view view--paired" id="pozostale-uslugi" aria-labelledby="cooperation-title home-services-title">
+      <span class="view-anchor" id="cooperation" aria-hidden="true"></span>
+      <div class="view-panel-grid services-layout">
+        <div class="view-inner">
+          <h2 id="cooperation-title">Modele współpracy</h2>
+          <nav class="view-options cooperation-preview-options" aria-labelledby="cooperation-title">
+            <a href="audyt-komunikacji.html">Audyt komunikacji</a>
+            <a href="modele-wspolpracy.html#model-start">Strona Start</a>
+            <a href="modele-wspolpracy.html#model-kampanii">Strona kampanii</a>
+            <a href="modele-wspolpracy.html#model-komunikacyjna">Strona komunikacyjna</a>
+            <a href="partnerstwo.html">Partnerstwo</a>
+            <a class="cooperation-preview-compare" href="modele-wspolpracy.html#models">Porównaj zakresy i ceny</a>
+          </nav>
+        </div>
+        <div class="view-inner">
+          <h2 id="home-services-title">Logo, teksty i reklama</h2>
+          <p class="view--desktop">Wybierz pojedynczą usługę lub dodaj ją do projektu strony.</p>
+          <div class="services-with-image">
+            <nav class="view-links home-shortcuts-grid" aria-labelledby="home-services-title">
+              <a href="modele-wspolpracy.html?kategoria=identyfikacja#cennik"><span><strong>Identyfikacja wizualna</strong><small>Logo, brandbook i wizytówki</small></span><span aria-hidden="true">↗</span></a>
+              <a href="modele-wspolpracy.html?kategoria=komunikacja#cennik"><span><strong>Komunikacja i teksty</strong><small>Teksty na stronę, oferty i posty</small></span><span aria-hidden="true">↗</span></a>
+              <a href="modele-wspolpracy.html?kategoria=reklama#cennik"><span><strong>Reklama i kreacja</strong><small>Grafiki, spoty AI i konfiguracja kampanii</small></span><span aria-hidden="true">↗</span></a>
+            </nav>
+            <img src="img/home-services-desktop.jpg" width="600" height="900" alt="" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view view--paired" id="zalozyciel" aria-labelledby="founder-title">
+      <div class="view-inner split-layout founder-layout">
+        <div class="split-heading">
+          <p class="view-label">Założyciel KAIROX</p>
+          <h2 id="founder-title">Cześć, jestem Dawid</h2>
+        </div>
+        <picture class="founder-photo split-media">
+          <source media="(max-width: 980px)" srcset="img/dawid-kairox-mobile-wide-v2.jpg" width="1000" height="625">
+          <img src="img/dawid-kairox.jpg" width="750" height="1000" alt="Portret Dawida" loading="lazy" decoding="async">
         </picture>
-        <nav class="home-shortcuts-grid" aria-labelledby="home-services-title">
-          <a href="modele-wspolpracy.html?kategoria=identyfikacja#cennik"><span><strong>Identyfikacja wizualna</strong><small>Logo, brandbook i wizytówki</small></span><span aria-hidden="true">↗</span></a>
-          <a href="modele-wspolpracy.html?kategoria=komunikacja#cennik"><span><strong>Komunikacja i teksty</strong><small>Teksty na stronę, oferty i posty</small></span><span aria-hidden="true">↗</span></a>
-          <a href="modele-wspolpracy.html?kategoria=reklama#cennik"><span><strong>Reklama i kreacja</strong><small>Grafiki, spoty AI i konfiguracja kampanii</small></span><span aria-hidden="true">↗</span></a>
-        </nav>
-      </div>
-    </section>
-
-    <section class="founder-section" id="zalozyciel" aria-labelledby="founder-title">
-      <div class="founder-copy">
-        <p class="eyebrow">Człowiek za KAIROX</p>
-        <h2 id="founder-title">Cześć, jestem Dawid.<br>Tworzę KAIROX.</h2>
-        <p>Łączę doświadczenie w pracy z klientami z projektowaniem i tworzeniem stron internetowych. Bezpośrednie rozmowy nauczyły mnie słuchać, rozumieć obawy i dostrzegać, jakich informacji ludzie potrzebują, zanim podejmą decyzję.</p>
-        <p>Z tego podejścia powstał KAIROX. Chcę tworzyć strony, które jasno pokazują ofertę i ułatwiają klientowi kolejny krok.</p>
-        <p class="founder-principle">Zanim zaproponuję rozwiązanie, chcę zrozumieć Twoją firmę.</p>
-        <p>Komu sprzedajesz? Co Cię wyróżnia? O co najczęściej pytają klienci? Te odpowiedzi pomagają mi uporządkować treść, zaprojektować stronę i dobrać technologię.</p>
-        <p>Ze mną porozmawiasz o swoim projekcie — po ludzku, bez zbędnego żargonu.</p>
-        <a class="primary-button" href="formularz-kontaktowy.html?source=%2Findex.html%23zalozyciel">Porozmawiajmy o Twojej stronie</a>
-      </div>
-      <figure class="founder-portrait">
-        <img src="img/dawid-kairox.jpg" width="750" height="1000" alt="Dawid — założyciel KAIROX" loading="lazy" decoding="async">
-        <figcaption><strong>Dawid</strong><span>Założyciel KAIROX</span></figcaption>
-      </figure>
-    </section>
-
-    <section class="comic-block comic-block--closing" id="contact" aria-labelledby="contact-title">
-      <div class="comic-copy">
-        <p class="eyebrow">Porozmawiajmy</p>
-        <h2 id="contact-title">Porozmawiajmy o Twojej stronie</h2>
-        <p class="comic-description">Napisz, co chcesz zmienić lub stworzyć. Na tej podstawie porozmawiamy o zakresie i dalszych krokach.</p>
-        <div class="comic-actions">
-          <a class="primary-button" href="formularz-kontaktowy.html?source=%2Findex.html">Porozmawiajmy</a>
+        <p class="split-body">Łączę doświadczenie w pracy z klientami z projektowaniem stron. Tworzę je tak, by jasno pokazywały ofertę i ułatwiały klientowi kolejny krok.</p>
+        <div class="founder-details split-actions view--desktop">
+          <h3>Jak zaczynam pracę nad stroną</h3>
+          <p>Zanim zaproponuję rozwiązanie, chcę zrozumieć Twoją firmę.</p>
+          <ul class="view-checklist">
+            <li>Komu sprzedajesz?</li>
+            <li>Co Cię wyróżnia?</li>
+            <li>O co najczęściej pytają klienci?</li>
+          </ul>
+          <p>Te odpowiedzi pomagają ustalić treść i strukturę, zanim wybierzemy technologię.</p>
+          <a class="primary-button" href="formularz-kontaktowy.html?source=%2Findex.html%23zalozyciel">Porozmawiajmy o Twojej stronie</a>
         </div>
       </div>
-      <figure class="comic-visual">
-        <img src="img/illustrations/kairox-03-jasny-kontakt.webp"
-          srcset="img/illustrations/kairox-03-jasny-kontakt-768.webp 768w, img/illustrations/kairox-03-jasny-kontakt.webp 1536w"
-          sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 48px), 650px"
-          width="1536" height="1024" alt="Klientka ogląda uporządkowaną stronę i wskazuje przycisk „Porozmawiajmy”. Dymek: „Teraz wiem, co dalej”."
-          loading="lazy" decoding="async">
-      </figure>
     </section>
 
+    <section class="view view--paired" id="contact" aria-labelledby="contact-title">
+      <div class="view-inner split-layout split-layout--reverse">
+        <h2 class="split-heading" id="contact-title">Porozmawiajmy o Twojej stronie</h2>
+        <p class="split-body">Napisz, co chcesz zmienić lub stworzyć. Omówimy zakres i dalsze kroki.</p>
+        <figure class="view-media split-media mobile-illustration">
+          <img src="img/illustrations/kairox-03-jasny-kontakt-768.webp" width="768" height="512"
+            alt="Klientka ogląda uporządkowaną stronę z przyciskiem kontaktu." loading="lazy" decoding="async">
+        </figure>
+        <div class="split-actions contact-actions">
+          <a class="primary-button" href="formularz-kontaktowy.html?source=%2Findex.html">Porozmawiajmy</a>
+          <div class="view-email">
+            <a class="view-text-link" href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
+            <button class="copy-email view--desktop" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
+            <span class="copy-email-status" role="status" aria-live="polite"></span>
+          </div>
+          <div class="view-actions footer-social view--desktop">
+            <a href="https://www.facebook.com/profile.php?id=61591724616267" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://www.linkedin.com/company/kairoxpl/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="site-footer">
-
-    <div class="footer-grid">
-
-        <div class="footer-brand">
-
-            <a href="index.html" class="footer-logo">
-                KAIROX
-            </a>
-
-            <p>
-                Strony internetowe jako narzędzie komunikacji marki.
-            </p>
-
-            <div class="footer-email">
-
-
-              <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
-
-
-              <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
-
-
-              <span class="copy-email-status" role="status" aria-live="polite"></span>
-
-
+    <div class="view-footer-grid">
+      <div class="view view--paired" id="informacje">
+        <div class="view-panel-grid footer-layout">
+          <div class="view-inner footer-navigation">
+            <h2 class="footer-logo" id="footer-nav-title">KAIROX</h2>
+            <nav class="view-options cooperation-preview-options" aria-labelledby="footer-nav-title">
+              <a href="audyt-komunikacji.html">Audyt</a><a href="metoda.html">Metoda Agent 0</a>
+              <a href="modele-wspolpracy.html">Modele współpracy</a><a href="partnerstwo.html">Partnerstwo</a>
+              <a href="realizacje.html">Realizacje</a><a href="artykuly.html">Artykuły</a>
+            </nav>
+          </div>
+          <div class="view-inner footer-privacy">
+            <h2>Informacje i prywatność</h2>
+            <div class="view-links">
+              <a href="polityka-prywatnosci.html">Polityka prywatności <span aria-hidden="true">↗</span></a>
+              <a href="polityka-cookies.html">Polityka cookies <span aria-hidden="true">↗</span></a>
+              <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+              <a class="view--mobile" href="#hero">Wróć na początek <span aria-hidden="true">↑</span></a>
             </div>
-
-
-            <div class="footer-social">
-
-                <a
-                    href="https://www.facebook.com/profile.php?id=61591724616267"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Facebook
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/company/kairoxpl/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    LinkedIn
-                </a>
-
+            <div class="footer-social footer-social--mobile view--mobile">
+              <a href="https://www.facebook.com/profile.php?id=61591724616267" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.linkedin.com/company/kairoxpl/" target="_blank" rel="noopener">LinkedIn</a>
             </div>
-
+          </div>
+          <p class="view-copyright">© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
         </div>
-
-        <nav class="footer-column">
-
-            <h3>Nawigacja</h3>
-
-            <a href="index.html">Start</a>
-            
-            <a href="audyt-komunikacji.html">Audyt</a>
-            <a href="metoda.html">Metoda Agent 0</a>
-            <a href="modele-wspolpracy.html">Modele współpracy</a>
-            <a href="partnerstwo.html">Partnerstwo</a>
-            <a href="artykuly.html">Artykuły</a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Usługi</h3>
-
-            <a href="audyt-komunikacji.html">
-                Audyt komunikacji
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Start
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Landing Page
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Komunikacyjna
-            </a>
-
-            <a href="partnerstwo.html">
-                Partnerstwo
-            </a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Informacje</h3>
-
-            <a href="polityka-prywatnosci.html">
-                Polityka prywatności
-            </a>
-
-            <a href="polityka-cookies.html">
-                Polityka cookies
-            </a>
-
-            <button
-              class="footer-privacy-button"
-              id="privacySettings"
-              type="button"
-            >
-              Ustawienia prywatności
-            </button>
-
-        </nav>
-
+      </div>
     </div>
-
-    <div class="footer-bottom">
-
-        <p>
-            © 2026 KAIROX. Wszystkie prawa zastrzeżone.
-        </p>
-
-        <p>
-            Projektujemy strony, które pomagają firmom
-            lepiej komunikować swoją wartość.
-        </p>
-
-    </div>
-
-</footer>
+  </footer>
   <div class="consent-banner"
   id="consentBanner"
   role="dialog"
@@ -563,7 +384,7 @@
   </div>
   <a class="home-mobile-contact" href="formularz-kontaktowy.html?source=%2Findex.html&amp;v=steps-8" aria-label="Przejdź do formularza kontaktowego"><span class="cta-label">Porozmawiajmy</span> <span class="cta-arrow" aria-hidden="true">→</span></a>
   <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/main.js?v=optional-website-1"></script>
+  <script src="js/main.js?v=demo-banner-off-1"></script>
   <script src="js/chat-config.js"></script>
   <script src="js/chat.js?v=direct-chat-1"></script>
 </body>

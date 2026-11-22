@@ -2,6 +2,8 @@
   "use strict";
   if (document.getElementById("kairox-chat")) return;
   const scriptUrl = document.currentScript.src;
+  const privacyUrl = new URL("../polityka-prywatnosci.html", scriptUrl);
+  const contactUrl = new URL("../formularz-kontaktowy.html", scriptUrl);
   const config = window.KAIROX_CHAT_CONFIG || {};
   const stylesheet = document.createElement("link");
   stylesheet.rel = "stylesheet";
@@ -40,7 +42,7 @@
           <label for="kx-lead-phone">Numer telefonu</label>
           <input id="kx-lead-phone" type="tel" autocomplete="tel" maxlength="30">
           <p class="kx-chat-disclosure">Wystarczy e-mail lub telefon. Dane wyślemy do KAIROX przez formularz — nie do modelu AI.</p>
-          <label class="kx-chat-lead-consent"><input id="kx-lead-privacy" type="checkbox"> <span>Zapoznałem(-am) się z <a href="/polityka-prywatnosci.html" target="_blank" rel="noopener noreferrer">Polityką prywatności</a> i przyjmuję do wiadomości zasady przetwarzania danych.</span></label>
+          <label class="kx-chat-lead-consent"><input id="kx-lead-privacy" type="checkbox"> <span>Zapoznałem(-am) się z <a href="${privacyUrl}" target="_blank" rel="noopener noreferrer">Polityką prywatności</a> i przyjmuję do wiadomości zasady przetwarzania danych.</span></label>
           <p class="kx-chat-lead-status" role="status" aria-live="polite"></p>
           <div class="kx-chat-actions"><button class="kx-chat-lead-cancel" type="button">Wróć do rozmowy</button><button class="kx-chat-lead-send" type="submit" disabled>Wyślij zgłoszenie</button></div>
         </form>
@@ -53,7 +55,7 @@
           <button class="kx-chat-retry" type="button" hidden>Ponów weryfikację</button>
           <p class="kx-chat-status" role="status" aria-live="polite"></p>
         </form>
-        <p class="kx-chat-footnote">Rozmawiasz z AI. Nie wpisuj danych osobowych ani poufnych. <a href="/polityka-prywatnosci.html#czat-ai">Prywatność czatu</a> · <a href="/formularz-kontaktowy.html">Kontakt z zespołem</a></p>
+        <p class="kx-chat-footnote">Rozmawiasz z AI. Nie wpisuj danych osobowych ani poufnych. <a href="${privacyUrl}#czat-ai">Prywatność czatu</a> · <a href="${contactUrl}">Kontakt z zespołem</a></p>
       </div>
     </div>`;
   document.body.appendChild(root);

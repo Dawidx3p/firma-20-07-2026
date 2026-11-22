@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
   <meta property="og:type" content="website">
 
   <meta property="og:title"
         content="KAIROX — Strony jako narzędzie komunikacji">
-  
+
   <meta property="og:description"
         content="Pomagamy firmom lepiej komunikować swoją wartość za pomocą stron internetowych.">
-  
+
   <meta property="og:url"
   content="https://kairox.pl/strona-jako-narzedzie-komunikacji">
-  
+
   <meta property="og:image" content="https://kairox.pl/img/kairox-share-1200x400-glow.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="400">
   <meta property="og:image:alt" content="KAIROX. Pomagamy firmom lepiej komunikować swoją wartość.">
-  
-  
+
+
   <meta property="og:site_name" content="KAIROX">
-  
+
   <meta name="twitter:card" content="summary_large_image">
   <meta
     name="description"
@@ -36,13 +37,17 @@
   <link rel="canonical" href="https://kairox.pl/strona-jako-narzedzie-komunikacji.html">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/typography.css?v=1">
-  <link rel="stylesheet" href="css/section-scroll.css?v=10">
-  <script src="js/section-motion.js?v=5" defer></script>
-  <script src="js/section-scroll.js?v=14" defer></script>
   <link rel="stylesheet" href="css/site-refinements.css?v=ux-1">
+
+  <link rel="stylesheet" href="css/section-scroll.css?v=desktop-fit-1">
+  <link rel="stylesheet" href="css/subpage-views.css?v=desktop-fit-1">
+  <script src="js/section-scroll.js?v=desktop-fit-1" defer></script>
+  <link rel="stylesheet" href="css/article-screens.css?v=6">
+  <script src="js/subpage-mobile.js?v=desktop-fit-1" defer></script>
+  <link rel="stylesheet" href="css/mobile-illustrations.css?v=4">
 </head>
 
-<body>
+<body class="home-screen-scroll subpage-screen">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
@@ -60,7 +65,7 @@
       <ul class="nav-list">
         <li><a href="index.html">Strona główna</a></li>
         <li><a href="modele-wspolpracy.html">Modele Współpracy</a></li>
-        
+
         <li><a href="audyt-komunikacji.html">Audyt</a></li>
         <li><a href="metoda.html">Metoda</a></li>
         <li><a href="partnerstwo.html">Partnerstwo</a></li>
@@ -75,386 +80,114 @@
     </nav>
   </header>
 
-  <main id="main-content">
 
-    <section class="hero page-hero">
-      <div class="hero-content">
-        <p class="eyebrow">Artykuł</p>
-
-        <h1>Strona internetowa to nie wizytówka</h1>
-
-        <p class="hero-description">
+<div class="view-controls" role="group" aria-label="Przełącz ekrany strony" hidden>
+    <button type="button" data-view-step="-1" aria-label="Poprzedni ekran" aria-disabled="true">↑</button>
+    <output class="view-position" aria-live="polite"></output>
+    <button type="button" data-view-step="1" aria-label="Następny ekran">↓</button>
+  </div>
+<main id="main-content">
+    <section class="view view--paired subpage-view subpage-hero" aria-labelledby="subpage-title">
+<div class="view-inner split-layout subpage-hero-layout">
+      <div class="split-heading"><p class="eyebrow">Artykuł</p><h1 id="subpage-title">Strona internetowa to nie wizytówka</h1></div>
+      <div class="split-body"><p class="hero-description">
           Wizytówka informuje, że firma istnieje. Dobra strona pomaga klientowi
           zrozumieć wartość marki i podjąć decyzję.
-        </p>
-
-        <div class="article-meta">
+        </p><div class="article-meta">
           <span>KAIROX</span>
           <span>•</span>
-          <span>6 min czytania</span>
-        </div>
-      </div>
-
-      <div class="hero-panel">
-        <p>
+          <span>2 min czytania</span>
+        </div><div class="subpage-hero-proof view--desktop"><p>
           Strona nie ma tylko przedstawiać firmy.
           Ma prowadzić rozmowę z odbiorcą.
-        </p>
+        </p></div></div>
+      <figure class="view-media split-media mobile-illustration">
+      <img src="img/illustrations/kairox-02-strategia-768.webp" srcset="img/illustrations/kairox-02-strategia-768.webp 768w, img/illustrations/kairox-02-strategia.webp 1536w"
+        sizes="(max-width: 980px) 100vw, 55vw" width="1536" height="1024" alt="" decoding="async" fetchpriority="high">
+    </figure>
+      <div class="split-actions subpage-hero-actions"></div>
+    </div>
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen article-reading-screen" id="rola-strony" aria-labelledby="rola-strony-tytul">
+      <div class="article-reading-layout">
+        <header><p class="eyebrow">Punkt wyjścia</p><h2 id="rola-strony-tytul">Strona pomaga odbiorcy ocenić ofertę</h2></header>
+        <p class="article-reading-lead">Informacje o firmie, lista usług i dane kontaktowe to część tego, czego szuka klient.</p>
+        <ul class="article-reading-list article-reading-list--pair">
+          <li><h3>Dopasowanie</h3><p>Czy firma rozumie moją sytuację i potrafi rozwiązać mój problem?</p></li>
+          <li><h3>Wiarygodność</h3><p>Czy widzę argumenty, doświadczenie lub przykłady, które pomagają mi zaufać?</p></li>
+        </ul>
+        <p class="article-reading-note">Odbiorca potrzebuje wskazówki, jak przejść od poznania oferty do decyzji.</p>
       </div>
     </section>
-
-    <section>
-      <div class="section-header">
-        <p class="eyebrow">Stare myślenie</p>
-
-        <h2>Wiele firm nadal traktuje stronę jak cyfrową ulotkę</h2>
-
-        <p class="section-intro">
-          Logo, kilka zdań o firmie, lista usług i formularz kontaktowy.
-          To wystarczało wtedy, gdy sama obecność w internecie była przewagą.
-          Dzisiaj użytkownik oczekuje czegoś więcej.
-        </p>
-      </div>
-
-      <div class="article-grid">
-        <article>
-          <h3>Wizytówka mówi: jesteśmy tutaj</h3>
-          <p>
-            Pokazuje podstawowe informacje, ale nie tłumaczy,
-            dlaczego klient powinien wybrać właśnie tę firmę.
-          </p>
-        </article>
-
-        <article>
-          <h3>Strona komunikacyjna mówi: rozumiemy Twój problem</h3>
-          <p>
-            Prowadzi użytkownika przez wartość, argumenty, zaufanie
-            i następny krok.
-          </p>
-        </article>
+    <section class="view view--paired subpage-view subpage-text-screen article-reading-screen article-reading-checklist" id="system-komunikacji" aria-labelledby="system-komunikacji-tytul">
+      <div class="article-reading-layout">
+        <header><p class="eyebrow">Rola strony</p><h2 id="system-komunikacji-tytul">Dobra strona pracuje jak system komunikacji</h2></header>
+        <ol class="article-reading-list article-reading-list--numbered">
+          <li><h3>Wyjaśnia</h3><p>Pokazuje, czym zajmuje się firma i dla kogo jest jej oferta.</p></li>
+          <li><h3>Porządkuje</h3><p>Układa informacje tak, żeby użytkownik nie musiał się domyślać.</p></li>
+          <li><h3>Buduje zaufanie</h3><p>Pokazuje proces, argumenty, doświadczenie i sposób współpracy.</p></li>
+          <li><h3>Prowadzi</h3><p>Pomaga użytkownikowi przejść od pierwszego wrażenia do działania.</p></li>
+          <li><h3>Sprzedaje</h3><p>Nie przez nacisk, ale przez jasność, wartość i redukcję wątpliwości.</p></li>
+        </ol>
       </div>
     </section>
-
-    <section class="message">
-      <h2>Klient nie wchodzi na stronę, żeby podziwiać firmę</h2>
-
-      <p>
-        Wchodzi, żeby sprawdzić, czy firma rozumie jego sytuację,
-        potrafi rozwiązać problem i jest godna zaufania.
-      </p>
-    </section>
-
-    <section>
-      <div class="section-header">
-        <p class="eyebrow">Nowa rola strony</p>
-
-        <h2>Dobra strona pracuje jak system komunikacji</h2>
-      </div>
-
-      <ol class="process-list">
-        <li>
-          <h3>Wyjaśnia</h3>
-          <p>Pokazuje, czym zajmuje się firma i dla kogo jest jej oferta.</p>
-        </li>
-
-        <li>
-          <h3>Porządkuje</h3>
-          <p>Układa informacje tak, żeby użytkownik nie musiał się domyślać.</p>
-        </li>
-
-        <li>
-          <h3>Buduje zaufanie</h3>
-          <p>Pokazuje proces, argumenty, doświadczenie i sposób współpracy.</p>
-        </li>
-
-        <li>
-          <h3>Prowadzi</h3>
-          <p>Pomaga użytkownikowi przejść od pierwszego wrażenia do działania.</p>
-        </li>
-
-        <li>
-          <h3>Sprzedaje</h3>
-          <p>Nie przez nacisk, ale przez jasność, wartość i redukcję wątpliwości.</p>
-        </li>
-      </ol>
-    </section>
-
-    <section>
-      <div class="section-header">
-        <p class="eyebrow">Co zmienia podejście?</p>
-
-        <h2>Projektowanie strony zaczyna się od pytania o komunikację</h2>
-
-        <p class="section-intro">
-          Zamiast pytać tylko o wygląd, trzeba zapytać:
-          co klient ma zrozumieć, co ma zapamiętać i jaki krok powinien wykonać dalej.
-        </p>
-      </div>
-
-      <div class="problem-grid">
-        <article>
-          <h3>Nie tylko „kim jesteśmy”</h3>
-          <p>
-            Ale przede wszystkim: komu pomagamy i jaki problem rozwiązujemy.
-          </p>
-        </article>
-
-        <article>
-          <h3>Nie tylko „co oferujemy”</h3>
-          <p>
-            Ale: dlaczego ta oferta ma znaczenie dla konkretnego odbiorcy.
-          </p>
-        </article>
-
-        <article>
-          <h3>Nie tylko „skontaktuj się”</h3>
-          <p>
-            Ale: co wydarzy się po kontakcie i dlaczego warto zrobić ten krok.
-          </p>
-        </article>
-      </div>
-
-      <p class="article-note">
-        Strona jako wizytówka kończy się na informacji. Strona jako narzędzie
-        komunikacji prowadzi użytkownika do zrozumienia, zaufania i decyzji.
-      </p>
-    </section>
-
-    <section>
-      <div class="section-header">
-        <p class="eyebrow">Praktycznie</p>
-
-        <h2>Jak rozpoznać, że Twoja strona jest tylko wizytówką?</h2>
-      </div>
-
-      <div class="article-grid">
-        <article>
-          <h3>Użytkownik musi się domyślać</h3>
-          <p>
-            Nie wiadomo od razu, dla kogo jest oferta, czym firma różni się od konkurencji
-            i dlaczego warto jej zaufać.
-          </p>
-        </article>
-
-        <article>
-          <h3>Strona opisuje firmę, ale nie prowadzi odbiorcy</h3>
-          <p>
-            Brakuje jasnej ścieżki, argumentów, kontekstu i wezwania do działania.
-          </p>
-        </article>
+    <section class="view view--paired subpage-view subpage-text-screen article-reading-screen" id="jak-rozpoznac" aria-labelledby="jak-rozpoznac-tytul">
+      <div class="article-reading-layout">
+        <header><p class="eyebrow">W praktyce</p><h2 id="jak-rozpoznac-tytul">Jak rozpoznać, że strona zatrzymała się na wizytówce?</h2></header>
+        <ul class="article-reading-list">
+          <li><h3>Odbiorca musi się domyślać</h3><p>Pokaż od razu, komu pomagasz i jaki problem rozwiązujesz.</p></li>
+          <li><h3>Brakuje argumentów</h3><p>Wyjaśnij, co zyskuje konkretna osoba i na czym polega różnica wobec innych ofert.</p></li>
+          <li><h3>Kontakt bez kontekstu</h3><p>Pokaż, co wydarzy się po kliknięciu lub wysłaniu zapytania.</p></li>
+        </ul>
+        <p class="article-reading-note">Projekt zaczyna się od pytania o to, co klient ma zrozumieć, zapamiętać i zrobić dalej.</p>
       </div>
     </section>
+    <section class="view view--paired subpage-view subpage-text-screen article-reading-screen" id="czytaj-dalej" aria-labelledby="czytaj-dalej-tytul">
+      <div class="article-reading-layout">
+        <header><h2 id="czytaj-dalej-tytul">Czytaj dalej</h2></header>
+        <ul class="article-reading-links">
 
-    <section>
-      <div class="section-header">
-        <p class="eyebrow">Podsumowanie</p>
-
-        <h2>Nowoczesna strona nie jest miejscem, gdzie firma mówi o sobie</h2>
-
-        <p class="section-intro">
-          To miejsce, gdzie odbiorca ma zrozumieć, czy firma jest właściwym wyborem
-          dla jego problemu, sytuacji i celu.
-        </p>
+        </ul>
+        <a class="primary-button" href="audyt-komunikacji.html">Zobacz audyt komunikacji</a>
       </div>
     </section>
-    <section class="next-step">
-
-        <div class="section-header">
-          <p class="eyebrow">Następny krok</p>
-      
-          <h2>Sprawdź, jak wygląda to w praktyce</h2>
-      
-          <p class="section-intro">
-            Jeżeli zgadzasz się z tym podejściem, zobacz jak analizujemy komunikację firm
-            i jak wygląda współpraca z KAIROX.
-          </p>
-        </div>
-      
-        <div class="article-grid">
-      
-          <article>
-      
-            <h3>Audyt komunikacji</h3>
-      
-            <p>
-              Dowiedz się, jakie elementy strony utrudniają użytkownikom
-              zrozumienie Twojej oferty.
-            </p>
-      
-            <a href="audyt-komunikacji.html">
-              Zobacz audyt →
-            </a>
-      
-          </article>
-      
-          <article>
-      
-            <h3>Partnerstwo</h3>
-      
-            <p>
-              Poznaj model długoterminowej współpracy
-              nad rozwojem komunikacji marki.
-            </p>
-      
-            <a href="partnerstwo.html">
-              Zobacz partnerstwo →
-            </a>
-      
-          </article>
-      
-        </div>
-      
-      </section>
-    <section class="cta-section">
-      <div class="cta-content">
-        <p class="eyebrow">Sprawdź swoją stronę</p>
-
-        <h2>
-          Czy Twoja strona jest tylko wizytówką, czy realnym narzędziem komunikacji?
-        </h2>
-
-        <p>
-          Audyt komunikacji pokaże, czy Twoja strona jasno tłumaczy wartość firmy
-          i prowadzi użytkownika do działania.
-        </p>
-
-        <a href="audyt-komunikacji.html" class="primary-button">
-          Zobacz audyt komunikacji
-        </a>
-      </div>
-    </section>
-
   </main>
 
   <footer class="site-footer">
-
-    <div class="footer-grid">
-
-        <div class="footer-brand">
-
-            <a href="index.html" class="footer-logo">
-                KAIROX
-            </a>
-
-            <p>
-                Strony internetowe jako narzędzie komunikacji marki.
-            </p>
-
-            <div class="footer-email">
-
-
+    <div class="view-footer-grid">
+      <div class="view view--paired" id="informacje">
+        <div class="view-panel-grid footer-layout">
+          <div class="view-inner footer-navigation">
+            <h2 class="footer-logo" id="footer-nav-title">KAIROX</h2>
+            <div class="footer-email footer-email-compact subpage-footer-email">
               <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
-
-
               <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
-
-
               <span class="copy-email-status" role="status" aria-live="polite"></span>
-
-
             </div>
-
-
-            <div class="footer-social">
-
-                <a
-                    href="https://www.facebook.com/profile.php?id=61591724616267"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Facebook
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/company/kairoxpl/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    LinkedIn
-                </a>
-
+            <nav class="view-options cooperation-preview-options" aria-labelledby="footer-nav-title">
+              <a href="audyt-komunikacji.html">Audyt</a><a href="metoda.html">Metoda Agent 0</a>
+              <a href="modele-wspolpracy.html">Modele współpracy</a><a href="partnerstwo.html">Partnerstwo</a>
+              <a href="realizacje.html">Realizacje</a><a href="artykuly.html">Artykuły</a>
+            </nav>
+          </div>
+          <div class="view-inner footer-privacy">
+            <h2>Informacje i prywatność</h2>
+            <div class="view-links">
+              <a href="polityka-prywatnosci.html">Polityka prywatności <span aria-hidden="true">↗</span></a>
+              <a href="polityka-cookies.html">Polityka cookies <span aria-hidden="true">↗</span></a>
+              <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+              <a class="view--mobile" href="#main-content">Wróć na początek <span aria-hidden="true">↑</span></a>
             </div>
-
+            <div class="footer-social footer-social--mobile view--mobile">
+              <a href="https://www.facebook.com/profile.php?id=61591724616267" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.linkedin.com/company/kairoxpl/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+          <p class="view-copyright">© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
         </div>
-
-        <nav class="footer-column">
-
-            <h3>Nawigacja</h3>
-
-            <a href="index.html">Start</a>
-            
-            <a href="audyt-komunikacji.html">Audyt</a>
-            <a href="metoda.html">Metoda Agent 0</a>
-            <a href="modele-wspolpracy.html">Modele współpracy</a>
-            <a href="partnerstwo.html">Partnerstwo</a>
-            <a href="artykuly.html">Artykuły</a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Usługi</h3>
-
-            <a href="audyt-komunikacji.html">
-                Audyt komunikacji
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Start
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Landing Page
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Komunikacyjna
-            </a>
-
-            <a href="partnerstwo.html">
-                Partnerstwo
-            </a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Informacje</h3>
-
-            <a href="polityka-prywatnosci.html">
-                Polityka prywatności
-            </a>
-
-            <a href="polityka-cookies.html">
-                Polityka cookies
-            </a>
-
-            <button
-            class="footer-privacy-button"
-            id="privacySettings"
-            type="button"
-          >
-            Ustawienia prywatności
-          </button>
-
-        </nav>
-
+      </div>
     </div>
-
-    <div class="footer-bottom">
-
-        <p>
-            © 2026 KAIROX. Wszystkie prawa zastrzeżone.
-        </p>
-
-        <p>
-            Projektujemy strony, które pomagają firmom
-            lepiej komunikować swoją wartość.
-        </p>
-
-    </div>
-
-</footer>
+  </footer>
   <div class="consent-banner"
   id="consentBanner"
   role="dialog"
@@ -501,7 +234,7 @@
   </div>
   </div>
   <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/main.js?v=ux-3"></script>
+  <script src="js/main.js?v=demo-banner-off-1"></script>
   <script src="js/chat-config.js"></script>
   <script src="js/chat.js?v=direct-chat-1"></script>
 </body>

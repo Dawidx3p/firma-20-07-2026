@@ -1,0 +1,51 @@
+/* Fine pointers use the trackpad controller; touch keeps native momentum. */
+html {
+  scroll-snap-type: none;
+  scroll-padding-top: 20px;
+}
+
+html:has(.site-header) {
+  scroll-padding-top: 92px;
+}
+
+/* Touch scrolling and boundary stops belong to the browser. Keep whole
+   sections as snap areas so oversized sections remain readable inside.
+   Never correct scroll position from a scroll event: it fights native inertia. */
+@media (hover: none) and (pointer: coarse) and (prefers-reduced-motion: no-preference) {
+  html:has(main > section) { scroll-snap-type: y mandatory; }
+  main > section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+  html:has(main > section) body > footer { scroll-snap-align: end; }
+  html:has(input:focus, textarea:focus, select:focus, [contenteditable="true"]:focus,
+    body.menu-open, .kx-chat-panel:not([hidden]), .consent-banner.is-visible) {
+    scroll-snap-type: none;
+  }
+}
+
+/* One entrance per section, without moving the layout or hiding future text. */
+main > section.section-entering {
+  animation: section-enter 360ms ease-out;
+}
+
+@keyframes section-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 640px) {
+  html:has(.site-header) {
+    scroll-padding-top: 84px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main > section.section-entering {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, follow">
-  <meta name="description" content="My Trip World — case study osobistego archiwum podróży z interaktywnym globusem, relacjami oraz galerią zdjęć i filmów.">
+<meta name="description" content="My Trip World — case study osobistego archiwum podróży z interaktywnym globusem, relacjami oraz galerią zdjęć i filmów.">
   <meta property="og:type" content="article">
   <meta property="og:title" content="My Trip World — case study KAIROX">
   <meta property="og:description" content="Jak zmieniliśmy archiwum podróży w interaktywne doświadczenie oparte na odkrywaniu miejsc i wspomnień.">
@@ -15,17 +15,22 @@
   <link rel="apple-touch-icon" href="../img/180na180.png">
   <link rel="stylesheet" href="../css/style.css?v=ui-1">
   <title>My Trip World — case study KAIROX</title>
+  <link rel="canonical" href="https://kairox.pl/realizacje/my-trip-world.html">
   <link rel="preload" href="../fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../css/typography.css?v=1">
-  <link rel="stylesheet" href="../css/section-scroll.css?v=10">
-  <script src="../js/section-motion.js?v=5" defer></script>
-  <script src="../js/section-scroll.js?v=14" defer></script>
   <link rel="stylesheet" href="../css/site-refinements.css?v=ux-1">
+
+  <link rel="stylesheet" href="../css/section-scroll.css?v=desktop-fit-1">
+  <link rel="stylesheet" href="../css/subpage-views.css?v=desktop-fit-1">
+  <script src="../js/section-scroll.js?v=desktop-fit-1" defer></script>
+  <link rel="stylesheet" href="../css/case-screens.css?v=6">
+  <script src="../js/subpage-mobile.js?v=desktop-fit-1" defer></script>
 </head>
-<body>
+<body class="home-screen-scroll subpage-screen case-screen-page">
   <header class="site-header">
     <nav class="navbar" aria-label="Główna nawigacja">
       <a href="../index.html" class="logo" aria-label="KAIROX — strona główna">KAIROX</a>
+      <a class="case-nav-back" href="../realizacje.html#my-trip-world" aria-label="Wróć do realizacji"><span aria-hidden="true">←</span> Realizacje</a>
       <button class="menu-toggle" type="button" aria-label="Otwórz menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -35,7 +40,7 @@
         <li><a href="../audyt-komunikacji.html">Audyt</a></li>
         <li><a href="../metoda.html">Metoda</a></li>
         <li><a href="../partnerstwo.html">Partnerstwo</a></li>
-        <li><a href="../realizacje.html" class="active" aria-current="page">Realizacje</a></li>
+        <li><a href="../realizacje.html#my-trip-world" class="active">Realizacje</a></li>
         <li><a href="../artykuly.html">Artykuły</a></li>
         <li class="nav-contact-link"><a href="../formularz-kontaktowy.html">Porozmawiajmy</a></li>
       </ul>
@@ -43,177 +48,119 @@
     </nav>
   </header>
 
-  <main>
-    <section class="case-hero">
-      <a class="case-back" href="../realizacje.html">← Wszystkie realizacje</a>
-      <div class="case-hero-grid">
-        <div>
-          <p class="eyebrow">Aplikacja webowa / projekt autorski</p>
-          <h1>My Trip World</h1>
-          <p class="case-hero-lead">
-            Interaktywne archiwum podróży, które zaczyna się od globusa 3D,
-            a kończy na pełnoekranowym wspomnieniu.
-          </p>
-        </div>
-        <dl class="case-facts">
-          <div><dt>Status</dt><dd>Działające MVP</dd></div>
-          <div><dt>Zakres</dt><dd>Koncepcja, UX, UI, development</dd></div>
-          <div><dt>Technologie</dt><dd>JavaScript, Three.js, TopoJSON</dd></div>
+
+<div class="view-controls" role="group" aria-label="Przełącz ekrany strony" hidden>
+    <button type="button" data-view-step="-1" aria-label="Poprzedni ekran" aria-disabled="true">↑</button>
+    <output class="view-position" aria-live="polite"></output>
+    <button type="button" data-view-step="1" aria-label="Następny ekran">↓</button>
+  </div>
+<main id="main-content">
+    <section class="view view--paired subpage-view subpage-text-screen case-screen" id="opis-projektu" aria-labelledby="subpage-title">
+      <div class="case-screen-inner case-overview">
+        <header><p class="eyebrow">Projekt autorski · Archiwum podróży</p><h1 id="subpage-title">My Trip World</h1></header>
+        <p class="case-screen-lead">Interaktywne archiwum podróży, które prowadzi od globusa 3D do pełnoekranowego wspomnienia.</p>
+        <dl class="case-screen-facts">
+          <div><dt>Zakres</dt><dd>Koncepcja, UX, UI i development</dd></div>
+          <div><dt>Format</dt><dd>Aplikacja webowa / MVP</dd></div>
+          <div><dt>Struktura</dt><dd>Globus i albumy wyjazdów</dd></div>
         </dl>
+        <div class="case-context"><h2>Kontekst</h2><p>Każda pinezka oznacza konkretny wyjazd. Po jej wybraniu otwiera się album z relacjami, zdjęciami, filmami i opisami.</p></div>
       </div>
     </section>
-
-    <section class="case-intro" aria-labelledby="trip-summary-title">
-      <p class="eyebrow">W skrócie</p>
-      <h2 id="trip-summary-title">Podróż nie jest folderem. Jest miejscem, czasem i historią.</h2>
-      <p>Każda pinezka oznacza konkretny wyjazd, a nie tylko lokalizację. Po jej wybraniu użytkownik trafia do albumu z relacjami, zdjęciami, filmami i opisami. Projekt rozpoczął się jako prywatne archiwum, ale jego struktura pozwala rozwijać go w produkt z osobnymi mapami użytkowników.</p>
-      <ol class="case-path" aria-label="Podstawowa ścieżka użytkownika">
-        <li><span>01</span>Globus</li>
-        <li><span>02</span>Pinezka z datą</li>
-        <li><span>03</span>Album podróży</li>
-        <li><span>04</span>Pełnoekranowe wspomnienie</li>
-      </ol>
-    </section>
-
-    <section class="case-story">
-      <article>
-        <p class="eyebrow">Problem</p>
-        <h2>Wspomnienia rozproszone pomiędzy aplikacjami</h2>
-        <p>
-          Zdjęcia z podróży trafiają do galerii telefonu, chmury, komunikatorów
-          i mediów społecznościowych. Folder przechowuje pliki, lecz nie pokazuje
-          relacji między wspomnieniem a miejscem. Klasyczna mapa zachowuje kontekst,
-          ale zwykle pozostaje techniczna i pozbawiona emocji.
-        </p>
-      </article>
-      <article>
-        <p class="eyebrow">Cel MVP</p>
-        <h2>Sprawdzić pełne doświadczenie na dwóch ekranach</h2>
-        <p>
-          Pierwsza wersja miała pozwolić odnaleźć wyjazd, rozpoznać go po miejscu
-          i dacie, otworzyć album, szybko przeglądać media i wrócić do mapy — bez
-          kont użytkowników, panelu administracyjnego, backendu i instrukcji.
-        </p>
-      </article>
-    </section>
-
-    <section class="case-focus" aria-labelledby="trip-focus-title">
-      <div class="section-header">
-        <p class="eyebrow">Na czym się skupiliśmy</p>
-        <h2 id="trip-focus-title">Pięć decyzji, które uprościły doświadczenie</h2>
-      </div>
-      <div class="case-focus-grid case-focus-grid-five">
-        <article>
-          <span>01</span>
-          <h3>Globus zamiast mapy 2D</h3>
-          <p>Projekt służy wracaniu do wspomnień, nie planowaniu trasy. Globus buduje charakter i pokazuje rozkład podróży.</p>
-        </article>
-        <article>
-          <span>02</span>
-          <h3>Wyjazd zamiast miejsca</h3>
-          <p>Pinezka ma własny identyfikator, daty, współrzędne, album i URL, więc jedno miasto może zawierać wiele podróży.</p>
-        </article>
-        <article>
-          <span>03</span>
-          <h3>Tylko dwa ekrany</h3>
-          <p>Usunięto ekran powitalny, dashboard i rozbudowane menu. Globus prowadzi bezpośrednio do albumu.</p>
-        </article>
-        <article>
-          <span>04</span>
-          <h3>Znane wzorce albumu</h3>
-          <p>Relacje grupują krótkie momenty, trzykolumnowa siatka porządkuje media, a viewer obsługuje klawiaturę i gesty.</p>
-        </article>
-        <article>
-          <span>05</span>
-          <h3>Treść ponad dekoracją</h3>
-          <p>Skrócony nagłówek odsłania pierwszy rząd mediów już w początkowym widoku. Charakter premium nie konkuruje ze zdjęciami.</p>
-        </article>
+    <section class="view view--paired subpage-view subpage-text-screen case-screen case-challenge" id="wyzwanie" aria-labelledby="case-challenge-title">
+      <div class="view-inner split-layout split-layout--reverse subpage-hero-layout case-challenge-layout">
+        <div class="split-heading"><p class="eyebrow">Wyzwanie</p><h2 id="case-challenge-title">Wspomnienia rozproszone pomiędzy aplikacjami</h2></div>
+        <div class="split-body"><p>Zdjęcia z podróży trafiają do telefonu, chmury i komunikatorów. Chcieliśmy połączyć je z miejscem i datą, tak aby można było znaleźć wyjazd, otworzyć album i wrócić do globusa.</p></div>
+        <figure class="view-media split-media"><img src="../img/projects/screens/my-trip-world-desktop.webp" width="1440" height="900" alt="Globus My Trip World z wyszukiwarką i pinezkami prowadzącymi do albumów" loading="lazy"></figure>
       </div>
     </section>
-
-    <section class="case-detail" aria-labelledby="trip-process-title">
-      <div class="case-detail-heading"><p class="eyebrow">Proces projektowy</p><h2 id="trip-process-title">Od abstrakcyjnej kuli do czytelnej mapy wspomnień</h2></div>
-      <div class="case-detail-grid case-detail-grid-four">
-        <article><span>01</span><h3>Minimalna ścieżka</h3><p>Zakres ograniczono do globusa, pinezek, albumu i pełnoekranowego podglądu. Konta, statystyki, trasy i społeczność przesunięto poza MVP.</p></article>
-        <article><span>02</span><h3>Działający globus</h3><p>Dodano obrót myszą i palcem, zoom, wyszukiwanie po miejscu, kraju, roku i dacie oraz pinezki obliczane ze współrzędnych. Niewidoczne etykiety są automatycznie ukrywane.</p></article>
-        <article><span>03</span><h3>Kontekst geograficzny</h3><p>Tekstura Ziemi, granice państw i startowy widok Europy zastąpiły abstrakcyjną kulę. Przy zbliżeniu obrót zwalnia, ułatwiając dokładny wybór.</p></article>
-        <article><span>04</span><h3>Iteracja pinezek</h3><p>Rozbudowane karty i linie prowadzące ustąpiły punktowi, nazwie miasta i dacie. Stabilność warstwy 3D okazała się ważniejsza niż dekoracyjność.</p></article>
-        <article><span>05</span><h3>Album i viewer</h3><p>Wspólny szablon danych obsługuje zdjęcia, filmy, relacje, podpisy, klawiaturę, gesty mobilne i udostępnianie linku.</p></article>
+    <section class="view view--paired subpage-view subpage-text-screen case-screen" id="system-doswiadczenia" aria-labelledby="case-system-title">
+      <div class="case-screen-inner">
+        <header><p class="eyebrow">System doświadczenia</p><h2 id="case-system-title">Od globusa do wspomnienia</h2></header>
+        <ol class="case-screen-cards case-screen-cards--system">
+          <li><span>01</span><h3>Globus</h3><p>Obrót, zbliżenie i wyszukiwanie po miejscu, kraju, roku lub dacie pomagają znaleźć wyjazd.</p></li>
+          <li><span>02</span><h3>Pinezka z datą</h3><p>Podróże do tego samego miasta mają osobne daty, pinezki i adresy albumów.</p></li>
+          <li><span>03</span><h3>Album i podgląd</h3><p>Relacje, zdjęcia i filmy otwierają się w pełnym ekranie z obsługą gestów i klawiatury.</p></li>
+        </ol>
       </div>
     </section>
-
-    <figure class="case-proof">
-      <div class="case-proof-copy">
-        <p class="eyebrow">Działający interfejs</p>
-        <h2>Od koncepcji do prawdziwego globusa</h2>
-        <p>Stylizowana okładka tłumaczy zasadę produktu, a poniższy ekran pokazuje rzeczywistą wersję opublikowanego MVP.</p>
-      </div>
-      <div class="case-proof-image">
-        <img src="../img/projects/my-trip-world.jpg" alt="Rzeczywisty interfejs My Trip World z globusem i wyszukiwarką podróży" loading="lazy">
-      </div>
-    </figure>
-
-    <section class="case-tech" aria-labelledby="trip-architecture-title">
-      <div><p class="eyebrow">Architektura</p><h2 id="trip-architecture-title">Dane oddzielone od interfejsu</h2><p>Projekt wykorzystuje HTML, CSS, JavaScript, Three.js i TopoJSON. Działa bez frameworka, backendu i procesu budowania, dlatego GitHub Pages publikuje go bezpośrednio. Każda podróż zawiera identyfikator i slug, miasto, kraj, współrzędne, daty, URL, media oraz kolekcje relacji.</p></div>
-      <pre aria-label="Struktura plików projektu"><code>index.html              → globus i wyszukiwarka
-js/trips.js             → wspólne dane podróży
-js/globe.js             → scena 3D, pinezki i sterowanie
-js/trip.js              → album, relacje i viewer
-trip/[nazwa]/index.html → adres konkretnego wyjazdu
-assets/                 → tekstura Ziemi i granice</code></pre>
-    </section>
-
-    <section class="case-notes">
-      <article><p class="eyebrow">Działające MVP</p><h2>Pełna ścieżka od miejsca do albumu</h2><ul class="case-list"><li>Globus 3D z teksturą, granicami i startowym widokiem Europy.</li><li>Adaptacyjna prędkość obrotu, wyszukiwarka i cztery wyjazdy.</li><li>Pinezki z miejscem i datą oraz osobne adresy albumów.</li><li>Relacje, trzykolumnowa siatka i pełnoekranowy viewer.</li><li>Responsywność, gesty mobilne i obsługa klawiatury.</li></ul></article>
-      <article><p class="eyebrow">Ograniczenia</p><h2>Świadomie lekki pierwszy etap</h2><ul class="case-list"><li>Materiały są demonstracyjne i częściowo zewnętrzne.</li><li>Dodawanie podróży wymaga ręcznej edycji danych.</li><li>GitHub Pages nie zapewnia logowania ani prywatnych albumów.</li><li>Większa liczba wyjazdów będzie wymagała grupowania pinezek.</li></ul></article>
-    </section>
-
-    <section class="case-result">
-      <div>
-        <p class="eyebrow">Efekt</p>
-        <h2>Cyfrowy dziennik, który zaczyna się od świata</h2>
-      </div>
-      <p>
-        Działające MVP potwierdziło, że osobiste archiwum może być jednocześnie
-        mapą i wizualnym albumem bez budowania aplikacji społecznościowej.
-        Rezultat jest obecnie oceniany funkcjonalnie — projekt nie zbiera jeszcze
-        danych analitycznych o zachowaniu użytkowników.
-      </p>
-    </section>
-
-    <section class="case-next" aria-labelledby="trip-next-title">
-      <div><p class="eyebrow">Następna iteracja</p><h2 id="trip-next-title">Od prototypu do osobistego produktu</h2></div>
-      <div class="case-next-columns">
-        <div><h3>Najbliżej</h3><p>Prawdziwe zdjęcia, miniatury WebP, lepsza obsługa bliskich pinezek, dostępność viewerów i optymalizacja mediów.</p></div>
-        <div><h3>Dalej</h3><p>Panel dodawania podróży, profile, albumy prywatne i publiczne, trasy, oś czasu oraz zewnętrzny magazyn plików.</p></div>
+    <section class="view view--paired subpage-view subpage-text-screen case-screen" id="technologia-i-ograniczenia" aria-labelledby="case-tech-title">
+      <div class="case-screen-inner">
+        <header><p class="eyebrow">Technologia i ograniczenia</p><h2 id="case-tech-title">Dane oddzielone od interfejsu</h2></header>
+        <div class="case-tech-layout">
+          <div class="case-screen-card"><h3>Technologia</h3><p>HTML, CSS, JavaScript, Three.js i TopoJSON. Wspólne dane opisują lokalizacje, daty, media i relacje. Aplikacja działa statycznie, bez backendu i procesu budowania.</p></div>
+          <div class="case-screen-card">
+            <h3>Świadomie lekkie MVP</h3>
+            <ul>
+            <li>Materiały w albumach są demonstracyjne.</li>
+            <li>Nowe podróże dodaje się ręcznie.</li>
+            <li>Prywatne albumy i logowanie wymagają dalszej rozbudowy.</li>
+            <li>Przy większej liczbie wyjazdów przyda się grupowanie pinezek.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
-
-    <blockquote class="case-lesson">
-      <p>Miejsce prowadzi do podróży, a podróż prowadzi do wspomnienia.</p>
-      <footer>Najważniejsza lekcja projektu</footer>
-    </blockquote>
-
-    <section class="case-launch">
-      <p class="eyebrow">Zobacz efekt</p>
-      <h2>Odkryj My Trip World</h2>
-      <p>Przed przejściem poinformujemy Cię, że otwierasz zewnętrzną stronę.</p>
-      <a class="primary-button" href="../my-trip-world/">Uruchom projekt</a>
+    <section class="view view--paired subpage-view subpage-text-screen case-screen" id="decyzje-projektowe" aria-labelledby="case-focus-title">
+      <div class="case-screen-inner">
+        <header><p class="eyebrow">Na czym się skupiliśmy</p><h2 id="case-focus-title">Cztery decyzje, które uprościły doświadczenie</h2></header>
+        <ol class="case-screen-cards">
+          <li><span>01</span><h3>Globus zamiast mapy 2D</h3><p>Tekstura Ziemi, granice i widok Europy budują kontekst. Przy zbliżeniu obrót zwalnia.</p></li>
+          <li><span>02</span><h3>Wyjazd zamiast miejsca</h3><p>Pinezka pokazuje miasto i datę. Jej prosty wygląd ułatwia wybór na globusie.</p></li>
+          <li><span>03</span><h3>Tylko dwa ekrany</h3><p>Globus prowadzi wprost do albumu, bez ekranu powitalnego i rozbudowanego menu.</p></li>
+          <li><span>04</span><h3>Treść na pierwszym planie</h3><p>Relacje grupują momenty, a krótki nagłówek odsłania pierwszy rząd mediów.</p></li>
+        </ol>
+      </div>
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen case-screen" id="efekt" aria-labelledby="case-result-title">
+      <div class="case-screen-inner case-result-layout">
+        <div class="case-result-main">
+        <header><p class="eyebrow">Efekt</p><h2 id="case-result-title">Cyfrowy dziennik, który zaczyna się od świata</h2></header>
+          <p>Działający prototyp łączy globus z albumami czterech podróży. Efekt można ocenić, przechodząc od pinezki z datą do zdjęć, filmów i relacji. Projekt nie zbiera danych o zachowaniu użytkowników.</p>
+          <blockquote class="case-principle"><p>Miejsce prowadzi do podróży, a podróż prowadzi do wspomnienia.</p><footer>Główna zasada projektu</footer></blockquote>
+        </div>
+        <div class="case-result-action">
+          <a class="primary-button" href="/my-trip-world/">Zobacz efekt <span class="sr-only">— My Trip World</span></a>
+          <p>Projekt otworzy się na zewnętrznej stronie.</p>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer class="case-footer">
-    <a href="../index.html" class="footer-logo">KAIROX</a>
-    <div class="footer-email footer-email-compact">
-      <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
-      <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
-      <span class="copy-email-status" role="status" aria-live="polite"></span>
+  <footer class="site-footer">
+    <div class="view-footer-grid">
+      <div class="view view--paired" id="informacje">
+        <div class="view-panel-grid footer-layout">
+          <div class="view-inner footer-navigation">
+            <h2 class="footer-logo" id="footer-nav-title">KAIROX</h2>
+            <div class="footer-email footer-email-compact subpage-footer-email">
+              <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
+              <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
+              <span class="copy-email-status" role="status" aria-live="polite"></span>
+            </div>
+            <nav class="view-options cooperation-preview-options" aria-labelledby="footer-nav-title">
+              <a href="../audyt-komunikacji.html">Audyt</a><a href="../metoda.html">Metoda Agent 0</a>
+              <a href="../modele-wspolpracy.html">Modele współpracy</a><a href="../partnerstwo.html">Partnerstwo</a>
+              <a href="../realizacje.html">Realizacje</a><a href="../artykuly.html">Artykuły</a>
+            </nav>
+          </div>
+          <div class="view-inner footer-privacy">
+            <h2>Informacje i prywatność</h2>
+            <div class="view-links">
+              <a href="../polityka-prywatnosci.html">Polityka prywatności <span aria-hidden="true">↗</span></a>
+              <a href="../polityka-cookies.html">Polityka cookies <span aria-hidden="true">↗</span></a>
+              <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+              <a class="view--mobile" href="#main-content">Wróć na początek <span aria-hidden="true">↑</span></a>
+            </div>
+            <div class="footer-social footer-social--mobile view--mobile">
+              <a href="https://www.facebook.com/profile.php?id=61591724616267" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.linkedin.com/company/kairoxpl/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+          <p class="view-copyright">© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
+        </div>
+      </div>
     </div>
-    <nav aria-label="Stopka">
-      <a href="../realizacje.html">Realizacje</a>
-      <a href="../polityka-prywatnosci.html">Prywatność</a>
-      <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
-    </nav>
   </footer>
 
   <div class="consent-banner" id="consentBanner" role="dialog" aria-modal="true" aria-labelledby="consentTitle" aria-describedby="consentDescription" hidden>
@@ -231,6 +178,6 @@ assets/                 → tekstura Ziemi i granice</code></pre>
     </div>
   </div>
   <script src="../js/consent.js"></script>
-  <script src="../js/main.js?v=ux-3"></script>
+  <script src="../js/main.js?v=demo-banner-off-1"></script>
 </body>
 </html>

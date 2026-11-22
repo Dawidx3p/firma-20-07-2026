@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
   <meta property="og:type" content="website">
 
   <meta property="og:title"
         content="KAIROX — Strony jako narzędzie komunikacji">
-  
+
   <meta property="og:description"
         content="Pomagamy firmom lepiej komunikować swoją wartość za pomocą stron internetowych.">
-  
+
   <meta property="og:url"
         content="https://kairox.pl/audyt-komunikacji">
-  
+
   <meta property="og:image" content="https://kairox.pl/img/banners/kairox-share-audyt-komiks-19.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1235">
   <meta property="og:image:height" content="650">
   <meta property="og:image:alt" content="Klientka i projektant analizują stronę. Dymek: „Zobaczmy, co blokuje kontakt.”">
-  
-  
+
+
   <meta property="og:site_name" content="KAIROX">
-  
+
   <meta name="twitter:card" content="summary_large_image">
   <meta
     name="description"
@@ -34,16 +35,19 @@
   <title>Audyt komunikacji strony — KAIROX</title>
   <link rel="canonical" href="https://kairox.pl/audyt-komunikacji.html">
   <link rel="stylesheet" href="css/comic.css?v=1">
-  <link rel="stylesheet" href="css/audit-report.css?v=2">
+  <link rel="stylesheet" href="css/audit-report.css?v=19">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/typography.css?v=1">
-  <link rel="stylesheet" href="css/section-scroll.css?v=10">
-  <script src="js/section-motion.js?v=5" defer></script>
-  <script src="js/section-scroll.js?v=14" defer></script>
   <link rel="stylesheet" href="css/site-refinements.css?v=ux-1">
+
+  <link rel="stylesheet" href="css/section-scroll.css?v=desktop-fit-1">
+  <link rel="stylesheet" href="css/subpage-views.css?v=desktop-fit-1">
+  <script src="js/section-scroll.js?v=desktop-fit-1" defer></script>
+  <script src="js/subpage-mobile.js?v=desktop-fit-1" defer></script>
+  <link rel="stylesheet" href="css/mobile-illustrations.css?v=4">
 </head>
 
-<body>
+<body class="home-screen-scroll subpage-screen audit-screen-page">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
@@ -59,7 +63,7 @@
       <ul class="nav-list">
         <li><a href="index.html">Strona główna</a></li>
         <li><a href="modele-wspolpracy.html">Modele Współpracy</a></li>
-        
+
         <li><a href="audyt-komunikacji.html" class="active" aria-current="page">Audyt</a></li>
         <li><a href="metoda.html">Metoda</a></li>
         <li><a href="partnerstwo.html">Partnerstwo</a></li>
@@ -74,36 +78,46 @@
     </nav>
   </header>
 
-  <main id="main-content">
 
-    <section class="comic-block hero page-hero comic-block--hero" aria-labelledby="comic-hero-title">
-      <div class="comic-copy">
-        <p class="eyebrow">Audyt komunikacji</p>
-        <h1 id="comic-hero-title">Zobacz, co warto poprawić na Twojej stronie</h1>
-        <p class="comic-description">Otrzymasz analizę komunikacji, listę problemów i rekomendacje omówione podczas konsultacji.</p>
-        <div class="comic-actions">
-          <a class="primary-button" href="formularz-kontaktowy.html?service=audit&amp;source=%2Faudyt-komunikacji.html">Zamów audyt — 499 zł brutto</a>
-          <a class="secondary-button" href="#audit-scope">Co sprawdzamy?</a>
-        </div>
-      </div>
-      <figure class="comic-visual">
-        <img src="img/illustrations/kairox-04-audyt.webp"
+<div class="view-controls" role="group" aria-label="Przełącz ekrany strony" hidden>
+    <button type="button" data-view-step="-1" aria-label="Poprzedni ekran" aria-disabled="true">↑</button>
+    <output class="view-position" aria-live="polite"></output>
+    <button type="button" data-view-step="1" aria-label="Następny ekran">↓</button>
+  </div>
+<main id="main-content">
+    <section class="view view--paired subpage-view subpage-hero" aria-labelledby="comic-hero-title">
+<div class="view-inner split-layout subpage-hero-layout">
+      <div class="split-heading"><p class="eyebrow">Audyt komunikacji</p><h1 id="comic-hero-title">Zobacz, co warto poprawić na Twojej stronie</h1></div>
+      <div class="split-body"><p class="comic-description">Otrzymasz analizę komunikacji, listę problemów i rekomendacje omówione podczas konsultacji.</p></div>
+      <figure class="view-media split-media mobile-illustration"><img src="img/illustrations/kairox-04-audyt.webp"
           srcset="img/illustrations/kairox-04-audyt-768.webp 768w, img/illustrations/kairox-04-audyt.webp 1536w"
           sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 48px), 650px"
           width="1536" height="1024" alt="Projektant zaznacza trzy problemy na stronie. Raport proponuje jasną ofertę, jeden cel i dowody. Dymek: „Zobaczmy, co blokuje kontakt”."
-          loading="eager" decoding="async" fetchpriority="high">
-      </figure>
+          loading="eager" fetchpriority="high"></figure>
+      <div class="split-actions subpage-hero-actions"><div class="comic-actions">
+          <a class="primary-button" href="formularz-kontaktowy.html?service=audit&amp;source=%2Faudyt-komunikacji.html"><span>Zamów audyt<span class="audit-hero-price"> — 499 zł brutto</span></span></a>
+          <a class="secondary-button" href="#audit-scope">Co sprawdzamy?</a>
+        </div></div>
+    </div>
     </section>
-
-    <section class="message">
-      <h2>Ładna strona może nadal źle komunikować ofertę</h2>
-      <p>
-        Jeśli użytkownik nie rozumie, czym się zajmujesz, dlaczego jesteś inny
-        i co powinien zrobić dalej — design nie rozwiąże problemu.
-      </p>
+    <div id="audit-scope"></div>
+    <section class="view view--paired view--mobile audit-mobile-screen" aria-labelledby="audit-mobile-scope-title">
+      <div class="audit-mobile-content">
+        <header>
+          <p class="eyebrow">Zakres audytu</p>
+          <h2 id="audit-mobile-scope-title">Co sprawdzamy na Twojej stronie?</h2>
+        </header>
+        <ul class="audit-mobile-list">
+          <li><strong>Jasność przekazu</strong><p>Czy w kilka sekund widać, czym zajmuje się firma i dla kogo jest oferta?</p></li>
+          <li><strong>Argumenty i zaufanie</strong><p>Czy strona odpowiada na obawy i daje powód, by wybrać właśnie Ciebie?</p></li>
+          <li><strong>Ścieżka do działania</strong><p>Czy po przeczytaniu oferty wiadomo, jaki krok wykonać?</p></li>
+        </ul>
+        <p class="audit-mobile-note">Nawet dopracowany wygląd strony nie pomoże, jeśli odbiorca nie rozumie, co ją wyróżnia i jak się skontaktować.</p>
+      </div>
     </section>
-
-    <section class="problem" id="audit-scope">
+    <section class="view view--paired view--desktop subpage-view subpage-text-screen">
+<div class="view-panel-grid view-panel-grid--priority subpage-pair">
+<section class="problem subpage-panel">
       <div class="section-header">
         <p class="eyebrow">Zakres audytu</p>
         <h2>Sprawdzamy stronę tak, jak widzi ją Twój klient</h2>
@@ -134,8 +148,32 @@
         </article>
       </div>
     </section>
-
-    <section class="process">
+<section class="message subpage-panel">
+      <h2>Ładna strona może nadal źle komunikować ofertę</h2>
+      <p>
+        Jeśli użytkownik nie rozumie, czym się zajmujesz, dlaczego jesteś inny
+        i co powinien zrobić dalej — design nie rozwiąże problemu.
+      </p>
+    </section>
+</div>
+    </section>
+    <section class="view view--paired view--mobile audit-mobile-screen audit-mobile-process" aria-labelledby="audit-mobile-process-title">
+      <div class="audit-mobile-content">
+        <header>
+          <p class="eyebrow">Jak wygląda audyt</p>
+          <h2 id="audit-mobile-process-title">Od analizy do planu zmian</h2>
+        </header>
+        <ol class="audit-mobile-list">
+          <li><strong>Analiza strony</strong><p>Sprawdzamy drogę od pierwszego wrażenia do kontaktu.</p></li>
+          <li><strong>Diagnoza problemów</strong><p>Wskazujemy, gdzie przekaz jest niejasny lub zbyt ogólny.</p></li>
+          <li><strong>Rekomendacje</strong><p>Pokazujemy, co zmienić w treści, układzie i wezwaniach do działania.</p></li>
+          <li><strong>Priorytety</strong><p>Oddzielamy szybkie poprawki od większej przebudowy.</p></li>
+          <li><strong>Kolejny krok</strong><p>Możemy wdrożyć zmiany albo zaprojektować stronę od nowa.</p></li>
+        </ol>
+      </div>
+    </section>
+    <section class="view view--paired view--desktop subpage-view subpage-text-screen">
+<section class="process subpage-panel">
       <div class="section-header">
         <p class="eyebrow">Jak wygląda audyt</p>
         <h2>Krótki proces, konkretne wnioski</h2>
@@ -168,17 +206,75 @@
         </li>
       </ol>
     </section>
-
-    <section class="audit-examples audit-report" id="przykladowy-audyt" aria-labelledby="audit-report-title">
-      <div class="section-header">
-        <p class="eyebrow">Od diagnozy do konkretnej zmiany</p>
-        <h2 id="audit-report-title">Tak mogą wyglądać zmiany zaproponowane po audycie</h2>
-        <p class="section-intro">Dowiesz się, co utrudnia zrozumienie oferty, co poprawić w pierwszej kolejności i jak może wyglądać rozwiązanie. Rekomendacje obejmują treść, typografię, interfejs i drogę klienta do kontaktu — z zachowaniem charakteru Twojej marki.</p>
+    </section>
+    <div id="przykladowy-audyt" class="audit-example-anchor"></div>
+    <section class="view view--paired view--mobile audit-mobile-screen audit-mobile-example" id="audit-porownanie" aria-labelledby="audit-mobile-before-title">
+      <div class="audit-mobile-content">
+        <header>
+          <p class="eyebrow">Od diagnozy do konkretnej zmiany</p>
+          <h2 id="audit-mobile-before-title">Przed zmianą</h2>
+        </header>
+        <p>Strona biura rachunkowego ma pomóc małej firmie zrozumieć zakres obsługi i wysłać zapytanie. Ogólny nagłówek, zbity tekst i trzy równorzędne przyciski utrudniają decyzję.</p>
+        <figure class="audit-example-figure">
+          <img src="img/illustrations/audyt-biuro-przed.png" width="732" height="862" loading="lazy" alt="Pierwszy ekran biura rachunkowego z nagłówkiem „Witamy na naszej stronie” i trzema przyciskami o tej samej wadze.">
+        </figure>
       </div>
-
-      <div class="audit-report-context">
-        <div><span class="eyebrow">Przykładowy fragment audytu</span><h3>Strona biura rachunkowego</h3><p>Cel: pomóc właścicielowi małej firmy zrozumieć ofertę i wysłać zapytanie o obsługę.</p></div>
-        <p class="audit-report-label">Przykład demonstracyjny dla fikcyjnej firmy. W obu widokach zachowano tę samą nazwę, kolory i styl marki.</p>
+    </section>
+    <section class="view view--paired view--mobile audit-mobile-screen audit-mobile-example" id="audit-po-zmianie" aria-labelledby="audit-mobile-after-title">
+      <div class="audit-mobile-content">
+        <header>
+          <p class="eyebrow">Przykład fikcyjnego biura rachunkowego</p>
+          <h2 id="audit-mobile-after-title">Po zmianie</h2>
+        </header>
+        <p>Nagłówek wskazuje odbiorcę, krótszy opis ułatwia czytanie, a przycisk „Zapytaj o obsługę” prowadzi do formularza. Nazwa i styl marki pozostają te same.</p>
+        <figure class="audit-example-figure">
+          <img src="img/illustrations/audyt-biuro-po.png" width="732" height="862" loading="lazy" alt="Pierwszy ekran biura po zmianie. Oferta wskazuje małe firmy, a jeden wyróżniony przycisk zachęca do zapytania o obsługę.">
+        </figure>
+      </div>
+    </section>
+    <section class="view view--paired view--mobile audit-mobile-screen audit-mobile-recommendations" aria-labelledby="audit-mobile-findings-title">
+      <div class="audit-mobile-content">
+        <h2 id="audit-mobile-findings-title">Zalecenia po audycie</h2>
+        <ol class="audit-mobile-findings">
+          <li>
+            <h3><span>01</span> Komunikacja</h3>
+            <p>Wskaż, jakie firmy i formy działalności obsługujesz. Pokaż zakres i zasady współpracy.</p>
+          </li>
+          <li>
+            <h3><span>02</span> Typografia</h3>
+            <p>Zacznij od 16–18 px, interlinii ok. 1,5 i wierszy po 55–70 znaków. Sprawdź kontrast na telefonie.</p>
+          </li>
+          <li>
+            <h3><span>03</span> Interfejs</h3>
+            <p>Wyróżnij przycisk. Zadbaj o pole 44 × 44 px, odstępy i stany formularza.</p>
+          </li>
+          <li>
+            <h3><span>04</span> Ścieżka klienta</h3>
+            <p>Pokaż zakres, dowody zaufania i proces. Skróć formularz i potwierdź wysłanie.</p>
+          </li>
+          <li>
+            <h3><span>05</span> Zaufanie</h3>
+            <p>Dodaj obok oferty opinię klienta lub przykład podobnej współpracy.</p>
+          </li>
+          <li>
+            <h3><span>06</span> Warunki</h3>
+            <p>Wyjaśnij, od czego zależy cena i co klient powinien podać do wyceny.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+    <section class="view view--paired view--desktop subpage-view subpage-text-screen" id="audit-porownanie-desktop" aria-labelledby="audit-report-title">
+<section class="audit-examples audit-report subpage-panel" aria-labelledby="audit-report-title">
+      <div class="section-header audit-comparison-heading">
+        <div>
+          <p class="eyebrow">Od diagnozy do konkretnej zmiany</p>
+          <h2 id="audit-report-title">Przed i po audycie</h2>
+        </div>
+        <p class="section-intro">Audyt wskazuje, co utrudnia zrozumienie oferty i jak poprawić treść, typografię, interfejs i drogę do kontaktu w obecnym stylu marki.</p>
+        <div class="audit-report-context">
+          <h3>Strona biura rachunkowego</h3>
+          <p>Fikcyjny przykład. Cel to pomóc małej firmie zrozumieć usługi księgowe i wysłać zapytanie. W obu wersjach zachowano nazwę, kolory i styl marki.</p>
+        </div>
       </div>
 
       <div class="audit-preview-grid" aria-label="Porównanie przykładowego pierwszego ekranu strony">
@@ -210,51 +306,102 @@
         </figure>
       </div>
 
-      <div class="audit-findings" aria-label="Przykładowe zalecenia audytu">
+    </section>
+    </section>
+    <section class="view view--paired view--desktop subpage-view subpage-text-screen" id="audit-zalecenia" aria-labelledby="audit-findings-title">
+      <section class="subpage-panel audit-report">
+        <div class="section-header">
+          <p class="eyebrow">Przykładowy raport</p>
+          <h2 id="audit-findings-title">Zalecenia po audycie</h2>
+        </div>
+        <div class="audit-findings">
         <article class="audit-finding">
           <div class="audit-finding-meta"><span>01 / Komunikacja</span><span>Priorytet wysoki</span></div>
           <h3>Powiedz, dla kogo jest oferta</h3>
-          <p><strong>Diagnoza:</strong> „Witamy na naszej stronie” nie wyjaśnia, komu firma pomaga.</p>
-          <p><strong>Zmiana:</strong> wskazać małe firmy i rodzaje obsługiwanej działalności. Pod nagłówkiem opisać zakres wsparcia, a dalej zasady rozpoczęcia współpracy.</p>
-          <p class="audit-finding-purpose">Po co: klient może ocenić, czy oferta pasuje do jego sytuacji.</p>
+          <p>Klient może ocenić, czy oferta pasuje do jego sytuacji.</p>
+          <button class="screen-detail-button audit-finding-detail" type="button" data-screen-all data-screen-detail="audit-finding-1" data-screen-title="Powiedz, dla kogo jest oferta" aria-haspopup="dialog" aria-label="Zobacz zalecenie: Powiedz, dla kogo jest oferta">Zobacz zalecenie</button>
+          <div id="audit-finding-1" hidden>
+            <p><strong>Diagnoza:</strong> „Witamy na naszej stronie” nie wyjaśnia, komu firma pomaga.</p>
+            <p><strong>Zmiana:</strong> wskazać małe firmy i rodzaje obsługiwanej działalności. Pod nagłówkiem opisać zakres wsparcia, a dalej zasady rozpoczęcia współpracy.</p>
+          </div>
         </article>
         <article class="audit-finding">
           <div class="audit-finding-meta"><span>02 / Typografia</span><span>Priorytet wysoki</span></div>
           <h3>Ułatw skanowanie tekstu</h3>
-          <p><strong>Diagnoza:</strong> drobny tekst i podobna wielkość tytułów zacierają hierarchię informacji.</p>
-          <p><strong>Zmiana:</strong> zacząć od tekstu 16–18 px, interlinii około 1,5 i szerokości akapitu 55–70 znaków. Rozróżnić nagłówek główny, tytuły sekcji i opisy; sprawdzić kontrast oraz łamanie tekstu na telefonie.</p>
-          <p class="audit-finding-purpose">Po co: najważniejsze informacje są łatwiejsze do znalezienia i przeczytania.</p>
+          <p>Najważniejsze informacje są łatwiejsze do znalezienia i przeczytania.</p>
+          <button class="screen-detail-button audit-finding-detail" type="button" data-screen-all data-screen-detail="audit-finding-2" data-screen-title="Ułatw skanowanie tekstu" aria-haspopup="dialog" aria-label="Zobacz zalecenie: Ułatw skanowanie tekstu">Zobacz zalecenie</button>
+          <div id="audit-finding-2" hidden>
+            <p><strong>Diagnoza:</strong> drobny tekst i podobna wielkość tytułów zacierają hierarchię informacji.</p>
+            <p><strong>Zmiana:</strong> zacząć od tekstu 16–18 px, interlinii około 1,5 i szerokości akapitu 55–70 znaków. Rozróżnić nagłówek główny, tytuły sekcji i opisy; sprawdzić kontrast oraz łamanie tekstu na telefonie.</p>
+          </div>
         </article>
         <article class="audit-finding">
           <div class="audit-finding-meta"><span>03 / UI — interfejs</span><span>Priorytet średni</span></div>
           <h3>Wyróżnij główne działanie</h3>
-          <p><strong>Diagnoza:</strong> trzy podobne przyciski konkurują o uwagę; odstępy nie porządkują treści.</p>
-          <p><strong>Zmiana:</strong> wyróżnić „Zapytaj o obsługę” w istniejącej palecie marki, ujednolicić przyciski i odstępy. Na telefonie zapewnić wygodne pola dotykowe, np. 44 × 44 px, oraz czytelne stany fokusu, błędu i wysyłania.</p>
-          <p class="audit-finding-purpose">Po co: wiadomo, co można kliknąć i który krok jest najważniejszy.</p>
+          <p>Wiadomo, co można kliknąć i który krok jest najważniejszy.</p>
+          <button class="screen-detail-button audit-finding-detail" type="button" data-screen-all data-screen-detail="audit-finding-3" data-screen-title="Wyróżnij główne działanie" aria-haspopup="dialog" aria-label="Zobacz zalecenie: Wyróżnij główne działanie">Zobacz zalecenie</button>
+          <div id="audit-finding-3" hidden>
+            <p><strong>Diagnoza:</strong> trzy podobne przyciski konkurują o uwagę; odstępy nie porządkują treści.</p>
+            <p><strong>Zmiana:</strong> wyróżnić „Zapytaj o obsługę” w istniejącej palecie marki, ujednolicić przyciski i odstępy. Na telefonie zapewnić wygodne pola dotykowe, np. 44 × 44 px, oraz czytelne stany fokusu, błędu i wysyłania.</p>
+          </div>
         </article>
         <article class="audit-finding">
           <div class="audit-finding-meta"><span>04 / UX — ścieżka klienta</span><span>Priorytet wysoki</span></div>
           <h3>Skróć drogę do zapytania</h3>
-          <p><strong>Diagnoza:</strong> klient musi szukać kontaktu, zanim pozna zakres i sposób współpracy.</p>
-          <p><strong>Zmiana:</strong> uporządkować stronę: dla kogo → zakres → dowody zaufania → proces → kontakt. Ograniczyć wymagane pola do potrzebnych na start i pokazać potwierdzenie po wysłaniu.</p>
-          <p class="audit-finding-purpose">Po co: klient wie, o co pyta i co wydarzy się po zostawieniu kontaktu.</p>
+          <p>Klient wie, o co pyta i co wydarzy się po zostawieniu kontaktu.</p>
+          <button class="screen-detail-button audit-finding-detail" type="button" data-screen-all data-screen-detail="audit-finding-4" data-screen-title="Skróć drogę do zapytania" aria-haspopup="dialog" aria-label="Zobacz zalecenie: Skróć drogę do zapytania">Zobacz zalecenie</button>
+          <div id="audit-finding-4" hidden>
+            <p><strong>Diagnoza:</strong> klient musi szukać kontaktu, zanim pozna zakres i sposób współpracy.</p>
+            <p><strong>Zmiana:</strong> uporządkować stronę: dla kogo → zakres → dowody zaufania → proces → kontakt. Ograniczyć wymagane pola do potrzebnych na start i pokazać potwierdzenie po wysłaniu.</p>
+          </div>
+        </article>
+        <article class="audit-finding">
+          <div class="audit-finding-meta"><span>05 / Dowody zaufania</span><span>Priorytet średni</span></div>
+          <h3>Pokaż przykład obsługi podobnej firmy</h3>
+          <p>Odbiorca widzi, jak biuro pomaga firmom w podobnej sytuacji.</p>
+          <button class="screen-detail-button audit-finding-detail" type="button" data-screen-all data-screen-detail="audit-finding-5" data-screen-title="Pokaż przykład obsługi podobnej firmy" aria-haspopup="dialog" aria-label="Zobacz zalecenie: Pokaż przykład obsługi podobnej firmy">Zobacz zalecenie</button>
+          <div id="audit-finding-5" hidden>
+            <p><strong>Diagnoza:</strong> zapewnienia o jakości i doświadczeniu są ogólne.</p>
+            <p><strong>Zmiana:</strong> dodaj obok oferty przykład obsługi firmy z opisem jej potrzeb i zakresu pomocy. Jeśli masz zgodę klienta, możesz też przytoczyć jego opinię.</p>
+          </div>
+        </article>
+        <article class="audit-finding">
+          <div class="audit-finding-meta"><span>06 / Warunki i wycena</span><span>Priorytet średni</span></div>
+          <h3>Wyjaśnij, od czego zależy cena</h3>
+          <p>Klient wie, czego się spodziewać i z czym zgłosić się do biura.</p>
+          <button class="screen-detail-button audit-finding-detail" type="button" data-screen-all data-screen-detail="audit-finding-6" data-screen-title="Wyjaśnij, od czego zależy cena" aria-haspopup="dialog" aria-label="Zobacz zalecenie: Wyjaśnij, od czego zależy cena">Zobacz zalecenie</button>
+          <div id="audit-finding-6" hidden>
+            <p><strong>Diagnoza:</strong> klient nie wie, co obejmuje obsługa ani jakie informacje są potrzebne do wyceny.</p>
+            <p><strong>Zmiana:</strong> opisz zakres podstawowej obsługi i podaj czynniki wpływające na cenę, np. formę działalności, liczbę dokumentów i obsługę pracowników.</p>
+          </div>
         </article>
       </div>
 
-      <aside class="audit-visualization" aria-labelledby="audit-visualization-title">
-        <div>
-          <p class="eyebrow">Dodatkowo płatny projekt zmian</p>
-          <h3 id="audit-visualization-title">Chcesz zobaczyć, jak wdrożyć rekomendacje?</h3>
-          <p>Po audycie możemy dodatkowo zaprojektować wybrane fragmenty Twojej obecnej strony. Zakres i cenę ustalamy osobno.</p>
-          <p>Projekt pokazuje poprawiony układ, hierarchię treści i przyciski w obecnym stylu marki. Wdrożenie oraz zmianę identyfikacji uzgadniamy osobno.</p>
-          <p>To osobna usługa od bezpłatnej wizualizacji pierwszego ekranu.</p>
-        </div>
-        <a class="secondary-button" href="formularz-kontaktowy.html?service=audit&amp;source=%2Faudyt-komunikacji.html%23przykladowy-audyt">Porozmawiajmy o audycie</a>
-      </aside>
       <p class="audit-report-note">To przykładowe kierunki zmian. Konkretne parametry, priorytety i zakres rekomendacji dobieramy do Twojej strony.</p>
     </section>
-
-    <section class="pricing">
+    </section>
+    <section class="view view--paired view--mobile audit-mobile-screen audit-mobile-pricing" aria-labelledby="audit-mobile-price-title">
+      <div class="audit-mobile-content">
+        <header>
+          <p class="eyebrow">Cena audytu</p>
+          <h2 id="audit-mobile-price-title">499 zł brutto</h2>
+        </header>
+        <p>Analiza strony głównej, ocena komunikacji i struktury, lista problemów, rekomendacje i konsultacja.</p>
+        <aside class="audit-mobile-extra">
+          <h3>Dodatkowo płatny projekt zmian</h3>
+          <p>Po audycie możemy zaprojektować układ, hierarchię treści i przyciski w stylu marki. Projekt, wdrożenie i zmianę identyfikacji wyceniamy osobno.</p>
+          <p class="audit-mobile-note">To osobna usługa od bezpłatnej wizualizacji.</p>
+        </aside>
+        <div class="audit-mobile-price-cta">
+          <h3>Zobaczmy, gdzie Twoja strona traci uwagę klientów</h3>
+          <p>Sprawdź, czy Twoja strona pomaga klientom zrozumieć wartość Twojej firmy.</p>
+          <a class="primary-button" href="formularz-kontaktowy.html?service=audit&amp;source=%2Faudyt-komunikacji.html">Zamów audyt komunikacji</a>
+        </div>
+      </div>
+    </section>
+    <section class="view view--paired view--desktop subpage-view subpage-text-screen audit-desktop-price">
+<div class="view-panel-grid view-panel-grid--priority subpage-pair">
+<section class="pricing subpage-panel">
       <div class="section-header">
         <p class="eyebrow">Cena</p>
         <h2>Audyt komunikacji strony</h2>
@@ -262,16 +409,11 @@
 
       <div class="pricing-grid single-pricing">
         <article class="pricing-card featured">
-          <h3>Audyt komunikacji</h3>
-
-          <p class="price">499 zł brutto</p>
-          <p class="pricing-description">
-
-            Idealny pierwszy krok, jeśli nie wiesz,
-          
-            czy problemem jest strona, komunikacja czy oferta.
-          
-          </p>
+          <div class="audit-price-copy">
+            <h3>Audyt komunikacji</h3>
+            <p class="price">499 zł brutto</p>
+            <p class="pricing-description">Jeśli nie wiesz, gdzie leży problem, audyt pomoże ocenić stronę, komunikację i ofertę.</p>
+          </div>
           <ul class="pricing-list">
             <li>Analiza strony głównej</li>
             <li>Ocena komunikacji i struktury</li>
@@ -279,11 +421,20 @@
             <li>Rekomendacje zmian</li>
             <li>Konsultacja po audycie</li>
           </ul>
+          <button class="screen-detail-button audit-extra-detail" type="button" data-screen-all data-screen-detail="audit-desktop-extra" data-screen-title="Dodatkowo płatny projekt zmian" aria-haspopup="dialog">Dodatkowo płatny projekt zmian</button>
         </article>
       </div>
+      <aside id="audit-desktop-extra" hidden aria-labelledby="audit-visualization-title">
+        <div>
+          <h3 id="audit-visualization-title">Chcesz zobaczyć, jak wdrożyć rekomendacje?</h3>
+          <p>Po audycie możemy dodatkowo zaprojektować wybrane fragmenty Twojej obecnej strony. Zakres i cenę ustalamy osobno.</p>
+          <p>Projekt pokazuje poprawiony układ, hierarchię treści i przyciski w obecnym stylu marki. Wdrożenie oraz zmianę identyfikacji uzgadniamy osobno.</p>
+          <p>To osobna usługa od bezpłatnej wizualizacji pierwszego ekranu.</p>
+        </div>
+        <a class="secondary-button" href="formularz-kontaktowy.html?service=audit&amp;source=%2Faudyt-komunikacji.html%23przykladowy-audyt">Porozmawiajmy o audycie</a>
+      </aside>
     </section>
-
-    <section class="cta-section">
+<section class="cta-section subpage-panel">
       <div class="cta-content">
         <p class="eyebrow">Zacznijmy od diagnozy</p>
 
@@ -299,138 +450,45 @@
         </a>
       </div>
     </section>
-
+</div>
+    </section>
   </main>
 
   <footer class="site-footer">
-
-    <div class="footer-grid">
-
-        <div class="footer-brand">
-
-            <a href="index.html" class="footer-logo">
-                KAIROX
-            </a>
-
-            <p>
-                Strony internetowe jako narzędzie komunikacji marki.
-            </p>
-
-            <div class="footer-email">
-
-
+    <div class="view-footer-grid">
+      <div class="view view--paired" id="informacje">
+        <div class="view-panel-grid footer-layout">
+          <div class="view-inner footer-navigation">
+            <h2 class="footer-logo" id="footer-nav-title">KAIROX</h2>
+            <div class="footer-email footer-email-compact subpage-footer-email">
               <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
-
-
               <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
-
-
               <span class="copy-email-status" role="status" aria-live="polite"></span>
-
-
             </div>
-
-
-            <div class="footer-social">
-
-                <a
-                    href="https://www.facebook.com/profile.php?id=61591724616267"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Facebook
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/company/kairoxpl/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    LinkedIn
-                </a>
-
+            <nav class="view-options cooperation-preview-options" aria-labelledby="footer-nav-title">
+              <a href="audyt-komunikacji.html">Audyt</a><a href="metoda.html">Metoda Agent 0</a>
+              <a href="modele-wspolpracy.html">Modele współpracy</a><a href="partnerstwo.html">Partnerstwo</a>
+              <a href="realizacje.html">Realizacje</a><a href="artykuly.html">Artykuły</a>
+            </nav>
+          </div>
+          <div class="view-inner footer-privacy">
+            <h2>Informacje i prywatność</h2>
+            <div class="view-links">
+              <a href="polityka-prywatnosci.html">Polityka prywatności <span aria-hidden="true">↗</span></a>
+              <a href="polityka-cookies.html">Polityka cookies <span aria-hidden="true">↗</span></a>
+              <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+              <a class="view--mobile" href="#main-content">Wróć na początek <span aria-hidden="true">↑</span></a>
             </div>
-
+            <div class="footer-social footer-social--mobile view--mobile">
+              <a href="https://www.facebook.com/profile.php?id=61591724616267" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.linkedin.com/company/kairoxpl/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+          <p class="view-copyright">© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
         </div>
-
-        <nav class="footer-column">
-
-            <h3>Nawigacja</h3>
-
-            <a href="index.html">Start</a>
-            
-            <a href="audyt-komunikacji.html">Audyt</a>
-            <a href="metoda.html">Metoda Agent 0</a>
-            <a href="modele-wspolpracy.html">Modele współpracy</a>
-            <a href="partnerstwo.html">Partnerstwo</a>
-            <a href="artykuly.html">Artykuły</a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Usługi</h3>
-
-            <a href="audyt-komunikacji.html">
-                Audyt komunikacji
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Start
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Landing Page
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Komunikacyjna
-            </a>
-
-            <a href="partnerstwo.html">
-                Partnerstwo
-            </a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Informacje</h3>
-
-            <a href="polityka-prywatnosci.html">
-                Polityka prywatności
-            </a>
-
-            <a href="polityka-cookies.html">
-                Polityka cookies
-            </a>
-
-            <button
-            class="footer-privacy-button"
-            id="privacySettings"
-            type="button"
-          >
-            Ustawienia prywatności
-          </button>
-
-        </nav>
-
+      </div>
     </div>
-
-    <div class="footer-bottom">
-
-        <p>
-            © 2026 KAIROX. Wszystkie prawa zastrzeżone.
-        </p>
-
-        <p>
-            Projektujemy strony, które pomagają firmom
-            lepiej komunikować swoją wartość.
-        </p>
-
-    </div>
-
-</footer>
+  </footer>
   <div class="consent-banner"
   id="consentBanner"
   role="dialog"
@@ -477,7 +535,7 @@
   </div>
   </div>
   <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/main.js?v=ux-3"></script>
+  <script src="js/main.js?v=demo-banner-off-1"></script>
   <script src="js/chat-config.js"></script>
   <script src="js/chat.js?v=direct-chat-1"></script>
 </body>

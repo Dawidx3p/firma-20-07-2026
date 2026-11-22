@@ -1140,7 +1140,7 @@ article a:hover{
     font-size: clamp(2.25rem, 9vw, 2.9rem);
     line-height: 1;
   }
-  
+
   h2 {
     font-size: clamp(1.75rem, 7vw, 2.35rem);
     line-height: 1.05;
@@ -2799,8 +2799,7 @@ article a:hover{
   width: 74%;
   border-color: rgba(200, 225, 237, .32);
   background-image:
-    linear-gradient(90deg, rgba(4, 10, 14, .08), rgba(4, 10, 14, .16) 55%, rgba(2, 6, 9, .58)),
-    url("../img/projects/my-trip-world-earth.jpg");
+    linear-gradient(90deg, rgba(4, 10, 14, .08), rgba(4, 10, 14, .16) 55%, rgba(2, 6, 9, .58));
   background-size: auto 100%;
   background-position: 57% center;
   box-shadow:

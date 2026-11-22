@@ -40,4 +40,4 @@
  .work-decisions li{font-size:13px}
  .work-copy .work-link{margin-top:24px;min-height:48px;width:100%;padding-inline:16px}
 }
-.work-copy .work-link::after{content:none}
+:is(.work-copy,.portfolio-screen-page) .work-link::after{content:none}

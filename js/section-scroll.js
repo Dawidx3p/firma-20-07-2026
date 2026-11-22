@@ -1,129 +1,274 @@
 (() => {
   "use strict";
 
-  // Trackpad control can be toggled independently of native touch scrolling.
-  const TRACKPAD_CONTROL_ENABLED = true;
-  if (!TRACKPAD_CONTROL_ENABLED) return;
+  const panelSelector = ".home-screen-scroll main > .view, .home-screen-scroll .view-footer-grid > .view, .subpage-screen > footer.view, .subpage-configurator .pricing-mobile-view, .lp-offer-and-process .lp-stage";
+  let panels = [...document.querySelectorAll(panelSelector)];
+  const root = document.documentElement;
+  const controls = document.querySelector(".view-controls");
+  const previousButton = controls.querySelector('[data-view-step="-1"]');
+  const nextButton = controls.querySelector('[data-view-step="1"]');
+  const positionLabel = controls.querySelector(".view-position");
+  const subpage = document.body.classList.contains("subpage-screen");
+  const pageHeader = subpage && document.querySelector("body > header");
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  const transitionTime = 230;
+  const editable = 'input, textarea, select, [contenteditable="true"]';
+  const overlays = 'body.menu-open, .kx-chat-panel:not([hidden]), .consent-banner.is-visible, dialog[open]';
+  const wheelControls = 'textarea, select, input[type="number"], [contenteditable="true"]';
+  const swipeSurfaces = '.home-screen-scroll :is(main, .site-footer, footer.view)';
+  const wheelPause = 48;
+  const swipeThreshold = 14;
+  let wheelGesture = null;
+  let swipe = null;
+  let animationFrame = 0;
+  let destination = null;
+  let destinationIndex = null;
 
-  const sections = Array.from(document.querySelectorAll("main > section"));
-  if (sections.length < 2) return;
-
-  // Trackpad input stays free inside a section. A deliberate gesture can cover
-  // at most one boundary; the remaining inertial events belong to that gesture.
-  const SNAP_DISTANCE = 80;
-  const SCROLL_SPEED = 1;
-  const STRONG_DELTA = 48;
-  const STRONG_DISTANCE = 140;
-  const SAMPLE_WINDOW = 120;
-  const GESTURE_PAUSE = 120;
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const nativeTouchScroll = window.matchMedia("(hover: none) and (pointer: coarse)");
-  let gesture = null;
-  let timer;
-
-  function reset() {
-    clearTimeout(timer);
-    gesture = null;
+  function blocked(target, controls = editable) {
+    return document.querySelector(overlays) ||
+      (target instanceof Element && target.closest(controls));
   }
 
-  function leaveNative(event) {
-    return nativeTouchScroll.matches || blockedScroll(event.target);
+  function getMaxScroll() {
+    return root.scrollHeight - root.clientHeight;
   }
 
-  function blockedScroll(target) {
-    if (reducedMotion.matches || document.querySelector(
-      'body.menu-open, .kx-chat-panel:not([hidden]), .consent-banner.is-visible, ' +
-      'input:focus, textarea:focus, select:focus, [contenteditable="true"]:focus'
-    )) return true;
-    for (let node = target; node instanceof Element && node !== document.body; node = node.parentElement) {
-      if (node.matches('input, textarea, select, [contenteditable="true"]') ||
-          (node.scrollHeight > node.clientHeight + 1 && /auto|scroll/.test(getComputedStyle(node).overflowY))) return true;
-    }
-    return false;
+  function cancelTransition() {
+    cancelAnimationFrame(animationFrame);
+    animationFrame = 0;
+    destination = null;
+    destinationIndex = null;
+    root.removeAttribute("data-view-transition");
   }
 
-  function nextBoundary(y, direction) {
-    const scrollport = getComputedStyle(document.documentElement);
-    const padding = parseFloat(scrollport.scrollPaddingTop) || 0;
-    const bottomPadding = parseFloat(scrollport.scrollPaddingBottom) || 0;
-    const visibleBottom = window.innerHeight - bottomPadding;
-    const boxes = sections.map(section => {
-      const box = section.getBoundingClientRect();
-      return { top: Math.max(0, box.top + y - padding), bottom: box.bottom + y };
-    });
-    let index = boxes.findLastIndex(box => box.top <= y + 1);
-    if (y + padding >= boxes[boxes.length - 1].bottom) index = boxes.length;
-    if (direction > 0) return boxes[index + 1]?.top ?? null;
-    // Enter the END of a long previous section when moving upward.
-    const previous = boxes[index - 1];
-    return previous ? Math.max(previous.top, previous.bottom - visibleBottom) : null;
+  function jumpTo(top) {
+    cancelTransition();
+    window.scrollTo({ top, behavior: "instant" });
   }
 
-  function onWheel(event) {
-    // Preserve pinch zoom, horizontal gestures, nested scrolling and controls.
-    if (event.defaultPrevented || !event.cancelable || event.ctrlKey ||
-        Math.abs(event.deltaX) > Math.abs(event.deltaY) || leaveNative(event)) {
-      reset();
+  function animateTo(top, index) {
+    if (reducedMotion.matches) {
+      jumpTo(top);
       return;
     }
-    const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerHeight : 1);
-    if (!delta) return;
-    const movement = delta * SCROLL_SPEED;
 
-    // Cancel from the FIRST event, not after native momentum has already begun.
-    event.preventDefault();
-    const direction = Math.sign(delta);
-    const now = performance.now();
-    const magnitude = Math.abs(delta);
-    if (gesture?.snapped) {
-      const landed = Math.abs(window.scrollY - gesture.target) <= 1;
-      // Momentum decays. A fresh acceleration or a brief break after landing
-      // is new input, and must work immediately instead of extending a lock.
-      const freshInput = now - gesture.lastTime >= 60 ||
-        (magnitude >= 8 && magnitude > gesture.lastDelta * 1.5);
-      if (landed && freshInput) gesture = null;
-    }
-    if (!gesture || gesture.direction !== direction) {
-      gesture = { direction, samples: [], snapped: false };
-    }
-    gesture.lastTime = now;
-    gesture.lastDelta = magnitude;
-    clearTimeout(timer);
-    timer = setTimeout(reset, GESTURE_PAUSE);
+    cancelTransition();
+    destination = top;
+    destinationIndex = index;
+    root.setAttribute("data-view-transition", "");
+    const start = window.scrollY;
+    const startedAt = performance.now();
 
-    if (gesture.snapped) return;
-    gesture.samples = gesture.samples.filter(sample => now - sample.time <= SAMPLE_WINDOW);
-    gesture.samples.push({ time: now, distance: Math.abs(delta) });
-    const travel = gesture.samples.reduce((sum, sample) => sum + sample.distance, 0);
-    const duration = Math.max(16, now - gesture.samples[0].time);
-    const strong = Math.abs(delta) >= STRONG_DELTA || travel >= STRONG_DISTANCE ||
-      (travel >= 64 && travel / duration >= 1);
+    function draw(now) {
+      const progress = Math.min(1, (now - startedAt) / transitionTime);
+      const eased = 1 - (1 - progress) ** 3;
+      window.scrollTo({ top: start + (top - start) * eased, behavior: "instant" });
 
-    const y = window.scrollY;
-    const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-    const boundary = nextBoundary(y, direction);
-    if (strong && boundary !== null) {
-      const target = Math.min(boundary, maxY);
-      const distance = (target - y) * direction;
-      if (distance > 1 && distance <= Math.abs(movement) + SNAP_DISTANCE) {
-        gesture.snapped = true;
-        gesture.target = target;
-        window.scrollTo({ top: target, behavior: "smooth" });
-        return;
+      if (progress < 1) {
+        animationFrame = requestAnimationFrame(draw);
+      } else {
+        cancelTransition();
       }
     }
 
-    // Small movements stay exactly where the reader leaves them, including
-    // just below a section heading. There is no scrollend correction/back-snap.
-    window.scrollTo({ top: Math.max(0, Math.min(maxY, y + movement)), behavior: "instant" });
+    animationFrame = requestAnimationFrame(draw);
   }
 
-  window.addEventListener("wheel", onWheel, { passive: false, capture: true });
-  window.addEventListener("hashchange", reset);
-  window.addEventListener("resize", reset);
-  window.addEventListener("pointerdown", reset, { passive: true });
-  window.addEventListener("touchstart", reset, { passive: true });
-  window.addEventListener("keydown", reset);
-  document.addEventListener("visibilitychange", reset);
-  reducedMotion.addEventListener("change", reset);
+  function getContinuationStops(panel, box, start, y, max, headerHeight) {
+    const clearance = parseFloat(getComputedStyle(panel).paddingBottom) || 0;
+    const pageDistance = Math.max(120, root.clientHeight - headerHeight - clearance - 12);
+    const bottom = Math.min(max, Math.round(box.bottom + y - root.clientHeight));
+    if (bottom <= start + 6) return [];
+
+    const landmarks = [...panel.querySelectorAll("h2, h3, h4, article, p, li, details, figure, .pricing-service")]
+      .filter(element => element.getClientRects().length)
+      .map(element => Math.round(element.getBoundingClientRect().top + y - headerHeight - 6))
+      .sort((a, b) => a - b);
+    const stops = [];
+    let current = start;
+
+    // Prefer a natural boundary near the bottom edge. Long single blocks
+    // advance by the available height so text and controls stay reachable.
+    while (bottom - current > pageDistance) {
+      const closest = landmarks.findLast(point => point <= current + pageDistance);
+      current = closest >= current + pageDistance * .6 ? closest : current + pageDistance;
+      stops.push(current);
+    }
+    if (bottom > current + 6) stops.push(bottom);
+    return stops;
+  }
+
+  function getStops() {
+    const y = window.scrollY;
+    const padding = parseFloat(getComputedStyle(root).scrollPaddingTop) || 0;
+    const max = getMaxScroll();
+    const visiblePanels = panels.filter(panel =>
+      panel.getClientRects().length && getComputedStyle(panel).scrollSnapAlign !== "none"
+    );
+    const stops = visiblePanels.flatMap(panel => {
+      const box = panel.getBoundingClientRect();
+      const start = Math.round(Math.max(0, Math.min(max, box.top + y - padding)));
+      const continuations = subpage ? getContinuationStops(panel, box, start, y, max, padding) : [];
+      return [start, ...continuations];
+    });
+    return [...new Set(stops)];
+  }
+
+  function updateControls(stops = getStops()) {
+    const from = destination ?? window.scrollY;
+    const index = Math.max(0, stops.findLastIndex(stop => stop <= from + 2));
+    const text = `${index + 1} / ${stops.length}`;
+    if (positionLabel.textContent !== text) positionLabel.textContent = text;
+    previousButton.setAttribute("aria-disabled", String(index === 0));
+    nextButton.setAttribute("aria-disabled", String(index >= stops.length - 1));
+  }
+
+  function move(direction) {
+    const stops = getStops();
+    const index = destinationIndex !== null
+      ? destinationIndex + direction
+      : direction > 0
+        ? stops.findIndex(stop => stop > window.scrollY + 2)
+        : stops.findLastIndex(stop => stop < window.scrollY - 2);
+    if (stops[index] !== undefined) {
+      animateTo(stops[index], index);
+      updateControls(stops);
+    }
+  }
+
+  function syncLayout() {
+    const stops = getStops();
+    if (destinationIndex !== null && stops.length) {
+      const index = Math.min(destinationIndex, stops.length - 1);
+      if (destination !== stops[index]) animateTo(stops[index], index);
+    }
+    updateControls(stops);
+  }
+
+  if (pageHeader) {
+    const syncHeaderHeight = () => {
+      root.style.setProperty("--screen-header", `${Math.round(pageHeader.getBoundingClientRect().height)}px`);
+      syncLayout();
+    };
+    syncHeaderHeight();
+    new ResizeObserver(syncHeaderHeight).observe(pageHeader);
+  }
+  if (subpage) {
+    const panelObserver = new ResizeObserver(syncLayout);
+    const syncPanels = () => {
+      panelObserver.disconnect();
+      panels = [...document.querySelectorAll(panelSelector)];
+      for (const panel of panels) {
+        if (getComputedStyle(panel).display !== "contents") panelObserver.observe(panel);
+      }
+      syncLayout();
+    };
+    document.addEventListener("kairox:views-changed", syncPanels);
+    syncPanels();
+  }
+
+  controls.hidden = false;
+  for (const button of [previousButton, nextButton]) {
+    button.addEventListener("click", () => {
+      if (button.getAttribute("aria-disabled") !== "true") move(Number(button.dataset.viewStep));
+    });
+  }
+  updateControls();
+
+  window.addEventListener("wheel", event => {
+    const mode = event.deltaMode;
+    if (event.defaultPrevented || event.ctrlKey || event.shiftKey || !event.deltaY ||
+        Math.abs(event.deltaX) > Math.abs(event.deltaY) || blocked(event.target, wheelControls)) return;
+    event.preventDefault();
+
+    const time = event.timeStamp;
+    const direction = Math.sign(event.deltaY);
+    const magnitude = Math.abs(event.deltaY) * (mode === 1 ? 16 : mode === 2 ? root.clientHeight : 1);
+    // Advance only on a fresh gesture, even while a previous transition is still animating.
+    const previous = wheelGesture;
+    const gap = time - (previous?.time ?? time);
+    const paused = gap >= wheelPause &&
+      (!previous.fading || magnitude > previous.magnitude || gap >= 3 * wheelPause);
+    // A new stroke can start before the previous stroke's tail has fully decayed.
+    const rebound = previous?.falling && gap >= 24 &&
+      magnitude >= Math.max(2, previous.magnitude * 1.25);
+    const begins = !previous || paused ||
+      (direction !== previous.direction
+        ? magnitude >= 1.5
+        : rebound || (previous.fading && magnitude >= Math.max(1, previous.magnitude * 1.6 + .25)));
+
+    if (begins) {
+      wheelGesture = { time, direction, magnitude, peak: magnitude, falling: false, fading: false };
+      move(direction);
+      return;
+    }
+
+    previous.time = time;
+    if (direction !== previous.direction) return;
+    previous.peak = Math.max(previous.peak, magnitude);
+    previous.falling = magnitude < previous.magnitude;
+    previous.fading = magnitude < previous.peak * .4;
+    previous.magnitude = magnitude;
+  }, { passive: false, capture: true });
+
+  window.addEventListener("touchstart", event => {
+    swipe = null;
+    if (event.touches.length !== 1 || blocked(event.target) ||
+        !(event.target instanceof Element && event.target.closest(swipeSurfaces))) return;
+    const finger = event.touches[0];
+    swipe = { id: finger.identifier, x: finger.clientX, y: finger.clientY, moved: false };
+  }, { passive: true, capture: true });
+
+  function acceptSwipe(finger, event) {
+    if (!swipe || !finger || finger.identifier !== swipe.id || blocked(event.target)) return;
+    if (swipe.moved) {
+      if (event.cancelable) event.preventDefault();
+      return;
+    }
+    const x = finger.clientX - swipe.x;
+    const y = swipe.y - finger.clientY;
+    if (Math.abs(y) < swipeThreshold || Math.abs(y) <= Math.abs(x)) return;
+    if (event.cancelable) event.preventDefault();
+    swipe.moved = true;
+    move(Math.sign(y));
+  }
+
+  window.addEventListener("touchmove", event => {
+    if (event.touches.length === 1) acceptSwipe(event.touches[0], event);
+  }, { passive: false, capture: true });
+  window.addEventListener("touchend", event => {
+    if (!swipe || event.touches.length) return;
+    const finger = Array.from(event.changedTouches).find(touch => touch.identifier === swipe.id);
+    acceptSwipe(finger, event);
+    swipe = null;
+  }, { passive: false, capture: true });
+  window.addEventListener("touchcancel", () => { swipe = null; }, { passive: true, capture: true });
+
+  window.addEventListener("keydown", event => {
+    if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || blocked(event.target)) return;
+    if (event.key === "Home" || event.key === "End") {
+      event.preventDefault();
+      jumpTo(event.key === "Home" ? 0 : getMaxScroll());
+      updateControls();
+      return;
+    }
+    const space = event.key === " " && !(event.target instanceof Element && event.target.closest("button, a, summary"));
+    const forward = ["ArrowDown", "PageDown"].includes(event.key) || space && !event.shiftKey;
+    const backward = ["ArrowUp", "PageUp"].includes(event.key) || space && event.shiftKey;
+    if (!forward && !backward) return;
+    event.preventDefault();
+    move(forward ? 1 : -1);
+  });
+
+  window.addEventListener("resize", syncLayout);
+  window.addEventListener("hashchange", () => {
+    wheelGesture = null;
+    cancelTransition();
+    updateControls();
+  });
+  window.addEventListener("scrollend", () => {
+    if (!animationFrame) updateControls();
+  });
+  window.addEventListener("pageshow", () => { updateControls(); });
+  window.addEventListener("pointerdown", () => { wheelGesture = null; });
 })();

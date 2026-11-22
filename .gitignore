@@ -8,3 +8,6 @@
 # Only the public redirect is allowed here; edition files stay private.
 /printer/*
 !/printer/index.html
+
+# Local previews only
+/demo/

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+  <meta name="robots" content="noindex,follow">
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
 
@@ -10,27 +12,26 @@
     name="description"
     content="Nie udało się znaleźć wybranej strony. Wróć na stronę główną KAIROX lub przejdź do najważniejszych sekcji serwisu."
   />
+<link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/180na180.png" />
+  <link rel="stylesheet" href="/css/style.css?v=ui-1" />
+  <link rel="preload" href="/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/typography.css?v=1">
+  <link rel="stylesheet" href="/css/site-refinements.css?v=ux-1">
 
-  <meta name="robots" content="noindex, follow" />
-
-  <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
-  <link rel="apple-touch-icon" href="img/180na180.png" />
-  <link rel="stylesheet" href="css/style.css?v=ui-1" />
-  <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/typography.css?v=1">
-  <link rel="stylesheet" href="css/section-scroll.css?v=10">
-  <script src="js/section-motion.js?v=5" defer></script>
-  <script src="js/section-scroll.js?v=14" defer></script>
-  <link rel="stylesheet" href="css/site-refinements.css?v=ux-1">
+  <link rel="stylesheet" href="/css/section-scroll.css?v=desktop-fit-1">
+  <link rel="stylesheet" href="/css/subpage-views.css?v=desktop-fit-1">
+  <script src="/js/section-scroll.js?v=desktop-fit-1" defer></script>
+  <script src="/js/subpage-mobile.js?v=desktop-fit-1" defer></script>
 </head>
 
-<body class="error-page">
+<body class="error-page home-screen-scroll subpage-screen">
 
   <header class="site-header">
     <nav class="navbar" aria-label="Główna nawigacja">
 
       <a
-        href="index.html"
+        href="/index.html"
         class="logo"
         aria-label="KAIROX — strona główna"
       >
@@ -49,25 +50,31 @@
       </button>
 
       <ul class="nav-list">
-        <li><a href="index.html">Strona główna</a></li>
-        <li><a href="modele-wspolpracy.html">Modele współpracy</a></li>
-        <li><a href="audyt-komunikacji.html">Audyt</a></li>
-        <li><a href="metoda.html">Metoda</a></li>
-        <li><a href="realizacje.html">Realizacje</a></li>
-        <li><a href="artykuly.html">Artykuły</a></li>
-        <li class="nav-contact-link"><a href="formularz-kontaktowy.html">Porozmawiajmy</a></li>
+        <li><a href="/index.html">Strona główna</a></li>
+        <li><a href="/modele-wspolpracy.html">Modele współpracy</a></li>
+        <li><a href="/audyt-komunikacji.html">Audyt</a></li>
+        <li><a href="/metoda.html">Metoda</a></li>
+        <li><a href="/realizacje.html">Realizacje</a></li>
+        <li><a href="/artykuly.html">Artykuły</a></li>
+        <li class="nav-contact-link"><a href="/formularz-kontaktowy.html">Porozmawiajmy</a></li>
       </ul>
 
-      <a class="nav-cta" href="formularz-kontaktowy.html">
+      <a class="nav-cta" href="/formularz-kontaktowy.html">
           Porozmawiajmy
         </a>
 
     </nav>
   </header>
 
-  <main class="error-main">
 
-    <section class="error-section">
+<div class="view-controls" role="group" aria-label="Przełącz ekrany strony" hidden>
+    <button type="button" data-view-step="-1" aria-label="Poprzedni ekran" aria-disabled="true">↑</button>
+    <output class="view-position" aria-live="polite"></output>
+    <button type="button" data-view-step="1" aria-label="Następny ekran">↓</button>
+  </div>
+<main id="main-content">
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="error-section subpage-panel">
 
       <div class="error-content">
 
@@ -90,11 +97,11 @@
         </p>
 
         <div class="hero-actions">
-          <a href="index.html" class="primary-button">
+          <a href="/index.html" class="primary-button">
             Wróć na stronę główną
           </a>
 
-          <a href="artykuly.html" class="secondary-button">
+          <a href="/artykuly.html" class="secondary-button">
             Przejdź do artykułów
           </a>
         </div>
@@ -115,8 +122,9 @@
       </div>
 
     </section>
-
-    <section class="error-links">
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen">
+<section class="error-links subpage-panel">
       <div class="section-header">
         <p class="eyebrow">Możesz przejść tutaj</p>
 
@@ -132,7 +140,7 @@
             Sprawdź, czy Twoja strona jasno pokazuje wartość firmy
             i prowadzi użytkownika do działania.
           </p>
-          <a href="audyt-komunikacji.html">
+          <a href="/audyt-komunikacji.html">
             Zobacz audyt →
           </a>
         </article>
@@ -144,7 +152,7 @@
             Poznaj proces KAIROX: od strategii i komunikacji
             po design oraz wdrożenie.
           </p>
-          <a href="metoda.html">
+          <a href="/metoda.html">
             Poznaj metodę →
           </a>
         </article>
@@ -156,145 +164,51 @@
             Zobacz dostępne zakresy współpracy i wybierz rozwiązanie
             dopasowane do sytuacji Twojej firmy.
           </p>
-          <a href="modele-wspolpracy.html">
+          <a href="/modele-wspolpracy.html">
             Zobacz modele →
           </a>
         </article>
 
       </div>
     </section>
-
+    </section>
   </main>
 
   <footer class="site-footer">
-
-    <div class="footer-grid">
-
-        <div class="footer-brand">
-
-            <a href="index.html" class="footer-logo">
-                KAIROX
-            </a>
-
-            <p>
-                Strony internetowe jako narzędzie komunikacji marki.
-            </p>
-
-            <div class="footer-email">
-
-
+    <div class="view-footer-grid">
+      <div class="view view--paired" id="informacje">
+        <div class="view-panel-grid footer-layout">
+          <div class="view-inner footer-navigation">
+            <h2 class="footer-logo" id="footer-nav-title">KAIROX</h2>
+            <div class="footer-email footer-email-compact subpage-footer-email">
               <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
-
-
               <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
-
-
               <span class="copy-email-status" role="status" aria-live="polite"></span>
-
-
             </div>
-
-
-            <div class="footer-social">
-
-                <a
-                    href="https://www.facebook.com/profile.php?id=61591724616267"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Facebook
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/company/kairoxpl/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    LinkedIn
-                </a>
-
+            <nav class="view-options cooperation-preview-options" aria-labelledby="footer-nav-title">
+              <a href="/audyt-komunikacji.html">Audyt</a><a href="/metoda.html">Metoda Agent 0</a>
+              <a href="/modele-wspolpracy.html">Modele współpracy</a><a href="/partnerstwo.html">Partnerstwo</a>
+              <a href="/realizacje.html">Realizacje</a><a href="/artykuly.html">Artykuły</a>
+            </nav>
+          </div>
+          <div class="view-inner footer-privacy">
+            <h2>Informacje i prywatność</h2>
+            <div class="view-links">
+              <a href="/polityka-prywatnosci.html">Polityka prywatności <span aria-hidden="true">↗</span></a>
+              <a href="/polityka-cookies.html">Polityka cookies <span aria-hidden="true">↗</span></a>
+              <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+              <a class="view--mobile" href="#main-content">Wróć na początek <span aria-hidden="true">↑</span></a>
             </div>
-
+            <div class="footer-social footer-social--mobile view--mobile">
+              <a href="https://www.facebook.com/profile.php?id=61591724616267" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.linkedin.com/company/kairoxpl/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+          <p class="view-copyright">© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
         </div>
-
-        <nav class="footer-column">
-
-            <h3>Nawigacja</h3>
-
-            <a href="index.html">Start</a>
-            
-            <a href="audyt-komunikacji.html">Audyt</a>
-            <a href="metoda.html">Metoda Agent 0</a>
-            <a href="modele-wspolpracy.html">Modele współpracy</a>
-            <a href="partnerstwo.html">Partnerstwo</a>
-            <a href="artykuly.html">Artykuły</a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Usługi</h3>
-
-            <a href="audyt-komunikacji.html">
-                Audyt komunikacji
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Start
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Landing Page
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Komunikacyjna
-            </a>
-
-            <a href="partnerstwo.html">
-                Partnerstwo
-            </a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Informacje</h3>
-
-            <a href="polityka-prywatnosci.html">
-                Polityka prywatności
-            </a>
-
-            <a href="polityka-cookies.html">
-                Polityka cookies
-            </a>
-
-            <button
-            class="footer-privacy-button"
-            id="privacySettings"
-            type="button"
-          >
-            Ustawienia prywatności
-          </button>
-
-        </nav>
-
+      </div>
     </div>
-
-    <div class="footer-bottom">
-
-        <p>
-            © 2026 KAIROX. Wszystkie prawa zastrzeżone.
-        </p>
-
-        <p>
-            Projektujemy strony, które pomagają firmom
-            lepiej komunikować swoją wartość.
-        </p>
-
-    </div>
-
-</footer>
+  </footer>
   <div class="consent-banner"
   id="consentBanner"
   role="dialog"
@@ -340,9 +254,9 @@
     </div>
   </div>
   </div>
-  <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/main.js?v=ux-3"></script>
-  <script src="js/chat-config.js"></script>
-  <script src="js/chat.js?v=direct-chat-1"></script>
+  <script src="/js/consent.js?v=audit-2"></script>
+  <script src="/js/main.js?v=demo-banner-off-1"></script>
+  <script src="/js/chat-config.js"></script>
+  <script src="/js/chat.js?v=direct-chat-1"></script>
 </body>
 </html>

@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
   <meta property="og:type" content="website">
 
   <meta property="og:title"
         content="Partnerstwo KAIROX — stała pomoc przy zmianach na stronie">
-  
+
   <meta property="og:description"
         content="Nowa usługa, kampania lub zmiana oferty? Pomagamy przygotować treść, zaprojektować i wdrożyć zmiany na Twojej stronie.">
-  
+
   <meta property="og:url"
   content="https://kairox.pl/partnerstwo.html">
-  
+
   <meta property="og:image" content="https://kairox.pl/img/kairox-share-1200x400-glow.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="400">
   <meta property="og:image:alt" content="KAIROX. Pomagamy firmom lepiej komunikować swoją wartość.">
-  
-  
+
+
   <meta property="og:site_name" content="KAIROX">
-  
+
   <meta name="twitter:card" content="summary_large_image">
   <meta
     name="description"
@@ -36,14 +37,17 @@
   <link rel="stylesheet" href="css/comic.css?v=1">
   <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/typography.css?v=1">
-  <link rel="stylesheet" href="css/section-scroll.css?v=10">
-  <script src="js/section-motion.js?v=5" defer></script>
-  <script src="js/section-scroll.js?v=14" defer></script>
-  <link rel="stylesheet" href="css/partnership.css?v=1">
+  <link rel="stylesheet" href="css/partnership.css?v=2">
   <link rel="stylesheet" href="css/site-refinements.css?v=ux-1">
+
+  <link rel="stylesheet" href="css/section-scroll.css?v=desktop-fit-1">
+  <link rel="stylesheet" href="css/subpage-views.css?v=desktop-fit-1">
+  <script src="js/section-scroll.js?v=desktop-fit-1" defer></script>
+  <script src="js/subpage-mobile.js?v=desktop-fit-1" defer></script>
+  <link rel="stylesheet" href="css/mobile-illustrations.css?v=4">
 </head>
 
-<body class="partnership-page">
+<body class="partnership-page home-screen-scroll subpage-screen">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
 
   <header class="site-header">
@@ -59,7 +63,7 @@
       <ul class="nav-list">
         <li><a href="index.html">Strona główna</a></li>
         <li><a href="modele-wspolpracy.html">Modele Współpracy</a></li>
-        
+
         <li><a href="audyt-komunikacji.html">Audyt</a></li>
         <li><a href="metoda.html">Metoda</a></li>
         <li><a href="partnerstwo.html" class="active" aria-current="page">Partnerstwo</a></li>
@@ -74,30 +78,31 @@
     </nav>
   </header>
 
-  <main id="main-content">
-    <section class="comic-block hero page-hero comic-block--hero" aria-labelledby="comic-hero-title">
-      <div class="comic-copy">
-        <p class="eyebrow">Partnerstwo KAIROX</p>
-        <h1 id="comic-hero-title">Twoja firma się zmienia. Strona też powinna.</h1>
-        <p class="comic-description">Dodajesz usługę, przygotowujesz kampanię albo zmieniasz ofertę? Pomagamy przygotować treść, zaprojektować i wdrożyć zmiany na Twojej stronie.</p>
-        <p class="partner-hero-meta">999 zł brutto / miesiąc <span>·</span> do 8 godzin pracy</p>
-        <div class="comic-actions">
-          <a class="primary-button" href="formularz-kontaktowy.html?service=partnership&amp;source=%2Fpartnerstwo.html">Porozmawiajmy o współpracy</a>
-          <a class="secondary-button" href="#pakiet-partnerstwa">Zobacz pakiet i zasady</a>
-        </div>
-      </div>
-      <figure class="comic-visual">
-        <img src="img/illustrations/kairox-06-partnerstwo.webp"
+
+<div class="view-controls" role="group" aria-label="Przełącz ekrany strony" hidden>
+    <button type="button" data-view-step="-1" aria-label="Poprzedni ekran" aria-disabled="true">↑</button>
+    <output class="view-position" aria-live="polite"></output>
+    <button type="button" data-view-step="1" aria-label="Następny ekran">↓</button>
+  </div>
+<main id="main-content">
+    <section class="view view--paired subpage-view subpage-hero" aria-labelledby="comic-hero-title">
+<div class="view-inner split-layout subpage-hero-layout">
+      <div class="split-heading"><p class="eyebrow">Partnerstwo KAIROX</p><h1 id="comic-hero-title">Twoja firma się zmienia. Strona też powinna.</h1></div>
+      <div class="split-body"><p class="comic-description">Dodajesz usługę, przygotowujesz kampanię albo zmieniasz ofertę? Pomagamy przygotować treść, zaprojektować i wdrożyć zmiany na Twojej stronie.</p><p class="partner-hero-meta">999 zł brutto / miesiąc <span>·</span> do 8 godzin pracy</p></div>
+      <figure class="view-media split-media mobile-illustration"><img src="img/illustrations/kairox-06-partnerstwo.webp"
           srcset="img/illustrations/kairox-06-partnerstwo-768.webp 768w, img/illustrations/kairox-06-partnerstwo.webp 1536w"
           sizes="(max-width: 760px) calc(100vw - 36px), (max-width: 980px) calc(100vw - 48px), 650px"
           width="1536" height="1024" alt="Klientka i projektant planują nową sekcję, landing page i rozwój treści działającej strony. Dymek: „Rozwijajmy to dalej”."
-          loading="eager" decoding="async" fetchpriority="high">
-      </figure>
+          loading="eager" fetchpriority="high"></figure>
+      <div class="split-actions subpage-hero-actions"><div class="comic-actions">
+          <a class="primary-button" href="formularz-kontaktowy.html?service=partnership&amp;source=%2Fpartnerstwo.html">Porozmawiajmy o współpracy</a>
+          <a class="secondary-button" href="#pakiet-partnerstwa">Zobacz pakiet i zasady</a>
+        </div></div>
+    </div>
     </section>
-
-
-    <section class="partner-section" id="partnership-scope" aria-labelledby="partner-scope-title">
-      <div class="partner-section-heading">
+    <section class="view view--paired subpage-view subpage-text-screen">
+<div class="view-panel-grid view-panel-grid--priority subpage-pair">
+<section class="subpage-panel partner-section" id="partnership-scope" aria-labelledby="partner-scope-title"><div class="partner-section-heading">
         <p class="eyebrow">Dla kogo jest partnerstwo</p>
         <h2 id="partner-scope-title">Jedna współpraca. Bieżące zmiany na stronie.</h2>
         <p>Regularnie zmieniasz ofertę, prowadzisz kampanie lub rozwijasz stronę? Masz jeden kontakt do treści, projektu i wdrożenia. Przy kolejnych zadaniach korzystamy z tego, co już wiemy o Twojej firmie.</p>
@@ -118,8 +123,8 @@
           <h3>Prostsza droga do zapytania</h3>
           <p>Poprawiamy układ, przyciski i formularze — również pod kątem wygody na telefonie.</p>
         </article>
-      </div>
-      <div class="partner-workflow">
+      </div></section>
+<div class="partner-workflow subpage-panel">
         <h3>Jak pracujemy?</h3>
         <ol>
           <li><span>01</span><div><strong>Ustalamy priorytety</strong><p>Poznajemy potrzeby i planujemy zadania na miesiąc.</p></div></li>
@@ -127,9 +132,10 @@
           <li><span>03</span><div><strong>Pokazujemy postęp</strong><p>Widzisz wykonane zadania, wykorzystany czas i pozostały limit.</p></div></li>
         </ol>
       </div>
+</div>
     </section>
-
-    <section class="partner-section partner-offer" id="pakiet-partnerstwa" aria-labelledby="partner-offer-title">
+    <section class="view view--paired subpage-view subpage-text-screen" id="pakiet-partnerstwa" aria-labelledby="partner-offer-title">
+<section class="partner-section partner-offer subpage-panel">
       <div class="partner-section-heading">
         <p class="eyebrow">Cena i zasady</p>
         <h2 id="partner-offer-title">Wiesz, za co płacisz.</h2>
@@ -179,146 +185,65 @@
         </div>
       </div>
     </section>
-
-    <section class="partner-section partner-contact" aria-labelledby="partner-contact-title">
-      <div>
-        <p class="eyebrow">Następny krok</p>
-        <h2 id="partner-contact-title">Opowiedz, co chcesz zmienić.</h2>
-        <p>Napisz, jakie prace planujesz i jak często potrzebujesz pomocy. Wspólnie ocenimy, czy partnerstwo pasuje do Twojej firmy.</p>
+    </section>
+    <section class="view view--paired subpage-view subpage-text-screen" id="nastepny-krok" aria-labelledby="partner-contact-title">
+      <div class="view-inner split-layout split-layout--reverse subpage-hero-layout">
+        <div class="split-heading">
+          <p class="eyebrow">Następny krok</p>
+          <h2 id="partner-contact-title">Opowiedz, co chcesz zmienić.</h2>
+        </div>
+        <div class="split-body">
+          <p>Napisz, jakie prace planujesz i jak często potrzebujesz pomocy. Wspólnie ocenimy, czy partnerstwo pasuje do Twojej firmy.</p>
+        </div>
+        <figure class="view-media split-media mobile-illustration">
+          <img src="img/illustrations/kairox-03-jasny-kontakt-768.webp"
+            srcset="img/illustrations/kairox-03-jasny-kontakt-768.webp 768w, img/illustrations/kairox-03-jasny-kontakt.webp 1536w"
+            sizes="(max-width: 980px) calc(100vw - 36px), 650px"
+            width="1536" height="1024" loading="lazy"
+            alt="Klientka i projektant omawiają stronę z przyciskiem „Porozmawiajmy”.">
+        </figure>
+        <div class="split-actions subpage-hero-actions">
+          <a class="primary-button" href="formularz-kontaktowy.html?service=partnership&amp;source=%2Fpartnerstwo.html">Zapytaj o partnerstwo</a>
+        </div>
       </div>
-      <a class="primary-button" href="formularz-kontaktowy.html?service=partnership&amp;source=%2Fpartnerstwo.html">Zapytaj o partnerstwo</a>
     </section>
   </main>
 
   <footer class="site-footer">
-
-    <div class="footer-grid">
-
-        <div class="footer-brand">
-
-            <a href="index.html" class="footer-logo">
-                KAIROX
-            </a>
-
-            <p>
-                Strony internetowe jako narzędzie komunikacji marki.
-            </p>
-
-            <div class="footer-email">
-
-
+    <div class="view-footer-grid">
+      <div class="view view--paired" id="informacje">
+        <div class="view-panel-grid footer-layout">
+          <div class="view-inner footer-navigation">
+            <h2 class="footer-logo" id="footer-nav-title">KAIROX</h2>
+            <div class="footer-email footer-email-compact subpage-footer-email">
               <a href="mailto:kontakt@kairox.pl">kontakt@kairox.pl</a>
-
-
               <button class="copy-email" type="button" data-email="kontakt@kairox.pl" aria-label="Kopiuj adres kontakt@kairox.pl">Kopiuj</button>
-
-
               <span class="copy-email-status" role="status" aria-live="polite"></span>
-
-
             </div>
-
-
-            <div class="footer-social">
-
-                <a
-                    href="https://www.facebook.com/profile.php?id=61591724616267"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    Facebook
-                </a>
-
-                <a
-                    href="https://www.linkedin.com/company/kairoxpl/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    LinkedIn
-                </a>
-
+            <nav class="view-options cooperation-preview-options" aria-labelledby="footer-nav-title">
+              <a href="audyt-komunikacji.html">Audyt</a><a href="metoda.html">Metoda Agent 0</a>
+              <a href="modele-wspolpracy.html">Modele współpracy</a><a href="partnerstwo.html">Partnerstwo</a>
+              <a href="realizacje.html">Realizacje</a><a href="artykuly.html">Artykuły</a>
+            </nav>
+          </div>
+          <div class="view-inner footer-privacy">
+            <h2>Informacje i prywatność</h2>
+            <div class="view-links">
+              <a href="polityka-prywatnosci.html">Polityka prywatności <span aria-hidden="true">↗</span></a>
+              <a href="polityka-cookies.html">Polityka cookies <span aria-hidden="true">↗</span></a>
+              <button class="footer-privacy-button" id="privacySettings" type="button">Ustawienia prywatności</button>
+              <a class="view--mobile" href="#main-content">Wróć na początek <span aria-hidden="true">↑</span></a>
             </div>
-
+            <div class="footer-social footer-social--mobile view--mobile">
+              <a href="https://www.facebook.com/profile.php?id=61591724616267" target="_blank" rel="noopener">Facebook</a>
+              <a href="https://www.linkedin.com/company/kairoxpl/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+          <p class="view-copyright">© 2026 KAIROX. Wszystkie prawa zastrzeżone.</p>
         </div>
-
-        <nav class="footer-column">
-
-            <h3>Nawigacja</h3>
-
-            <a href="index.html">Start</a>
-            
-            <a href="audyt-komunikacji.html">Audyt</a>
-            <a href="metoda.html">Metoda Agent 0</a>
-            <a href="modele-wspolpracy.html">Modele współpracy</a>
-            <a href="partnerstwo.html">Partnerstwo</a>
-            <a href="artykuly.html">Artykuły</a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Usługi</h3>
-
-            <a href="audyt-komunikacji.html">
-                Audyt komunikacji
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Start
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Landing Page
-            </a>
-
-            <a href="modele-wspolpracy.html">
-                Strona Komunikacyjna
-            </a>
-
-            <a href="partnerstwo.html">
-                Partnerstwo
-            </a>
-
-        </nav>
-
-        <nav class="footer-column">
-
-            <h3>Informacje</h3>
-
-            <a href="polityka-prywatnosci.html">
-                Polityka prywatności
-            </a>
-
-            <a href="polityka-cookies.html">
-                Polityka cookies
-            </a>
-
-            <button
-            class="footer-privacy-button"
-            id="privacySettings"
-            type="button"
-          >
-            Ustawienia prywatności
-          </button>
-
-        </nav>
-
+      </div>
     </div>
-
-    <div class="footer-bottom">
-
-        <p>
-            © 2026 KAIROX. Wszystkie prawa zastrzeżone.
-        </p>
-
-        <p>
-            Projektujemy strony, które pomagają firmom
-            lepiej komunikować swoją wartość.
-        </p>
-
-    </div>
-
-</footer>
+  </footer>
   <div class="consent-banner"
   id="consentBanner"
   role="dialog"
@@ -365,7 +290,7 @@
   </div>
   </div>
   <script src="js/consent.js?v=audit-2"></script>
-  <script src="js/main.js?v=ux-3"></script>
+  <script src="js/main.js?v=demo-banner-off-1"></script>
   <script src="js/chat-config.js"></script>
   <script src="js/chat.js?v=direct-chat-1"></script>
 </body>

@@ -75,6 +75,7 @@ const summary = document.querySelector('#twoj-zestaw');
 const total = document.querySelector('#bundle-total');
 const monthly = document.querySelector('#bundle-monthly');
 const items = document.querySelector('#bundle-items');
+const itemsDetail = document.querySelector('#bundle-items-detail');
 const open = document.querySelector('#bundle-open');
 const form = document.querySelector('#bundle-form');
 const contactInput = document.querySelector('#bundle-contact');
@@ -88,6 +89,8 @@ const jumpLabel = document.querySelector('#bundle-jump-label');
 const selected = new Set();
 const serviceControls = new Map();
 const services = categories.flatMap((category) => category.services);
+const mobilePricing = matchMedia('(max-width: 980px)');
+const screenPricing = Boolean(summary.closest('.subpage-configurator'));
 
 function formatPrice(amount, kind) {
   return (kind === 'from' ? 'od ' : '') + currency.format(amount) + ' brutto' + (kind === 'monthly' ? ' / mies.' : '');
@@ -95,11 +98,15 @@ function formatPrice(amount, kind) {
 
 function serviceRow(service) {
   const [name, amount, scope, kind] = service;
+  const tile = document.createElement('div');
+  tile.className = 'pricing-service-tile';
   const row = document.createElement('label');
   row.className = 'pricing-service';
   row.innerHTML = '<input type="checkbox"><span><strong></strong><small></small></span><strong class="pricing-price"></strong>';
   row.querySelector('span strong').textContent = name;
-  row.querySelector('small').textContent = scope;
+  const description = row.querySelector('small');
+  description.textContent = scope;
+  description.id = 'pricing-service-' + services.indexOf(service);
   row.querySelector('.pricing-price').textContent = formatPrice(amount, kind);
   const checkbox = row.querySelector('input');
   serviceControls.set(service, checkbox);
@@ -111,18 +118,43 @@ function serviceRow(service) {
     }
     updateBundle();
   });
-  return row;
+  const detail = document.createElement('button');
+  detail.type = 'button';
+  detail.className = 'screen-detail-button pricing-service-detail';
+  if (screenPricing) detail.dataset.screenAll = "";
+  detail.dataset.screenDetail = description.id;
+  detail.dataset.screenTitle = name;
+  detail.setAttribute('aria-label', 'Zakres usługi: ' + name);
+  detail.setAttribute('aria-haspopup', 'dialog');
+  detail.textContent = 'Zakres';
+  tile.append(row, detail);
+  return tile;
 }
 
 const groups = categories.map(({ name, services: groupServices }) => {
   const section = document.createElement('section');
-  section.className = 'pricing-group';
+  section.className = 'pricing-group pricing-mobile-view';
   const heading = document.createElement('h4');
   heading.textContent = name;
-  section.append(heading, ...groupServices.map(serviceRow));
-  catalog.append(section);
+  const grid = document.createElement('div');
+  grid.className = 'pricing-service-grid';
+  grid.append(...groupServices.map(serviceRow));
+  section.append(heading, grid);
   return section;
 });
+
+for (const [index, group] of groups.entries()) {
+  if (!screenPricing) {
+    catalog.append(group);
+    continue;
+  }
+  if (index % 2 === 0) {
+    const pair = document.createElement('div');
+    pair.className = 'pricing-pair pricing-mobile-view';
+    catalog.append(pair);
+  }
+  catalog.lastElementChild.append(group);
+}
 
 const params = new URLSearchParams(location.search);
 const filterOptions = [{ name: 'Wszystkie usługi', filter: 'Wszystkie' }, ...categories];
@@ -130,18 +162,31 @@ const filterOptions = [{ name: 'Wszystkie usługi', filter: 'Wszystkie' }, ...ca
 const requestedCategory = params.get('kategoria');
 const initialFilter = Math.max(0, filterOptions.findIndex(({ key }) => key === requestedCategory));
 
+function revealPricingView(view) {
+  if (screenPricing && !mobilePricing.matches && getComputedStyle(view).scrollSnapAlign === 'none') {
+    view.parentElement.scrollIntoView();
+  } else {
+    view.scrollIntoView();
+  }
+}
+
 filterOptions.forEach(({ name, filter }, index) => {
   const button = document.createElement('button');
   button.type = 'button';
   button.textContent = filter;
   button.setAttribute('aria-label', name);
-  button.addEventListener('click', () => {
+  button.addEventListener('click', event => {
     for (const option of filters.children) {
       option.setAttribute('aria-pressed', String(option === button));
     }
+    catalog.toggleAttribute('data-show-all', index === 0);
     groups.forEach((group, groupIndex) => {
       group.hidden = index !== 0 && index !== groupIndex + 1;
     });
+    document.dispatchEvent(new Event('kairox:views-changed'));
+    if (event.isTrusted && (screenPricing || mobilePricing.matches)) {
+      revealPricingView(groups[Math.max(0, index - 1)]);
+    }
   });
   filters.append(button);
 });
@@ -182,16 +227,17 @@ function updateModel() {
   updateBundle();
 }
 
-for (const link of document.querySelectorAll('[data-pricing-model]')) {
-  link.addEventListener('click', (event) => {
+document.addEventListener('click', event => {
+    const link = event.target.closest('[data-pricing-model]');
+    if (!link) return;
     if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
+    link.closest('dialog')?.close();
     selectedModel = link.dataset.pricingModel;
     updateModel();
     document.querySelector('#pricing-title').focus({ preventScroll: true });
     document.querySelector('#cennik').scrollIntoView();
-  });
-}
+});
 
 updateModel();
 
@@ -207,13 +253,17 @@ function updateBundle() {
   const monthlyPrice = recurring.reduce((sum, [, amount]) => sum + amount, 0);
   const oneTimeKind = oneTime.some(([, , , kind]) => kind === 'from') ? 'from' : '';
 
-  empty.hidden = Boolean(model) || chosen.length > 0;
+  const hasSelection = Boolean(model) || chosen.length > 0;
+  const selectionChanged = empty.hidden !== hasSelection;
+  empty.hidden = hasSelection;
   costLabel.hidden = chosen.length === 0;
   total.hidden = oneTime.length === 0;
   total.textContent = formatPrice(oneTimePrice, oneTimeKind) + (monthlyPrice ? ' jednorazowo' : '');
   monthly.hidden = monthlyPrice === 0;
   monthly.textContent = formatPrice(monthlyPrice, 'monthly');
   items.hidden = chosen.length === 0;
+  itemsDetail.hidden = chosen.length === 0;
+  itemsDetail.textContent = 'Wybrane usługi (' + chosen.length + ')';
   items.replaceChildren(...chosen.map((service, index) => {
     const [name, amount, , kind] = service;
     const item = document.createElement('li');
@@ -225,19 +275,29 @@ function updateBundle() {
     remove.setAttribute('aria-label', 'Usuń z zestawu: ' + name);
     remove.addEventListener('click', () => {
       selected.delete(service);
-      serviceControls.get(service).checked = false;
+      const checkbox = serviceControls.get(service);
+      checkbox.checked = false;
       updateBundle();
       const nextItem = items.children[Math.min(index, items.children.length - 1)];
-      (nextItem?.querySelector('button') || summary).focus();
+      if (nextItem) nextItem.querySelector('button').focus();
+      else {
+        items.closest('dialog')?.close();
+        if ((screenPricing || mobilePricing.matches) && !selectedModel) {
+          const target = checkbox.getClientRects().length ? checkbox : filters.querySelector('[aria-pressed="true"]');
+          target.focus({ preventScroll: true });
+          revealPricingView(target.closest('.pricing-mobile-view'));
+        } else if (!mobilePricing.matches) summary.focus();
+      }
     });
     item.append(detail, remove);
     return item;
   }));
-  open.disabled = !model && chosen.length === 0;
+  open.disabled = !hasSelection;
   if (open.disabled) closeForm();
-  jump.classList.toggle('has-selection', !open.disabled);
+  jump.classList.toggle('has-selection', hasSelection);
   jumpLabel.textContent = 'Twój zestaw (' + (chosen.length + Number(Boolean(model))) + ')';
   if (!sending) feedback.textContent = '';
+  if (selectionChanged && (screenPricing || mobilePricing.matches)) document.dispatchEvent(new Event('kairox:views-changed'));
 }
 
 const summaryObserver = new IntersectionObserver(([entry]) => {

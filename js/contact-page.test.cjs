@@ -8,7 +8,10 @@ function mount(sendContact, search = '?service=start&source=%2Fmodele-wspolpracy
   const getField = id => {
     if (!fields.has(id)) fields.set(id, {
       id, value: '', checked: false, hidden: true, disabled: false, textContent: '', options: [], selectedOptions: [],
-      attributes: {}, setAttribute(name, value) { this.attributes[name] = value; }, focus() {},
+      attributes: {}, dataset: {},
+      setAttribute(name, value) { this.attributes[name] = value; },
+      removeAttribute(name) { delete this.attributes[name]; },
+      focus() {}, append() {}, replaceChildren() {},
       classList: { add() {}, remove() {}, toggle() {} },
       parentElement: { classList: { add() {}, remove() {}, toggle() {} } },
       handlers: {}, addEventListener(name, handler) {
@@ -19,10 +22,22 @@ function mount(sendContact, search = '?service=start&source=%2Fmodele-wspolpracy
     });
     return fields.get(id);
   };
+  const form = getField('contactForm');
+  const steps = Array.from({ length: 3 }, (_, i) => getField(`step-${i}`));
+  for (const step of steps) step.querySelector = () => getField(`legend-${step.id}`);
+  const progress = getField('contact-wizard-progress');
+  progress.children = steps.map(step => getField(`progress-${step.id}`));
+  const next = getField('next');
+  form.querySelector = selector => selector === '.contact-wizard-progress' ? progress : null;
+  const selectors = {
+    '[data-contact-step]': steps,
+    '[data-contact-next]': [next]
+  };
+  form.querySelectorAll = selector => selectors[selector] ?? [];
   const context = vm.createContext({
     URL, URLSearchParams, __sendContact: sendContact,
     document: {
-      getElementById: getField, querySelectorAll: () => [], referrer,
+      getElementById: getField, querySelectorAll: () => [], createElement: tag => ({ tag }), referrer,
       currentScript: { src: 'https://kairox.pl/js/contact-page.js' }
     },
     window: { location: { origin: 'https://kairox.pl', pathname: '/formularz-kontaktowy.html', search }, setTimeout() {} }
@@ -34,7 +49,15 @@ function mount(sendContact, search = '?service=start&source=%2Fmodele-wspolpracy
   getField('email').value = 'test@example.com';
   getField('privacy').checked = true;
   getField('email').handlers.input();
-  return { getField, submit: () => getField('contactForm').handlers.submit({ preventDefault() {} }) };
+  return {
+    getField,
+    async submit() {
+      for (const step of steps.slice(0, 2)) {
+        if (!step.hidden) next.handlers.click();
+      }
+      if (!steps[2].hidden) return form.handlers.submit({ preventDefault() {} });
+    }
+  };
 }
 
 test('editing contact fields cannot unlock a pending request or send it twice', async () => {

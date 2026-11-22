@@ -23,7 +23,7 @@
 .partnership-page .partner-scope-grid p { font-size: .95rem; }
 .partnership-page .partner-workflow { margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--line); }
 .partnership-page .partner-workflow > h3 { margin-bottom: 20px; font-size: 1rem; }
-.partnership-page .partner-workflow ol { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.partnership-page .partner-workflow ol { list-style: none; display: grid; gap: 16px; }
 .partnership-page .partner-workflow li { display: flex; gap: 12px; }
 .partnership-page .partner-workflow li > span { color: var(--accent-2); font-size: .8rem; padding-top: 3px; }
 .partnership-page .partner-workflow strong { font-weight: 600; }
@@ -63,7 +63,7 @@
 @media (max-width: 760px) {
   .partnership-page .partner-offer-grid { grid-template-columns: 1fr; gap: 32px; }
   .partnership-page .partner-scope-grid { grid-template-columns: 1fr; gap: 24px; }
-  .partnership-page .partner-workflow ol { grid-template-columns: 1fr; gap: 20px; }
+  .partnership-page .partner-workflow ol { gap: 20px; }
 }
 @media (max-width: 600px) {
   .partnership-page .partner-section { padding: 40px 18px; }
