@@ -258,11 +258,11 @@
   .pricing-contact input { margin-bottom: 8px; }
   .pricing-form .pricing-submit { margin-top: 8px; }
 
-  html:has(.models-page .pricing-contact input:focus) {
+  html:has(.models-page .pricing-form:not([data-keyboard-form]) .pricing-contact input:focus) {
     scroll-padding-top: 12px;
   }
 
-  .models-page:has(.pricing-contact input:focus) .site-header {
+  .models-page:has(.pricing-form:not([data-keyboard-form]) .pricing-contact input:focus) .site-header {
     visibility: hidden;
   }
 }

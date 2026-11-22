@@ -40,11 +40,13 @@
 
   <link rel="stylesheet" href="css/section-scroll.css?v=desktop-fit-1">
   <link rel="stylesheet" href="css/subpage-views.css?v=desktop-fit-1">
-  <script src="js/section-scroll.js?v=desktop-fit-1" defer></script>
+  <script src="js/section-scroll.js?v=keyboard-1" defer></script>
   <link rel="stylesheet" href="css/article-screens.css?v=6">
   <script src="js/subpage-mobile.js?v=desktop-fit-1" defer></script>
   <script type="module" src="js/article-topics.mjs?v=1"></script>
   <link rel="stylesheet" href="css/mobile-illustrations.css?v=4">
+  <link rel="stylesheet" href="css/mobile-form-keyboard.css?v=1">
+  <script src="js/mobile-form-keyboard.js?v=1" defer></script>
 </head>
 
 <body class="home-screen-scroll subpage-screen">
@@ -176,7 +178,7 @@
         </div>
       </div>
     </section>
-    <form id="article-topic-form" class="article-topic-form">
+    <form id="article-topic-form" data-keyboard-form class="article-topic-form">
       <div>
         <label for="article-topic-message">Jaki temat proponujesz?</label>
         <textarea id="article-topic-message" name="message" rows="4" maxlength="1500" required></textarea>

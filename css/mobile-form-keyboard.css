@@ -1,0 +1,48 @@
+/* While typing, keep the form in the visible part of the mobile viewport. */
+html[data-site-keyboard] {
+  overflow: hidden;
+  overscroll-behavior: none;
+  scroll-snap-type: none;
+}
+
+html[data-site-keyboard] body { visibility: hidden; }
+html[data-site-keyboard] .home-screen-scroll main { touch-action: auto; }
+
+:root[data-site-keyboard] form[data-keyboard-active] {
+  visibility: visible;
+  position: fixed;
+  z-index: 10001;
+  inset: var(--keyboard-top) 0 auto;
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: var(--keyboard-height);
+  max-height: none;
+  margin: 0;
+  padding: max(12px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 16px max(16px, env(safe-area-inset-left));
+  border: 0;
+  border-radius: 0;
+  background: var(--bg, #0d0e16);
+  color: var(--text, #f4f6fb);
+  overflow: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-y pinch-zoom;
+}
+
+:root[data-site-keyboard] form[data-keyboard-active] :is(input, textarea) { font-size: 1rem; }
+:root[data-site-keyboard] form[data-keyboard-active] textarea { min-height: 92px; }
+:root[data-site-keyboard] form[data-keyboard-active] > .contact-wizard-progress { margin-top: 0; }
+:root[data-site-keyboard] form[data-keyboard-active].view-form > input { margin-block: 6px; }
+
+html[data-site-keyboard] dialog:has(form[data-keyboard-active]) {
+  inset: var(--keyboard-top) 0 auto;
+  width: 100%;
+  max-width: none;
+  height: var(--keyboard-height);
+  max-height: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+html[data-site-keyboard] dialog:has(form[data-keyboard-active])::backdrop { background: var(--bg, #0d0e16); }

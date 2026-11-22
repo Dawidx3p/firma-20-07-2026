@@ -314,7 +314,7 @@ function closeForm() {
 }
 
 const contactViewport = window.visualViewport;
-if (contactViewport) {
+if (contactViewport && !form.hasAttribute('data-keyboard-form')) {
   let fullHeight = 0;
   let keyboardWasOpen = false;
 

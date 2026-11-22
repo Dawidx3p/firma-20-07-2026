@@ -25,6 +25,8 @@
   <script src="js/section-motion.js?v=5" defer></script>
   <link rel="stylesheet" href="css/site-refinements.css?v=contact-compact-17">
 
+  <link rel="stylesheet" href="css/mobile-form-keyboard.css?v=1">
+  <script src="js/mobile-form-keyboard.js?v=1" defer></script>
 </head>
 <body class="compact-contact-page">
   <a class="skip-link" href="#main-content">Przejdź do treści</a>
@@ -50,7 +52,7 @@
         <h2 hidden></h2>
         <p id="contactServiceContext" hidden></p>
 
-        <form id="contactForm" novalidate>
+        <form id="contactForm" data-keyboard-form novalidate>
           <ol class="contact-wizard-progress" aria-label="Etapy formularza" hidden><li>1. Twoja strona</li><li>2. Kontakt</li><li>3. Potwierdzenie</li></ol>
           <fieldset class="contact-wizard-step" data-contact-step>
             <legend tabindex="-1" class="contact-step-label">Twoja strona</legend>

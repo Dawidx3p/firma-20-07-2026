@@ -53,14 +53,16 @@
       text-underline-offset: .2em;
     }
   </style>
-  <link rel="stylesheet" href="css/cennik-test.css?v=24">
-  <script src="js/cennik-test.js?v=18" defer></script>
+  <link rel="stylesheet" href="css/cennik-test.css?v=25">
+  <script src="js/cennik-test.js?v=19" defer></script>
 
   <link rel="stylesheet" href="css/section-scroll.css?v=desktop-fit-1">
   <link rel="stylesheet" href="css/subpage-views.css?v=desktop-fit-1">
-  <script src="js/section-scroll.js?v=desktop-fit-1" defer></script>
+  <script src="js/section-scroll.js?v=keyboard-1" defer></script>
   <script src="js/subpage-mobile.js?v=desktop-fit-2" defer></script>
   <link rel="stylesheet" href="css/mobile-illustrations.css?v=4">
+  <link rel="stylesheet" href="css/mobile-form-keyboard.css?v=1">
+  <script src="js/mobile-form-keyboard.js?v=1" defer></script>
 </head>
 
 <body class="models-page home-screen-scroll subpage-screen">
@@ -165,7 +167,7 @@
           <ul id="bundle-items" class="pricing-picked" aria-label="Wybrane usługi" hidden></ul>
           <button id="bundle-items-detail" class="screen-detail-button" type="button" data-screen-all data-screen-detail="bundle-items" data-screen-title="Wybrane usługi" data-screen-move aria-haspopup="dialog" hidden>Wybrane usługi</button>
           <button id="bundle-open" class="pricing-submit" type="button" aria-controls="bundle-form" aria-expanded="false" disabled>Wyślij zapytanie</button>
-          <form id="bundle-form" class="pricing-form" hidden>
+          <form id="bundle-form" data-keyboard-form class="pricing-form" hidden>
             <div class="pricing-contact">
               <label for="bundle-contact">E-mail lub numer telefonu</label>
               <input id="bundle-contact" type="text" name="contact" autocapitalize="none" spellcheck="false" required>

@@ -13,7 +13,7 @@
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const transitionTime = 230;
   const editable = 'input, textarea, select, [contenteditable="true"]';
-  const overlays = 'body.menu-open, .kx-chat-panel:not([hidden]), .consent-banner.is-visible, dialog[open]';
+  const overlays = 'html[data-site-keyboard], body.menu-open, .kx-chat-panel:not([hidden]), .consent-banner.is-visible, dialog[open]';
   const wheelControls = 'textarea, select, input[type="number"], [contenteditable="true"]';
   const swipeSurfaces = '.home-screen-scroll :is(main, .site-footer, footer.view)';
   const wheelPause = 48;
