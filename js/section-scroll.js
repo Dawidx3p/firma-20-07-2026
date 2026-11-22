@@ -138,9 +138,8 @@
       const continuations = subpage ? getContinuationStops(panel, box, start, y, max, padding) : [];
       return [start, ...continuations];
     });
-    const orderedStops = [...new Set(stops)].sort((a, b) => a - b);
-    if (touchViewport) cachedStops = orderedStops;
-    return orderedStops;
+    cachedStops = [...new Set(stops)].sort((a, b) => a - b);
+    return cachedStops;
   }
 
   function updateControls(stops = getStops()) {
@@ -201,11 +200,13 @@
     syncHeaderHeight();
     new ResizeObserver(syncHeaderHeight).observe(pageHeader);
   }
-  if (subpage) {
+  if (subpage || !touchViewport) {
     const panelObserver = new ResizeObserver(syncLayout);
     const syncPanels = () => {
       panelObserver.disconnect();
       panels = [...document.querySelectorAll(panelSelector)];
+      const header = !subpage && document.querySelector("body > header");
+      if (header) panelObserver.observe(header);
       for (const panel of panels) {
         if (getComputedStyle(panel).display !== "contents") panelObserver.observe(panel);
       }
@@ -339,7 +340,7 @@
     measureViewport();
     syncLayout();
   });
-  if (touchViewport) window.addEventListener("load", syncLayout, { once: true });
+  window.addEventListener("load", syncLayout, { once: true });
   window.addEventListener("hashchange", () => {
     wheelGesture = null;
     cancelTransition();

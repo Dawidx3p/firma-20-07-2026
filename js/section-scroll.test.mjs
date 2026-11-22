@@ -12,6 +12,8 @@ function mount({ reduced = true, touch = false } = {}) {
   const root = { clientWidth: 390, clientHeight: 844, scrollHeight: 3884,
     style: { setProperty: style.set.bind(style) }, setAttribute() {}, removeAttribute() {} };
   let measurements = 0;
+  let panelOffset = 0;
+  let notifyPanelResize;
   const frames = new Map();
   let clock = 0;
   let frameId = 0;
@@ -30,22 +32,28 @@ function mount({ reduced = true, touch = false } = {}) {
     scrollTo({ top }) { this.scrollY = top; scrolls.push(top); },
     addEventListener(type, listener) { listeners.set(type, listener); }
   };
-  const panels = [84, 844, 1604, 2364, 3124].map(top => ({
+  const panels = [84, 844, 1604, 2364, 3124].map((top, index) => ({
     getClientRects: () => [{}],
     getBoundingClientRect: () => {
       measurements++;
-      return { top: top - window.scrollY };
+      return { top: top + (index ? panelOffset : 0) - window.scrollY };
     }
   }));
   const document = {
     body: { classList: { contains: () => false } },
     documentElement: root,
     querySelector: selector => selector === '.view-controls' ? controls : null,
-    querySelectorAll: () => panels
+    querySelectorAll: () => panels,
+    addEventListener() {},
   };
   vm.runInNewContext(source, {
     document, window, Element: class {},
     matchMedia: query => ({ matches: query.includes('pointer: coarse') ? touch : reduced }),
+    ResizeObserver: class {
+      constructor(callback) { notifyPanelResize = callback; }
+      observe() {}
+      disconnect() {}
+    },
     getComputedStyle: () => ({ scrollPaddingTop: '84px', scrollSnapAlign: 'start' }),
     performance: { now: () => clock },
     requestAnimationFrame(callback) { frames.set(++frameId, callback); return frameId; },
@@ -55,6 +63,12 @@ function mount({ reduced = true, touch = false } = {}) {
     scrolls, position, frames, style,
     get measurements() { return measurements; },
     load() { listeners.get('load')?.(); },
+    scrollEnd() { listeners.get('scrollend')(); },
+    growFirstPanel(amount) {
+      panelOffset += amount;
+      root.scrollHeight += amount;
+      notifyPanelResize?.();
+    },
     resize(width, height) {
       root.clientWidth = width;
       root.clientHeight = window.innerHeight = height;
@@ -77,6 +91,30 @@ function mount({ reduced = true, touch = false } = {}) {
     }
   };
 }
+
+test('laptop odczytuje zapisane punkty między zmianami układu', () => {
+  const surface = mount({ reduced: false });
+  surface.load();
+  const initialMeasurements = surface.measurements;
+
+  surface.wheel(100, 10);
+  surface.frame(250);
+  surface.scrollEnd();
+  assert.equal(surface.measurements, initialMeasurements);
+  assert.equal(surface.scrolls.at(-1), 760);
+
+  surface.growFirstPanel(90);
+  const updatedMeasurements = surface.measurements;
+  assert(updatedMeasurements > initialMeasurements);
+  surface.wheel(100, 300);
+  surface.frame(540);
+  surface.scrollEnd();
+  assert.equal(surface.scrolls.at(-1), 850);
+  assert.equal(surface.measurements, updatedMeasurements);
+
+  surface.resize(390, 900);
+  assert(surface.measurements > updatedMeasurements);
+});
 
 test('wysokość paska przeglądarki nie zmienia punktów ekranów na dotyku', () => {
   const surface = mount({ touch: true });
