@@ -12,6 +12,8 @@
   const pageHeader = subpage && document.querySelector("body > header");
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const transitionTime = 230;
+  const extraStepTime = 70;
+  const maxTransitionTime = 460;
   const editable = 'input, textarea, select, [contenteditable="true"]';
   const overlays = 'html[data-site-keyboard], body.menu-open, .kx-chat-panel:not([hidden]), .consent-banner.is-visible, dialog[open]';
   const wheelControls = 'textarea, select, input[type="number"], [contenteditable="true"]';
@@ -21,8 +23,8 @@
   let wheelGesture = null;
   let swipe = null;
   let animationFrame = 0;
-  let destination = null;
-  let destinationIndex = null;
+  let animation = null;
+  const queue = [];
 
   function blocked(target, controls = editable) {
     return document.querySelector(overlays) ||
@@ -36,8 +38,8 @@
   function cancelTransition() {
     cancelAnimationFrame(animationFrame);
     animationFrame = 0;
-    destination = null;
-    destinationIndex = null;
+    animation = null;
+    queue.length = 0;
     root.removeAttribute("data-view-transition");
   }
 
@@ -46,32 +48,39 @@
     window.scrollTo({ top, behavior: "instant" });
   }
 
-  function animateTo(top, index) {
-    if (reducedMotion.matches) {
-      jumpTo(top);
+  function animateTo(top, extend = false) {
+    const now = performance.now();
+    const remaining = animation ? animation.startedAt + animation.duration - now : 0;
+    animation = {
+      top,
+      from: window.scrollY,
+      startedAt: now,
+      duration: extend ? Math.min(maxTransitionTime, Math.max(transitionTime, remaining + extraStepTime)) : transitionTime
+    };
+    root.setAttribute("data-view-transition", "");
+    if (!animationFrame) animationFrame = requestAnimationFrame(draw);
+  }
+
+  function draw(now) {
+    animationFrame = 0;
+    const { top, from, startedAt, duration } = animation;
+    const progress = Math.min(1, Math.max(0, (now - startedAt) / duration));
+    const eased = 1 - (1 - progress) ** 3;
+    window.scrollTo({ top: from + (top - from) * eased, behavior: "instant" });
+    if (progress < 1) {
+      animationFrame = requestAnimationFrame(draw);
       return;
     }
 
-    cancelTransition();
-    destination = top;
-    destinationIndex = index;
-    root.setAttribute("data-view-transition", "");
-    const start = window.scrollY;
-    const startedAt = performance.now();
-
-    function draw(now) {
-      const progress = Math.min(1, (now - startedAt) / transitionTime);
-      const eased = 1 - (1 - progress) ** 3;
-      window.scrollTo({ top: start + (top - start) * eased, behavior: "instant" });
-
-      if (progress < 1) {
-        animationFrame = requestAnimationFrame(draw);
-      } else {
-        cancelTransition();
-      }
+    queue.shift();
+    const stops = getStops();
+    const next = stops[queue[0]?.index];
+    if (next === undefined) {
+      cancelTransition();
+    } else {
+      animateTo(next);
     }
-
-    animationFrame = requestAnimationFrame(draw);
+    updateControls(stops);
   }
 
   function getContinuationStops(panel, box, start, y, max, headerHeight) {
@@ -111,36 +120,51 @@
       const continuations = subpage ? getContinuationStops(panel, box, start, y, max, padding) : [];
       return [start, ...continuations];
     });
-    return [...new Set(stops)];
+    return [...new Set(stops)].sort((a, b) => a - b);
   }
 
   function updateControls(stops = getStops()) {
-    const from = destination ?? window.scrollY;
-    const index = Math.max(0, stops.findLastIndex(stop => stop <= from + 2));
+    const index = queue.at(-1)?.index ?? Math.max(0, stops.findLastIndex(stop => stop <= window.scrollY + 2));
     const text = `${index + 1} / ${stops.length}`;
     if (positionLabel.textContent !== text) positionLabel.textContent = text;
     previousButton.setAttribute("aria-disabled", String(index === 0));
     nextButton.setAttribute("aria-disabled", String(index >= stops.length - 1));
   }
 
+  // Report when the planned destination is at the edge in this direction.
   function move(direction) {
     const stops = getStops();
-    const index = destinationIndex !== null
-      ? destinationIndex + direction
+    const last = queue.at(-1);
+    const index = last
+      ? last.index + direction
       : direction > 0
         ? stops.findIndex(stop => stop > window.scrollY + 2)
         : stops.findLastIndex(stop => stop < window.scrollY - 2);
-    if (stops[index] !== undefined) {
-      animateTo(stops[index], index);
-      updateControls(stops);
+    if (stops[index] === undefined) return true;
+
+    if (reducedMotion.matches) {
+      jumpTo(stops[index]);
+    } else if (last?.direction === direction) {
+      last.index = index;
+      if (last === queue[0]) animateTo(stops[index], true);
+    } else {
+      queue.push({ direction, index });
+      if (queue.length === 1) animateTo(stops[index]);
     }
+    updateControls(stops);
+    return index === (direction > 0 ? stops.length - 1 : 0);
   }
 
   function syncLayout() {
     const stops = getStops();
-    if (destinationIndex !== null && stops.length) {
-      const index = Math.min(destinationIndex, stops.length - 1);
-      if (destination !== stops[index]) animateTo(stops[index], index);
+    if (animation) {
+      if (!stops.length) {
+        cancelTransition();
+      } else {
+        for (const run of queue) run.index = Math.min(run.index, stops.length - 1);
+        const target = stops[queue[0].index];
+        if (animation.top !== target) animateTo(target);
+      }
     }
     updateControls(stops);
   }
@@ -182,20 +206,22 @@
     // A late, very small impulse can still belong to the original stroke.
     if (gap >= 440) return mode !== 0 || magnitude >= 2 || gap >= 700;
     if (direction !== previous.direction) {
+      if (previous.atBoundary) return magnitude >= 1.2;
       return magnitude >= Math.max(1.5, Math.min(8, previous.peak * .08));
     }
 
     if (mode === 2) return gap >= wheelPause;
     if (mode === 1) {
       // Whole-line steps can repeat at the same value throughout a momentum tail.
-      // Keep discrete wheel notches responsive and require acceleration after a burst.
+      // Full-strength line steps after a pause can start another deliberate stroke.
       if (previous.samples === 1) return gap >= 64;
+      if (gap >= 72 && magnitude >= Math.max(16, previous.magnitude, previous.peak * .65)) return true;
       return previous.falling && gap >= 28 &&
         magnitude >= Math.max(32, previous.magnitude * 1.6, previous.peak * .4);
     }
 
     const restartedAfterPause = gap >= wheelPause &&
-      magnitude >= Math.max(1.6, previous.magnitude * .9, previous.peak * .32);
+      magnitude >= Math.max(1.6, previous.magnitude * .9, Math.min(8, previous.peak * .32));
     const accelerated = previous.falling && gap >= 12 && gap <= 96 &&
       magnitude >= Math.max(1.2, previous.magnitude * 1.8, previous.peak * .085);
     return restartedAfterPause || accelerated;
@@ -212,8 +238,8 @@
     const magnitude = Math.abs(event.deltaY) * (mode === 1 ? 16 : mode === 2 ? root.clientHeight : 1);
     const previous = wheelGesture;
     if (startsWheelGesture(previous, direction, magnitude, time, mode)) {
-      wheelGesture = { time, direction, magnitude, peak: magnitude, falling: false, samples: 1 };
-      move(direction);
+      const atBoundary = move(direction);
+      wheelGesture = { time, direction, magnitude, peak: magnitude, falling: false, samples: 1, atBoundary };
       return;
     }
 
@@ -262,6 +288,7 @@
     if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey || blocked(event.target)) return;
     if (event.key === "Home" || event.key === "End") {
       event.preventDefault();
+      wheelGesture = null;
       jumpTo(event.key === "Home" ? 0 : getMaxScroll());
       updateControls();
       return;

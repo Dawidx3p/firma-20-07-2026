@@ -5,10 +5,13 @@ import vm from 'node:vm';
 
 const source = readFileSync(new URL('./section-scroll.js', import.meta.url), 'utf8');
 
-function mount() {
+function mount({ reduced = true } = {}) {
   const listeners = new Map();
   const scrolls = [];
-  const root = { clientHeight: 844, scrollHeight: 3792, removeAttribute() {} };
+  const root = { clientHeight: 844, scrollHeight: 3884, setAttribute() {}, removeAttribute() {} };
+  const frames = new Map();
+  let clock = 0;
+  let frameId = 0;
   const position = {};
   const previous = { addEventListener() {}, setAttribute() {} };
   const next = { addEventListener() {}, setAttribute() {} };
@@ -34,13 +37,22 @@ function mount() {
     querySelectorAll: () => panels
   };
   vm.runInNewContext(source, {
-    document, window, Element: class {}, matchMedia: () => ({ matches: true }),
+    document, window, Element: class {}, matchMedia: () => ({ matches: reduced }),
     getComputedStyle: () => ({ scrollPaddingTop: '84px', scrollSnapAlign: 'start' }),
-    cancelAnimationFrame() {}
+    performance: { now: () => clock },
+    requestAnimationFrame(callback) { frames.set(++frameId, callback); return frameId; },
+    cancelAnimationFrame(id) { frames.delete(id); }
   });
   return {
-    scrolls, position,
+    scrolls, position, frames,
+    frame(now) {
+      clock = now;
+      const callbacks = [...frames.values()];
+      frames.clear();
+      for (const callback of callbacks) callback(now);
+    },
     wheel(deltaY, timeStamp, deltaMode = 0) {
+      clock = timeStamp;
       let prevented = false;
       listeners.get('wheel')({
         target: document.body, deltaY, deltaX: 0, deltaMode, timeStamp,
@@ -112,4 +124,60 @@ test('lekki szybszy gest rozpoznajemy także przed końcem animacji', () => {
   surface.wheel(.5, 58);
   surface.wheel(1.3, 71);
   assert.deepEqual(surface.scrolls, [760, 1520]);
+});
+
+test('kolejne pełne impulsy w liniach po krótkich przerwach dołączają do kolejki', () => {
+  const surface = mount({ reduced: false });
+  for (const time of [0, 90, 180, 270]) {
+    surface.wheel(3, time, 1);
+    surface.frame(time + 8);
+    surface.wheel(3, time + 12, 1);
+    surface.frame(time + 16);
+  }
+  assert.equal(surface.position.textContent, '5 / 5');
+  assert.equal(surface.frames.size, 1);
+  surface.frame(740);
+  assert.equal(surface.scrolls.at(-1), 3040);
+  assert(surface.scrolls.every((position, i) => i === 0 || position >= surface.scrolls[i - 1]));
+  assert.equal(surface.frames.size, 0);
+});
+
+test('zmiana kierunku zostaje osobnym przejściem po scalonym ruchu', () => {
+  const surface = mount({ reduced: false });
+  surface.wheel(100, 10);
+  surface.frame(55);
+  surface.wheel(100, 70);
+  surface.frame(115);
+  surface.wheel(-100, 130);
+  assert.equal(surface.position.textContent, '2 / 5');
+  surface.frame(500);
+  assert.equal(surface.scrolls.at(-1), 1520);
+  assert.equal(surface.frames.size, 1);
+  surface.frame(750);
+  assert.equal(surface.scrolls.at(-1), 760);
+  assert.equal(surface.frames.size, 0);
+});
+
+test('krańce odrzucają nadmiar i pozwalają na lekki gest z powrotem', () => {
+  const surface = mount();
+  surface.wheel(-180, 10);
+  assert.deepEqual(surface.scrolls, []);
+  surface.wheel(2, 40);
+  for (let time = 110; time <= 600; time += 70) surface.wheel(150, time);
+  assert.deepEqual(surface.scrolls, [760, 1520, 2280, 3040]);
+  surface.wheel(-2, 610);
+  assert.deepEqual(surface.scrolls, [760, 1520, 2280, 3040, 2280]);
+});
+
+test('przewinięcia poza zaplanowany ostatni ekran nie tworzą zaległych ruchów', () => {
+  const surface = mount({ reduced: false });
+  for (let time = 10; time < 600; time += 60) surface.wheel(90, time);
+  assert.equal(surface.position.textContent, '5 / 5');
+  surface.frame(1080);
+  assert.equal(surface.scrolls.at(-1), 3040);
+  assert.equal(surface.frames.size, 0);
+  surface.wheel(-2, 1100);
+  surface.frame(1350);
+  assert.equal(surface.scrolls.at(-1), 2280);
+  assert.equal(surface.frames.size, 0);
 });
