@@ -169,6 +169,13 @@ html:has(.subpage-screen) { --screen-clearance: 18px; }
 
 @media (min-width: 981px) {
   html:has(.subpage-screen) { --screen-clearance: 72px; }
+  .home-screen-scroll.subpage-screen .view h1 { max-width: 22ch; }
+  .home-screen-scroll.subpage-screen .view h2:not(:where(.footer-logo)) {
+    font-size: var(--desktop-panel-title, var(--desktop-section-title));
+  }
+  .home-screen-scroll.subpage-screen .view h3 {
+    font-size: clamp(1.06rem, 1.48vw, 1.25rem);
+  }
   .subpage-screen .view .view-panel-grid { column-gap: clamp(22px, 4vw, 50px); }
   .subpage-screen .view .view-panel-grid--priority { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
   .subpage-screen .subpage-hero-layout .view-media img { max-height: 54dvh; }
@@ -608,7 +615,6 @@ html:has(.subpage-screen) { --screen-clearance: 18px; }
 }
 
 @media (min-width: 981px) and (max-height: 640px) {
-  .subpage-screen.error-page .error-content h1 { font-size: clamp(1.65rem, 3.2vw, 2.4rem); }
   .subpage-screen.error-page .error-description { margin-top: 8px; font-size: .98rem; line-height: 1.45; }
   .subpage-screen.error-page .error-code { font-size: clamp(5.2rem, 16dvh, 8rem); margin-bottom: -12px; }
   .subpage-screen.error-page .error-content .hero-actions { flex-direction: row; gap: 7px; }

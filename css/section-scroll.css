@@ -382,16 +382,31 @@ html:has(.home-screen-scroll) {
 }
 
 @media (min-width: 981px) {
-  html:has(.home-screen-scroll) { --screen-columns: 2; --screen-clearance: 72px; }
+  html:has(.home-screen-scroll) {
+    --screen-columns: 2;
+    --screen-clearance: 72px;
+    --desktop-page-title: clamp(1.9rem, 2.95vw, 2.65rem);
+    --desktop-section-title: clamp(1.55rem, 2.3vw, 2rem);
+  }
+  .home-screen-scroll .view h1 { font-size: var(--desktop-page-title); }
+  .home-screen-scroll .view h2:not(:where(.footer-logo)) {
+    font-size: var(--desktop-panel-title, var(--desktop-section-title));
+  }
+  .home-page .view h2:not(:where(.footer-logo)) { max-width: 22ch; }
+  .home-screen-scroll .site-footer .view .footer-privacy h2 {
+    font-size: clamp(1.35rem, 1.85vw, 1.6rem);
+  }
   .view { padding: 20px 9px var(--screen-clearance) 20px; }
   .view:nth-child(even of .view:not(.view--paired)) { padding-inline: 9px 20px; scroll-snap-align: none; border-left: 1px solid var(--line); }
   .view--paired { grid-column: 1 / -1; padding-inline: 20px; }
   .view-panel-grid {
+    --desktop-panel-title: clamp(1.4rem, 2vw, 1.75rem);
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: center;
     gap: 18px;
   }
   .view-panel-grid--priority { grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); }
+  .view-panel-grid--priority > :first-child { --desktop-panel-title: var(--desktop-section-title); }
   #site-paths .view-links.home-shortcuts-grid { grid-template-columns: minmax(0, 1fr); }
   #site-paths .view-links a { border-left: 0; }
   .view-panel-grid--priority .visualization-paths { padding-inline: clamp(10px, 2vw, 24px); }
@@ -573,7 +588,7 @@ html:has(.home-screen-scroll) {
     padding-block: 5px;
   }
   #zalozyciel .split-heading { gap: 3px; }
-  .home-screen-scroll #zalozyciel h2 { max-width: none; font-size: clamp(1.65rem, 2.7vw, 2.25rem); }
+  .home-screen-scroll #zalozyciel h2 { max-width: none; }
   #zalozyciel .founder-details { max-width: none; }
   #zalozyciel :is(.split-body, .founder-details > p) { max-width: 65ch; font-size: .94rem; }
   #zalozyciel .view-checklist {
