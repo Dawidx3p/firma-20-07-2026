@@ -293,25 +293,23 @@ test('krańce odrzucają nadmiar i pozwalają na lekki gest z powrotem', () => {
   assert.deepEqual(surface.scrolls, [760, 1520, 2280, 3040, 2280]);
 });
 
-test('mocne impulsy przesuwają o dwa lub trzy ekrany, też przy ułamkowych liniach', () => {
-  for (const [delta, mode, screens] of [[80, 0, 2], [150, 0, 3], [1.5, 1, 2], [3.25, 1, 3]]) {
+test('rosnąca siła jednej fali nadal przesuwa o jeden ekran', () => {
+  for (const [mode, deltas] of [[0, [60, 58, 80, 150, 210, 150, 90, 40]],
+    [1, [.5, 1.25, 3.25, 1.5, .5]]]) {
     const surface = mount();
-    surface.wheel(delta, 10, mode);
-    surface.wheel(delta / 2, 20, mode);
-    surface.wheel(delta / 4, 30, mode);
-    assert.deepEqual(surface.scrolls, [screens * 760]);
+    deltas.forEach((delta, index) => surface.wheel(delta, 10 + index * 5, mode));
+    assert.deepEqual(surface.scrolls, [760]);
   }
 });
 
-test('szybki początek wydłuża już rozpoczęty skok, najwyżej do trzech ekranów', () => {
+test('każde wyraźne przyspieszenie po zwolnieniu dodaje po jednym ekranie', () => {
   const surface = mount({ reduced: false });
-  surface.wheel(58, 10);
+  [8, 15, 24, 12, 5].forEach((delta, index) => surface.wheel(delta, 10 + index * 5));
   assert.equal(surface.position.textContent, '2 / 5');
-  surface.frame(18);
-  surface.wheel(68, 22);
+  surface.frame(31);
+  surface.wheel(18, 35);
   assert.equal(surface.position.textContent, '3 / 5');
-  surface.wheel(90, 35);
-  surface.wheel(100, 48);
+  [25, 10, 6, 8, 11].forEach((delta, index) => surface.wheel(delta, 40 + index * 5));
   assert.equal(surface.position.textContent, '4 / 5');
   surface.frame(550);
   assert.equal(surface.scrolls.at(-1), 2280);
@@ -324,11 +322,11 @@ test('lekki drugi gest po mocnym przełącza kolejny ekran bez pauzy', () => {
   surface.wheel(80, 18);
   surface.wheel(30, 26);
   surface.wheel(4, 34);
-  assert.equal(surface.position.textContent, '4 / 5');
+  assert.equal(surface.position.textContent, '2 / 5');
   surface.wheel(8, 40);
-  assert.equal(surface.position.textContent, '5 / 5');
+  assert.equal(surface.position.textContent, '3 / 5');
   surface.frame(550);
-  assert.equal(surface.scrolls.at(-1), 3040);
+  assert.equal(surface.scrolls.at(-1), 1520);
 });
 
 test('przewinięcia poza zaplanowany ostatni ekran nie tworzą zaległych ruchów', () => {
