@@ -22,6 +22,10 @@
   const wheelControls = 'textarea, select, input[type="number"], [contenteditable="true"]';
   const swipeSurfaces = '.home-screen-scroll :is(main, .site-footer, footer.view)';
   const wheelPause = 48;
+  const wheelStrengthWindow = 50;
+  // Wheel deltas are normalized to pixels below, including 16 px per line.
+  const pixelWheelStrength = { impulse: [80, 150], total: [120, 210] };
+  const fractionalWheelStrength = { impulse: [24, 48], total: [40, 72] };
   const swipeThreshold = 14;
   let wheelGesture = null;
   let swipe = null;
@@ -153,16 +157,22 @@
   }
 
   // Report when the planned destination is at the edge in this direction.
-  function move(direction) {
+  function move(direction, steps = 1, interruptReverse = false) {
     const stops = getStops();
+    const reversing = interruptReverse && animation && queue[0]?.direction !== direction;
+    if (reversing) cancelTransition();
     const last = queue.at(-1);
     if (!last && touchViewport && direction > 0 && window.scrollY >= getMaxScroll() - 2) return true;
-    const index = last
+    const nextIndex = last
       ? last.index + direction
       : direction > 0
         ? stops.findIndex(stop => stop > window.scrollY + 2)
         : stops.findLastIndex(stop => stop < window.scrollY - 2);
-    if (stops[index] === undefined) return true;
+    if (stops[nextIndex] === undefined) {
+      if (reversing) updateControls(stops);
+      return true;
+    }
+    const index = Math.max(0, Math.min(stops.length - 1, nextIndex + (steps - 1) * direction));
 
     if (reducedMotion.matches) {
       jumpTo(stops[index]);
@@ -224,7 +234,7 @@
   }
   updateControls();
 
-  function startsWheelGesture(previous, direction, magnitude, time, mode, fractionalLine) {
+  function startsWheelGesture(previous, direction, magnitude, time, mode, fractionalLine, precisionWheel) {
     if (!previous) return true;
 
     const gap = time - previous.time;
@@ -234,6 +244,7 @@
     if (direction !== previous.direction) {
       if (previous.atBoundary) return magnitude >= (fractionalLine ? .5 : 1.2);
       if (fractionalLine) return magnitude >= Math.max(.5, Math.min(2, previous.magnitude));
+      if (precisionWheel) return magnitude >= Math.max(1.5, Math.min(4, previous.magnitude * .25));
       return magnitude >= Math.max(1.5, Math.min(8, previous.peak * .08));
     }
 
@@ -253,9 +264,16 @@
       : Math.max(1.6, previous.magnitude * .9, Math.min(8, previous.peak * .32));
     const restartedAfterPause = gap >= wheelPause &&
       magnitude >= pauseThreshold;
-    const accelerated = previous.falling && gap >= 12 && gap <= 96 &&
-      magnitude >= Math.max(fractionalLine ? .5 : 1.2, previous.magnitude * 1.8, previous.peak * .085);
+    const accelerated = previous.falling && (precisionWheel || (gap >= 12 && gap <= 96)) &&
+      magnitude >= Math.max(fractionalLine ? .5 : 1.2, previous.magnitude * 1.8,
+        precisionWheel ? previous.magnitude + (fractionalLine ? .25 : .75) : previous.peak * .085);
     return restartedAfterPause || accelerated;
+  }
+
+  function wheelSteps(strength, magnitude, total) {
+    if (!strength) return 1;
+    if (magnitude >= strength.impulse[1] || total >= strength.total[1]) return 3;
+    return magnitude >= strength.impulse[0] || total >= strength.total[0] ? 2 : 1;
   }
 
   window.addEventListener("wheel", event => {
@@ -268,16 +286,31 @@
     const direction = Math.sign(event.deltaY);
     const delta = Math.abs(event.deltaY);
     const magnitude = delta * (mode === 1 ? 16 : mode === 2 ? root.clientHeight : 1);
-    const fractionalLine = mode === 1 && !Number.isInteger(delta);
     const previous = wheelGesture;
-    if (startsWheelGesture(previous, direction, magnitude, time, mode, fractionalLine)) {
-      const atBoundary = move(direction);
-      wheelGesture = { time, direction, magnitude, peak: magnitude, falling: false, samples: 1, atBoundary };
+    const fractionalLine = mode === 1 && (!Number.isInteger(delta) ||
+        (previous?.strength === fractionalWheelStrength && time - previous.time < 100));
+    const precisionWheel = !touchViewport && (mode === 0 || fractionalLine);
+    if (startsWheelGesture(previous, direction, magnitude, time, mode, fractionalLine, precisionWheel)) {
+      const strength = precisionWheel ? (fractionalLine ? fractionalWheelStrength : pixelWheelStrength) : null;
+      const steps = wheelSteps(strength, magnitude, magnitude);
+      const atBoundary = move(direction, steps, precisionWheel);
+      wheelGesture = { time, startedAt: time, direction, magnitude, peak: magnitude, falling: false,
+        samples: 1, atBoundary, strength, steps, total: magnitude };
       return;
     }
 
     previous.time = time;
     if (direction !== previous.direction) return;
+    // Only the leading, non-decelerating part of a stroke can extend its jump.
+    if (previous.strength && !previous.atBoundary && !previous.falling && magnitude >= previous.magnitude &&
+        previous.steps < 3 && time - previous.startedAt <= wheelStrengthWindow) {
+      previous.total += magnitude;
+      const steps = wheelSteps(previous.strength, magnitude, previous.total);
+      if (steps > previous.steps) {
+        previous.atBoundary = move(direction, steps - previous.steps, true);
+        previous.steps = steps;
+      }
+    }
     previous.samples++;
     previous.peak = Math.max(previous.peak, magnitude);
     if (magnitude !== previous.magnitude) previous.falling = magnitude < previous.magnitude;
