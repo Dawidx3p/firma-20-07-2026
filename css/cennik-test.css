@@ -681,3 +681,19 @@
     }
   }
 }
+
+@media (max-width: 360px) and (max-height: 550px) {
+  .mobile-subpages .subpage-configurator [data-pricing-category="strony"] .pricing-service-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .mobile-subpages .subpage-configurator [data-pricing-category="strony"] .pricing-service-tile {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+  }
+  .mobile-subpages .subpage-configurator [data-pricing-category="strony"] .pricing-service {
+    padding-block: 2px;
+  }
+  .mobile-subpages .subpage-configurator [data-pricing-category="strony"] .pricing-service-detail {
+    margin-inline-start: 0;
+  }
+}

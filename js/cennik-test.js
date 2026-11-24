@@ -25,6 +25,7 @@ const categories = [
     name: 'Strony internetowe',
     filter: 'Strony WWW',
     services: [
+      ['KAIROX Digital ID', 20, 'Spersonalizowana strona z projektami, CV lub linkami i kontaktem. Dostajesz kod QR oraz repozytorium z kodem. Na życzenie publikujemy profil pod domeną KAIROX.', 'from'],
       ['Strona firmowa 4–5 podstron', 2999, 'Projekt i wdrożenie na podstawie dostarczonych tekstów. Jeden formularz i wersja mobilna.', 'from'],
       ['Strona z indywidualnym projektem, 6–8 podstron', 4999, 'Indywidualny projekt i wdrożenie na podstawie dostarczonych tekstów. Wersja mobilna.', 'from'],
       ['Audyt UX/UI', 999, 'Sprawdzenie nawigacji, formularzy i obsługi do 5 podstron na telefonie i komputerze. Raport z zaleceniami.', 'from'],
@@ -131,9 +132,10 @@ function serviceRow(service) {
   return tile;
 }
 
-const groups = categories.map(({ name, services: groupServices }) => {
+const groups = categories.map(({ key, name, services: groupServices }) => {
   const section = document.createElement('section');
   section.className = 'pricing-group pricing-mobile-view';
+  section.dataset.pricingCategory = key;
   const heading = document.createElement('h4');
   heading.textContent = name;
   const grid = document.createElement('div');
