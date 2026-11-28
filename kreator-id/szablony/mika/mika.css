@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&display=swap');
+
+.mika {
+  --accent: #d7bcff;
+  --lime: var(--accent);
+  --paper: #faf3ff;
+  --muted: #c5b5d3;
+  --line: #51375f;
+  color: var(--paper);
+  background: #170e24;
+}
+.mika .hero { background: #25143d; }
+.mika .hero::before {
+  background: linear-gradient(180deg, #140b1bd9, transparent 22%, transparent 43%, #140b20d4 79%, #140b20), url('../assets/mika-byte.jpg') center 42% / cover;
+}
+.mika h1, .mika h2 {
+  font-family: 'Bricolage Grotesque', Geist, sans-serif;
+  font-weight: 800;
+  letter-spacing: -.065em;
+  text-transform: none;
+}
+.mika h1 { font-size: clamp(5.25rem, 11vw, 12rem); line-height: .78; }
+.mika h1 em { color: var(--accent); }
+.mika h2 { font-size: clamp(2.8rem, 5.3vw, 5.6rem); line-height: .85; }
+.mika .jump { border-radius: .65rem; }
+.mika .directory {
+  background: linear-gradient(145deg, #775197, #291d40 44%, #211932 62%, #4d376a);
+}
+.mika .frame {
+  border-color: #8865a0;
+  border-radius: 1.2rem;
+  background: #1c1429;
+  box-shadow: 0 22px 44px #0c071978;
+}
+.mika .frame::before, .mika .frame::after { content: none; }
+.mika .panel-header { margin-bottom: clamp(13px, 2.5vh, 24px); }
+.mika .entries {
+  padding: 2px 4px 2px 2px;
+  scrollbar-color: #9e77bd transparent;
+}
+.stream-main, .mika .channel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  color: var(--paper);
+  text-decoration: none;
+}
+.stream-main {
+  min-height: 64px;
+  padding: 8px 13px;
+  margin-bottom: 8px;
+  border: 1px solid #dac2ff;
+  border-radius: .75rem;
+  color: #241636;
+  background: #d7bcff;
+}
+.stream-main:hover { background: #e7d7ff; }
+.stream-main strong, .stream-main strong + span { display: block; }
+.stream-main strong { font-size: 1.15rem; }
+.stream-main strong + span { color: #4b3567; font-size: .78rem; }
+.channel-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mika .channel {
+  min-height: 48px;
+  height: 100%;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: .55rem;
+  background: #251a34;
+}
+.mika .channel:hover { border-color: var(--accent); }
+.mika .channel:focus-visible { outline-offset: -2px; }
+.mika .channel > span:first-child { min-width: 0; }
+.mika .handle { font-size: .73rem; }
+.mika .channel-arrow { flex: none; color: var(--accent); font-size: .9rem; }
+.stream-main .channel-arrow { color: #40275c; font-size: 1.2rem; }
+
+@media (max-width: 760px) {
+  .mika h1 { font-size: clamp(5rem, 22vw, 9rem); }
+}
+@media (max-width: 760px) and (max-height: 480px) {
+  .mika h1 { font-size: min(22vw, 26dvh); }
+  .mika .panel-header { margin-bottom: 8px; }
+}

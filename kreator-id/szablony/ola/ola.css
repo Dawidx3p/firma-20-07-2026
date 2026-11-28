@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+.ola {
+  --lime: #6f2d23;
+  --paper: #321e19;
+  --muted: #6b5147;
+  --line: #d8b9a9;
+  color-scheme: light;
+  color: var(--paper);
+  background: #e7bcaa;
+}
+.ola .hero { color: #fff5e8; background: #532c20; }
+.ola .hero::before {
+  background: linear-gradient(180deg, #321c17aa, transparent 24%, transparent 42%, #22110ac9 79%, #22110a), url('../assets/ola-nowak.jpg') center 43% / cover;
+}
+.ola .jump { color: #ffdfbd; }
+.ola .jump { border-color: #ffdfbd; border-radius: 999px; }
+.ola h1, .ola h2 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-weight: 400;
+  text-transform: none;
+}
+.ola h1 { font-size: clamp(4rem, 9.2vw, 10rem); line-height: .85; letter-spacing: -.035em; }
+.ola h1 em { display: block; color: #ffdfbd; font-style: italic; }
+.ola .bio { color: #fae6d7; }
+.ola .directory {
+  background: linear-gradient(145deg, #f3d9c0, #ce9789);
+}
+.ola .frame {
+  color: var(--paper);
+  background: #fff7ee;
+  border-color: #a87768;
+  border-radius: 1.6rem;
+  box-shadow: 0 12px 32px #643a251b;
+}
+.ola .frame::before, .ola .frame::after { content: none; }
+.ola h2 { font-size: clamp(3rem, 6.5vw, 6.2rem); letter-spacing: -.04em; }
+.ola .panel-header { margin-bottom: clamp(12px, 3vh, 26px); }
+.ola .panel-name {
+  margin: 0 0 8px;
+  color: #744338;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.ola .entries { padding: 2px 4px 2px 2px; scrollbar-color: #a27365 transparent; }
+.ola .blog-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border: 1px solid #d5aa98;
+  border-radius: .9rem;
+  background: #f7e2d3;
+  color: #60281f;
+  text-decoration: none;
+}
+.ola .blog-card:hover { background: #f1d4c2; }
+.ola .blog-card strong { display: block; margin-bottom: 2px; }
+.ola .blog-card strong + span { display: block; color: var(--muted); font-size: .8rem; }
+.ola .blog-arrow { flex: none; font-size: 1.35rem; }
+.ola .social-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.ola .social-link {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px;
+  height: 100%;
+  min-height: 48px;
+  padding: 5px 8px;
+  border: 1px solid var(--line);
+  border-radius: .65rem;
+  color: var(--paper);
+  text-decoration: none;
+}
+.ola .social-link:hover { background: #fae4d6; }
+.ola .social-link:focus-visible { outline-offset: -2px; }
+.ola .entry strong { color: var(--paper); font-size: .88rem; }
+.ola .handle { font-size: .75rem; }
+.ola .social-arrow {
+  color: var(--lime);
+  font-size: .9rem;
+}
+.ola .back { min-height: 32px; align-items: center; }
+.ola .hero :focus-visible { outline-color: #ffdfbd; }
+.ola-blog { background: #fff7ee; }
+.ola-blog .blog-page {
+  display: block;
+  max-width: 42rem;
+  margin: auto;
+  padding: clamp(22px, 6vw, 72px);
+  touch-action: auto;
+}
+.ola-blog .blog-back { display: inline-block; color: var(--lime); margin-bottom: 40px; }
+.ola-blog h1 { font-size: clamp(3rem, 10vw, 6rem); line-height: .95; }
+.ola-blog article p { line-height: 1.65; }
+.ola-blog footer { border-top: 1px solid var(--line); margin-top: 28px; padding-top: 12px; color: var(--muted); font-size: .8rem; }
+
+@media (max-width: 760px) {
+  html:has(.ola-blog), body.ola-blog { overflow: auto; }
+  .ola .hero h1 { font-size: clamp(4.5rem, 20vw, 8.5rem); }
+}
+@media (max-width: 760px) and (max-height: 480px) {
+  .ola .hero h1 { font-size: min(20vw, 24dvh); }
+  .ola .panel-header { margin-bottom: 8px; }
+}

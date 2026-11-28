@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kreator · KAIROX Digital ID</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="zip.js" defer></script>
+  <script src="export.js" defer></script>
+  <script src="creator.js?v=5" defer></script>
+</head>
+<body>
+  <header class="masthead"><strong>KAIROX<span> / </span>DIGITAL ID</strong></header>
+  <main>
+    <section class="editor" aria-labelledby="title">
+      <h1 id="title">Kreator wizytówki</h1>
+      <form id="editor">
+        <fieldset>
+          <legend>Szablon</legend>
+          <div id="templates" class="templates"></div>
+        </fieldset>
+        <fieldset>
+          <legend>Twój profil</legend>
+          <label>Imię i nazwisko lub pseudonim<input id="name" maxlength="60" placeholder="np. Alex Nowak"></label>
+          <label>Krótki opis<textarea id="bio" rows="2" maxlength="180" placeholder="Napisz, czym się zajmujesz"></textarea></label>
+          <label>Zdjęcie profilowe <small>Opcjonalne · domyślnie zdjęcie z szablonu</small><input id="photo" type="file" accept="image/jpeg,image/png,image/webp"></label>
+          <p id="photo-error" role="status" hidden></p>
+        </fieldset>
+        <fieldset>
+          <legend>Twoje linki</legend>
+          <div id="links"></div>
+          <button class="add" type="button" id="add-link">+ Dodaj link</button>
+        </fieldset>
+        <div>
+          <button class="add" type="button" id="download-project" disabled>Pobierz projekt (ZIP)</button>
+          <p id="download-status" role="status" hidden></p>
+        </div>
+      </form>
+    </section>
+    <section class="preview" aria-labelledby="preview-title">
+      <div class="preview-bar">
+        <h2 id="preview-title">Podgląd na żywo</h2>
+        <div class="views" role="group" aria-label="Ekran wizytówki">
+          <button type="button" data-view="start" aria-pressed="true">Profil</button>
+          <button type="button" data-view="profile" aria-pressed="false">Linki</button>
+        </div>
+      </div>
+      <iframe id="preview" title="Podgląd wizytówki"></iframe>
+      <p id="preview-error" role="status" hidden>Uruchom kreator przez lokalny serwer HTTP, aby zobaczyć podgląd.</p>
+    </section>
+  </main>
+  <noscript>Włącz JavaScript, aby korzystać z kreatora.</noscript>
+</body>
+</html>

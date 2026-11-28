@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Adam Lis — przykładowa wizytówka zawodowa projektanta produktów cyfrowych.">
+  <meta name="theme-color" content="#193147">
+  <title>Adam Lis · KAIROX Digital ID</title>
+  <link rel="stylesheet" href="../style.css?v=2">
+  <link rel="stylesheet" href="../share.css?v=2">
+  <link rel="stylesheet" href="adam.css?v=6">
+  <script src="../screens.js" defer></script>
+  <script src="../share.js" defer></script>
+  <script src="career.js" defer></script>
+</head>
+<body class="career">
+  <main>
+    <section class="hero" id="start" aria-labelledby="name" tabindex="-1">
+      <div class="identity">
+        <h1 id="name">Adam Lis</h1>
+        <p class="role">Product Designer · Warszawa</p>
+        <p class="bio">Projektuję aplikacje i narzędzia do pracy.</p>
+        <a class="jump" href="#profile">Zobacz CV <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section class="directory" id="profile" aria-labelledby="directory-title" tabindex="-1">
+      <div class="frame">
+        <header class="panel-header">
+          <a class="back" href="#start"><span aria-hidden="true">←</span> Profil</a>
+          <h2 id="directory-title">Adam Lis</h2>
+          <p class="career-role">Product Designer <span>· Warszawa</span></p>
+        </header>
+
+        <div class="career-tabs" role="group" aria-label="Karty CV" data-switcher>
+          <button type="button" aria-controls="experience-card" aria-pressed="true">Doświadczenie</button>
+          <button type="button" aria-controls="skills-card" aria-pressed="false">Umiejętności</button>
+        </div>
+
+        <div class="entries" aria-label="Zawartość karty CV" tabindex="0">
+          <section id="experience-card" aria-label="Doświadczenie">
+            <section aria-labelledby="timeline-title">
+              <h3 id="timeline-title">Oś czasu</h3>
+              <div class="work-timeline" role="group" aria-labelledby="timeline-title" data-switcher>
+                <button type="button" aria-controls="work-kreska" aria-pressed="false"><span class="period">2018–2020</span><strong>Studio Kreska</strong></button>
+                <button type="button" aria-controls="work-interfejsy" aria-pressed="false"><span class="period">2020–2023</span><strong>Pracownia Interfejsów</strong></button>
+                <button type="button" aria-controls="work-polnoc" aria-pressed="true"><span class="period">2023–obecnie</span><strong>Studio Północ</strong></button>
+              </div>
+            </section>
+
+            <section class="career-projects" aria-labelledby="projects-title">
+              <h3 id="projects-title">Wybrane projekty</h3>
+              <div id="work-polnoc">
+                <p class="project-role">Product Designer</p>
+                <ul class="project-list">
+                  <li><a href="projekty/#panel-obslugi"><span><strong>Panel obsługi klienta</strong><span class="project-description">Widok zgłoszeń i historii rozmów.</span></span><span class="project-arrow" aria-hidden="true">↗</span></a></li>
+                  <li><a href="projekty/#przekazywanie-zgloszen"><span><strong>Przekazywanie zgłoszeń</strong><span class="project-description">Prototyp przepływu między zespołami.</span></span><span class="project-arrow" aria-hidden="true">↗</span></a></li>
+                </ul>
+              </div>
+              <div id="work-interfejsy" hidden>
+                <p class="project-role">UX/UI Designer</p>
+                <ul class="project-list">
+                  <li><a href="projekty/#rejestracja-mobilna"><span><strong>Rejestracja mobilna</strong><span class="project-description">Projekt formularza i ekranów startowych.</span></span><span class="project-arrow" aria-hidden="true">↗</span></a></li>
+                  <li><a href="projekty/#biblioteka-ui"><span><strong>Biblioteka UI</strong><span class="project-description">Komponenty formularzy i komunikatów.</span></span><span class="project-arrow" aria-hidden="true">↗</span></a></li>
+                </ul>
+              </div>
+              <div id="work-kreska" hidden>
+                <p class="project-role">Junior UI Designer</p>
+                <ul class="project-list">
+                  <li><a href="projekty/#strona-studia"><span><strong>Strona studia</strong><span class="project-description">Makiety i prototyp nawigacji.</span></span><span class="project-arrow" aria-hidden="true">↗</span></a></li>
+                  <li><a href="projekty/#katalog-online"><span><strong>Katalog online</strong><span class="project-description">Lista produktów i karty szczegółowe.</span></span><span class="project-arrow" aria-hidden="true">↗</span></a></li>
+                </ul>
+              </div>
+              <p class="education"><strong>Wykształcenie:</strong> Wzornictwo · licencjat</p>
+            </section>
+          </section>
+
+          <section id="skills-card" aria-label="Umiejętności" hidden>
+            <section class="skill-group" aria-labelledby="design-tools">
+              <h3 id="design-tools">Narzędzia</h3>
+              <ul class="skill-list"><li>Figma</li><li>FigJam</li><li>Storybook</li></ul>
+            </section>
+            <section class="skill-group" aria-labelledby="technologies">
+              <h3 id="technologies">Technologie i standardy</h3>
+              <ul class="skill-list"><li>HTML</li><li>CSS</li><li>WCAG</li><li>Tokeny projektowe</li></ul>
+            </section>
+            <section class="skill-group" aria-labelledby="practice">
+              <h3 id="practice">Projektowanie w praktyce</h3>
+              <ul class="skill-list"><li>Badania UX</li><li>Interakcje</li><li>Prototypowanie</li><li>Design systems</li><li>Dostępność</li></ul>
+            </section>
+            <section class="skill-group" aria-labelledby="interests">
+              <h3 id="interests">Po pracy</h3>
+              <ul class="skill-list"><li>Fotografia uliczna</li><li>Gry planszowe</li><li>Jazda na rowerze</li></ul>
+            </section>
+          </section>
+        </div>
+        <footer class="career-footer">
+          <ul class="career-links" aria-label="Profile zawodowe">
+            <li><a href="https://www.linkedin.com/"><strong>LinkedIn</strong><span aria-hidden="true">↗</span></a></li>
+            <li><a href="https://www.behance.net/"><strong>Behance</strong><span aria-hidden="true">↗</span></a></li>
+          </ul>
+          <p>Profil fikcyjny · linki do stron serwisów</p>
+        </footer>
+      </div>
+    </section>
+  </main>
+  <button type="button" class="share-button" aria-label="Udostępnij wizytówkę" title="Udostępnij wizytówkę" aria-haspopup="dialog" aria-controls="share-dialog">
+    <span class="share-glyph" aria-hidden="true"></span>
+  </button>
+  <dialog class="qr-dialog" id="share-dialog" aria-labelledby="qr-title">
+    <form method="dialog"><button type="submit" aria-label="Zamknij panel udostępniania" autofocus>×</button></form>
+    <h2 id="qr-title">Udostępnij profil</h2>
+    <img src="../assets/kuba-qr.png" alt="Przykładowy kod QR">
+    <p class="qr-caption">Przykładowy kod QR</p>
+    <div class="share-tiles">
+      <button type="button" class="share-copy"><span aria-hidden="true">⧉</span>Kopiuj link</button>
+      <a href="mailto:?subject=Digital%20ID%20%C2%B7%20Adam%20Lis&amp;body=https%3A%2F%2Fkairox-digital-id-gamer.maildawcio.chatgpt.site%2Fadam%2F"><span aria-hidden="true">✉</span>Wyślij e-mailem</a>
+      <a href="../assets/kuba-qr.png" download="digital-id-demo-qr.png"><span aria-hidden="true">↓</span>Pobierz QR</a>
+    </div>
+    <p class="share-status" role="status"></p>
+    <input class="share-address" aria-label="Link do skopiowania" readonly hidden value="https://kairox-digital-id-gamer.maildawcio.chatgpt.site/adam/">
+  </dialog>
+</body>
+</html>

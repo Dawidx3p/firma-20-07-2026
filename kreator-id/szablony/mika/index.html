@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mika Byte — przykładowa wizytówka streamerki KAIROX Digital ID.">
+  <meta name="theme-color" content="#170e24">
+  <title>Mika Byte · KAIROX Digital ID</title>
+  <link rel="stylesheet" href="../style.css?v=2">
+  <link rel="stylesheet" href="../share.css?v=2">
+  <link rel="stylesheet" href="mika.css">
+  <script src="../screens.js" defer></script>
+  <script src="../share.js" defer></script>
+</head>
+<body class="mika">
+  <main>
+    <section class="hero" id="start" aria-labelledby="name" tabindex="-1">
+      <div class="identity">
+        <h1 id="name">Mika<br><em>Byte</em></h1>
+        <p class="bio">Wieczorne streamy. Gry indie, co-op i pogaduchy na czacie.</p>
+        <a class="jump" href="#profile">Kanały i sociale <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+    <section class="directory" id="profile" aria-labelledby="directory-title" tabindex="-1">
+      <div class="frame">
+        <header class="panel-header">
+          <a class="back" href="#start"><span aria-hidden="true">←</span> Profil</a>
+          <h2 id="directory-title">Kanały<br>i sociale<span>.</span></h2>
+        </header>
+        <div class="entries" aria-label="Kanały Mika Byte" tabindex="0">
+          <a class="stream-main" href="https://www.twitch.tv/">
+            <span><strong>Twitch</strong><span>Transmisje na żywo · mikabyte</span></span>
+            <span class="channel-arrow" aria-hidden="true">↗</span>
+          </a>
+          <ul class="channel-list" aria-label="Pozostałe kanały i profile">
+            <li>
+              <a class="entry channel" href="https://www.youtube.com/">
+                <span><strong>YouTube</strong><span class="handle">VOD-y · @MikaByte</span></span>
+                <span class="channel-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a class="entry channel" href="https://discord.com/">
+                <span><strong>Discord</strong><span class="handle">Społeczność · Mika Byte</span></span>
+                <span class="channel-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a class="entry channel" href="https://www.tiktok.com/">
+                <span><strong>TikTok</strong><span class="handle">Klipy · @mikabyte</span></span>
+                <span class="channel-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a class="entry channel" href="https://www.instagram.com/">
+                <span><strong>Instagram</strong><span class="handle">Kulisy · @mika.byte</span></span>
+                <span class="channel-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a class="entry channel" href="https://kick.com/">
+                <span><strong>Kick</strong><span class="handle">Streamy · mikabyte</span></span>
+                <span class="channel-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a class="entry channel" href="https://x.com/">
+                <span><strong>X</strong><span class="handle">Zapowiedzi · @mika_byte</span></span>
+                <span class="channel-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a class="entry channel" href="https://bsky.app/">
+                <span><strong>Bluesky</strong><span class="handle">@mikabyte.example</span></span>
+                <span class="channel-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a class="entry channel" href="https://www.threads.com/">
+                <span><strong>Threads</strong><span class="handle">@mika.byte</span></span>
+                <span class="channel-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a class="entry channel" href="https://www.facebook.com/">
+                <span><strong>Facebook</strong><span class="handle">Mika Byte</span></span>
+                <span class="channel-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+            <li>
+              <a class="entry channel" href="https://www.patreon.com/">
+                <span><strong>Patreon</strong><span class="handle">Mika Byte</span></span>
+                <span class="channel-arrow" aria-hidden="true">↗</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <footer class="panel-footer">Profil demonstracyjny. Linki otwierają strony serwisów.</footer>
+      </div>
+    </section>
+  </main>
+  <button type="button" class="share-button" aria-label="Udostępnij wizytówkę" title="Udostępnij wizytówkę" aria-haspopup="dialog" aria-controls="share-dialog">
+    <span class="share-glyph" aria-hidden="true"></span>
+  </button>
+  <dialog class="qr-dialog" id="share-dialog" aria-labelledby="qr-title">
+    <form method="dialog"><button type="submit" aria-label="Zamknij panel udostępniania" autofocus>×</button></form>
+    <h2 id="qr-title">Udostępnij profil</h2>
+    <img src="../assets/kuba-qr.png" alt="Przykładowy kod QR">
+    <p class="qr-caption">Przykładowy kod QR</p>
+    <div class="share-tiles">
+      <button type="button" class="share-copy"><span aria-hidden="true">⧉</span>Kopiuj link</button>
+      <a href="mailto:?subject=Digital%20ID%20%C2%B7%20Mika%20Byte&amp;body=https%3A%2F%2Fkairox-digital-id-gamer.maildawcio.chatgpt.site%2Fmika%2F"><span aria-hidden="true">✉</span>Wyślij e-mailem</a>
+      <a href="../assets/kuba-qr.png" download="digital-id-demo-qr.png"><span aria-hidden="true">↓</span>Pobierz QR</a>
+    </div>
+    <p class="share-status" role="status"></p>
+    <input class="share-address" aria-label="Link do skopiowania" readonly hidden value="https://kairox-digital-id-gamer.maildawcio.chatgpt.site/mika/">
+  </dialog>
+</body>
+</html>

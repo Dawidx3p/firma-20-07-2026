@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap');
+
+.career {
+  --lime: #195187;
+  --paper: #142d42;
+  --muted: #455e72;
+  --line: #cad8e3;
+  color-scheme: light;
+  color: var(--paper);
+  background: #cbdae7;
+  font-family: 'Instrument Sans', Geist, sans-serif;
+}
+.career .hero { color: #f9fcff; background: #193147; }
+.career .hero::before {
+  background: linear-gradient(180deg, #112639c9, transparent 22%, transparent 40%, #0d1c2ddd 78%, #0d1c2d), url('../assets/adam-lis.jpg') center 40% / cover;
+}
+.career .jump { color: #c6e2fb; }
+.career .jump { border-color: #c6e2fb; border-radius: .55rem; }
+.career .hero :focus-visible { outline-color: #c6e2fb; }
+.career h1, .career h2 {
+  font-family: 'Instrument Sans', Geist, sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: -.055em;
+}
+.career h1 { font-size: clamp(3rem, 8vw, 9rem); line-height: .9; }
+.career .role { margin: 15px 0 0; color: #c6e2fb; font-weight: 700; }
+.career .bio { margin-top: 10px; max-width: 34ch; color: #edf5fd; line-height: 1.45; }
+.career .directory {
+  background: linear-gradient(150deg, #dce7f2 18%, #a8bed3);
+}
+.career .frame {
+  padding: clamp(16px, 3vw, 42px);
+  color: var(--paper);
+  border-color: #afc3d5;
+  border-radius: 1.15rem;
+  background: #fcfdff;
+  box-shadow: 0 16px 40px #17385824;
+}
+.career .frame::before, .career .frame::after { content: none; }
+.career .panel-header { position: relative; margin-bottom: clamp(12px, 2.6vh, 22px); }
+.career h2 { font-size: clamp(2.35rem, 5.1vw, 5.2rem); line-height: .95; }
+.career .panel-header .career-role {
+  margin: 7px 0 0;
+  color: var(--lime);
+  font-size: .9rem;
+  font-weight: 700;
+}
+.career-role span { color: var(--muted); font-weight: 500; }
+.career .entries { padding: 2px 5px 2px 2px; scrollbar-color: #7797b1 transparent; }
+.career-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  padding: 3px;
+  margin-bottom: 10px;
+  border-radius: .7rem;
+  background: #e8f0f7;
+}
+.career-tabs button {
+  min-height: 40px;
+  border: 0;
+  border-radius: .52rem;
+  background: transparent;
+  color: #34526a;
+  font-size: .85rem;
+  font-weight: 700;
+}
+.career-tabs button[aria-pressed="true"] { background: #195187; color: #fff; }
+.career h3 {
+  margin: 0 0 6px;
+  color: #38556c;
+  font-size: .73rem;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+}
+.work-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5px;
+}
+.work-timeline::before {
+  position: absolute;
+  inset: 7px 16.66% auto;
+  border-top: 1px solid #a0bcd3;
+  content: "";
+}
+.work-timeline button {
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  padding: 2px 3px 5px;
+  border: 1px solid transparent;
+  border-radius: .55rem;
+  background: transparent;
+  color: var(--paper);
+  line-height: 1.12;
+}
+.work-timeline button::before {
+  width: 9px;
+  height: 9px;
+  margin-bottom: 2px;
+  border: 2px solid #47749c;
+  border-radius: 50%;
+  background: #fcfdff;
+  content: "";
+}
+.work-timeline button[aria-pressed="true"] { color: #164770; }
+.work-timeline button[aria-pressed="true"]::before { background: #195187; border-color: #195187; }
+.work-timeline button[aria-pressed="true"] strong { text-decoration: underline; text-underline-offset: 3px; }
+.work-timeline button:hover { border-color: #b9cbde; }
+.work-timeline strong { font-size: .75rem; overflow-wrap: anywhere; }
+.work-timeline .period { color: #375874; font-size: .68rem; font-variant-numeric: tabular-nums; }
+.career-projects, .skill-group + .skill-group { margin-top: clamp(10px, 2vh, 18px); }
+.project-role { margin: 0 0 6px; color: var(--muted); font-size: .79rem; }
+.project-list, .skill-list, .career-links { list-style: none; padding: 0; margin: 0; }
+.project-list { display: grid; gap: 5px; }
+.project-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-height: 44px;
+  padding: 6px 9px;
+  border-radius: .45rem;
+  background: #eef4fa;
+  color: var(--paper);
+  line-height: 1.25;
+  text-decoration: none;
+}
+.project-list a:hover { background: #e1edf8; }
+.project-list a:focus-visible { outline-offset: -2px; }
+.project-list strong, .project-description { display: block; }
+.project-list strong { font-size: .84rem; }
+.project-description, .education { margin: 2px 0 0; color: var(--muted); font-size: .78rem; }
+.project-arrow { flex: none; color: var(--lime); font-size: 1rem; }
+.education { margin-top: 8px; }
+.skill-list { display: flex; flex-wrap: wrap; gap: 5px; }
+.skill-list li { padding: 4px 8px; background: #eaf2f9; border-radius: .35rem; color: #274965; font-size: .76rem; }
+.career-footer { margin-top: auto; padding-top: clamp(12px, 2.5vh, 22px); }
+.career-footer p { margin: 6px 0 0; color: var(--muted); font-size: .71rem; }
+.career-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
+.career-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  min-height: 44px;
+  padding: 6px 10px;
+  color: var(--lime);
+  border: 1px solid #b9cbde;
+  border-radius: .5rem;
+  background: #f0f6fb;
+  text-decoration: none;
+  font-size: .86rem;
+}
+.career-links li:first-child a { color: #fff; background: #195187; border-color: #195187; }
+.career-links a:hover { box-shadow: inset 0 0 0 1px currentColor; }
+.career-links a:focus-visible { outline-offset: 2px; }
+
+@media (max-width: 760px) {
+  .career h1 { font-size: clamp(3.5rem, 16vw, 7.5rem); }
+  .career .back { position: absolute; top: 0; right: 0; min-height: 32px; padding-left: 8px; }
+  .career h2 { padding-right: 70px; }
+}
+@media (max-width: 760px) and (max-height: 600px) {
+  .career h1 { font-size: min(16vw, 22dvh); }
+  .career h2 { font-size: clamp(1.85rem, 8vw, 2.4rem); }
+  .career .panel-header .career-role { margin-top: 4px; }
+  .career .frame { padding: 12px; }
+  .career .panel-header { margin-bottom: 8px; }
+  .career-tabs { margin-bottom: 6px; }
+  .career-tabs button { min-height: 36px; }
+  .career-projects, .skill-group + .skill-group { margin-top: 8px; }
+  .skill-list { gap: 4px; }
+  .skill-list li { padding: 3px 6px; }
+  .career-footer { padding-top: 8px; }
+}
+@media (max-width: 760px) and (max-height: 500px) {
+  .career .directory { padding: 8px; }
+  .career .frame { padding: 10px; }
+  .career .panel-header { margin-bottom: 6px; }
+  .career h3 { margin-bottom: 4px; }
+  .career-projects { margin-top: 6px; }
+  .project-role { margin-bottom: 4px; }
+  .project-list { gap: 4px; }
+  .project-list a { padding-block: 4px; }
+  .education { margin-top: 5px; }
+}
+
+.career-portfolio { background: #f1f6fb; }
+.portfolio-page {
+  display: block;
+  max-width: 44rem;
+  margin: auto;
+  padding: clamp(22px, 6vw, 60px);
+  touch-action: auto;
+}
+.portfolio-back { display: inline-block; margin-bottom: 24px; color: var(--lime); }
+.portfolio-page h1 { font-size: clamp(2rem, 7vw, 3.5rem); }
+.portfolio-page article { margin-top: 14px; padding: 16px; border: 1px solid var(--line); border-radius: .75rem; background: #fcfdff; }
+.portfolio-page:has(article:target) article:not(:target) { display: none; }
+.portfolio-page h2 { padding: 0; font-size: clamp(1.4rem, 4vw, 2rem); }
+.portfolio-page article p { line-height: 1.5; }
+.portfolio-employer, .portfolio-page footer { color: var(--muted); font-size: .8rem; }
+.portfolio-employer { margin: 0 0 5px; }
+.portfolio-page footer { margin-top: 14px; }
+@media (max-width: 760px) {
+  html:has(.career-portfolio), .career-portfolio { overflow: auto; }
+}

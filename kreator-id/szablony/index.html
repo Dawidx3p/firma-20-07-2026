@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Neon Vex — przykładowa wizytówka gracza KAIROX Digital ID.">
+  <meta name="theme-color" content="#101313">
+  <title>Neon Vex · KAIROX Digital ID</title>
+  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="share.css?v=2">
+  <script src="profile.js" defer></script>
+  <script src="screens.js" defer></script>
+  <script src="share.js" defer></script>
+</head>
+<body class="gamer">
+  <main>
+    <section class="hero" id="start" aria-labelledby="name" tabindex="-1">
+      <div class="identity">
+        <p class="eyebrow">Profil demonstracyjny</p>
+        <h1 id="name">Neon<br><em>Vex</em></h1>
+        <p class="bio">Rankedy po zmroku. Wyścigi na odpoczynek.</p>
+        <a class="jump" href="#profile">Znajdź mnie <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+    <section class="directory" id="profile" aria-labelledby="directory-title" tabindex="-1">
+      <div class="frame">
+        <header class="panel-header">
+          <a class="back" href="#start">← <span>Profil</span></a>
+          <h2 id="directory-title">Znajdź mnie<span>.</span></h2>
+          <p class="directory-hint">Wybierz grę, aby skopiować nick.</p>
+          <div class="filters" role="group" aria-label="Rodzaj profilu">
+            <button type="button" data-group="games" aria-pressed="true">Gry</button>
+            <button type="button" data-group="platforms" aria-pressed="false">Platformy</button>
+            <button type="button" data-group="socials" aria-pressed="false">Sociale</button>
+          </div>
+          <label class="search"><span class="sr-only">Szukaj w tej kategorii</span><input type="search" placeholder="Szukaj gry lub nicku" autocomplete="off"></label>
+        </header>
+        <ul class="entries" aria-label="Wyniki" tabindex="0"></ul>
+        <p class="empty" hidden>Brak wyników.</p>
+        <footer class="panel-footer"><span class="count"></span><span class="status" role="status"></span></footer>
+        <noscript>Włącz JavaScript, aby zobaczyć listę nicków.</noscript>
+      </div>
+    </section>
+  </main>
+  <button type="button" class="share-button" aria-label="Udostępnij wizytówkę" title="Udostępnij wizytówkę" aria-haspopup="dialog" aria-controls="share-dialog">
+    <span class="share-glyph" aria-hidden="true"></span>
+  </button>
+  <dialog class="qr-dialog" id="share-dialog" aria-labelledby="qr-title">
+    <form method="dialog"><button type="submit" aria-label="Zamknij panel udostępniania" autofocus>×</button></form>
+    <h2 id="qr-title">Udostępnij profil</h2>
+    <img src="assets/kuba-qr.png" alt="Przykładowy kod QR">
+    <p class="qr-caption">Przykładowy kod QR</p>
+    <div class="share-tiles">
+      <button type="button" class="share-copy"><span aria-hidden="true">⧉</span>Kopiuj link</button>
+      <a href="mailto:?subject=Digital%20ID%20%C2%B7%20Neon%20Vex&amp;body=https%3A%2F%2Fkairox-digital-id-gamer.maildawcio.chatgpt.site%2F"><span aria-hidden="true">✉</span>Wyślij e-mailem</a>
+      <a href="assets/kuba-qr.png" download="digital-id-demo-qr.png"><span aria-hidden="true">↓</span>Pobierz QR</a>
+    </div>
+    <p class="share-status" role="status"></p>
+    <input class="share-address" aria-label="Link do skopiowania" readonly hidden value="https://kairox-digital-id-gamer.maildawcio.chatgpt.site/">
+  </dialog>
+</body>
+</html>
